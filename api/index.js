@@ -14,8 +14,12 @@ apiRouter.get('/health', (req, res, next) => {
   });
 });
 
-usersRouter.use('/users', usersRouter);
-productsRouter.use('/products', productsRouter);
+apiRouter.use('/users', usersRouter);
+apiRouter.use('/products', productsRouter);
+
+apiRouter.use((error, req, res, next) => {
+res.send(error)
+})
 
 // place your routers here
 
