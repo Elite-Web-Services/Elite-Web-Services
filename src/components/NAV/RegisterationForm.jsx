@@ -1,6 +1,6 @@
-import React from "react";
+import React from 'react';
 // import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import useAuth from '../hooks/useAuth';
 
 const RegisterationForm = () => {
   const { user } = useAuth();
@@ -9,9 +9,9 @@ const RegisterationForm = () => {
   const handleRegistration = async (e) => {
     e.preventDefault();
     const response = await fetchRegisterUser(username, password);
-    localStorage.setItem("token", response.token);
-    localStorage.setitem("username", username);
-    const userToken = localStorage.getItem("token");
+    localStorage.setItem('token', response.token);
+    localStorage.setitem('username', username);
+    const userToken = localStorage.getItem('token');
     setToken(userToken);
   };
 
