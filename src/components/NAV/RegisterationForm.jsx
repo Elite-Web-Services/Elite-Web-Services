@@ -1,17 +1,24 @@
-import React from 'react';
+import { registerUser } from "../../axios-services";
 // import { useNavigate } from "react-router-dom";
-import useAuth from '../hooks/useAuth';
+import useAuth from "../hooks/useAuth";
 
-const RegisterationForm = () => {
+const RegisterationForm = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+}) => {
+
   const { user } = useAuth();
   // let navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-    const response = await fetchRegisterUser(username, password);
-    localStorage.setItem('token', response.token);
-    localStorage.setitem('username', username);
-    const userToken = localStorage.getItem('token');
+
+    const response = await registerUser(username, password);
+    localStorage.setItem("token", response.token);
+    localStorage.setitem("username", username);
+    const userToken = localStorage.getItem("token");
     setToken(userToken);
   };
 
