@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import useAuth from '../hooks/useAuth';
 import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
+import RegisterationForm from './RegisterationForm';
 
 // rename this to Login? embed LoginForm and RegisterForm components
 const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
 
   return (
@@ -16,10 +18,24 @@ const Login = () => {
             setIsRegister(!isRegister);
           }}
         >
-          <RegistrationForm />
+          Register instead
         </div>
       </p>
-      {isRegister ? <p>register form goes here</p> : <LoginForm />}
+      {isRegister ? (
+        <RegisterationForm
+          username={username}
+          setUserName={setUsername}
+          password={password}
+          setPassword={setPassword}
+        />
+      ) : (
+        <LoginForm
+          username={username}
+          setUserName={setUsername}
+          password={password}
+          setPassword={setPassword}
+        />
+      )}
     </div>
   );
 };

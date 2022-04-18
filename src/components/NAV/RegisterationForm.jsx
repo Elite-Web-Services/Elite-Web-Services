@@ -8,11 +8,13 @@ const RegisterationForm = ({
   password,
   setPassword,
 }) => {
+
   const { user } = useAuth();
   // let navigate = useNavigate();
 
   const handleRegistration = async (e) => {
     e.preventDefault();
+
     const response = await registerUser(username, password);
     localStorage.setItem("token", response.token);
     localStorage.setitem("username", username);
