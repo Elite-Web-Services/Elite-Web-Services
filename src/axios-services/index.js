@@ -1,4 +1,5 @@
-import axios from 'axios';
+import axios from "axios";
+import res from "express/lib/response";
 
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
@@ -20,10 +21,28 @@ import axios from 'axios';
 
 export async function getAPIHealth() {
   try {
-    const { data } = await axios.get('/api/health');
+    const { data } = await axios.get("/api/health");
     return data;
   } catch (err) {
     console.error(err);
     return { healthy: false };
+  }
+}
+
+export async function registerUser(username, password) {
+  try {
+    const response = await axios.post("/api/users", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      Body: JSON.stringify({
+        username,
+        password,
+      }),
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error(err);
   }
 }
