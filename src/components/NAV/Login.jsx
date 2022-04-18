@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
+
 import LoginForm from './LoginForm';
 import RegisterationForm from './RegisterationForm';
 
@@ -12,14 +12,14 @@ const Login = () => {
   return (
     <div>
       <p>
-        Don't have an account?{' '}
-        <div
+        Don't have an account?
+        <span
           onClick={() => {
             setIsRegister(!isRegister);
           }}
         >
-          Register instead
-        </div>
+          {' Register instead'}
+        </span>
       </p>
       {isRegister ? (
         <RegisterationForm
