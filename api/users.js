@@ -1,8 +1,7 @@
 const usersRouter = require("express").Router();
 const { useImperativeHandle } = require("react/cjs/react.production.min");
 const { getUserByUsername, createUser } = require("../db/models/user");
-const {JWT_SECRET} = process.env;
-
+const { JWT_SECRET } = process.env;
 
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
@@ -25,19 +24,20 @@ usersRouter.post("/register", async (req, res, next) => {
         username,
         password,
       });
-      const token = jwt.sign({
-        id: user.id,
-        username
-      }
-      process.env.JWT_SECRET,
-      {
-        expiresIn: "1w",
-      }
-      )
+      const token = jwt.sign(
+        {
+          id: user.id,
+          username,
+        },
+        process.env.JWT_SECRET,
+        {
+          expiresIn: "1w",
+        }
+      );
       res.send({
         user,
-        token
-      })
+        token,
+      });
     }
   } catch ({ name, message }) {
     next({ name, message });
