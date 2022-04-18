@@ -4,7 +4,7 @@ const client = require("../client");
 module.exports = {
   // add your database adapter fns here
   createProduct,
-  getAllProducts,
+  getPublicProducts,
 };
 
 async function createProduct({ type, name, description, price, public }) {
@@ -26,11 +26,12 @@ async function createProduct({ type, name, description, price, public }) {
   }
 }
 
-async function getAllProducts() {
+async function getPublicProducts() {
   try {
     const { rows } = await client.query(`
         SELECT * 
         FROM products
+        WHERE public is true
         `);
 
     return rows;
