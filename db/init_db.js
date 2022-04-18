@@ -3,7 +3,7 @@ const {
   Product,
   // declare your model imports here
   // for example, User
-} = require('./');
+} = require("./");
 
 async function buildTables() {
   try {
@@ -13,11 +13,17 @@ async function buildTables() {
     // drop tables in correct order
     await client.query(`
     DROP TABLE IF EXISTS products;
+    DROP TABLE IF EXISTS users;
     `);
     console.log("Finished dropping tables");
 
     // build tables in correct order
     await client.query(`
+    CREATE TABLE users (
+      id SERIAL PRIMARY KEY,
+      username varchar(255) UNIQUE NOT NULL,
+      password varchar(255) NOT NULL
+    );
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
       type varchar(255) UNIQUE NOT NULL,
@@ -30,7 +36,23 @@ async function buildTables() {
 
     console.log("Finished creating tables");
   } catch (error) {
-    console.log("Problem with building tables")
+    console.log("Problem with building tables");
+    throw error;
+  }
+}
+
+async function createInitialUsers() {
+  try {
+    console.log("Starting to create users...");
+    const usersToCreate = [
+      { username: "KDawg", password: "dawgiedawgworld" },
+      { username: "DanDigidy", password: TheDFrameWork },
+      { username: "HaytersGonHay8", password: Hayyoooo1 },
+    ];
+    const users = await Promise.all(usersToCreate.map(createUser));
+    console.log("Finished creating users!");
+  } catch (error) {
+    console.error("Error creating users!");
     throw error;
   }
 }
@@ -42,7 +64,8 @@ async function createInitialProducts() {
     const service1 = await Product.createProduct({
       type: "website",
       name: "Great Value",
-      description: "I will make you a brand new website for CHEAP using 100% HTML.",
+      description:
+        "I will make you a brand new website for CHEAP using 100% HTML.",
       price: "25",
       public: true,
     });
@@ -50,7 +73,8 @@ async function createInitialProducts() {
     const service2 = await Product.createProduct({
       type: "consultation",
       name: "I'm a great listener",
-      description: "I don't know much about computers, personally. But I'll make you feel understood.",
+      description:
+        "I don't know much about computers, personally. But I'll make you feel understood.",
       price: "125",
       public: true,
     });
@@ -80,6 +104,7 @@ async function populateInitialData() {
 }
 
 buildTables()
+  .then(createInitialUsers)
   .then(createInitialProducts)
   .then(populateInitialData)
   .catch(console.error)
