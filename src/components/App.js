@@ -6,9 +6,8 @@ import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthProvider from './context/AuthContext';
-
+import Main from './MAIN/Main';
 import Navbar from './NAV/Navbar';
-import Products from './Products'; // NEW
 import Sidebar from './SIDEBAR/Sidebar'; //NEW
 
 const App = () => {
@@ -34,7 +33,7 @@ const App = () => {
         <h1>Hello, World!</h1>
         <Navbar />
         <p>API Status: {APIHealth}</p>
-        <Products /> {/* NEW */}
+        <Main />
         <Sidebar />
       </div>
     </AuthProvider>
