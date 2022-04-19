@@ -20,7 +20,7 @@ const Products = () => {
 
   return (
     <div>
-      <button onClick={()=> setProductType("")}>See all</button>
+      {productType ? <button onClick={()=> setProductType("")}>See all</button>: null}
        <button onClick={()=> setProductType("website")}>Website</button>
        <button onClick={()=> setProductType("web design")}>web design</button>
        <button onClick={()=> setProductType("consultation")}>consultation</button>
