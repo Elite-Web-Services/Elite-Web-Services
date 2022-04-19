@@ -4,8 +4,7 @@ import useAuth from "../hooks/useAuth";
 const Products = () => {
   const { publicProducts } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
-
-  let productType = "website"
+  const [productType, setProductType] = useState('');
 
   useEffect(() => {
     if (productType) {
@@ -20,8 +19,13 @@ const Products = () => {
   }, [publicProducts, productType]);
 
   return (
+    <div>
+      <button onClick={()=> setProductType("")}>See all</button>
+       <button onClick={()=> setProductType("website")}>Website</button>
+       <button onClick={()=> setProductType("web design")}>web design</button>
+       <button onClick={()=> setProductType("consultation")}>consultation</button>
     <div id="productList">
-      {/* productType ? <h1>{productType}</h1> : <h1>Public Products</h1> */}
+      {productType ? <h1>{productType}s</h1> : <h1>Public Products</h1>}
       {filterProducts.map((product) => (
         <div key={product.id}>
           <h2>{product.name}</h2>
@@ -30,6 +34,7 @@ const Products = () => {
           <p>Price: {product.price}</p>
         </div>
       ))}
+    </div>
     </div>
   );
 };
