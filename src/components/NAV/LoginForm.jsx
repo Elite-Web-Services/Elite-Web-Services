@@ -1,8 +1,16 @@
 import React from 'react';
+import { loginUser } from '../../axios-services/';
 
 const LoginForm = ({ username, setUsername, password, setPassword }) => {
-  const handleSubmit = async () => {
-    alert('LOGGED IN');
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await loginUser(username, password);
+      console.log('LOGINUSER RESPONSE: ', response);
+    } catch (error) {
+      throw error;
+    }
+    const response = await loginUser(username, password);
   };
 
   return (
@@ -21,7 +29,7 @@ const LoginForm = ({ username, setUsername, password, setPassword }) => {
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
-      <button onClick={() => handleSubmit}>Submit</button>
+      <button onClick={(e) => handleSubmit(e)}>Submit</button>
     </form>
   );
 };

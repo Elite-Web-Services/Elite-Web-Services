@@ -1,4 +1,5 @@
 // This is the Web Server
+require('dotenv').config();
 const express = require('express');
 const server = express();
 
@@ -13,6 +14,12 @@ server.use(morgan('dev'));
 
 // handle application/json requests
 server.use(express.json());
+server.use((req, res, next) => {
+  console.log('BODDY LOGGER START');
+  console.log(req.body);
+  console.log('BODDY LOGGER END');
+  next();
+});
 
 // here's our static files
 const path = require('path');

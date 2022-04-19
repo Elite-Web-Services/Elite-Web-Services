@@ -11,7 +11,7 @@ const Navbar = () => {
       <p>{`TOKEN: ${token}`}</p>
       <p>{user.username ? `Hello, ${user.username}` : `Hello, guest`}</p>
       <LoginBtn setIsLogin={setIsLogin} isLogin={isLogin} />
-      {isLogin ? <Login /> : null}
+      {isLogin && <Login isLogin={isLogin} setIsLogin={setIsLogin} />}
     </div>
   );
 };

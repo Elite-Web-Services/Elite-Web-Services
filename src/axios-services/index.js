@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
@@ -20,7 +20,7 @@ import axios from "axios";
 
 export async function getAPIHealth() {
   try {
-    const { data } = await axios.get("/api/health");
+    const { data } = await axios.get('/api/health');
     return data;
   } catch (err) {
     console.error(err);
@@ -28,16 +28,23 @@ export async function getAPIHealth() {
   }
 }
 
+export async function loginUser(username, password) {
+  try {
+    const { data } = await axios.post(`/api/users/login`, {
+      username,
+      password,
+    });
+    return data;
+  } catch (err) {
+    console.error(err);
+  }
+}
+
 export async function registerUser(username, password) {
   try {
-    const response = await axios.post("/api/users", {
-      headers: {
-        "Content-Type": "application/json",
-      },
-      Body: JSON.stringify({
-        username,
-        password,
-      }),
+    const response = await axios.post('/api/users/register', {
+      username,
+      password,
     });
 
     return response.data;
@@ -49,9 +56,8 @@ export async function registerUser(username, password) {
 export const getPublicProducts = async () => {
   try {
     const response = await axios.get(`api/products`, {
-      method: "GET",
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 

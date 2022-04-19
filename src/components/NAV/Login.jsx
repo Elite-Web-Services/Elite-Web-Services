@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
-
 import LoginForm from './LoginForm';
 import RegisterationForm from './RegisterationForm';
+import { Modal } from 'react-bootstrap';
 
 // rename this to Login? embed LoginForm and RegisterForm components
-const Login = () => {
+const Login = ({ isLogin, setIsLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
 
+  const handleClose = () => setIsLogin(false);
+
   return (
-    <div>
+    <Modal show={isLogin} onHide={handleClose}>
       <p>
         Don't have an account?
         <span
@@ -31,12 +33,12 @@ const Login = () => {
       ) : (
         <LoginForm
           username={username}
-          setUserName={setUsername}
+          setUsername={setUsername}
           password={password}
           setPassword={setPassword}
         />
       )}
-    </div>
+    </Modal>
   );
 };
 

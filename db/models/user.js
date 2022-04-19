@@ -1,5 +1,5 @@
 // grab our db client connection to use with our adapters
-const client = require("../client");
+const client = require('../client');
 
 module.exports = {
   // add your database adapter fns here
@@ -50,10 +50,12 @@ async function getUserByUsername(username) {
     } = await client.query(
       `
       SELECT * FROM users
-      WHERE username= $1
+      WHERE username=$1;
       `,
       [username]
     );
+
+    return user;
   } catch (error) {
     throw error;
   }
