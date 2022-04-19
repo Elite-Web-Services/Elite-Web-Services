@@ -11,3 +11,22 @@
   color: var(--green);
   padding: 1rem;
 }
+
+#sidebar_container {
+  width: 100%;
+  height: 15em;
+  background: blue;
+  display: flex;
+  justify-content: left;
+  flex-direction: column;
+  border: 5px solid black;
+}
+
+.cart_products_list {
+  height: 10em;
+  width: 100%;
+  background: orange;
+  padding: 1.3em;
+  margin: 0.5em;
+  border: 5px solid red;
+}

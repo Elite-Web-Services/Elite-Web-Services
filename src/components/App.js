@@ -8,8 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import AuthProvider from './context/AuthContext';
 
 import Navbar from './NAV/Navbar';
-
 import Products from './Products'; // NEW
+import Sidebar from './SIDEBAR/Sidebar'; //NEW
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -35,6 +35,7 @@ const App = () => {
         <Navbar />
         <p>API Status: {APIHealth}</p>
         <Products /> {/* NEW */}
+        <Sidebar />
       </div>
     </AuthProvider>
   );
