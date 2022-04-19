@@ -1,5 +1,4 @@
 const usersRouter = require("express").Router();
-const { useImperativeHandle } = require("react/cjs/react.production.min");
 const { getUserByUsername, createUser } = require("../db/models/user");
 const { JWT_SECRET } = process.env;
 
