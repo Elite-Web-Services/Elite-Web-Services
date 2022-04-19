@@ -5,10 +5,9 @@ import React, { useState, useEffect } from 'react';
 import { getAPIHealth } from '../axios-services';
 import '../style/App.css';
 import AuthProvider from './context/AuthContext';
-
-import Navbar from './NAV/Navbar';
-
 import Main from './MAIN/Main';
+import Navbar from './NAV/Navbar';
+import Sidebar from './SIDEBAR/Sidebar'; //NEW
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -34,6 +33,7 @@ const App = () => {
         <Navbar />
         <p>API Status: {APIHealth}</p>
         <Main />
+        <Sidebar />
       </div>
     </AuthProvider>
   );
