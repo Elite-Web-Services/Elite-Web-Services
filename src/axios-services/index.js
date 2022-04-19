@@ -45,3 +45,18 @@ export async function registerUser(username, password) {
     console.error(err);
   }
 }
+
+export const getPublicProducts = async () => {
+  try {
+    const response = await axios.get(`api/products`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
