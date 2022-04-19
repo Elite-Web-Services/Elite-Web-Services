@@ -1,6 +1,7 @@
 const usersRouter = require("express").Router();
 const { getUserByUsername, createUser } = require("../db/models/user");
 const { JWT_SECRET } = process.env;
+const { requireUser } = require("./utils");
 
 usersRouter.use((req, res, next) => {
   console.log("A request is being made to /users");
@@ -43,8 +44,8 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
-// usersRouter.get('/me', requireUser, (res, res, next) => {
-
-// })
+usersRouter.get("/me", requireUser, (req, res, next) => {
+  res.send(req.user);
+});
 
 module.exports = usersRouter;
