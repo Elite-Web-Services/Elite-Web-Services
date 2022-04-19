@@ -8,7 +8,7 @@ import AuthProvider from './context/AuthContext';
 
 import Navbar from './NAV/Navbar';
 
-import Products from './Products'; // NEW
+import Main from './MAIN/Main';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -33,7 +33,7 @@ const App = () => {
         <h1>Hello, World!</h1>
         <Navbar />
         <p>API Status: {APIHealth}</p>
-        <Products /> {/* NEW */}
+        <Main />
       </div>
     </AuthProvider>
   );
