@@ -1,7 +1,7 @@
-import React from 'react';
-import { registerUser } from '../../axios-services';
+import React from "react";
+import { registerUser } from "../../axios-services";
 // import { useNavigate } from "react-router-dom";
-import useAuth from '../hooks/useAuth';
+import useAuth from "../hooks/useAuth";
 
 const RegisterationForm = ({
   username,
@@ -16,9 +16,9 @@ const RegisterationForm = ({
     e.preventDefault();
 
     const response = await registerUser(username, password);
-    localStorage.setItem('token', response.token);
-    localStorage.setitem('username', username);
-    const userToken = localStorage.getItem('token');
+    localStorage.setItem("token", response.token);
+    localStorage.setitem("username", username);
+    const userToken = localStorage.getItem("token");
     // setToken(userToken);
   };
 
@@ -33,15 +33,11 @@ const RegisterationForm = ({
   return (
     <div id="registration_container">
       <form onSubmit={handleRegistration}>
+        <label htmlFor="username">Username: </label>
+        <input type="text" onChange={handleUsername} required></input>
+        <label htmlFor="password">Password: </label>
         <input
           type="text"
-          placeholder="username"
-          onChange={handleUsername}
-          required
-        ></input>
-        <input
-          type="text"
-          placeholder="password"
           onChange={handlePassword}
           required
           minLength={8}
