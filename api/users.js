@@ -4,38 +4,6 @@ const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 const { requireUser } = require('./utils');
 
-usersRouter.use(async (req, res, next) => {
-  console.log('A request is being made to /users');
-  console.log('Checking for authorization...');
-  const prefix = `Bearer `;
-  const auth = req.header('Authorization');
-  if (!auth) {
-    console.log('No auth provided. Continuing.');
-    next();
-  } else if (auth.startsWith(prefix)) {
-    const token = auth.slice(prefix.length);
-    try {
-      const { username } = jwt.verify(token, JWT_SECRET);
-      if (username) {
-        console.log('Good token. Setting user.');
-        req.user = await getUserByUsername(username);
-        next();
-      } else {
-        res.status(409);
-        next({ name: 'BadTokenError', message: 'Invalid Token' });
-      }
-    } catch ({ name, message }) {
-      next({ name, message });
-    }
-  } else {
-    res.status(409);
-    next({
-      name: 'AuthorizationHeaderError',
-      message: `Authorization token must start with ${prefix}`,
-    });
-  }
-});
-
 usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
