@@ -1,4 +1,6 @@
 // grab our db client connection to use with our adapters
+const bcrypt = require('bcrypt');
+const SALT = 10;
 const client = require('../client');
 
 module.exports = {
@@ -8,18 +10,20 @@ module.exports = {
   getUserByUsername,
 };
 
-async function createUser({ username, password }) {
+async function createUser({ username, password, isAdmin = false }) {
+  // CHANGE BCRYPT TO ASYNC SOMEHOW
+  const hashedPW = bcrypt.hashSync(password, SALT);
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password)
-      VALUES($1, $2)
+      INSERT INTO users(username, password, "isAdmin")
+      VALUES($1, $2, $3)
       ON CONFLICT (username) DO NOTHING
-      RETURNING id, username;
+      RETURNING id, username, "isAdmin";
       `,
-      [username, password]
+      [username, hashedPW, isAdmin]
     );
     return user;
   } catch (error) {
@@ -33,7 +37,7 @@ async function getAllUsers() {
   try {
     const { rows } = await client.query(
       `
-        SELECT * 
+        SELECT id, username, "isAdmin" 
         FROM users
       `
     );
