@@ -8,11 +8,43 @@ const Login = ({ isLogin, setIsLogin }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isRegister, setIsRegister] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState('');
 
   const handleClose = () => setIsLogin(false);
 
   return (
     <Modal show={isLogin} onHide={handleClose}>
+      {isRegister ? (
+        <RegisterationForm
+          setIsLogin={setIsLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          isError={isError}
+          setIsError={setIsError}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
+      ) : (
+        <LoginForm
+          setIsLogin={setIsLogin}
+          username={username}
+          setUsername={setUsername}
+          password={password}
+          setPassword={setPassword}
+          isError={isError}
+          setIsError={setIsError}
+          errorMessage={errorMessage}
+          setErrorMessage={setErrorMessage}
+        />
+      )}
+      {isError ? (
+        <div className="errorMessage">
+          <p>{`${errorMessage}`}</p>
+        </div>
+      ) : null}
       <p>
         Don't have an account?
         <span
@@ -23,21 +55,6 @@ const Login = ({ isLogin, setIsLogin }) => {
           {' Register instead'}
         </span>
       </p>
-      {isRegister ? (
-        <RegisterationForm
-          username={username}
-          setUserName={setUsername}
-          password={password}
-          setPassword={setPassword}
-        />
-      ) : (
-        <LoginForm
-          username={username}
-          setUsername={setUsername}
-          password={password}
-          setPassword={setPassword}
-        />
-      )}
     </Modal>
   );
 };

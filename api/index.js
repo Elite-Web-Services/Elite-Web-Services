@@ -18,8 +18,9 @@ apiRouter.use('/users', usersRouter);
 apiRouter.use('/products', productsRouter);
 
 apiRouter.use((error, req, res, next) => {
-res.send(error)
-})
+  console.log('SENDING ERROR: ', error);
+  res.send(error);
+});
 
 // place your routers here
 

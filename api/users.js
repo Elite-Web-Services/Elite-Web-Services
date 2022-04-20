@@ -2,12 +2,38 @@ const usersRouter = require('express').Router();
 const { getUserByUsername, createUser } = require('../db/models/user');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
-const { requireUser } = require("./utils");
+const { requireUser } = require('./utils');
 
-usersRouter.use((req, res, next) => {
+usersRouter.use(async (req, res, next) => {
   console.log('A request is being made to /users');
-
-  next();
+  console.log('Checking for authorization...');
+  const prefix = `Bearer `;
+  const auth = req.header('Authorization');
+  if (!auth) {
+    console.log('No auth provided. Continuing.');
+    next();
+  } else if (auth.startsWith(prefix)) {
+    const token = auth.slice(prefix.length);
+    try {
+      const { username } = jwt.verify(token, JWT_SECRET);
+      if (username) {
+        console.log('Good token. Setting user.');
+        req.user = await getUserByUsername(username);
+        next();
+      } else {
+        res.status(409);
+        next({ name: 'BadTokenError', message: 'Invalid Token' });
+      }
+    } catch ({ name, message }) {
+      next({ name, message });
+    }
+  } else {
+    res.status(409);
+    next({
+      name: 'AuthorizationHeaderError',
+      message: `Authorization token must start with ${prefix}`,
+    });
+  }
 });
 
 usersRouter.post('/login', async (req, res, next) => {
@@ -16,11 +42,20 @@ usersRouter.post('/login', async (req, res, next) => {
   try {
     const user = await getUserByUsername(username);
     console.log('USER: ', user);
-    if (user.password === password) {
-      console.log('NO MATCH');
-      res.send(user);
+    if (user && user.password === password) {
+      console.log('LOGIN SUCCESS');
+      const token = jwt.sign(
+        { id: user.id, username: username },
+        process.env.JWT_SECRET,
+        { expiresIn: '1w' }
+      );
+
+      res.send({
+        msesage: `Welcome Back, ${user.username}.`,
+        token: token,
+      });
     } else {
-      console.log('NO MATCH');
+      console.log('LOGIN FAIL');
       res.status(409);
       next({
         name: 'Bad Login/Password',
@@ -28,16 +63,18 @@ usersRouter.post('/login', async (req, res, next) => {
       });
     }
   } catch ({ name, message }) {
+    res.status(404);
     next({ name, message });
   }
 });
 
 usersRouter.post('/register', async (req, res, next) => {
   const { username, password } = req.body;
-  const_user = await getUserByUsername(username);
+
   try {
+    const _user = await getUserByUsername(username);
     if (_user) {
-      HTMLTableRowElement.status(409);
+      res.status(409);
       next({
         name: 'UserAlreadyExistsError',
         message: 'Username is already taken',
@@ -47,6 +84,7 @@ usersRouter.post('/register', async (req, res, next) => {
         username,
         password,
       });
+      console.log(user);
       const token = jwt.sign(
         {
           id: user.id,
@@ -58,16 +96,17 @@ usersRouter.post('/register', async (req, res, next) => {
         }
       );
       res.send({
-        user,
+        message: `Thanks for registering, ${username}.`,
         token,
       });
     }
   } catch ({ name, message }) {
+    res.status(404);
     next({ name, message });
   }
 });
 
-usersRouter.get("/me", requireUser, (req, res, next) => {
+usersRouter.get('/me', requireUser, (req, res, next) => {
   res.send(req.user);
 });
 
