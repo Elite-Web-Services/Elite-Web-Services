@@ -6,6 +6,7 @@ const Products = () => {
   const { publicProducts } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
+  const [types, setTypes] = useState([])
 
   useEffect(() => {
     if (productType) {
@@ -19,7 +20,13 @@ const Products = () => {
     }
   }, [publicProducts, productType]);
 
-  console.log(publicProducts);
+  useEffect(() => {
+    const displayAllTypes = async () => {
+      const data = await getAllTypes();
+      setTypes(data);
+    };
+    displayAllTypes();
+  }, []);
 
   return (
     <div>
@@ -29,21 +36,16 @@ const Products = () => {
       {/* Map out the type buttons */}
       {types.map((type, index) => {
         return (
-          <option
+          <button
             key={`typeList: ${index}`}
-            onClick={() => setProductType(type)}
+            onClick={() => setProductType(type.name)}
           >
-            {activity.name}
-          </option>
+            {type.name}
+          </button>
         );
       })}
-      <button onClick={() => setProductType("website")}>Website</button>
-      <button onClick={() => setProductType("web design")}>web design</button>
-      <button onClick={() => setProductType("consultation")}>
-        consultation
-      </button>
       <div id="productList">
-        {productType ? <h1>{productType}s</h1> : <h1>Public Products</h1>}
+        {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
         {filterProducts.map((product) => (
           <div key={product.id}>
             <h2>{product.name}</h2>
