@@ -22,6 +22,8 @@ const LoginForm = ({
       const response = await loginUser(username, password);
       setIsError(false);
       console.log('LOGINUSER RESPONSE: ', response);
+      localStorage.setItem('token', response.token);
+      setToken(response.token);
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);

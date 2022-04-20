@@ -24,6 +24,7 @@ const RegisterationForm = ({
       setIsError(false);
       console.log('REGISTER USER RESPONSE: ', response);
       localStorage.setItem('token', response.token);
+      setToken(response.token);
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);

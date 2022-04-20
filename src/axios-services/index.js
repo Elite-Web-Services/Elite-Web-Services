@@ -28,13 +28,27 @@ export async function getAPIHealth() {
   }
 }
 
+export const getMe = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/users/me`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const loginUser = async (username, password) => {
   try {
-    const response = await axios.post(`/api/users/login`, {
+    const { data } = await axios.post(`/api/users/login`, {
       username,
       password,
     });
-    return response.data;
+    return data;
   } catch (error) {
     throw error.response.data;
   }
