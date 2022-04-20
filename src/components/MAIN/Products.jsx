@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import EditProduct from "./EditProduct";
 import useAuth from "../hooks/useAuth";
 import { getAllTypes } from "../../axios-services";
 
@@ -47,11 +48,12 @@ const Products = () => {
       <div id="productList">
         {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
         {filterProducts.map((product) => (
-          <div key={product.id}>
+          <div key={"productList:" + product.id}>
             <h2>{product.name}</h2>
-            <h3>Category: {product.type}</h3>
+            <h3>Category: {product.typeName}</h3>
             <p>{product.description}</p>
             <p>Price: {product.price}</p>
+            <EditProduct product={product} types={types} />
           </div>
         ))}
       </div>

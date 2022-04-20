@@ -5,6 +5,7 @@ module.exports = {
   // add your database adapter fns here
   createProduct,
   getPublicProducts,
+  updateProduct,
   createType,
   getAllTypes,
 };
@@ -34,7 +35,8 @@ async function getPublicProducts() {
         SELECT
         products.id AS id,
         products.name AS name,
-        types.name AS type,
+        types.id AS "typeId",
+        types.name AS "typeName",
         products.description AS description,
         products.price AS price,
         products.public AS public
@@ -44,6 +46,35 @@ async function getPublicProducts() {
         `);
 
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateProduct(fields = {}) {
+  const setString = Object.keys(fields)
+    .map((key, index) => `"${key}"=$${index + 1}`)
+    .join(", ");
+
+  // return early if this is called without fields
+  if (setString.length === 0) {
+    return;
+  }
+
+  try {
+    const {
+      rows: [product],
+    } = await client.query(
+      `
+          UPDATE products
+          SET ${setString}
+          WHERE id=${fields.id}
+          RETURNING *;
+        `,
+      Object.values(fields)
+    );
+
+    return product;
   } catch (error) {
     throw error;
   }
