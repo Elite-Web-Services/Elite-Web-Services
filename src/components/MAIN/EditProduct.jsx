@@ -10,7 +10,7 @@ const EditProduct = ({ product, types }) => {
         name: product.name,
         description: product.description,
         price: product.price,
-        public: product.public,
+        isPublic: product.isPublic,
       });
 
       const [updateError, setUpdateError] = useState("");
@@ -19,10 +19,11 @@ const EditProduct = ({ product, types }) => {
         const result = await updateProduct(
           product.id,
           token,
+          updateState.typeId,
           updateState.name,
           updateState.description,
           updateState.price,
-          updateState.public
+          updateState.isPublic
         );
         
         if (result.error) {
@@ -65,9 +66,9 @@ const EditProduct = ({ product, types }) => {
             <select
               name="isPublic"
               id="select-public"
-              value={updateState.public}
+              value={updateState.isPublic}
               onChange={(e) =>
-                setUpdateState({ ...updateState, public: e.target.value })
+                setUpdateState({ ...updateState, isPublic: e.target.value })
               }
             >
               <option value="true">Public</option>

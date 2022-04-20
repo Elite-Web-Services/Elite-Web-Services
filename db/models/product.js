@@ -10,17 +10,17 @@ module.exports = {
   getAllTypes,
 };
 
-async function createProduct({ typeId, name, description, price, public }) {
+async function createProduct({ typeId, name, description, price, isPublic }) {
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-          INSERT INTO products("typeId", name, description, price, public) 
+          INSERT INTO products("typeId", name, description, price, "isPublic") 
           VALUES($1, $2, $3, $4, $5) 
           RETURNING *;
           `,
-      [typeId, name, description, price, public]
+      [typeId, name, description, price, isPublic]
     );
 
     return product;
@@ -39,10 +39,10 @@ async function getPublicProducts() {
         types.name AS "typeName",
         products.description AS description,
         products.price AS price,
-        products.public AS public
+        products."isPublic" AS "isPublic"
         FROM products
         LEFT JOIN types ON products."typeId" = types.id
-        WHERE public is true
+        WHERE "isPublic" is true
         `);
 
     return rows;
