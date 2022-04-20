@@ -43,6 +43,7 @@ async function getPublicProducts() {
         FROM products
         LEFT JOIN types ON products."typeId" = types.id
         WHERE "isPublic" is true
+        ORDER BY products.id desc
         `);
 
     return rows;
@@ -104,6 +105,7 @@ async function getAllTypes() {
     const { rows } = await client.query(`
         SELECT * 
         FROM types
+        ORDER BY types.id
         `);
 
     return rows;

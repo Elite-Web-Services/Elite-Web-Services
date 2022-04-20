@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 import { getAllTypes } from "../../axios-services";
 
 const Products = () => {
-  const { publicProducts, token } = useAuth();
+  const { publicProducts, user } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
   const [types, setTypes] = useState([]);
@@ -34,32 +34,39 @@ const Products = () => {
       {productType ? (
         <button onClick={() => setProductType("")}>See all</button>
       ) : null}
+
       {/* Map out the type buttons */}
-      {types.map((type, index) => {
-        return (
-          <button
-            key={`typeList: ${index}`}
-            onClick={() => setProductType(type.name)}
-          >
-            {type.name}
-          </button>
-        );
-      })}
+      {types ? (
+        <div id="typeList">
+          {types.map((type, index) => {
+            return (
+              <button
+                key={`typeList: ${index}`}
+                onClick={() => setProductType(type.name)}
+              >
+                {type.name}
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
+
       {filterProducts ? (
-      <div id="productList">
-        {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
-        {filterProducts.map((product) => (
-          <div key={"productList:" + product.id}>
-            <h2>{product.name}</h2>
-            <h3>Category: {product.typeName}</h3>
-            <p>{product.description}</p>
-            <p>Price: {product.price}</p>
-            {token ? <EditProduct product={product} types={types} />: null}
-          </div>
-        ))}
-      </div>
+        <div id="productList">
+          {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
+          {filterProducts.map((product) => (
+            <div key={"productList:" + product.id}>
+              <h2>{product.name}</h2>
+              <h3>Category: {product.typeName}</h3>
+              <p>{product.description}</p>
+              <p>Price: {product.price}</p>
+              {user.isAdmin ? <EditProduct product={product} types={types} /> : null}
+            </div>
+          ))}
+        </div>
       ) : (
-        <h5>Sorry, we couldn't find anything that matched your search!</h5>)}
+        <h5>Sorry, we couldn't find anything that matched your search!</h5>
+      )}
     </div>
   );
 };
