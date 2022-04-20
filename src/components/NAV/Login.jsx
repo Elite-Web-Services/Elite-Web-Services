@@ -27,6 +27,7 @@ const Login = ({ isLogin, setIsLogin }) => {
       </p>
       {isRegister ? (
         <RegisterationForm
+          setIsLogin={setIsLogin}
           username={username}
           setUsername={setUsername}
           password={password}
@@ -38,6 +39,7 @@ const Login = ({ isLogin, setIsLogin }) => {
         />
       ) : (
         <LoginForm
+          setIsLogin={setIsLogin}
           username={username}
           setUsername={setUsername}
           password={password}

@@ -1,13 +1,24 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 
-const LoginBtn = ({ isLogin, setIsLogin }) => {
-  const { user } = useAuth();
+const LoginBtn = ({ setIsLogin }) => {
+  const { user, setToken } = useAuth();
+
+  const logIn = () => {
+    setIsLogin(true);
+  };
+
+  const logOut = () => {
+    localStorage.removeItem('token');
+    setToken('');
+  };
   return (
     <div>
-      <button onClick={() => setIsLogin(!isLogin)}>
-        {user ? 'Log in' : `Logout`}
-      </button>
+      {user.username ? (
+        <button onClick={logOut}>Log Out</button>
+      ) : (
+        <button onClick={logIn}>Log In</button>
+      )}
     </div>
   );
 };

@@ -4,6 +4,7 @@ import { registerUser } from '../../axios-services';
 import useAuth from '../hooks/useAuth';
 
 const RegisterationForm = ({
+  setIsLogin,
   username,
   setUsername,
   password,
@@ -25,6 +26,7 @@ const RegisterationForm = ({
       console.log('REGISTER USER RESPONSE: ', response);
       localStorage.setItem('token', response.token);
       setToken(response.token);
+      setIsLogin(false);
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);

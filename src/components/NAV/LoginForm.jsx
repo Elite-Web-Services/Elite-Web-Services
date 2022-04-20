@@ -3,6 +3,7 @@ import { loginUser } from '../../axios-services/';
 import useAuth from '../hooks/useAuth';
 
 const LoginForm = ({
+  setIsLogin,
   username,
   setUsername,
   password,
@@ -24,6 +25,7 @@ const LoginForm = ({
       console.log('LOGINUSER RESPONSE: ', response);
       localStorage.setItem('token', response.token);
       setToken(response.token);
+      setIsLogin(false);
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);

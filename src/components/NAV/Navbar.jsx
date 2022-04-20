@@ -7,12 +7,13 @@ const Navbar = () => {
   const { user, token } = useAuth();
   const [isLogin, setIsLogin] = useState(false); // change this to modal
   return (
-    <div>
-      <p>{`TOKEN: ${token}`}</p>
-      <p>{user.username ? `Hello, ${user.username}` : `Hello, guest`}</p>
-      <LoginBtn setIsLogin={setIsLogin} isLogin={isLogin} />
-      {isLogin && <Login isLogin={isLogin} setIsLogin={setIsLogin} />}
-    </div>
+    <header className="navbar p-3 bg-dark text-white">
+      <div className="container">
+        <p>{user.username ? `Hello, ${user.username}` : `Hello, guest`}</p>
+        <LoginBtn setIsLogin={setIsLogin} isLogin={isLogin} />
+        {isLogin && <Login isLogin={isLogin} setIsLogin={setIsLogin} />}
+      </div>
+    </header>
   );
 };
 

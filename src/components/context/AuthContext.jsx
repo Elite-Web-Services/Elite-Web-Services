@@ -22,6 +22,8 @@ const AuthProvider = ({ children }) => {
     if (localStorage.getItem('token')) {
       const user = await getMe(token);
       setUser(user);
+    } else {
+      setUser({});
     }
   };
   useEffect(() => {
@@ -30,7 +32,14 @@ const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, setUser, publicProducts, setPublicProducts }}
+      value={{
+        user,
+        setUser,
+        token,
+        setToken,
+        publicProducts,
+        setPublicProducts,
+      }}
     >
       {children}
     </AuthContext.Provider>
