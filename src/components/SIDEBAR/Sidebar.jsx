@@ -62,6 +62,9 @@ const Sidebar = () => {
             </div>
           </li>
         </ul>
+        {/* terery admin button */}
+
+        <div className="side-bar-render-box">render container</div>
       </div>
     </div>
   );
