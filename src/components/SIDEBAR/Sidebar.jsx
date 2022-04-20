@@ -37,7 +37,34 @@ const Sidebar = () => {
               </ul>
             </div>
           </li>
+          <li className="mb-1">
+            <button
+              className="btn btn-toggle align-items-center rounded collapsed"
+              data-bs-toggle="collapse"
+              data-bs-target="#cart-sidebar-collapse"
+              aria-expanded="false"
+            >
+              Cart
+            </button>
+            <div className="collapse" id="cart-sidebar-collapse">
+              <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                <li>
+                  <a href="#" className="link-dark rounded">
+                    Checkout
+                  </a>
+                </li>
+                <li>
+                  <a href="#" className="link-dark rounded">
+                    Go to Cart
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
         </ul>
+        {/* terery admin button */}
+
+        <div className="side-bar-render-box">render container</div>
       </div>
     </div>
   );
