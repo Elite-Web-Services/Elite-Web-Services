@@ -15,16 +15,6 @@ const Login = ({ isLogin, setIsLogin }) => {
 
   return (
     <Modal show={isLogin} onHide={handleClose}>
-      <p>
-        Don't have an account?
-        <span
-          onClick={() => {
-            setIsRegister(!isRegister);
-          }}
-        >
-          {' Register instead'}
-        </span>
-      </p>
       {isRegister ? (
         <RegisterationForm
           setIsLogin={setIsLogin}
@@ -55,6 +45,16 @@ const Login = ({ isLogin, setIsLogin }) => {
           <p>{`${errorMessage}`}</p>
         </div>
       ) : null}
+      <p>
+        Don't have an account?
+        <span
+          onClick={() => {
+            setIsRegister(!isRegister);
+          }}
+        >
+          {' Register instead'}
+        </span>
+      </p>
     </Modal>
   );
 };
