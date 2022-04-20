@@ -1,42 +1,42 @@
-const usersRouter = require('express').Router();
+const usersRouter = require("express").Router();
 const {
   getUserByUsername,
   createUser,
   getAllUsers,
-} = require('../db/models/user');
-const jwt = require('jsonwebtoken');
+} = require("../db/models/user");
+const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { requireUser } = require('./utils');
+const { requireUser } = require("./utils");
 
-usersRouter.use('/', (req, res, next) => {
-  console.log('Request to /users is being made.');
+usersRouter.use("/", (req, res, next) => {
+  console.log("Request to /users is being made.");
   next();
 });
 
-usersRouter.post('/login', async (req, res, next) => {
+usersRouter.post("/login", async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
     const user = await getUserByUsername(username);
-    console.log('USER: ', user);
+    console.log("USER: ", user);
     if (user && user.password === password) {
-      console.log('LOGIN SUCCESS');
+      console.log("LOGIN SUCCESS");
       const token = jwt.sign(
         { id: user.id, username: username },
         process.env.JWT_SECRET,
-        { expiresIn: '1w' }
+        { expiresIn: "1w" }
       );
 
       res.send({
-        msesage: `Welcome Back, ${user.username}.`,
+        message: `Welcome Back, ${user.username}.`,
         token: token,
       });
     } else {
-      console.log('LOGIN FAIL');
+      console.log("LOGIN FAIL");
       res.status(409);
       next({
-        name: 'Bad Login/Password',
-        message: 'Login error: you must supply a valid login/password',
+        name: "Bad Login/Password",
+        message: "Login error: you must supply a valid login/password",
       });
     }
   } catch ({ name, message }) {
@@ -45,7 +45,7 @@ usersRouter.post('/login', async (req, res, next) => {
   }
 });
 
-usersRouter.post('/register', async (req, res, next) => {
+usersRouter.post("/register", async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
@@ -53,8 +53,8 @@ usersRouter.post('/register', async (req, res, next) => {
     if (_user) {
       res.status(409);
       next({
-        name: 'UserAlreadyExistsError',
-        message: 'Username is already taken',
+        name: "UserAlreadyExistsError",
+        message: "Username is already taken",
       });
     } else {
       const user = await createUser({
@@ -69,7 +69,7 @@ usersRouter.post('/register', async (req, res, next) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: '1w',
+          expiresIn: "1w",
         }
       );
       res.send({
@@ -83,11 +83,11 @@ usersRouter.post('/register', async (req, res, next) => {
   }
 });
 
-usersRouter.get('/me', requireUser, (req, res, next) => {
+usersRouter.get("/me", requireUser, (req, res, next) => {
   res.send(req.user);
 });
 
-usersRouter.get('/all', requireUser, async (req, res, next) => {
+usersRouter.get("/all", requireUser, async (req, res, next) => {
   const users = await getAllUsers();
   res.send(users);
 });
