@@ -1,16 +1,31 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { loginUser } from '../../axios-services/';
+import useAuth from '../hooks/useAuth';
 
-const LoginForm = ({ username, setUsername, password, setPassword }) => {
+const LoginForm = ({
+  username,
+  setUsername,
+  password,
+  setPassword,
+  setIsError,
+  setErrorMessage,
+}) => {
+  const { user, setToken } = useAuth();
+
+  useEffect(() => {
+    setIsError(false);
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await loginUser(username, password);
+      setIsError(false);
       console.log('LOGINUSER RESPONSE: ', response);
     } catch (error) {
-      throw error;
+      setIsError(true);
+      setErrorMessage(error.message);
     }
-    const response = await loginUser(username, password);
   };
 
   return (

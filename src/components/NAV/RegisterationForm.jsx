@@ -1,25 +1,33 @@
-import React from "react";
-import { registerUser } from "../../axios-services";
+import React, { useEffect } from 'react';
+import { registerUser } from '../../axios-services';
 // import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import useAuth from '../hooks/useAuth';
 
 const RegisterationForm = ({
   username,
   setUsername,
   password,
   setPassword,
+  setIsError,
+  setErrorMessage,
 }) => {
-  const { user } = useAuth();
-  // let navigate = useNavigate();
+  const { user, setToken } = useAuth();
+
+  useEffect(() => {
+    setIsError(false);
+  }, []);
 
   const handleRegistration = async (e) => {
     e.preventDefault();
-
-    const response = await registerUser(username, password);
-    localStorage.setItem("token", response.token);
-    localStorage.setitem("username", username);
-    const userToken = localStorage.getItem("token");
-    // setToken(userToken);
+    try {
+      const response = await registerUser(username, password);
+      setIsError(false);
+      console.log('REGISTER USER RESPONSE: ', response);
+      localStorage.setItem('token', response.token);
+    } catch (error) {
+      setIsError(true);
+      setErrorMessage(error.message);
+    }
   };
 
   const handleUsername = (e) => {
@@ -34,10 +42,16 @@ const RegisterationForm = ({
     <div id="registration_container">
       <form onSubmit={handleRegistration}>
         <label htmlFor="username">Username: </label>
-        <input type="text" onChange={handleUsername} required></input>
+        <input
+          type="text"
+          value={username}
+          onChange={handleUsername}
+          required
+        ></input>
         <label htmlFor="password">Password: </label>
         <input
           type="text"
+          value={password}
           onChange={handlePassword}
           required
           minLength={8}

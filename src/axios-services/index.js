@@ -28,17 +28,17 @@ export async function getAPIHealth() {
   }
 }
 
-export async function loginUser(username, password) {
+export const loginUser = async (username, password) => {
   try {
-    const { data } = await axios.post(`/api/users/login`, {
+    const response = await axios.post(`/api/users/login`, {
       username,
       password,
     });
-    return data;
-  } catch (err) {
-    console.error(err);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
   }
-}
+};
 
 export async function registerUser(username, password) {
   try {
@@ -48,8 +48,8 @@ export async function registerUser(username, password) {
     });
 
     return response.data;
-  } catch (err) {
-    console.error(err);
+  } catch (error) {
+    throw error.response.data;
   }
 }
 

@@ -1,3 +1,10 @@
+/* NAVBAR START */
+.errorMessage {
+  color: red;
+  font-weight: 900;
+}
+/* NAVBAR END */
+
 .app-container {
   display: flex;
   flex-direction: column;
