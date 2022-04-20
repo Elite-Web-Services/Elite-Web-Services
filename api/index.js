@@ -18,7 +18,9 @@ apiRouter.use(async (req, res, next) => {
       const { username } = jwt.verify(token, JWT_SECRET);
       if (username) {
         console.log('Good token. Setting user.');
-        req.user = await getUserByUsername(username);
+        user = await getUserByUsername(username);
+        delete user.password;
+        req.user = user;
         next();
       } else {
         res.status(409);
