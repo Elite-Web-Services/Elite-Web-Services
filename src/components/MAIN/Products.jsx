@@ -60,7 +60,9 @@ const Products = () => {
               <h3>Category: {product.typeName}</h3>
               <p>{product.description}</p>
               <p>Price: {product.price}</p>
-              {user.isAdmin ? <EditProduct product={product} types={types} /> : null}
+              {user.isAdmin ? (
+                <EditProduct product={product} types={types} />
+              ) : null}
             </div>
           ))}
         </div>

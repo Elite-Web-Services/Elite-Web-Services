@@ -5,11 +5,14 @@ import { Modal } from 'react-bootstrap';
 
 const LoginForm = ({
   setIsLogin,
+  setIsRegister,
   username,
   setUsername,
   password,
   setPassword,
+  isError,
   setIsError,
+  errorMessage,
   setErrorMessage,
 }) => {
   const { user, setToken } = useAuth();
@@ -73,10 +76,23 @@ const LoginForm = ({
           >
             Submit
           </button>
-          <small className="text-muted">
-            Don't have an account? Register instead.
-          </small>
         </form>
+        {isError ? (
+          <div className="errorMessage">
+            <p>{`${errorMessage}`}</p>
+          </div>
+        ) : null}
+        <small className="text-center text-muted">
+          Don't have an account?
+          <span
+            style={{ color: 'blue' }}
+            onClick={() => {
+              setIsRegister(true);
+            }}
+          >
+            {' Register instead.'}
+          </span>
+        </small>
       </div>
     </div>
   );
