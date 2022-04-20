@@ -31,7 +31,7 @@ productsRouter.get("/", async (req, res, next) => {
 
 productsRouter.post("/", requireUser, async (req, res, next) => {
   // const creatorId = req.user.id;
-  const { typeId, name, description, price, public } = req.body;
+  const { typeId, name, description, price, isPublic } = req.body;
 
   const productsData = {
     // creatorId,
@@ -39,7 +39,7 @@ productsRouter.post("/", requireUser, async (req, res, next) => {
     name,
     description,
     price,
-    public,
+    isPublic,
   };
 
   try {
@@ -54,7 +54,7 @@ productsRouter.post("/", requireUser, async (req, res, next) => {
 productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
   const { productId } = req.params;
   // const creatorId = req.user.id;
-  const { typeId, name, description, price, public } = req.body;
+  const { typeId, name, description, price, isPublic } = req.body;
 
   const updateFields = {
     // creatorId,
@@ -63,7 +63,7 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
     name,
     description,
     price,
-    public,
+    isPublic,
   };
 
   try {

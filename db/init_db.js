@@ -36,7 +36,7 @@ async function buildTables() {
       name VARCHAR(255) NOT NULL,
       description varchar(255),
       price varchar(255),
-      public BOOLEAN DEFAULT true
+      "isPublic" BOOLEAN DEFAULT true
       );
     `);
 
@@ -94,7 +94,7 @@ async function createInitialProducts() {
         description:
           "I will make you a brand new website for CHEAP using 100% HTML.",
         price: "25",
-        public: true,
+        isPublic: true,
       },
       {
         typeId: 2,
@@ -102,14 +102,14 @@ async function createInitialProducts() {
         description:
           "I don't know much about computers, personally. But I'll make you feel understood.",
         price: "125",
-        public: true,
+        isPublic: true,
       },
       {
         typeId: 3,
         name: "Making websites stand out since 2021",
         description: "Colorblind? I'm here to help.",
         price: "100",
-        public: true,
+        isPublic: true,
       },
     ];
     const products = await Promise.all(

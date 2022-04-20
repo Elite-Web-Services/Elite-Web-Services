@@ -4,16 +4,16 @@ import useAuth from "../hooks/useAuth";
 import { getAllTypes } from "../../axios-services";
 
 const Products = () => {
-  const { publicProducts } = useAuth();
+  const { publicProducts, token } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
-  const [types, setTypes] = useState([])
+  const [types, setTypes] = useState([]);
 
   useEffect(() => {
     if (productType) {
       setFilterProducts(
         publicProducts.filter(
-          (publicProducts) => publicProducts.type === productType
+          (publicProducts) => publicProducts.typeName === productType
         )
       );
     } else {
@@ -45,6 +45,7 @@ const Products = () => {
           </button>
         );
       })}
+      {filterProducts ? (
       <div id="productList">
         {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
         {filterProducts.map((product) => (
@@ -53,10 +54,12 @@ const Products = () => {
             <h3>Category: {product.typeName}</h3>
             <p>{product.description}</p>
             <p>Price: {product.price}</p>
-            <EditProduct product={product} types={types} />
+            {token ? <EditProduct product={product} types={types} />: null}
           </div>
         ))}
       </div>
+      ) : (
+        <h5>Sorry, we couldn't find anything that matched your search!</h5>)}
     </div>
   );
 };
