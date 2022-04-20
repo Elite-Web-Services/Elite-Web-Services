@@ -77,6 +77,41 @@ export const getPublicProducts = async () => {
 
     return response.data;
   } catch (error) {
+    return error.response.data;
+  }
+};
+
+export const updateProduct = async (productId, token, typeId, name, description, price, isPublic ) => {
+  try {
+    const response = await axios.patch(`api/products/${productId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+        typeId,
+        name,
+        description,
+        price,
+        isPublic 
+    });
+
+    return response.data;
+  } catch (error) {
+    console.log("in axios-service", error)
+    return error;
+  }
+};
+
+export const getAllTypes = async () => {
+  try {
+    const response = await axios.get(`api/products/types`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
     return error;
   }
 };
