@@ -1,8 +1,17 @@
 const usersRouter = require('express').Router();
-const { getUserByUsername, createUser } = require('../db/models/user');
+const {
+  getUserByUsername,
+  createUser,
+  getAllUsers,
+} = require('../db/models/user');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
 const { requireUser } = require('./utils');
+
+usersRouter.use('/', (req, res, next) => {
+  console.log('Request to /users is being made.');
+  next();
+});
 
 usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
@@ -76,6 +85,11 @@ usersRouter.post('/register', async (req, res, next) => {
 
 usersRouter.get('/me', requireUser, (req, res, next) => {
   res.send(req.user);
+});
+
+usersRouter.get('/all', requireUser, async (req, res, next) => {
+  const users = await getAllUsers();
+  res.send(users);
 });
 
 module.exports = usersRouter;

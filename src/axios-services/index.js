@@ -42,6 +42,20 @@ export const getMe = async (token) => {
   }
 };
 
+export const getAllUsers = async (token) => {
+  try {
+    const { data } = await axios.get(`/api/users/all`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 export const loginUser = async (username, password) => {
   try {
     const { data } = await axios.post(`/api/users/login`, {
