@@ -13,7 +13,16 @@ productsRouter.get("/", async (req, res, next) => {
 
     res.send(publicProducts);
   } catch ({ name, message }) {
-    console.log("Yes we are here")
+    next({ name, message });
+  }
+});
+
+productsRouter.get("/types", async (req, res, next) => {
+  try {
+    const types = await Product.getAllTypes();
+    
+    res.send(types);
+  } catch ({ name, message }) {
     next({ name, message });
   }
 });

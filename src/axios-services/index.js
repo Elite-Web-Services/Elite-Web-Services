@@ -80,3 +80,17 @@ export const getPublicProducts = async () => {
     return error;
   }
 };
+
+export const getAllTypes = async () => {
+  try {
+    const response = await axios.get(`api/products/types`, {
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
