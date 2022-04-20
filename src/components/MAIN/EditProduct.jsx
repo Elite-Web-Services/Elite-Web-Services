@@ -7,6 +7,7 @@ const EditProduct = ({ product, types }) => {
 
     const [updateState, setUpdateState] = useState({
         typeId: product.typeId,
+        typeName: product.typeName,
         name: product.name,
         description: product.description,
         price: product.price,
@@ -59,7 +60,7 @@ const EditProduct = ({ product, types }) => {
               placeholder={product.description}
               value={updateState.description}
               onChange={(event) =>
-                setUpdateState({ ...updateState, goal: event.target.value })
+                setUpdateState({ ...updateState, description: event.target.value })
               }
             />
             {/* sets isPublic to either true or false */}
@@ -79,13 +80,12 @@ const EditProduct = ({ product, types }) => {
               <select
                 name="category"
                 id="category-select"
-                value={product.typeId}
+                value={updateState.typeId}
                 onChange={(e) =>
                     setUpdateState({ ...updateState, typeId: e.target.value })
                 }
                 /* this should update the value of the type */
               >
-                <option value={product.typeId}>{product.typeName}</option>
                 {types.map((type) => {
                   return (
                     <option key={"typeList:" + type.id} value={type.id}>
@@ -95,6 +95,14 @@ const EditProduct = ({ product, types }) => {
                 })}
                 {/* map over the types, return an <option /> */}
               </select>
+              <input
+              type="text"
+              placeholder={product.price}
+              value={updateState.price}
+              onChange={(event) =>
+                setUpdateState({ ...updateState, price: event.target.value })
+              }
+            />
             </div>
             <button type="submit">Update Product</button>
           </form>
