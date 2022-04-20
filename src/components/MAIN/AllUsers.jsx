@@ -18,13 +18,29 @@ const AllUsers = () => {
   }, [user]);
 
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="usersContainer">
       {isError ? <h1 style={{ color: 'red' }}>{errorMessage}</h1> : null}
       {allUsers ? (
-        <div className="allUsersContainer">
+        <div className="list-group mx-0">
           {allUsers.map((user, i) => {
-            return <div key={`allusers:${i}`}>{user.username}</div>;
+            return (
+              <div className="list-group-item d-flex gap-2">
+                <label
+                  key={`allusers:${i}`}
+                  className="list-group-item d-flex gap-2"
+                >
+                  <input
+                    className="form-check-input flex-shrink-0"
+                    type="checkbox"
+                  ></input>
+                  <div>
+                    <span className="d-block text-muted">{user.username}</span>
+                    <small>{`Admin: ${user.isAdmin}`}</small>
+                    <small>See order history</small>
+                  </div>
+                </label>
+              </div>
+            );
           })}
         </div>
       ) : null}
