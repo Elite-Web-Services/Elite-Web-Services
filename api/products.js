@@ -1,9 +1,9 @@
-const productsRouter = require('express').Router();
+const productsRouter = require("express").Router();
 const { Product } = require("../db/models");
-const { requireUser } = require('./utils');
+const { requireUser } = require("./utils");
 
 productsRouter.use("/", (req, res, next) => {
-  console.log('A request is being made to /products');
+  console.log("A request is being made to /products");
 
   next();
 });
@@ -14,6 +14,7 @@ productsRouter.get("/", async (req, res, next) => {
 
     res.send(publicProducts);
   } catch ({ name, message }) {
+    console.log("Yes we are here");
     next({ name, message });
   }
 });
@@ -38,7 +39,7 @@ productsRouter.post("/", requireUser, async (req, res, next) => {
     name,
     description,
     price,
-    public
+    public,
   };
 
   try {
@@ -69,9 +70,9 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
     // const originalProduct = await Product.getProductById(productId);
 
     // if (originalProduct.creatorId === req.user.id) {
-      const updatedProduct = await Product.updateProduct(updateFields);
+    const updatedProduct = await Product.updateProduct(updateFields);
 
-      res.send(updatedProduct);
+    res.send(updatedProduct);
     // } else {
     //   next({
     //     name: "UnauthorizedUserError",
@@ -79,7 +80,7 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
     //   });
     // }
   } catch ({ name, message }) {
-    console.log("we got this far", { name, message })
+    console.log("we got this far", { name, message });
     next({ name, message });
   }
 });
@@ -87,7 +88,7 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
 productsRouter.get("/types", async (req, res, next) => {
   try {
     const types = await Product.getAllTypes();
-    
+
     res.send(types);
   } catch ({ name, message }) {
     next({ name, message });

@@ -9,6 +9,7 @@ import AuthProvider from './context/AuthContext';
 import Main from './MAIN/Main';
 import Navbar from './NAV/Navbar';
 import Sidebar from './SIDEBAR/Sidebar'; //NEW
+import { BrowserRouter as Router } from 'react-router-dom';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
@@ -28,15 +29,17 @@ const App = () => {
   }, []);
 
   return (
-    <AuthProvider>
-      <div className="app-container">
-        <h1>Hello, World!</h1>
-        <Navbar />
-        <p>API Status: {APIHealth}</p>
-        <Main />
-        <Sidebar />
-      </div>
-    </AuthProvider>
+    <Router>
+      <AuthProvider>
+        <div className="app-container">
+          <h1>Hello, World!</h1>
+          <Navbar />
+          <p>API Status: {APIHealth}</p>
+          <Main />
+          <Sidebar />
+        </div>
+      </AuthProvider>
+    </Router>
   );
 };
 
