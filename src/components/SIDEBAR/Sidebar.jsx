@@ -10,6 +10,23 @@ const Sidebar = () => {
   const [toggleCartRender, setToggleCartRender] = useState(false);
   const [toggleProfileRender, setToggleProfileRender] = useState(false);
 
+  const handleAdmin = () => {
+    setToggleAdminRender(true);
+    setToggleCartRender(false);
+    setToggleProfileRender(false);
+  };
+
+  const handleCart = () => {
+    setToggleAdminRender(false);
+    setToggleCartRender(true);
+    setToggleProfileRender(false);
+  };
+  const handleProfile = () => {
+    setToggleAdminRender(false);
+    setToggleCartRender(false);
+    setToggleProfileRender(true);
+  };
+
   return (
     <div id="sidebar_container">
       <div className=" flex-shrink-0 p-3 bg-white" style={{ width: "280px" }}>
@@ -22,6 +39,7 @@ const Sidebar = () => {
               data-bs-toggle="collapse"
               data-bs-target="#profile-collapse"
               aria-expanded="false"
+              onClick={handleProfile}
             >
               My Profile
             </button>
@@ -53,6 +71,7 @@ const Sidebar = () => {
                 data-bs-toggle="collapse"
                 data-bs-target="#cart-sidebar-collapse"
                 aria-expanded="false"
+                onClick={handleAdmin}
               >
                 ADMIN Controls
               </button>
@@ -79,6 +98,7 @@ const Sidebar = () => {
               data-bs-toggle="collapse"
               data-bs-target="#cart-sidebar-collapse"
               aria-expanded="false"
+              onClick={handleCart}
             >
               Cart
             </button>
@@ -100,9 +120,9 @@ const Sidebar = () => {
         </ul>
 
         <div className="side-bar-render-box">
-          {/* {user.isAdmin && toggleAdminRender ? <Admin /> : null}
+          {user.isAdmin && toggleAdminRender ? <Admin /> : null}
           {toggleCartRender ? <Cart /> : null}
-          {toggleProfileRender ? <Profile /> : null} */}
+          {toggleProfileRender ? <Profile /> : null}
         </div>
       </div>
     </div>
