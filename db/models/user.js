@@ -8,18 +8,18 @@ module.exports = {
   getUserByUsername,
 };
 
-async function createUser({ username, password }) {
+async function createUser({ username, password, isAdmin = false }) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password)
-      VALUES($1, $2)
+      INSERT INTO users(username, password, "isAdmin")
+      VALUES($1, $2, $3)
       ON CONFLICT (username) DO NOTHING
-      RETURNING id, username;
+      RETURNING id, username, "isAdmin";
       `,
-      [username, password]
+      [username, password, isAdmin]
     );
     return user;
   } catch (error) {

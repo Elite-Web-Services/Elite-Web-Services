@@ -18,6 +18,7 @@ const Login = ({ isLogin, setIsLogin }) => {
       {isRegister ? (
         <RegisterationForm
           setIsLogin={setIsLogin}
+          setIsRegister={setIsRegister}
           username={username}
           setUsername={setUsername}
           password={password}
@@ -30,6 +31,7 @@ const Login = ({ isLogin, setIsLogin }) => {
       ) : (
         <LoginForm
           setIsLogin={setIsLogin}
+          setIsRegister={setIsRegister}
           username={username}
           setUsername={setUsername}
           password={password}
@@ -40,21 +42,6 @@ const Login = ({ isLogin, setIsLogin }) => {
           setErrorMessage={setErrorMessage}
         />
       )}
-      {isError ? (
-        <div className="errorMessage">
-          <p>{`${errorMessage}`}</p>
-        </div>
-      ) : null}
-      <p>
-        Don't have an account?
-        <span
-          onClick={() => {
-            setIsRegister(!isRegister);
-          }}
-        >
-          {' Register instead'}
-        </span>
-      </p>
     </Modal>
   );
 };
