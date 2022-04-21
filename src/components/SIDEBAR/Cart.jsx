@@ -4,7 +4,7 @@ import useAuth from "../hooks/useAuth";
 
 const Cart = () => {
   const { cart, token, setCart } = useAuth();
-  console.log(cart);
+
   return (
     <div>
       <h2>{cart.cartId}</h2>

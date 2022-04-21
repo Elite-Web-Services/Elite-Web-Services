@@ -1,6 +1,6 @@
 const mapProducts = (cart) => {
   let map = {};
-  console.log("CARTTTT", cart);
+
   if (cart.length) {
     for (const row of cart) {
       if (!map[row.cartId]) {

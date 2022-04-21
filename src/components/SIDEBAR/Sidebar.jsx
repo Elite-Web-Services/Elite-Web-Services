@@ -48,7 +48,7 @@ const Sidebar = () => {
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
                   <Link
-                    to="/#"
+                    to="/orderHistory"
                     onClick={() => {
                       setToggleProfileOH(true);
                     }}
