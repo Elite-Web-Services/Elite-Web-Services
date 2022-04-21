@@ -2,6 +2,7 @@
 const bcrypt = require('bcrypt');
 const SALT = 10;
 const client = require('../client');
+const { createCart } = require('./cart');
 
 module.exports = {
   // add your database adapter fns here
@@ -25,6 +26,8 @@ async function createUser({ username, password, isAdmin = false }) {
       `,
       [username, hashedPW, isAdmin]
     );
+
+    const cart = await createCart({ userId: user.id, purchased: false });
     return user;
   } catch (error) {
     throw error;

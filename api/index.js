@@ -1,6 +1,7 @@
 const apiRouter = require('express').Router();
 const usersRouter = require('./users');
 const productsRouter = require('./products');
+const cartsRouter = require('./carts');
 const { getUserByUsername } = require('../db/models/user');
 const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
@@ -52,6 +53,7 @@ apiRouter.get('/health', (req, res, next) => {
 
 apiRouter.use('/users', usersRouter);
 apiRouter.use('/products', productsRouter);
+apiRouter.use('/carts', cartsRouter);
 
 apiRouter.use((error, req, res, next) => {
   console.log('SENDING ERROR: ', error);
