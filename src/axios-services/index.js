@@ -171,7 +171,7 @@ export const deleteProduct = async (productId, token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    return response
+    return response;
   } catch (error) {
     return error;
   }
@@ -185,6 +185,49 @@ export const getAllTypes = async () => {
       },
     });
 
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const getCart = async (token) => {
+  try {
+    const response = await axios.get(`api/carts`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const addProductToCart = async (
+  token,
+  cartId,
+  productId,
+  quantity,
+  purchasedCost
+) => {
+  try {
+    const response = await axios.post(
+      `api/carts/addProduct`,
+      {
+        cartId,
+        productId,
+        quantity,
+        purchasedCost,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
     return response.data;
   } catch (error) {
     return error;

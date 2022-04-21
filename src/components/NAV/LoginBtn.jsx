@@ -2,7 +2,7 @@ import React from 'react';
 import useAuth from '../hooks/useAuth';
 
 const LoginBtn = ({ setIsLogin }) => {
-  const { user, setToken } = useAuth();
+  const { user, setToken, setCart } = useAuth();
 
   const logIn = () => {
     setIsLogin(true);
@@ -11,6 +11,7 @@ const LoginBtn = ({ setIsLogin }) => {
   const logOut = () => {
     localStorage.removeItem('token');
     setToken('');
+    setCart({})
   };
   return (
     <div>
