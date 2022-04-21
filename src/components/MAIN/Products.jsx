@@ -36,7 +36,7 @@ const Products = () => {
         <button onClick={() => setProductType("")}>See all</button>
       ) : null}
 
-      <CreateProduct types={types} />
+      {user.isAdmin ? <CreateProduct types={types} />: null}
 
       {/* Map out the type buttons */}
       {types ? (
