@@ -1,5 +1,5 @@
 // grab our db client connection to use with our adapters
-const client = require("../client");
+const client = require('../client');
 
 module.exports = {
   // add your database adapter fns here
@@ -11,17 +11,24 @@ module.exports = {
   getAllTypes,
 };
 
-async function createProduct({ typeId, name, description, price, isPublic }) {
+async function createProduct({
+  typeId,
+  name,
+  description,
+  price,
+  isPublic,
+  imgURL,
+}) {
   try {
     const {
       rows: [product],
     } = await client.query(
       `
-          INSERT INTO products("typeId", name, description, price, "isPublic") 
-          VALUES($1, $2, $3, $4, $5) 
+          INSERT INTO products("typeId", name, description, price, "isPublic", "imgURL") 
+          VALUES($1, $2, $3, $4, $5, $6) 
           RETURNING *;
           `,
-      [typeId, name, description, price, isPublic]
+      [typeId, name, description, price, isPublic, imgURL]
     );
 
     return product;
@@ -56,7 +63,7 @@ async function getPublicProducts() {
 async function updateProduct(fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(", ");
+    .join(', ');
 
   // return early if this is called without fields
   if (setString.length === 0) {
@@ -83,7 +90,7 @@ async function updateProduct(fields = {}) {
 }
 
 async function deleteProduct({ productId }) {
-  try {  
+  try {
     const {
       rows: [product],
     } = await client.query(
@@ -94,7 +101,7 @@ async function deleteProduct({ productId }) {
     `,
       [productId]
     );
-    return product
+    return product;
   } catch (error) {
     throw error;
   }

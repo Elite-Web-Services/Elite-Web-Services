@@ -3,6 +3,14 @@ require('dotenv').config();
 const express = require('express');
 const server = express();
 
+// integrate cloudinary CDN
+const cloudinary = require('cloudinary').v2;
+cloudinary.config({
+  cloud_name: process.env.CCLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
+
 // enable cross-origin resource sharing to proxy api requests
 // from localhost:3000 to localhost:4000 in local dev env
 const cors = require('cors');
