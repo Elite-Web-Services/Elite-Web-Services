@@ -100,7 +100,7 @@ const EditProduct = ({ product, types }) => {
             {/* map over the types, return an <option /> */}
           </select>
           <input
-            type="text"
+            type="number"
             placeholder={product.price}
             value={updateState.price}
             onChange={(event) =>
@@ -115,7 +115,7 @@ const EditProduct = ({ product, types }) => {
           onClick={async (event) => {
             event.preventDefault();
             await deleteProduct(product.id, token);
-            
+
             const newProducts = await getPublicProducts();
             setPublicProducts(newProducts);
           }}

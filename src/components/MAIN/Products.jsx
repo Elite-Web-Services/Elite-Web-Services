@@ -60,9 +60,9 @@ const Products = () => {
           {filterProducts.map((product) => (
             <div key={"productList:" + product.id}>
               <h2>{product.name}</h2>
-              <h3>Category: {product.typeName}</h3>
+              {!productType ? <h3>Category: {product.typeName}</h3>: null}
               <p>{product.description}</p>
-              <p>Price: {product.price}</p>
+              <p>${product.price}/hr</p>
               {user.isAdmin ? (
                 <EditProduct product={product} types={types} />
               ) : null}

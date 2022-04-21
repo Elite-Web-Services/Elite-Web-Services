@@ -5,7 +5,7 @@ import { createProduct, getPublicProducts } from "../../axios-services";
 const CreateProduct = ({ types }) => {
     const { token, setPublicProducts } = useAuth();
   const [createState, setCreateState] = useState({
-    typeId: '',
+    typeId: 1,
     typeName: '',
     name: '',
     description: '',
@@ -35,7 +35,6 @@ const CreateProduct = ({ types }) => {
       setPublicProducts(newProducts);
     }
   };
-  console.log(createError)
 
   return (
     <>
@@ -95,8 +94,8 @@ const CreateProduct = ({ types }) => {
             {/* map over the types, retCrn an <option /> */}
           </select>
           <input
-            type="text"
-            placeholder="Price"
+            type="number"
+            placeholder="Price per Hour"
             value={createState.price}
             onChange={(event) =>
               setCreateState({ ...createState, price: event.target.value })
