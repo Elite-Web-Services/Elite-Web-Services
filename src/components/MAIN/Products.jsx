@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import EditProduct from "./EditProduct";
 import CreateProduct from "./CreateProduct"
 import useAuth from "../hooks/useAuth";
-import { getAllTypes } from "../../axios-services";
+import { getAllTypes, addProductToCart } from "../../axios-services";
 
 const Products = () => {
-  const { publicProducts, user } = useAuth();
+  const { token, publicProducts, user, cart, setCart } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
   const [types, setTypes] = useState([]);
@@ -63,6 +63,18 @@ const Products = () => {
               {!productType ? <h3>Category: {product.typeName}</h3>: null}
               <p>{product.description}</p>
               <p>${product.price}/hr</p>
+              {/* remove later */}
+              {user.username ? (
+                <button
+                onClick={async (event) => {
+                event.preventDefault();
+                const newCart = await addProductToCart(token, cart.cartId, product.id, 1);
+                setCart(newCart)
+                }}
+                >
+                  Add To Cart
+                  </button>
+              ): null}
               {user.isAdmin ? (
                 <EditProduct product={product} types={types} />
               ) : null}

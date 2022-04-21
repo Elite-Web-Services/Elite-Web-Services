@@ -133,7 +133,7 @@ const Sidebar = () => {
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
                   <Link
-                    to="/#"
+                    to="/cart"
                     onClick={() => {
                       setToggleCheckout(true);
                     }}

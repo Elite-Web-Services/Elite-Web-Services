@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPublicProducts, getMe, getAllUsers } from '../../axios-services';
+import { getPublicProducts, getMe, getAllUsers, getCart } from '../../axios-services';
 
 export const AuthContext = React.createContext();
 
@@ -8,6 +8,7 @@ const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [publicProducts, setPublicProducts] = useState([]);
+  const [cart, setCart] = useState({})
 
   // GET PUBLIC PRODUCTS
   useEffect(() => {
@@ -32,8 +33,10 @@ const AuthProvider = ({ children }) => {
       setUser(user);
       console.log('ME THE USER: ', user);
 
-      // change to if (user.isAdmin)
-      if (user.username) {
+      const cart = await getCart(token) 
+      setCart(cart)
+
+      if (user.isAdmin) {
         getAllTheUsers();
       }
     } else {
@@ -57,6 +60,8 @@ const AuthProvider = ({ children }) => {
         setPublicProducts,
         allUsers,
         setAllUsers,
+        cart,
+        setCart,
       }}
     >
       {children}
