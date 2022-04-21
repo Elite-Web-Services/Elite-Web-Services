@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Admin from "./Admin";
-import Cart from "./Cart";
-import Profile from "./Profile";
 import ProfileOrderHistory from "./ProfileOrderHistory";
-import ProfileContactInfo from "./ProfileContactInfo";
+
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -40,7 +38,6 @@ const Sidebar = () => {
               data-bs-toggle="collapse"
               data-bs-target="#profile-collapse"
               aria-expanded="false"
-              // onClick={handleProfile}
             >
               My Profile
             </button>
@@ -86,9 +83,15 @@ const Sidebar = () => {
               <div className="collapse" id="cart-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <a href="#" className="link-dark rounded">
-                      Manage Users
-                    </a>
+                    <Link
+                      to="/users"
+                      onClick={() => {
+                        setToggleCheckout(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Manage Users{" "}
+                    </Link>
                   </li>
                   <li>
                     <Link
@@ -147,7 +150,6 @@ const Sidebar = () => {
         {/* -------------------------------------RENDER MENU */}
         <div className="side-bar-render-box">
           {user.isAdmin && toggleAdminRender ? <Admin /> : null}
-          {toggleProfileOH ? <ProfileOrderHistory /> : null}
         </div>
       </div>
     </div>

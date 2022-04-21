@@ -47,7 +47,7 @@ async function getCart(userId) {
   }
 }
 
-async function getOrderhistory(userId) {
+async function getOrderHistory(userId) {
   try {
     const { rows } = await client.query(
       `
