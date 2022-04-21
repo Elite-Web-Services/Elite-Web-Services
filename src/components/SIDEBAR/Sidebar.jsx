@@ -4,6 +4,7 @@ import Admin from "./Admin";
 import Cart from "./Cart";
 import Profile from "./Profile";
 import ProfileOrderHistory from "./ProfileOrderHistory";
+import ProfileContactInfo from "./ProfileContactInfo";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -16,6 +17,7 @@ const Sidebar = () => {
   const [toggleProfileCustom, setToggleProfileCustom] = useState(false);
   const [toggleCart, setToggleCart] = useState(false);
   const [toggleCheckout, setToggleCheckout] = useState(false);
+  const [toggleContactInfo, setToggleContactInfo] = useState(false);
 
   const handleAdmin = () => {
     setToggleAdminRender(true);
@@ -65,7 +67,7 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/#"
+                    to="/contactinfo"
                     onClick={() => {
                       setToggleProfileContact(true);
                     }}
@@ -74,7 +76,7 @@ const Sidebar = () => {
                     Contact Information{" "}
                   </Link>
                 </li>
-                <li>
+                {/* <li>
                   <Link
                     to="/#"
                     onClick={() => {
@@ -84,7 +86,7 @@ const Sidebar = () => {
                   >
                     Customize Profile{" "}
                   </Link>
-                </li>
+                </li> */}
               </ul>
             </div>
           </li>
@@ -161,6 +163,7 @@ const Sidebar = () => {
           {/* {toggleCartRender ? <Cart /> : null} */}
           {/* {toggleProfileRender ? <Profile /> : null} */}
           {toggleProfileOH ? <ProfileOrderHistory /> : null}
+          {/* {toggleProfileContact ? <ProfileContactInfo /> : null} */}
         </div>
       </div>
     </div>

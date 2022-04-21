@@ -1,7 +1,8 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Products from './Products';
-import AllUsers from './AllUsers';
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Products from "./Products";
+import AllUsers from "./AllUsers";
+import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
 
 const Main = () => {
   return (
@@ -9,6 +10,7 @@ const Main = () => {
       <Routes>
         <Route path="/users/" element={<AllUsers />}></Route>
         <Route path="/" element={<Products />}></Route>
+        <Route path="/contactinfo" element={<ProfileContactInfo />}></Route>
       </Routes>
     </div>
   );
