@@ -3,30 +3,37 @@ import useAuth from "../hooks/useAuth";
 import Admin from "./Admin";
 import Cart from "./Cart";
 import Profile from "./Profile";
+import ProfileOrderHistory from "./ProfileOrderHistory";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = useAuth();
   const [toggleAdminRender, setToggleAdminRender] = useState(false);
   const [toggleCartRender, setToggleCartRender] = useState(false);
-  const [toggleProfileRender, setToggleProfileRender] = useState(false);
+  // const [toggleProfileRender, setToggleProfileRender] = useState(false);
+  const [toggleProfileOH, setToggleProfileOH] = useState(false);
+  const [toggleProfileContact, setToggleProfileContact] = useState(false);
+  const [toggleProfileCustom, setToggleProfileCustom] = useState(false);
+  const [toggleCart, setToggleCart] = useState(false);
+  const [toggleCheckout, setToggleCheckout] = useState(false);
 
   const handleAdmin = () => {
     setToggleAdminRender(true);
     setToggleCartRender(false);
-    setToggleProfileRender(false);
+    // setToggleProfileRender(false);
   };
 
   const handleCart = () => {
     setToggleAdminRender(false);
     setToggleCartRender(true);
-    setToggleProfileRender(false);
-  };
-  const handleProfile = () => {
-    setToggleAdminRender(false);
-    setToggleCartRender(false);
-    setToggleProfileRender(true);
+    // setToggleProfileRender(false);
   };
 
+  // const handleProfile = () => {
+  //   setToggleAdminRender(false);
+  //   setToggleCartRender(false);
+  //   setToggleProfileRender(true);
+  // };
   return (
     <div id="sidebar_container">
       <div className=" flex-shrink-0 p-3 bg-white" style={{ width: "280px" }}>
@@ -39,26 +46,44 @@ const Sidebar = () => {
               data-bs-toggle="collapse"
               data-bs-target="#profile-collapse"
               aria-expanded="false"
-              onClick={handleProfile}
+              // onClick={handleProfile}
             >
               My Profile
             </button>
             <div className="collapse" id="profile-collapse">
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
-                  <a href="#" className="link-dark rounded">
-                    Order History
-                  </a>
+                  <Link
+                    to="/#"
+                    onClick={() => {
+                      setToggleProfileOH(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Order History{" "}
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="link-dark rounded">
-                    Contact Info
-                  </a>
+                  <Link
+                    to="/#"
+                    onClick={() => {
+                      setToggleProfileContact(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Contact Information{" "}
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="link-dark rounded">
-                    Customize Profile
-                  </a>
+                  <Link
+                    to="/#"
+                    onClick={() => {
+                      setToggleProfileCustom(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Customize Profile{" "}
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -105,24 +130,37 @@ const Sidebar = () => {
             <div className="collapse" id="cart-sidebar-collapse">
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
-                  <a href="#" className="link-dark rounded">
-                    Checkout
-                  </a>
+                  <Link
+                    to="/#"
+                    onClick={() => {
+                      setToggleCheckout(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Checkout{" "}
+                  </Link>
                 </li>
                 <li>
-                  <a href="#" className="link-dark rounded">
-                    Go to Cart
-                  </a>
+                  <Link
+                    to="/#"
+                    onClick={() => {
+                      setToggleCart(true);
+                    }}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Go to Cart{" "}
+                  </Link>
                 </li>
               </ul>
             </div>
           </li>
         </ul>
-
+        {/* -------------------------------------RENDER MENU */}
         <div className="side-bar-render-box">
           {user.isAdmin && toggleAdminRender ? <Admin /> : null}
-          {toggleCartRender ? <Cart /> : null}
-          {toggleProfileRender ? <Profile /> : null}
+          {/* {toggleCartRender ? <Cart /> : null} */}
+          {/* {toggleProfileRender ? <Profile /> : null} */}
+          {toggleProfileOH ? <ProfileOrderHistory /> : null}
         </div>
       </div>
     </div>
