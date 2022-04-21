@@ -6,6 +6,7 @@ module.exports = {
   createProduct,
   getPublicProducts,
   updateProduct,
+  deleteProduct,
   createType,
   getAllTypes,
 };
@@ -76,6 +77,24 @@ async function updateProduct(fields = {}) {
     );
 
     return product;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteProduct({ productId }) {
+  try {  
+    const {
+      rows: [product],
+    } = await client.query(
+      `
+    DELETE
+    FROM products
+    WHERE id=$1;
+    `,
+      [productId]
+    );
+    return product
   } catch (error) {
     throw error;
   }
