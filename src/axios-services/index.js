@@ -95,6 +95,39 @@ export const getPublicProducts = async () => {
   }
 };
 
+export const createProduct = async (
+  token,
+  typeId,
+  name,
+  description,
+  price,
+  isPublic
+) => {
+  try {
+    const response = await axios.post(
+      `api/products`,
+      {
+        typeId,
+        name,
+        description,
+        price,
+        isPublic,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    console.log(response.data);
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const updateProduct = async (
   productId,
   token,
@@ -121,11 +154,25 @@ export const updateProduct = async (
         },
       }
     );
-    console.log(response.data)
+    console.log(response.data);
 
     return response.data;
   } catch (error) {
     console.log("in axios-service", error);
+    return error;
+  }
+};
+
+export const deleteProduct = async (productId, token) => {
+  try {
+    const response = await axios.delete(`api/products/${productId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    return response
+  } catch (error) {
     return error;
   }
 };

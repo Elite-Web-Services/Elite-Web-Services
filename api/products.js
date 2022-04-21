@@ -80,7 +80,16 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
     //   });
     // }
   } catch ({ name, message }) {
-    console.log("we got this far", { name, message });
+    next({ name, message });
+  }
+});
+
+productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
+  try {
+    const deletedProduct = await Product.deleteProduct(req.params);
+
+    res.send(deletedProduct)
+  } catch ({ name, message }) {
     next({ name, message });
   }
 });

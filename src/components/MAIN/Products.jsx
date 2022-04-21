@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import EditProduct from "./EditProduct";
+import CreateProduct from "./CreateProduct"
 import useAuth from "../hooks/useAuth";
 import { getAllTypes } from "../../axios-services";
 
@@ -34,6 +35,8 @@ const Products = () => {
       {productType ? (
         <button onClick={() => setProductType("")}>See all</button>
       ) : null}
+
+      <CreateProduct types={types} />
 
       {/* Map out the type buttons */}
       {types ? (
