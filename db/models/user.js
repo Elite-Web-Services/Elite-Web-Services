@@ -1,8 +1,8 @@
 // grab our db client connection to use with our adapters
-const bcrypt = require('bcrypt');
+const bcrypt = require("bcrypt");
 const SALT = 10;
-const client = require('../client');
-const { createCart } = require('./cart');
+const client = require("../client");
+const { createCart } = require("./cart");
 
 module.exports = {
   // add your database adapter fns here
@@ -11,7 +11,17 @@ module.exports = {
   getUserByUsername,
 };
 
-async function createUser({ username, password, isAdmin = false }) {
+async function createUser({
+  username,
+  password,
+  isAdmin = false,
+  email,
+  address,
+  address2,
+  city,
+  state,
+  zip,
+}) {
   // CHANGE BCRYPT TO ASYNC SOMEHOW
   const hashedPW = bcrypt.hashSync(password, SALT);
   try {
@@ -19,12 +29,12 @@ async function createUser({ username, password, isAdmin = false }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, "isAdmin")
-      VALUES($1, $2, $3)
+      INSERT INTO users(username, password, "isAdmin",email, address, address2, city, state, zip)
+      VALUES($1, $2, $3,$4,$5,$6, $7,$8,$9)
       ON CONFLICT (username) DO NOTHING
       RETURNING id, username, "isAdmin";
       `,
-      [username, hashedPW, isAdmin]
+      [username, hashedPW, isAdmin, email, address, address2, city, state, zip]
     );
 
     const cart = await createCart({ userId: user.id, purchased: false });
