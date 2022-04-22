@@ -105,7 +105,7 @@ const EditProduct = ({ product }) => {
                     </select>
                   </div>
                   <div className="col-md-5 mb-3">
-                  <label htmlFor="price">Price/hr</label>
+                    <label htmlFor="price">Price/hr</label>
                     <input
                       className="custom-select d-block w-100"
                       type="number"

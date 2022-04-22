@@ -26,7 +26,7 @@ const SingleProduct = ({ product }) => {
             <div className="btn-group">
               {user.id ? (
                 <button
-                className="btn btn-secondary"
+                  className="btn btn-secondary"
                   onClick={async (event) => {
                     event.preventDefault();
                     const newCart = await addProductToCart(
