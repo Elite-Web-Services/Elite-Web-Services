@@ -48,7 +48,7 @@ const Products = () => {
         </div>
       ) : null}
 
-      {filterProducts ? (
+      {Array.isArray(filterProducts) ? (
         <div id="productList" className="album py-5 bg-light">
           <div className="container">
             <div className="row">
@@ -76,7 +76,7 @@ const Products = () => {
                         </Link>
                           {user.username ? (
                             <button
-                              className="btn btn-sm btn-outline-secondary"
+                            className="btn btn-secondary"
                               onClick={async (event) => {
                                 event.preventDefault();
                                 const newCart = await addProductToCart(
