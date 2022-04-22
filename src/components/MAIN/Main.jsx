@@ -4,11 +4,13 @@ import Products from "./Products";
 import AllUsers from "./AllUsers";
 import Cart from "../SIDEBAR/Cart";
 import EditProduct from "./EditProduct";
+import SingleProduct from "./SingleProduct";
+import CreateProduct from "./CreateProduct";
 import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
 import useAuth from "../hooks/useAuth";
 
 const Main = () => {
-  const { publicProducts } = useAuth();
+  const { publicProducts, user } = useAuth();
 
   return (
     <div className="main">
@@ -17,17 +19,30 @@ const Main = () => {
         <Route path="/contactinfo" element={<ProfileContactInfo />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
-        {publicProducts ? (
-          <>
-            {publicProducts.map((product) => (
+        <Route path="/createproduct" element={<CreateProduct />} />
+        
+        {publicProducts
+          ? publicProducts.map((product) => (
+              // (
               <Route
-                key={`productLink ${product.id}`}
-                path={`products=${product.id}`}
-                element={<EditProduct product={product} />}
+                key={`SingleProductLink ${product.id}`}
+                path={`viewproduct=${product.id}`}
+                element={<SingleProduct product={product} />}
               />
-            ))}
-          </>
-        ) : null}
+            ))
+          : null}
+
+        {publicProducts && user.isAdmin
+          ? publicProducts.map((product) =>
+              user.isAdmin ? (
+                <Route
+                  key={`editProductLink ${product.id}`}
+                  path={`editproduct=${product.id}`}
+                  element={<EditProduct product={product} />}
+                />
+              ) : null
+            )
+          : null}
       </Routes>
     </div>
   );

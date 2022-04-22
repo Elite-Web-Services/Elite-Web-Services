@@ -28,7 +28,11 @@ const Products = () => {
         <button onClick={() => setProductType("")}>See all</button>
       ) : null}
 
-      {user.isAdmin ? <CreateProduct types={types} /> : null}
+      {user.isAdmin ? (
+        <Link to="/createproduct">
+          <button>Add New Product</button>
+        </Link>
+      ) : null}
 
       {/* Map out the type buttons */}
       {types ? (
@@ -53,40 +57,55 @@ const Products = () => {
               {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
               {filterProducts.map((product) => (
                 <div key={"productList:" + product.id} className="col-md-4">
-                  <Link to={`/products=${product.id}`} className="card mb-4 box-shadow">
+                  <div className="card mb-4 box-shadow">
                     <div className="card-body">
                       {!productType ? (
-                        <h6 className="card-text">Category: {product.typeName}</h6>
+                        <h6 className="card-text">
+                          Category: {product.typeName}
+                        </h6>
                       ) : null}
                       <h2 className="card-text">{product.name}</h2>
                       <p className="card-text">{product.description}</p>
                       {/* remove later */}
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                      {user.username ? (
-                        <button className="btn btn-sm btn-outline-secondary"
-                        onClick={async (event) => {
-                          event.preventDefault();
-                          const newCart = await addProductToCart(
-                            token,
-                            cart.cartId,
-                            product.id,
-                            1
-                            );
-                            setCart(newCart);
-                          }}
-                          >
-                          Add To Cart
+                        <Link
+                          to={`/viewproduct=${product.id}`}>
+                            <button className="btn btn-sm btn-outline-secondary">
+                          View
                         </button>
-                      ) : null}
-                      {/* {user.isAdmin ? (
-                        <EditProduct product={product} types={types} />
-                        ) : null} */}
+                        </Link>
+                          {user.username ? (
+                            <button
+                              className="btn btn-sm btn-outline-secondary"
+                              onClick={async (event) => {
+                                event.preventDefault();
+                                const newCart = await addProductToCart(
+                                  token,
+                                  cart.cartId,
+                                  product.id,
+                                  1
+                                );
+                                setCart(newCart);
+                              }}
+                            >
+                              Add To Cart
+                            </button>
+                          ) : null}
+                          {user.isAdmin ? (
+                          <Link to={`/editproduct=${product.id}`}>
+                            <button className="btn btn-sm btn-outline-secondary">
+                              Edit
+                            </button>
+                          </Link>
+                          ) : null}
                         </div>
-                        <small className="text-muted">${product.price}/hr</small>
-                        </div>
+                        <small className="text-muted">
+                          ${product.price}/hr
+                        </small>
+                      </div>
                     </div>
-                  </Link>
+                  </div>
                 </div>
               ))}
             </div>

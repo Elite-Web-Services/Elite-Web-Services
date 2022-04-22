@@ -7,7 +7,6 @@ import {
 } from "../../axios-services";
 
 const EditProduct = ({ product }) => {
-  console.log(product);
 
   const { token, setPublicProducts, types } = useAuth();
 
