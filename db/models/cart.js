@@ -46,3 +46,24 @@ async function getCart(userId) {
     throw error;
   }
 }
+
+async function getOrderHistory(userId) {
+  try {
+    const { rows } = await client.query(
+      `
+    SELECT 
+	    purchased, "userId", carts.id as "cartId", "productId", quantity, 
+        "typeId", products.name as "productName", products.description as "productDescription", price, "isPublic"
+    FROM carts
+	    LEFT JOIN cart_products ON cart_products."cartId" = carts.id
+        LEFT JOIN products ON products.id = cart_products."productId"
+    WHERE "userId"=$1 AND purchased=$2;
+    `,
+      [userId, true]
+    );
+
+    return mapProducts(rows);
+  } catch (error) {
+    throw error;
+  }
+}

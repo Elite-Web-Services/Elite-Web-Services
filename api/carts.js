@@ -52,4 +52,16 @@ cartsRouter.delete(
   }
 );
 
+cartsRouter.get("/orderHistory", requireUser, async (req, res, next) => {
+  console.log("a request to get history is made");
+  try {
+    const [cart] = await Cart.getOrderHistory(req.user.id);
+    res.send(cart);
+
+    // come back to catch errors
+  } catch (error) {
+    throw error;
+  }
+});
+
 module.exports = cartsRouter;

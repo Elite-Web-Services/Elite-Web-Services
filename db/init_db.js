@@ -41,7 +41,8 @@ async function buildTables() {
       name VARCHAR(255) NOT NULL,
       description varchar(255),
       price varchar(255),
-      "isPublic" BOOLEAN DEFAULT true
+      "isPublic" BOOLEAN DEFAULT true,
+      "imgURL" text
       );
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
@@ -111,6 +112,8 @@ async function createInitialProducts() {
           'I will make you a brand new website for CHEAP using 100% HTML.',
         price: '25',
         isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567503/cld-sample.jpg',
       },
       {
         typeId: 2,
@@ -119,6 +122,8 @@ async function createInitialProducts() {
           "I don't know much about computers, personally. But I'll make you feel understood.",
         price: '125',
         isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567503/cld-sample.jpg',
       },
       {
         typeId: 3,
@@ -126,6 +131,8 @@ async function createInitialProducts() {
         description: "Colorblind? I'm here to help.",
         price: '100',
         isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567482/sample.jpg',
       },
     ];
     const products = await Promise.all(

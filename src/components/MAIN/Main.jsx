@@ -9,6 +9,9 @@ import CreateProduct from "./CreateProduct";
 import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
 import useAuth from "../hooks/useAuth";
 
+import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
+
+
 const Main = () => {
   const { publicProducts, user } = useAuth();
 
@@ -17,6 +20,7 @@ const Main = () => {
       <Routes>
         <Route path="/users/" element={<AllUsers />} />
         <Route path="/contactinfo" element={<ProfileContactInfo />} />
+        <Route path="/orderHistory" element={<ProfileOrderHistory />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/" element={<Products />} />
         <Route path="/createproduct" element={<CreateProduct />} />
