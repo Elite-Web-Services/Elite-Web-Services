@@ -57,6 +57,7 @@ const Products = () => {
                 <div key={"productList:" + product.id} className="col-md-4">
                   <div className="card mb-4 box-shadow">
                     <div className="card-body">
+                    <img className="card-img-top" style={{height: 225 + 'px', width: '100%', display: 'block'}} alt="Thumbnail [100%x225]" src={product.imgURL} />
                       {!productType ? (
                         <h6 className="card-text">
                           Category: {product.typeName}
