@@ -6,6 +6,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitPayment(true);
   };
 
   return (

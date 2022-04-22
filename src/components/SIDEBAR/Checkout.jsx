@@ -23,6 +23,7 @@ const Checkout = () => {
         <CheckoutSubmitPayment
           isSubmitPayment={isSubmitPayment}
           setIsSubmitPayment={setIsSubmitPayment}
+          total={total}
         />
       )}
     </div>
