@@ -13,6 +13,8 @@ const useAuth = () => {
     setAllUsers,
     cart,
     setCart,
+    types,
+    setTypes,
   } = useContext(AuthContext);
 
   return {
@@ -26,6 +28,8 @@ const useAuth = () => {
     setAllUsers,
     cart,
     setCart,
+    types,
+    setTypes,
   };
 };
 
