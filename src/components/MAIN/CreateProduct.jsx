@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import { createProduct, getPublicProducts } from "../../axios-services";
 
-const CreateProduct = ({ types }) => {
-    const { token, setPublicProducts } = useAuth();
+const CreateProduct = () => {
+    const { token, setPublicProducts, types } = useAuth();
   const [createState, setCreateState] = useState({
     typeId: 1,
     typeName: '',

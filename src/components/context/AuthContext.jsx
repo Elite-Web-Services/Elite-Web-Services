@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPublicProducts, getMe, getAllUsers, getCart } from '../../axios-services';
+import { getPublicProducts, getMe, getAllUsers, getCart, getAllTypes } from '../../axios-services';
 
 export const AuthContext = React.createContext();
 
@@ -9,6 +9,7 @@ const AuthProvider = ({ children }) => {
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [publicProducts, setPublicProducts] = useState([]);
   const [cart, setCart] = useState({})
+  const [types, setTypes] = useState([]);
 
   // GET PUBLIC PRODUCTS
   useEffect(() => {
@@ -49,6 +50,14 @@ const AuthProvider = ({ children }) => {
     getUser();
   }, [token]);
 
+  useEffect(() => {
+    const displayAllTypes = async () => {
+      const data = await getAllTypes();
+      setTypes(data);
+    };
+    displayAllTypes();
+  }, []);
+
   return (
     <AuthContext.Provider
       value={{
@@ -62,6 +71,8 @@ const AuthProvider = ({ children }) => {
         setAllUsers,
         cart,
         setCart,
+        types,
+        setTypes
       }}
     >
       {children}
