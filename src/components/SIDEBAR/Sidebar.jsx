@@ -1,23 +1,18 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Admin from "./Admin";
-import Cart from "./Cart";
-import Profile from "./Profile";
 import ProfileOrderHistory from "./ProfileOrderHistory";
-import ProfileContactInfo from "./ProfileContactInfo";
+
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = useAuth();
   const [toggleAdminRender, setToggleAdminRender] = useState(false);
   const [toggleCartRender, setToggleCartRender] = useState(false);
-  // const [toggleProfileRender, setToggleProfileRender] = useState(false);
   const [toggleProfileOH, setToggleProfileOH] = useState(false);
   const [toggleProfileContact, setToggleProfileContact] = useState(false);
-  const [toggleProfileCustom, setToggleProfileCustom] = useState(false);
   const [toggleCart, setToggleCart] = useState(false);
   const [toggleCheckout, setToggleCheckout] = useState(false);
-  const [toggleContactInfo, setToggleContactInfo] = useState(false);
 
   const handleAdmin = () => {
     setToggleAdminRender(true);
@@ -31,11 +26,6 @@ const Sidebar = () => {
     // setToggleProfileRender(false);
   };
 
-  // const handleProfile = () => {
-  //   setToggleAdminRender(false);
-  //   setToggleCartRender(false);
-  //   setToggleProfileRender(true);
-  // };
   return (
     <div id="sidebar_container">
       <div className=" flex-shrink-0 p-3 bg-white" style={{ width: "280px" }}>
@@ -48,7 +38,6 @@ const Sidebar = () => {
               data-bs-toggle="collapse"
               data-bs-target="#profile-collapse"
               aria-expanded="false"
-              // onClick={handleProfile}
             >
               My Profile
             </button>
@@ -56,7 +45,7 @@ const Sidebar = () => {
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
                   <Link
-                    to="/#"
+                    to="/orderHistory"
                     onClick={() => {
                       setToggleProfileOH(true);
                     }}
@@ -76,17 +65,6 @@ const Sidebar = () => {
                     Contact Information{" "}
                   </Link>
                 </li>
-                {/* <li>
-                  <Link
-                    to="/#"
-                    onClick={() => {
-                      setToggleProfileCustom(true);
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
-                    Customize Profile{" "}
-                  </Link>
-                </li> */}
               </ul>
             </div>
           </li>
@@ -105,14 +83,26 @@ const Sidebar = () => {
               <div className="collapse" id="cart-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <a href="#" className="link-dark rounded">
-                      Manage Users
-                    </a>
+                    <Link
+                      to="/users"
+                      onClick={() => {
+                        setToggleCheckout(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Manage Users{" "}
+                    </Link>
                   </li>
                   <li>
-                    <a href="#" className="link-dark rounded">
-                      Manage Products
-                    </a>
+                    <Link
+                      to="/"
+                      onClick={() => {
+                        setToggleCheckout(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Manage Products{" "}
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -144,7 +134,7 @@ const Sidebar = () => {
                 </li>
                 <li>
                   <Link
-                    to="/#"
+                    to="/cart"
                     onClick={() => {
                       setToggleCart(true);
                     }}
@@ -160,10 +150,6 @@ const Sidebar = () => {
         {/* -------------------------------------RENDER MENU */}
         <div className="side-bar-render-box">
           {user.isAdmin && toggleAdminRender ? <Admin /> : null}
-          {/* {toggleCartRender ? <Cart /> : null} */}
-          {/* {toggleProfileRender ? <Profile /> : null} */}
-          {toggleProfileOH ? <ProfileOrderHistory /> : null}
-          {/* {toggleProfileContact ? <ProfileContactInfo /> : null} */}
         </div>
       </div>
     </div>

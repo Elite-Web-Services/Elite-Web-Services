@@ -252,3 +252,34 @@ export const deleteCartProduct = async (productId, token) => {
     return error;
   }
 };
+
+export const purchaseHistory = async (
+  token,
+  cartId,
+  productId,
+  quantity,
+  purchasedCost,
+  purchased
+) => {
+  try {
+    const response = await axios.post(
+      `api/orderHistory`,
+      {
+        cartId,
+        productId,
+        quantity,
+        purchasedCost,
+        purchased,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
