@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Modal, ModalHeader } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth';
+import { purchaseCart } from '../../axios-services';
 
 const CheckoutSubmitPayment = ({
   total,
@@ -10,7 +11,7 @@ const CheckoutSubmitPayment = ({
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
-  const { cart, setCart } = useAuth();
+  const { cart, setCart, token } = useAuth();
 
   const handleClose = () => {
     setIsSubmitPayment(false);
@@ -19,6 +20,9 @@ const CheckoutSubmitPayment = ({
 
   const handlePurchase = async () => {
     setPurchased(true);
+    const newCart = await purchaseCart(token, cart.cartId);
+    console.log('NEW CART AFTER PURCHASING, ', newCart);
+    setCart(newCart);
   };
 
   const handleReject = () => {

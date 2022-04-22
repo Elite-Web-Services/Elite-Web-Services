@@ -24,8 +24,8 @@ const Main = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
-        <Route path="/" element={<Products />} />
         <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/" element={<Products />} />
 
         {publicProducts
           ? publicProducts.map((product) => (
