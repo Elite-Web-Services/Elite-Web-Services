@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Routes, Route, Link } from "react-router-dom";
-import EditProduct from "./EditProduct";
-import CreateProduct from "./CreateProduct";
+import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { getAllTypes, addProductToCart } from "../../axios-services";
+import { addProductToCart } from "../../axios-services";
 
 const Products = () => {
   const { token, publicProducts, user, cart, setCart, types } = useAuth();

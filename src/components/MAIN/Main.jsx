@@ -18,9 +18,9 @@ const Main = () => {
         <Route path="/users/" element={<AllUsers />} />
         <Route path="/contactinfo" element={<ProfileContactInfo />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="/products" element={<Products />} />
+        <Route path="/" element={<Products />} />
         <Route path="/createproduct" element={<CreateProduct />} />
-        
+
         {publicProducts
           ? publicProducts.map((product) => (
               // (
