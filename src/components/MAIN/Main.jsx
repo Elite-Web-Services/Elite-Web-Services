@@ -27,9 +27,8 @@ const Main = () => {
         <Route path="/createproduct" element={<CreateProduct />} />
         <Route path="/" element={<Products />} />
 
-        {publicProducts
+        {Array.isArray(publicProducts)
           ? publicProducts.map((product) => (
-              // (
               <Route
                 key={`SingleProductLink ${product.id}`}
                 path={`viewproduct=${product.id}`}
@@ -38,16 +37,14 @@ const Main = () => {
             ))
           : null}
 
-        {publicProducts && user.isAdmin
-          ? publicProducts.map((product) =>
-              user.isAdmin ? (
+        {Array.isArray(publicProducts) && user.isAdmin
+          ? publicProducts.map((product) => (
                 <Route
                   key={`editProductLink ${product.id}`}
                   path={`editproduct=${product.id}`}
                   element={<EditProduct product={product} />}
                 />
-              ) : null
-            )
+              ))
           : null}
       </Routes>
     </div>
