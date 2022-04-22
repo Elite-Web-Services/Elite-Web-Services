@@ -48,7 +48,7 @@ const Products = () => {
         </div>
       ) : null}
 
-      {filterProducts ? (
+      {Array.isArray(filterProducts) ? (
         <div id="productList" className="album py-5 bg-light">
           <div className="container">
             <div className="row">
@@ -57,6 +57,16 @@ const Products = () => {
                 <div key={"productList:" + product.id} className="col-md-4">
                   <div className="card mb-4 box-shadow">
                     <div className="card-body">
+                      <img
+                        className="card-img-top"
+                        style={{
+                          height: 225 + "px",
+                          width: "100%",
+                          display: "block",
+                        }}
+                        alt="Thumbnail [100%x225]"
+                        src={product.imgURL}
+                      />
                       {!productType ? (
                         <h6 className="card-text">
                           Category: {product.typeName}
@@ -67,15 +77,14 @@ const Products = () => {
                       {/* remove later */}
                       <div className="d-flex justify-content-between align-items-center">
                         <div className="btn-group">
-                        <Link
-                          to={`/viewproduct=${product.id}`}>
+                          <Link to={`/viewproduct=${product.id}`}>
                             <button className="btn btn-sm btn-outline-secondary">
-                          View
-                        </button>
-                        </Link>
+                              View
+                            </button>
+                          </Link>
                           {user.username ? (
                             <button
-                              className="btn btn-sm btn-outline-secondary"
+                              className="btn btn-secondary"
                               onClick={async (event) => {
                                 event.preventDefault();
                                 const newCart = await addProductToCart(
@@ -91,11 +100,11 @@ const Products = () => {
                             </button>
                           ) : null}
                           {user.isAdmin ? (
-                          <Link to={`/editproduct=${product.id}`}>
-                            <button className="btn btn-sm btn-outline-secondary">
-                              Edit
-                            </button>
-                          </Link>
+                            <Link to={`/editproduct=${product.id}`}>
+                              <button className="btn btn-sm btn-outline-secondary">
+                                Edit
+                              </button>
+                            </Link>
                           ) : null}
                         </div>
                         <small className="text-muted">

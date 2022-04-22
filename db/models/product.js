@@ -47,7 +47,8 @@ async function getPublicProducts() {
         types.name AS "typeName",
         products.description AS description,
         products.price AS price,
-        products."isPublic" AS "isPublic"
+        products."isPublic" AS "isPublic",
+        products."imgURL" AS "imgURL"
         FROM products
         LEFT JOIN types ON products."typeId" = types.id
         WHERE "isPublic" is true
