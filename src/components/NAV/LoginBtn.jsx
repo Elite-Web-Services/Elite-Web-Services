@@ -11,16 +11,21 @@ const LoginBtn = ({ setIsLogin }) => {
   const logOut = () => {
     localStorage.removeItem('token');
     setToken('');
-    setCart({})
+    setCart({});
   };
+
+  const handleLogIn = () => {
+    if (user.username) {
+      logOut();
+    } else {
+      logIn();
+    }
+  };
+
   return (
-    <div>
-      {user.username ? (
-        <button onClick={logOut}>Log Out</button>
-      ) : (
-        <button onClick={logIn}>Log In</button>
-      )}
-    </div>
+    <a className="nav-link" onClick={handleLogIn}>
+      {user.username ? 'Logout' : 'Login'}
+    </a>
   );
 };
 
