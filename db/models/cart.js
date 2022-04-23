@@ -32,7 +32,7 @@ async function getCart(userId) {
     const { rows } = await client.query(
       `
     SELECT 
-	    purchased, "userId", carts.id as "cartId", "productId", quantity, 
+	    purchased, "userId", carts.id as "cartId", "productId", quantity, "imgURL",
         "typeId", products.name as "productName", products.description as "productDescription", price, "isPublic"
     FROM carts
 	    LEFT JOIN cart_products ON cart_products."cartId" = carts.id

@@ -3,6 +3,14 @@
   width: 100%;
 }
 
+.loginRegisterRedirect:hover {
+  cursor: pointer;
+}
+
+#loginLogoutLink:hover {
+  cursor: pointer;
+}
+
 .errorMessage {
   color: red;
   font-weight: 900;

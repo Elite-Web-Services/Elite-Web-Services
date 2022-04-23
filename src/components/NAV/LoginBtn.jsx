@@ -23,7 +23,7 @@ const LoginBtn = ({ setIsLogin }) => {
   };
 
   return (
-    <a className="nav-link" onClick={handleLogIn}>
+    <a id="loginLogoutLink" className="nav-link" onClick={handleLogIn}>
       {user.username ? 'Logout' : 'Login'}
     </a>
   );

@@ -19,6 +19,7 @@ const mapProducts = (cart) => {
           quantity: row.quantity,
           price: row.price,
           isPublic: row.isPublic,
+          imgURL: row.imgURL,
         });
       }
     }

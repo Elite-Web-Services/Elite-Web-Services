@@ -59,7 +59,6 @@ const RegisterationForm = ({
       <div className="modal-body p-5 pt-0">
         <form onSubmit={handleRegistration}>
           <div className="form-floating mb-3">
-            <label htmlFor="username">Username: </label>
             <input
               className="form-control rounded-4"
               type="text"
@@ -67,9 +66,9 @@ const RegisterationForm = ({
               onChange={handleUsername}
               required
             />
+            <label htmlFor="username">Username: </label>
           </div>
           <div className="form-floating mb-3">
-            <label htmlFor="password">Password: </label>
             <input
               className="form-control rounded-4"
               type="password"
@@ -78,6 +77,7 @@ const RegisterationForm = ({
               required
               minLength={8}
             ></input>
+            <label htmlFor="password">Password: </label>
           </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
@@ -94,6 +94,7 @@ const RegisterationForm = ({
         <small className="text-center text-muted">
           Go back to
           <span
+            className="loginRegisterRedirect"
             style={{ color: 'blue' }}
             onClick={() => {
               setIsRegister(false);
