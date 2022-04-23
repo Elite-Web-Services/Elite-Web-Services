@@ -17,7 +17,12 @@ const Cart = () => {
     <div className="container px-4 py-5">
       {cart.products && cart.products.length > 0 ? (
         <Fragment>
-          <h2 className="pb-2 border-bottom">Cart</h2>
+          <h2 className="pb-2 border-bottom">
+            Cart{' '}
+            <Link to="/checkout">
+              <button className="btn btn-outline-success">Checkout</button>
+            </Link>
+          </h2>
           <div
             className={`row row-cols-1 ${rowCols} align-items-stretch g-4 py-5`}
           >
