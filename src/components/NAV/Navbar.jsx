@@ -3,6 +3,7 @@ import LoginBtn from './LoginBtn';
 import Login from './Login';
 import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
 
 const Navbar = () => {
   const { user, cart } = useAuth();
@@ -62,6 +63,7 @@ const Navbar = () => {
               </Link>
             </li>
           </ul>
+          <SearchBar />
         </div>
 
         {isLogin && <Login isLogin={isLogin} setIsLogin={setIsLogin} />}

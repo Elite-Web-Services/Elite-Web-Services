@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { addProductToCart } from "../../axios-services";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import { addProductToCart } from '../../axios-services';
 
 const Products = () => {
+  let location = useLocation();
+  if (location.search) {
+    console.log('SEARCH: ', location.search);
+  }
+
   const { token, publicProducts, user, cart, setCart, types } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
-  const [productType, setProductType] = useState("");
+  const [productType, setProductType] = useState('');
 
   useEffect(() => {
     if (productType) {
@@ -23,7 +28,7 @@ const Products = () => {
   return (
     <div>
       {productType ? (
-        <button onClick={() => setProductType("")}>See all</button>
+        <button onClick={() => setProductType('')}>See all</button>
       ) : null}
 
       {user.isAdmin ? (
@@ -54,15 +59,15 @@ const Products = () => {
             <div className="row">
               {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
               {filterProducts.map((product) => (
-                <div key={"productList:" + product.id} className="col-md-4">
+                <div key={'productList:' + product.id} className="col-md-4">
                   <div className="card mb-4 box-shadow">
                     <div className="card-body">
                       <img
                         className="card-img-top"
                         style={{
-                          height: 225 + "px",
-                          width: "100%",
-                          display: "block",
+                          height: 225 + 'px',
+                          width: '100%',
+                          display: 'block',
                         }}
                         alt="Thumbnail [100%x225]"
                         src={product.imgURL}

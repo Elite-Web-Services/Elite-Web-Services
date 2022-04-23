@@ -34,7 +34,7 @@ const App = () => {
         <div className="app-container">
           <h1>Hello, World!</h1>
           <Navbar />
-          <p>API Status: {APIHealth}</p>
+          {/* <p>API Status: {APIHealth}</p> */}
           <Main />
           <Sidebar />
         </div>
