@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Fragment } from 'react';
 import useAuth from '../hooks/useAuth';
 import CheckoutForm from './CheckoutForm';
 import CheckoutSubmitPayment from './CheckoutSubmitPayment';
@@ -17,7 +17,7 @@ const Checkout = () => {
   }, [cart]);
 
   return (
-    <div>
+    <div className="container">
       <CheckoutForm total={total} setIsSubmitPayment={setIsSubmitPayment} />
       {isSubmitPayment && (
         <CheckoutSubmitPayment

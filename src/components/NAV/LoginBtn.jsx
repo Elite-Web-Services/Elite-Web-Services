@@ -1,7 +1,9 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const LoginBtn = ({ setIsLogin }) => {
+  const navigate = useNavigate();
   const { user, setToken, setCart } = useAuth();
 
   const logIn = () => {
@@ -11,16 +13,22 @@ const LoginBtn = ({ setIsLogin }) => {
   const logOut = () => {
     localStorage.removeItem('token');
     setToken('');
-    setCart({})
+    setCart({});
+    navigate('/');
   };
+
+  const handleLogIn = () => {
+    if (user.username) {
+      logOut();
+    } else {
+      logIn();
+    }
+  };
+
   return (
-    <div>
-      {user.username ? (
-        <button onClick={logOut}>Log Out</button>
-      ) : (
-        <button onClick={logIn}>Log In</button>
-      )}
-    </div>
+    <a id="loginLogoutLink" className="nav-link" onClick={handleLogIn}>
+      {user.username ? 'Logout' : 'Login'}
+    </a>
   );
 };
 
