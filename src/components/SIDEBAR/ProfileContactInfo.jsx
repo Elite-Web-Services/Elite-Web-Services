@@ -43,7 +43,7 @@ const ProfileContactInfo = () => {
   return (
     <div>
       <div>
-        <h1> hi!</h1>
+        <h1> bye!</h1>
       </div>
       <form className="row g-3" onSubmit={handleAddressStored}>
         <div className="col-md-7">
