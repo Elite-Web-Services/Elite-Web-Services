@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
 import ProductCard from './ProductCard';
 
 
@@ -11,28 +10,21 @@ const Products = () => {
     console.log("SEARCH: ", location.search);
   }
 
-  const { token, products, user, types } = useAuth();
-  const { cart, setCart } = useCart();
+  const { products, user, types } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
+  const [query, setQuery] = useState(new URLSearchParams(location.search).get("search"))
 
   useEffect(() => {
+    setFilterProducts(products);
+
     if (productType) {
       setFilterProducts(
         products.filter((products) => products.typeName === productType)
       );
     } 
-    if (location.search) {
-      const queryParams = new URLSearchParams(location.search);
-      for (const [key, value] of queryParams) {
-        console.log(key, "this is the value HERE", value)
-        setFilterProducts(filterProducts.filter((product) => product.name.includes(value)))
-      }
-      const singleValue = queryParams.get('value')
-      console.log(singleValue)
-    }
-    if (!productType && !location.search) {
-      setFilterProducts(products);
+    if (query) {
+        setFilterProducts(products.filter((product) => product.name.includes(query)))
     }
   }, [products, productType, location.search]);
 
