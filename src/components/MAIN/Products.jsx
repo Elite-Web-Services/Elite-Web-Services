@@ -1,32 +1,42 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
-import { addProductToCart } from '../../axios-services';
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import useAuth from "../hooks/useAuth";
+import ProductCard from './ProductCard';
 
 const Products = () => {
   let location = useLocation();
   if (location.search) {
-    console.log('SEARCH: ', location.search);
+    console.log("SEARCH: ", location.search);
   }
 
-  const { token, products, user, cart, setCart, types } = useAuth();
+  const { products, user, types } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
-  const [productType, setProductType] = useState('');
+  const [productType, setProductType] = useState("");
 
   useEffect(() => {
     if (productType) {
       setFilterProducts(
         products.filter((products) => products.typeName === productType)
       );
-    } else {
+    } 
+    if (location.search) {
+      const queryParams = new URLSearchParams(location.search);
+      for (const [key, value] of queryParams) {
+        console.log(key, "this is the value HERE", value)
+        setFilterProducts(filterProducts.filter((product) => product.name.includes(value)))
+      }
+      const singleValue = queryParams.get('value')
+      console.log(singleValue)
+    }
+    if (!productType && !location.search) {
       setFilterProducts(products);
     }
-  }, [products, productType]);
+  }, [products, productType, location.search]);
 
   return (
     <div>
       {productType ? (
-        <button onClick={() => setProductType('')}>See all</button>
+        <button onClick={() => setProductType("")}>See all</button>
       ) : null}
 
       {user.isAdmin ? (
@@ -57,70 +67,8 @@ const Products = () => {
             <div className="row">
               {productType ? <h1>{productType}</h1> : <h1>All Products</h1>}
               {filterProducts.map((product) => (
-                <div key={'productList:' + product.id} className="col-md-4">
-                  <div className="card mb-4 box-shadow">
-                    <div className="card-body">
-                      {user.isAdmin ? (
-                        <h6 className="card-text">
-                          {product.isPublic ? 'Public' : 'Private'}
-                        </h6>
-                      ) : null}
-                      <img
-                        className="card-img-top"
-                        style={{
-                          height: 225 + 'px',
-                          width: '100%',
-                          display: 'block',
-                        }}
-                        alt="Thumbnail [100%x225]"
-                        src={product.imgURL}
-                      />
-                      {!productType ? (
-                        <h6 className="card-text">
-                          Category: {product.typeName}
-                        </h6>
-                      ) : null}
-                      <h2 className="card-text">{product.name}</h2>
-                      <p className="card-text">{product.description}</p>
-                      {/* remove later */}
-                      <div className="d-flex justify-content-between align-items-center">
-                        <div className="btn-group">
-                          <Link to={`/viewproduct=${product.id}`}>
-                            <button className="btn btn-sm btn-outline-secondary">
-                              View
-                            </button>
-                          </Link>
-                          {user.username ? (
-                            <button
-                              className="btn btn-secondary"
-                              onClick={async (event) => {
-                                event.preventDefault();
-                                const newCart = await addProductToCart(
-                                  token,
-                                  cart.cartId,
-                                  product.id,
-                                  1
-                                );
-                                setCart(newCart);
-                              }}
-                            >
-                              Add To Cart
-                            </button>
-                          ) : null}
-                          {user.isAdmin ? (
-                            <Link to={`/editproduct=${product.id}`}>
-                              <button className="btn btn-sm btn-outline-secondary">
-                                Edit
-                              </button>
-                            </Link>
-                          ) : null}
-                        </div>
-                        <small className="text-muted">
-                          ${product.price}/hr
-                        </small>
-                      </div>
-                    </div>
-                  </div>
+                <div key={"productList:" + product.id} className="col-md-4">
+                  <ProductCard product={product} productType={productType}/>
                 </div>
               ))}
             </div>

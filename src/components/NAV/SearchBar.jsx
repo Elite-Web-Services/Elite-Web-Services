@@ -8,7 +8,7 @@ const SearchBar = () => {
         class="form-control"
         type="text"
         placeholder="Product Search"
-        name="s"
+        name="search"
       />
     </form>
   );
