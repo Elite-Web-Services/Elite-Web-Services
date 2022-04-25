@@ -1,10 +1,14 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
-import { createProduct, getPublicProducts } from "../../axios-services";
+import { Link, useNavigate } from "react-router-dom";
+import {
+  createProduct,
+  getAllProducts,
+} from "../../axios-services";
 
 const CreateProduct = () => {
-  const { token, setPublicProducts, types } = useAuth();
+  const navigate = useNavigate();
+  const { token, setProducts, types } = useAuth();
   const [createState, setCreateState] = useState({
     typeId: 1,
     typeName: "",
@@ -12,6 +16,7 @@ const CreateProduct = () => {
     description: "",
     price: "",
     isPublic: true,
+    imageURL: "",
   });
 
   const [createError, setCreateError] = useState("");
@@ -32,8 +37,9 @@ const CreateProduct = () => {
     } else {
       setCreateError("");
 
-      const newProducts = await getPublicProducts();
-      setPublicProducts(newProducts);
+        const newProducts = await getAllProducts(token);
+        setProducts(newProducts);
+        navigate("/products");
     }
   };
 
@@ -46,7 +52,7 @@ const CreateProduct = () => {
         <div className="card-body">
           <div className="d-flex justify-content-between align-items-center">
             <form
-            className="needs-validation"
+              className="needs-validation"
               onSubmit={async (event) => {
                 event.preventDefault();
                 handleCreateProduct();
@@ -112,6 +118,17 @@ const CreateProduct = () => {
                     setCreateState({
                       ...createState,
                       price: event.target.value,
+                    })
+                  }
+                />
+                <input
+                  type="text"
+                  placeholder="Image URL"
+                  value={createState.imageURL}
+                  onChange={(event) =>
+                    setCreateState({
+                      ...createState,
+                      imageURL: event.target.value,
                     })
                   }
                 />

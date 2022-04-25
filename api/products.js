@@ -1,6 +1,6 @@
 const productsRouter = require("express").Router();
 const { Product } = require("../db/models");
-const { requireUser } = require("./utils");
+const { requireAdmin } = require("./utils");
 
 productsRouter.use("/", (req, res, next) => {
   console.log("A request is being made to /products");
@@ -8,28 +8,27 @@ productsRouter.use("/", (req, res, next) => {
   next();
 });
 
+productsRouter.get("/all", requireAdmin, async (req, res, next) => {
+  try {
+    const allProducts = await Product.getAllProducts();
+
+    res.send(allProducts);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
 productsRouter.get("/", async (req, res, next) => {
   try {
     const publicProducts = await Product.getPublicProducts();
 
     res.send(publicProducts);
   } catch ({ name, message }) {
-    console.log("Yes we are here");
     next({ name, message });
   }
 });
 
-productsRouter.get("/", async (req, res, next) => {
-  try {
-    const publicProducts = await Product.getPublicProducts();
-
-    res.send(publicProducts);
-  } catch ({ name, message }) {
-    next({ name, message });
-  }
-});
-
-productsRouter.post("/", requireUser, async (req, res, next) => {
+productsRouter.post("/", requireAdmin, async (req, res, next) => {
   // const creatorId = req.user.id;
   const { typeId, name, description, price, isPublic } = req.body;
 
@@ -51,7 +50,7 @@ productsRouter.post("/", requireUser, async (req, res, next) => {
   }
 });
 
-productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
+productsRouter.patch("/:productId", requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
   // const creatorId = req.user.id;
   const { typeId, name, description, price, isPublic } = req.body;
@@ -84,7 +83,7 @@ productsRouter.patch("/:productId", requireUser, async (req, res, next) => {
   }
 });
 
-productsRouter.delete("/:productId", requireUser, async (req, res, next) => {
+productsRouter.delete("/:productId", requireAdmin, async (req, res, next) => {
   try {
     const deletedProduct = await Product.deleteProduct(req.params);
 

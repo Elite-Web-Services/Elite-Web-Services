@@ -1,14 +1,15 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import {
-  getPublicProducts,
+  getAllProducts,
   updateProduct,
   deleteProduct,
 } from "../../axios-services";
 
 const EditProduct = ({ product }) => {
-  const { token, setPublicProducts, types } = useAuth();
+  const navigate = useNavigate();
+  const { token, setProducts, types } = useAuth();
 
   const [updateState, setUpdateState] = useState({
     typeId: product.typeId,
@@ -30,17 +31,20 @@ const EditProduct = ({ product }) => {
       updateState.name,
       updateState.description,
       updateState.price,
-      updateState.isPublic
+      updateState.isPublic,
+      updateState.imgURL
     );
 
+    console.log(result);
     if (result.error) {
       console.log("error", result);
       setUpdateError(result.error);
     } else {
       setUpdateError("");
 
-      const newProducts = await getPublicProducts();
-      setPublicProducts(newProducts);
+      const newProducts = await getAllProducts(token);
+      setProducts(newProducts);
+      navigate("/products");
     }
   };
 
@@ -163,7 +167,7 @@ const EditProduct = ({ product }) => {
                       className="form-control"
                       type="text"
                       placeholder={product.imgURL}
-                      value={updateState.imgURL}
+                      value={updateState.imgURL ? updateState.imgURL : ""}
                       onChange={(event) =>
                         setUpdateState({
                           ...updateState,
@@ -183,8 +187,9 @@ const EditProduct = ({ product }) => {
                     event.preventDefault();
                     await deleteProduct(product.id, token);
 
-                    const newProducts = await getPublicProducts();
-                    setPublicProducts(newProducts);
+                    const newProducts = await getAllProducts(token);
+                    setProducts(newProducts);
+                    navigate("/products");
                   }}
                 >
                   Delete Product
