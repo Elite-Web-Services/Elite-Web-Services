@@ -9,16 +9,14 @@ const Products = () => {
     console.log('SEARCH: ', location.search);
   }
 
-  const { token, publicProducts, user, cart, setCart, types } = useAuth();
+  const { token, products, user, cart, setCart, types } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState('');
 
   useEffect(() => {
     if (productType) {
       setFilterProducts(
-        products.filter(
-          (products) => products.typeName === productType
-        )
+        products.filter((products) => products.typeName === productType)
       );
     } else {
       setFilterProducts(products);
@@ -62,9 +60,9 @@ const Products = () => {
                 <div key={'productList:' + product.id} className="col-md-4">
                   <div className="card mb-4 box-shadow">
                     <div className="card-body">
-                    {user.isAdmin ? (
+                      {user.isAdmin ? (
                         <h6 className="card-text">
-                          {product.isPublic ? "Public": "Private"}
+                          {product.isPublic ? 'Public' : 'Private'}
                         </h6>
                       ) : null}
                       <img
