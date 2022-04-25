@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Modal, ModalHeader } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth';
 import { purchaseCart } from '../../axios-services';
+import useCart from '../hooks/useCart';
 
 const CheckoutSubmitPayment = ({
   total,
@@ -11,7 +12,8 @@ const CheckoutSubmitPayment = ({
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
-  const { cart, setCart, token } = useAuth();
+  const { token } = useAuth();
+  const { cart, setCart } = useCart();
 
   const handleClose = () => {
     setIsSubmitPayment(false);

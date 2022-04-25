@@ -1,7 +1,9 @@
-import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
 import ProductCard from './ProductCard';
+
 
 const Products = () => {
   let location = useLocation();
@@ -9,7 +11,8 @@ const Products = () => {
     console.log("SEARCH: ", location.search);
   }
 
-  const { products, user, types } = useAuth();
+  const { token, products, user, types } = useAuth();
+  const { cart, setCart } = useCart();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
 

@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import Admin from "./Admin";
-import ProfileOrderHistory from "./ProfileOrderHistory";
+import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import Admin from './Admin';
+import ProfileOrderHistory from './ProfileOrderHistory';
 
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -27,8 +27,8 @@ const Sidebar = () => {
   };
 
   return (
-    <div id="sidebar_container">
-      <div className=" flex-shrink-0 p-3 bg-white" style={{ width: "280px" }}>
+    <div className="sideBarContainer">
+      <div className="d-flex flex-column p-3 bg-white">
         <ul className="list-unstyled ps-0">
           {/* --------------------------------------------MY PROFILE */}
           {user.username ? (
@@ -91,9 +91,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
-                      Manage Users{" "}
+                      Manage Users{' '}
                     </Link>
                   </li>
                   <li>
@@ -102,9 +102,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
-                      Manage Products{" "}
+                      Manage Products{' '}
                     </Link>
                   </li>
                 </ul>
@@ -130,9 +130,9 @@ const Sidebar = () => {
                     onClick={() => {
                       setToggleCheckout(true);
                     }}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: 'none' }}
                   >
-                    Checkout{" "}
+                    Checkout{' '}
                   </Link>
                 </li>
                 <li>
@@ -141,9 +141,9 @@ const Sidebar = () => {
                     onClick={() => {
                       setToggleCart(true);
                     }}
-                    style={{ textDecoration: "none" }}
+                    style={{ textDecoration: 'none' }}
                   >
-                    Go to Cart{" "}
+                    Go to Cart{' '}
                   </Link>
                 </li>
               </ul>

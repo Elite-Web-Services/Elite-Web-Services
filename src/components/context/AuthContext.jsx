@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { getAllProducts, getPublicProducts, getMe, getAllUsers, getCart, getAllTypes } from '../../axios-services';
+import {
+  getAllProducts,
+  getPublicProducts,
+  getMe,
+  getAllUsers,
+  getAllTypes,
+} from '../../axios-services';
 
 export const AuthContext = React.createContext();
 
@@ -8,7 +14,6 @@ const AuthProvider = ({ children }) => {
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token'));
   const [products, setProducts] = useState([]);
-  const [cart, setCart] = useState({})
   const [types, setTypes] = useState([]);
 
   // GET PRODUCTS
@@ -21,11 +26,11 @@ const AuthProvider = ({ children }) => {
       displayAllProducts();
     } else {
       const displayPublicProducts = async () => {
-      const data = await getPublicProducts();
-      setProducts(data);
-    };
-    displayPublicProducts();
-  }
+        const data = await getPublicProducts();
+        setProducts(data);
+      };
+      displayPublicProducts();
+    }
   }, [user, token]);
 
   // SET USER
@@ -41,9 +46,6 @@ const AuthProvider = ({ children }) => {
       const user = await getMe(token);
       setUser(user);
       console.log('ME THE USER: ', user);
-
-      const cart = await getCart(token) 
-      setCart(cart)
 
       if (user.isAdmin) {
         getAllTheUsers();
@@ -77,10 +79,8 @@ const AuthProvider = ({ children }) => {
         setProducts,
         allUsers,
         setAllUsers,
-        cart,
-        setCart,
         types,
-        setTypes
+        setTypes,
       }}
     >
       {children}

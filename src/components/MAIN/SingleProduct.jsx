@@ -1,11 +1,12 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { addProductToCart } from "../../axios-services";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import { addProductToCart } from '../../axios-services';
+import useCart from '../hooks/useCart';
 
 const SingleProduct = ({ product }) => {
-  const { token, cart, setCart, user } = useAuth();
-
+  const { token, user } = useAuth();
+  const { cart, setCart } = useCart();
   return (
     <>
       <Link to="/products">
@@ -15,7 +16,7 @@ const SingleProduct = ({ product }) => {
         <div className="card-body">
           <img
             className="card-img-top"
-            style={{ height: 225 + "px", width: "100%", display: "block" }}
+            style={{ height: 225 + 'px', width: '100%', display: 'block' }}
             alt="Thumbnail [100%x225]"
             src={product.imgURL}
           />

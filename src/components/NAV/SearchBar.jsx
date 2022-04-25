@@ -5,7 +5,7 @@ const SearchBar = () => {
   return (
     <form action="/products" method="get">
       <input
-        class="form-control"
+        className="form-control"
         type="text"
         placeholder="Product Search"
         name="search"

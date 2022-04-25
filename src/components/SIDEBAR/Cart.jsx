@@ -2,10 +2,12 @@ import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import { deleteCartProduct } from '../../axios-services';
 import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
 import EmptyCart from './EmptyCart';
 
 const Cart = () => {
-  const { cart, token, setCart } = useAuth();
+  const { token } = useAuth();
+  const { cart, setCart } = useCart();
   console.log(cart);
 
   // this fixes weird formatting when only one item in cart
