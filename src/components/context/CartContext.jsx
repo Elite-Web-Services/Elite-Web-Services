@@ -8,7 +8,7 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   const { user, token } = useAuth();
 
-  const addProdcutToCart = async (product) => {
+  const addProductToCart = async (product) => {
     if (user.username) {
       // fetch call
       return;
@@ -55,7 +55,7 @@ const CartProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <CartContext.Provider value={{ cart, setCart, addProdcutToCart }}>
+    <CartContext.Provider value={{ cart, setCart, addProductToCart }}>
       {children}
     </CartContext.Provider>
   );

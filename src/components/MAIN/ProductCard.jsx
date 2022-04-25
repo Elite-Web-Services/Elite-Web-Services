@@ -1,21 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
-import { addProductToCart } from "../../axios-services";
+// import { addProductToCart } from "../../axios-services";
+import useCart from '../hooks/useCart';
 
 const ProductCard = ({ product, productType }) => {
+    const { cart, setCart, addProductToCart } = useCart();
+    const { token, user } = useAuth();
 
     const handleAddToCart = async () => {
-    const newCart = await addProductToCart(
-        token,
-        cart.cartId,
-        product.id,
-        1
-      );
+    const newCart = await addProductToCart(product);
       setCart(newCart);
     }
 
-  const { token, user, cart, setCart } = useAuth();
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
