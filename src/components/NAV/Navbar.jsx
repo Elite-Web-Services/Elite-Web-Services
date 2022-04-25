@@ -11,7 +11,12 @@ const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
-        <a className="navbar-brand">Elite Web Services</a>
+        <a className="navbar-brand">
+          <img
+            src="https://res.cloudinary.com/elite-web-services/image/upload/v1650896310/ews_Logo_t7guky.png"
+            width="100px"
+          />
+        </a>
         <button
           className="navbar-toggler collapsed"
           data-bs-toggle="collapse"
