@@ -37,6 +37,9 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                       >
                         {product.productDescription}
                       </small>
+                      <p>
+                        <strong>Quantity: {product.quantity}</strong>
+                      </p>
                     </div>
                     <span className="text-muted">{`$${product.price}/hr`}</span>
                   </li>

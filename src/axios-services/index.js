@@ -175,6 +175,34 @@ export const updateProduct = async (
   }
 };
 
+export const updateCartProductQuantity = async (
+  token,
+  quantity,
+  cartId,
+  productId
+) => {
+  try {
+    const response = await axios.patch(
+      `api/carts/productQuantity`,
+      {
+        quantity,
+        cartId,
+        productId,
+      },
+      {
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const deleteProduct = async (productId, token) => {
   try {
     const response = await axios.delete(`api/products/${productId}`, {
@@ -325,11 +353,11 @@ export const addContact = async (token, email, userId) => {
       data: { userId, email },
 
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("response!!!!!!!!", response.data);
+    console.log('response!!!!!!!!', response.data);
     return response.data;
   } catch (error) {
     return error;

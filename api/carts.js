@@ -42,7 +42,9 @@ cartsRouter.patch('/productQuantity', requireUser, async (req, res, next) => {
       productId,
     });
 
-    res.send(response);
+    const [cart] = await Cart.getCart(req.user.id);
+
+    res.send(cart);
   } catch (error) {
     throw error;
   }
