@@ -1,7 +1,9 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
+import { useNavigate } from 'react-router-dom';
 
 const LoginBtn = ({ setIsLogin }) => {
+  const navigate = useNavigate();
   const { user, setToken, setCart } = useAuth();
 
   const logIn = () => {
@@ -12,6 +14,7 @@ const LoginBtn = ({ setIsLogin }) => {
     localStorage.removeItem('token');
     setToken('');
     setCart({});
+    navigate('/');
   };
 
   const handleLogIn = () => {

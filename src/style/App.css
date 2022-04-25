@@ -1,4 +1,11 @@
 /* NAVBAR START */
+
+.webTitle:hover {
+  color: blue;
+  transform: scale(1.75);
+  transition: ease 5s;
+}
+
 .navbar {
   width: 100%;
 }

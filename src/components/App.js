@@ -32,7 +32,7 @@ const App = () => {
     <Router>
       <AuthProvider>
         <div className="app-container">
-          <h1>Hello, World!</h1>
+          <h1 className="webTitle">{'ELITE . WEB . SERVICES'}</h1>
           <Navbar />
           {/* <p>API Status: {APIHealth}</p> */}
           <Main />

@@ -164,7 +164,6 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                 name="paymentMethod"
                 type="radio"
                 className="form-check-input"
-                checked=""
                 required=""
               />
               <label className="form-check-label" htmlFor="credit">
