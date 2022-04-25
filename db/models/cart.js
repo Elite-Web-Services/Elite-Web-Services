@@ -1,10 +1,11 @@
 // grab our db client connection to use with our adapters
-const client = require("../client");
-const { mapProducts } = require("./utils");
+const client = require('../client');
+const { mapProducts } = require('./utils');
 
 module.exports = {
   createCart,
   getCart,
+  purchaseCart,
 };
 
 async function createCart({ userId, purchased = false }) {
@@ -31,17 +32,38 @@ async function getCart(userId) {
     const { rows } = await client.query(
       `
     SELECT 
-	    purchased, "userId", carts.id as "cartId", "productId", quantity, 
+	    purchased, "userId", carts.id as "cartId", "productId", quantity, "imgURL",
         "typeId", products.name as "productName", products.description as "productDescription", price, "isPublic"
     FROM carts
 	    LEFT JOIN cart_products ON cart_products."cartId" = carts.id
         LEFT JOIN products ON products.id = cart_products."productId"
-    WHERE "userId"=$1;
+    WHERE "userId"=$1 and purchased=false;
     `,
       [userId]
     );
 
     return mapProducts(rows);
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function purchaseCart(cartId) {
+  try {
+    // add a purchaseDate to the table
+    const {
+      rows: [cart],
+    } = await client.query(
+      `
+    UPDATE carts SET
+      purchased=true
+    WHERE carts.id=$1
+    RETURNING *;
+    `,
+      [cartId]
+    );
+
+    return cart;
   } catch (error) {
     throw error;
   }

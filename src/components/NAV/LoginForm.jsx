@@ -51,17 +51,17 @@ const LoginForm = ({
       <div className="modal-body p-5 pt-0">
         <form>
           <div className="form-floating mb-3">
-            <label htmlFor="username">Username: </label>
             <input
               className="form-control rounded-4"
               type="text"
-              name="username"
+              id="loginFormUsername"
+              name="loginFormUsername"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
+            <label htmlFor="loginFormUsername">Username: </label>
           </div>
           <div className="form-floating mb-3">
-            <label htmlFor="password">Password: </label>
             <input
               className="form-control rounded-4"
               type="password"
@@ -69,6 +69,7 @@ const LoginForm = ({
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
+            <label htmlFor="password">Password: </label>
           </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
@@ -85,6 +86,7 @@ const LoginForm = ({
         <small className="text-center text-muted">
           Don't have an account?
           <span
+            className="loginRegisterRedirect"
             style={{ color: 'blue' }}
             onClick={() => {
               setIsRegister(true);

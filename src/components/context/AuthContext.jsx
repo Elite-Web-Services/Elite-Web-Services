@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getPublicProducts, getMe, getAllUsers, getCart, getAllTypes } from '../../axios-services';
+import { getAllProducts, getPublicProducts, getMe, getAllUsers, getCart, getAllTypes } from '../../axios-services';
 
 export const AuthContext = React.createContext();
 
@@ -7,18 +7,26 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState({});
   const [allUsers, setAllUsers] = useState([]);
   const [token, setToken] = useState(localStorage.getItem('token'));
-  const [publicProducts, setPublicProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [cart, setCart] = useState({})
   const [types, setTypes] = useState([]);
 
-  // GET PUBLIC PRODUCTS
+  // GET PRODUCTS
   useEffect(() => {
-    const displayPublicProducts = async () => {
+    if (user.isAdmin) {
+      const displayAllProducts = async () => {
+        const data = await getAllProducts(token);
+        setProducts(data);
+      };
+      displayAllProducts();
+    } else {
+      const displayPublicProducts = async () => {
       const data = await getPublicProducts();
-      setPublicProducts(data);
+      setProducts(data);
     };
     displayPublicProducts();
-  }, []);
+  }
+  }, [user, token]);
 
   // SET USER
   const getAllTheUsers = async () => {
@@ -65,8 +73,8 @@ const AuthProvider = ({ children }) => {
         setUser,
         token,
         setToken,
-        publicProducts,
-        setPublicProducts,
+        products,
+        setProducts,
         allUsers,
         setAllUsers,
         cart,

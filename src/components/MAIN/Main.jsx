@@ -1,18 +1,19 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import Products from "./Products";
-import AllUsers from "./AllUsers";
-import Cart from "../SIDEBAR/Cart";
-import EditProduct from "./EditProduct";
-import SingleProduct from "./SingleProduct";
-import CreateProduct from "./CreateProduct";
-import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
-import useAuth from "../hooks/useAuth";
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+import Products from './Products';
+import AllUsers from './AllUsers';
+import Cart from '../SIDEBAR/Cart';
+import Checkout from '../SIDEBAR/Checkout';
+import EditProduct from './EditProduct';
+import SingleProduct from './SingleProduct';
+import CreateProduct from './CreateProduct';
+import ProfileContactInfo from '../SIDEBAR/ProfileContactInfo';
+import useAuth from '../hooks/useAuth';
+import ProfileOrderHistory from '../SIDEBAR/ProfileOrderHistory';
 
-import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
 
 const Main = () => {
-  const { publicProducts, user } = useAuth();
+  const { products, user } = useAuth();
 
   return (
     <div className="main">
@@ -20,13 +21,14 @@ const Main = () => {
         <Route path="/users/" element={<AllUsers />} />
         <Route path="/contactinfo" element={<ProfileContactInfo />} />
         <Route path="/orderHistory" element={<ProfileOrderHistory />} />
+        <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
         <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/" element={<Products />} />
 
-        {publicProducts
-          ? publicProducts.map((product) => (
-              // (
+        {Array.isArray(products)
+          ? products.map((product) => (
               <Route
                 key={`SingleProductLink ${product.id}`}
                 path={`viewproduct=${product.id}`}
@@ -35,16 +37,14 @@ const Main = () => {
             ))
           : null}
 
-        {publicProducts && user.isAdmin
-          ? publicProducts.map((product) =>
-              user.isAdmin ? (
+        {Array.isArray(products) && user.isAdmin
+          ? products.map((product) => (
                 <Route
                   key={`editProductLink ${product.id}`}
                   path={`editproduct=${product.id}`}
                   element={<EditProduct product={product} />}
                 />
-              ) : null
-            )
+              ))
           : null}
       </Routes>
     </div>

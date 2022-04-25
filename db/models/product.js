@@ -4,6 +4,7 @@ const client = require('../client');
 module.exports = {
   // add your database adapter fns here
   createProduct,
+  getAllProducts,
   getPublicProducts,
   updateProduct,
   deleteProduct,
@@ -37,6 +38,29 @@ async function createProduct({
   }
 }
 
+async function getAllProducts() {
+  try {
+    const { rows } = await client.query(`
+        SELECT
+        products.id AS id,
+        products.name AS name,
+        types.id AS "typeId",
+        types.name AS "typeName",
+        products.description AS description,
+        products.price AS price,
+        products."isPublic" AS "isPublic",
+        products."imgURL" AS "imgURL"
+        FROM products
+        LEFT JOIN types ON products."typeId" = types.id
+        ORDER BY products.id desc
+        `);
+
+    return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
 async function getPublicProducts() {
   try {
     const { rows } = await client.query(`
@@ -47,7 +71,8 @@ async function getPublicProducts() {
         types.name AS "typeName",
         products.description AS description,
         products.price AS price,
-        products."isPublic" AS "isPublic"
+        products."isPublic" AS "isPublic",
+        products."imgURL" AS "imgURL"
         FROM products
         LEFT JOIN types ON products."typeId" = types.id
         WHERE "isPublic" is true
