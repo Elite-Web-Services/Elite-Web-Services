@@ -9,19 +9,10 @@ module.exports = {
   getAllUsers,
   createUser,
   getUserByUsername,
+  addContacts,
 };
 
-async function createUser({
-  username,
-  password,
-  isAdmin = false,
-  email,
-  address,
-  address2,
-  city,
-  state,
-  zip,
-}) {
+async function createUser({ username, password, isAdmin = false }) {
   // CHANGE BCRYPT TO ASYNC SOMEHOW
   const hashedPW = bcrypt.hashSync(password, SALT);
   try {
@@ -29,17 +20,38 @@ async function createUser({
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, "isAdmin",email, address, address2, city, state, zip)
-      VALUES($1, $2, $3,$4,$5,$6, $7,$8,$9)
+      INSERT INTO users(username, password, "isAdmin")
+      VALUES($1, $2, $3)
       ON CONFLICT (username) DO NOTHING
       RETURNING id, username, "isAdmin";
       `,
-      [username, hashedPW, isAdmin, email, address, address2, city, state, zip]
+      [username, hashedPW, isAdmin]
     );
 
     const cart = await createCart({ userId: user.id, purchased: false });
     return user;
   } catch (error) {
+    throw error;
+  }
+}
+
+async function addContacts({ id, email }) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      UPDATE users 
+      SET email = COALESCE($2, users.email)
+      WHERE users.id=$1
+      RETURNING *;
+      `,
+      [id, email]
+    );
+    console.log("*****DB USERS******", user);
+    return user;
+  } catch (error) {
+    console.error("error in addContacts in db");
     throw error;
   }
 }
