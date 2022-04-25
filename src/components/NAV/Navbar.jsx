@@ -4,9 +4,11 @@ import Login from './Login';
 import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 import SearchBar from './SearchBar';
+import useCart from '../hooks/useCart';
 
 const Navbar = () => {
-  const { user, cart } = useAuth();
+  const { user } = useAuth();
+  const { cart } = useCart();
   const [isLogin, setIsLogin] = useState(false); // change this to modal
   return (
     <nav className="navbar navbar-expand-md navbar-dark bg-dark">

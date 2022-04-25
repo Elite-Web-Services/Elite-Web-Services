@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import { addProductToCart } from '../../axios-services';
+import useCart from '../hooks/useCart';
 
 const Products = () => {
   let location = useLocation();
@@ -9,7 +10,8 @@ const Products = () => {
     console.log('SEARCH: ', location.search);
   }
 
-  const { token, products, user, cart, setCart, types } = useAuth();
+  const { token, products, user, types } = useAuth();
+  const { cart, setCart } = useCart();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState('');
 

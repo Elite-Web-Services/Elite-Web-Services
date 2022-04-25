@@ -1,8 +1,10 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
 
 const CheckoutForm = ({ total, setIsSubmitPayment }) => {
-  const { cart, user } = useAuth();
+  const { user } = useAuth();
+  const { cart } = useCart();
 
   const handleSubmit = async (e) => {
     e.preventDefault();

@@ -1,10 +1,12 @@
 import React from 'react';
 import useAuth from '../hooks/useAuth';
 import { useNavigate } from 'react-router-dom';
+import useCart from '../hooks/useCart';
 
 const LoginBtn = ({ setIsLogin }) => {
   const navigate = useNavigate();
-  const { user, setToken, setCart } = useAuth();
+  const { user, setToken } = useAuth();
+  const { setCart } = useCart();
 
   const logIn = () => {
     setIsLogin(true);
