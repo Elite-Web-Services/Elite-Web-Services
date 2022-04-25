@@ -13,7 +13,7 @@ import useAuth from '../hooks/useAuth';
 import ProfileOrderHistory from '../SIDEBAR/ProfileOrderHistory';
 
 const Main = () => {
-  const { publicProducts, user } = useAuth();
+  const { products, user } = useAuth();
 
   return (
     <div className="main">
@@ -27,8 +27,8 @@ const Main = () => {
         <Route path="/createproduct" element={<CreateProduct />} />
         <Route path="/" element={<Products />} />
 
-        {Array.isArray(publicProducts)
-          ? publicProducts.map((product) => (
+        {Array.isArray(products)
+          ? products.map((product) => (
               <Route
                 key={`SingleProductLink ${product.id}`}
                 path={`viewproduct=${product.id}`}
@@ -37,8 +37,8 @@ const Main = () => {
             ))
           : null}
 
-        {Array.isArray(publicProducts) && user.isAdmin
-          ? publicProducts.map((product) => (
+        {Array.isArray(products) && user.isAdmin
+          ? products.map((product) => (
                 <Route
                   key={`editProductLink ${product.id}`}
                   path={`editproduct=${product.id}`}

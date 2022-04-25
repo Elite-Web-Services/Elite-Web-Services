@@ -81,6 +81,21 @@ export async function registerUser(username, password) {
   }
 }
 
+export const getAllProducts = async (token) => {
+  try {
+    const response = await axios.get(`api/products/all`, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
+
+    return response.data;
+  } catch (error) {
+    return error.response.data;
+  }
+};
+
 export const getPublicProducts = async () => {
   try {
     const response = await axios.get(`api/products`, {
@@ -120,7 +135,6 @@ export const createProduct = async (
         },
       }
     );
-    console.log(response.data);
 
     return response.data;
   } catch (error) {
@@ -154,11 +168,9 @@ export const updateProduct = async (
         },
       }
     );
-    console.log(response.data);
 
     return response.data;
   } catch (error) {
-    console.log('in axios-service', error);
     return error;
   }
 };

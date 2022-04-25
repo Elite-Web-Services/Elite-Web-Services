@@ -2,23 +2,24 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { addProductToCart } from "../../axios-services";
+import { use } from "bcrypt/promises";
 
 const Products = () => {
-  const { token, publicProducts, user, cart, setCart, types } = useAuth();
+  const { token, products, user, cart, setCart, types } = useAuth();
   const [filterProducts, setFilterProducts] = useState([]);
   const [productType, setProductType] = useState("");
 
   useEffect(() => {
     if (productType) {
       setFilterProducts(
-        publicProducts.filter(
-          (publicProducts) => publicProducts.typeName === productType
+        products.filter(
+          (products) => products.typeName === productType
         )
       );
     } else {
-      setFilterProducts(publicProducts);
+      setFilterProducts(products);
     }
-  }, [publicProducts, productType]);
+  }, [products, productType]);
 
   return (
     <div>
@@ -52,11 +53,16 @@ const Products = () => {
         <div id="productList" className="album py-5 bg-light">
           <div className="container">
             <div className="row">
-              {productType ? <h1>{productType}</h1> : <h1>Public Products</h1>}
+              {productType ? <h1>{productType}</h1> : <h1>All Products</h1>}
               {filterProducts.map((product) => (
                 <div key={"productList:" + product.id} className="col-md-4">
                   <div className="card mb-4 box-shadow">
                     <div className="card-body">
+                    {user.isAdmin ? (
+                        <h6 className="card-text">
+                          {product.isPublic ? "Public": "Private"}
+                        </h6>
+                      ) : null}
                       <img
                         className="card-img-top"
                         style={{
