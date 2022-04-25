@@ -36,6 +36,8 @@ async function createUser({ username, password, isAdmin = false }) {
 }
 
 async function addContacts({ id, email }) {
+  console.log("EMAIL", email);
+  console.log("ID", id);
   try {
     const {
       rows: [user],

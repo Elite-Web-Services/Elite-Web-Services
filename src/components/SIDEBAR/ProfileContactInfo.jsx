@@ -14,7 +14,6 @@ const ProfileContactInfo = () => {
     e.preventDefault();
     const response = await addContact(token, newEmail, theUser);
     console.log("UDPATING USER", response);
-    const myInfo = await getMe(user.username, token);
   };
 
   const handleEmail = async (e) => {

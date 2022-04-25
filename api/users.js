@@ -98,11 +98,11 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
 });
 
 usersRouter.patch("/contact/:userId", async (req, res, next) => {
-  const userId = req.params;
+  const { userId } = req.params;
   const { email } = req.body;
   try {
     const updateContacts = await addContacts({
-      userId,
+      id: +userId,
       email,
     });
 
