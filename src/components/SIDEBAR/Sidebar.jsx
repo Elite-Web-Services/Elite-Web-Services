@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import Admin from './Admin';
-import ProfileOrderHistory from './ProfileOrderHistory';
-
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import Admin from "./Admin";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -91,9 +89,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
-                      Manage Users{' '}
+                      Manage Users{" "}
                     </Link>
                   </li>
                   <li>
@@ -102,9 +100,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
-                      Manage Products{' '}
+                      Manage Products{" "}
                     </Link>
                   </li>
                 </ul>
@@ -130,9 +128,9 @@ const Sidebar = () => {
                     onClick={() => {
                       setToggleCheckout(true);
                     }}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Checkout{' '}
+                    Checkout{" "}
                   </Link>
                 </li>
                 <li>
@@ -141,9 +139,9 @@ const Sidebar = () => {
                     onClick={() => {
                       setToggleCart(true);
                     }}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Go to Cart{' '}
+                    Go to Cart{" "}
                   </Link>
                 </li>
               </ul>
