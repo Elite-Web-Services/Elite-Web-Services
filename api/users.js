@@ -98,12 +98,16 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
 });
 
 usersRouter.patch("/contact/:userId", async (req, res, next) => {
-  const userId = req.params;
-  const { email } = req.body;
+  const { userId } = req.params;
+  const { email, address, address2, city, zip } = req.body;
   try {
     const updateContacts = await addContacts({
-      userId,
+      id: +userId,
       email,
+      address,
+      address2,
+      city,
+      zip: +zip,
     });
 
     console.log("*******USERS API********", updateContacts);

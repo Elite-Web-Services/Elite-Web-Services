@@ -13,12 +13,14 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   const { user, token } = useAuth();
 
+
   // replace "deleteCartProduct" in other components with this function
   const removeProduct = () => {
     // call deleteCartProduct if user.username
   };
 
   const addProduct = async (product, quantity = 1) => {
+
     if (user.username) {
       // if product exists in cart, update the quantity
       let cartProductIdx = findCartProductIdx(cart, product.id);
@@ -100,7 +102,9 @@ const CartProvider = ({ children }) => {
   }, [token]);
 
   return (
+
     <CartContext.Provider value={{ cart, setCart, addProduct }}>
+
       {children}
     </CartContext.Provider>
   );
