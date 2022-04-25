@@ -9,8 +9,8 @@ import SingleProduct from './SingleProduct';
 import CreateProduct from './CreateProduct';
 import ProfileContactInfo from '../SIDEBAR/ProfileContactInfo';
 import useAuth from '../hooks/useAuth';
-
 import ProfileOrderHistory from '../SIDEBAR/ProfileOrderHistory';
+
 
 const Main = () => {
   const { products, user } = useAuth();

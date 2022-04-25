@@ -316,3 +316,22 @@ export const purchaseCart = async (token, cartId) => {
     return error;
   }
 };
+
+// appears in console in browser
+
+export const addContact = async (token, email, userId) => {
+  try {
+    const response = await axios.patch(`api/users/contact/${userId}`, {
+      data: { userId, email },
+
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("response!!!!!!!!", response.data);
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
