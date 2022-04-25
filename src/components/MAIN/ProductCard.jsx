@@ -1,32 +1,29 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-// import { addProductToCart } from "../../axios-services";
+
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
+import { addProductToCart } from '../../axios-services';
 
 const ProductCard = ({ product, productType }) => {
-    const { cart, setCart, addProductToCart } = useCart();
-    const { token, user } = useAuth();
 
-    const handleAddToCart = async () => {
-    const newCart = await addProductToCart(product);
-      setCart(newCart);
-    }
+  const { addProduct } = useCart();
+  const { token, user } = useAuth();
 
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
         {user.isAdmin ? (
           <h6 className="card-text">
-            {product.isPublic ? "Public" : "Private"}
+            {product.isPublic ? 'Public' : 'Private'}
           </h6>
         ) : null}
         <img
           className="card-img-top"
           style={{
-            height: 225 + "px",
-            width: "100%",
-            display: "block",
+            height: 225 + 'px',
+            width: '100%',
+            display: 'block',
           }}
           alt="Thumbnail [100%x225]"
           src={product.imgURL}
@@ -42,15 +39,15 @@ const ProductCard = ({ product, productType }) => {
             <Link to={`/viewproduct=${product.id}`}>
               <button className="btn btn-sm btn-outline-secondary">View</button>
             </Link>
-              <button
-                className="btn btn-secondary"
-                onClick={async (event) => {
-                  event.preventDefault();
-                  handleAddToCart()
-                }}
-              >
-                Add To Cart
-              </button>
+            <button
+              className="btn btn-secondary"
+              onClick={async (event) => {
+                event.preventDefault();
+                addProduct(product);
+              }}
+            >
+              Add To Cart
+            </button>
             {user.isAdmin ? (
               <Link to={`/editproduct=${product.id}`}>
                 <button className="btn btn-sm btn-outline-secondary">

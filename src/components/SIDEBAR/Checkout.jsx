@@ -13,7 +13,9 @@ const Checkout = () => {
   useEffect(() => {
     let newTotal = 0;
     if (cart.products) {
-      cart.products.forEach((product) => (newTotal += +product.price));
+      cart.products.forEach(
+        (product) => (newTotal += +product.price * +product.quantity)
+      );
     }
     setTotal(newTotal);
   }, [cart]);

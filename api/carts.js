@@ -33,6 +33,23 @@ cartsRouter.post('/addProduct', requireUser, async (req, res, next) => {
   }
 });
 
+cartsRouter.patch('/productQuantity', requireUser, async (req, res, next) => {
+  const { quantity, cartId, productId } = req.body;
+  try {
+    const response = await CartProduct.increaseCartProductQuantity({
+      quantity,
+      cartId,
+      productId,
+    });
+
+    const [cart] = await Cart.getCart(req.user.id);
+
+    res.send(cart);
+  } catch (error) {
+    throw error;
+  }
+});
+
 cartsRouter.delete(
   '/removeCartProduct',
   requireUser,
