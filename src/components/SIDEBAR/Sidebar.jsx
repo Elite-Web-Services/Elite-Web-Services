@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Admin from "./Admin";
+import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {

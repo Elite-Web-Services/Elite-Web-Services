@@ -191,7 +191,7 @@ export const updateCartProductQuantity = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -293,31 +293,15 @@ export const deleteCartProduct = async (productId, token) => {
   }
 };
 
-export const purchaseHistory = async (
-  token,
-  cartId,
-  productId,
-  quantity,
-  purchasedCost,
-  purchased
-) => {
+export const getOrderHistory = async (token) => {
   try {
-    const response = await axios.post(
-      `api/orderHistory`,
-      {
-        cartId,
-        productId,
-        quantity,
-        purchasedCost,
-        purchased,
+    const response = await axios.get(`api/products/orderHistory`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
+    });
+    console.log("response.data orderhistroy", response.data);
     return response.data;
   } catch (error) {
     return error;

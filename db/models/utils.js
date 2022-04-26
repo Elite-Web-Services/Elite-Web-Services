@@ -13,9 +13,9 @@ const mapProducts = (cart) => {
       }
       if (row.productId) {
         map[row.cartId].products.push({
-          productId: row.productId,
-          productName: row.productName,
-          productDescription: row.productDescription,
+          id: row.productId,
+          name: row.productName,
+          description: row.productDescription,
           quantity: row.quantity,
           price: row.price,
           isPublic: row.isPublic,

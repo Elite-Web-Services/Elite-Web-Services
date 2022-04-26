@@ -1,5 +1,6 @@
 const productsRouter = require("express").Router();
 const { Product } = require("../db/models");
+const { Cart } = require("../db/models");
 const { requireAdmin } = require("./utils");
 
 productsRouter.use("/", (req, res, next) => {
@@ -87,7 +88,7 @@ productsRouter.delete("/:productId", requireAdmin, async (req, res, next) => {
   try {
     const deletedProduct = await Product.deleteProduct(req.params);
 
-    res.send(deletedProduct)
+    res.send(deletedProduct);
   } catch ({ name, message }) {
     next({ name, message });
   }
@@ -98,6 +99,17 @@ productsRouter.get("/types", async (req, res, next) => {
     const types = await Product.getAllTypes();
 
     res.send(types);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+productsRouter.get("/orderHistory", async (req, res, next) => {
+  console.log("inside Products API orders", req.user.id);
+  try {
+    const history = await Product.getOrderHistory(req.user.id);
+
+    res.send(history);
   } catch ({ name, message }) {
     next({ name, message });
   }
