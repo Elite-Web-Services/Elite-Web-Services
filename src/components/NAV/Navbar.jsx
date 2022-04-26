@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import LoginBtn from './LoginBtn';
-import Login from './Login';
-import useAuth from '../hooks/useAuth';
-import { Link } from 'react-router-dom';
-import SearchBar from './SearchBar';
-import useCart from '../hooks/useCart';
+import React, { useState } from "react";
+import LoginBtn from "./LoginBtn";
+import Login from "./Login";
+import useAuth from "../hooks/useAuth";
+import { Link } from "react-router-dom";
+import SearchBar from "./SearchBar";
+import useCart from "../hooks/useCart";
 
 const Navbar = () => {
   const { user } = useAuth();
@@ -54,7 +54,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/cart" className="nav-link">
                 <span className="badge bg-success rounded-pill">
-                  {cart.products ? cart.products.length : '0'}
+                  {cart.products ? cart.products.length : "0"}
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

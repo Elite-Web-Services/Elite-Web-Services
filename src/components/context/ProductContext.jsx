@@ -11,18 +11,24 @@ export const ProductContext = React.createContext();
 
 const ProductProvider = ({ children }) => {
   const { user, token } = useAuth();
-
+  
   let location = useLocation();
   const params = new URLSearchParams(location.search);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
     query: params.get("q") ? params.get("q") : "",
     type: params.get("type") ? params.get("type") : "",
-    min: params.get("min") ? params.get("min") : 0,
-    max: params.get("max") ? params.get("max") : 0,
+    min: 0,
+    max: 0,
+  });
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [price, setPrice] = useState({
+    min: "",
+    max: "",
   });
   const [filterProducts, setFilterProducts] = useState([]);
 
@@ -57,8 +63,6 @@ const ProductProvider = ({ children }) => {
     if (location.pathname == "/products") {
       params.set("q", searchObj.query);
       params.set("type", searchObj.type);
-      params.set("min", searchObj.min);
-      params.set("max", searchObj.max);
       setSearchParams(params);
     }
   }, [location.pathname]);
@@ -81,7 +85,8 @@ const ProductProvider = ({ children }) => {
     products.forEach((product) => {
       if (
         product.typeName.includes(searchObj.type) &&
-        product.price > searchObj.min &&
+        Number(product.price) >= Number(searchObj.min) &&
+        (searchObj.max == 0 ? true: Number(product.price) <= Number(searchObj.max)) &&
         (tLC(product.name).includes(searchQuery) ||
           tLC(product.description).includes(searchQuery) ||
           tLC(product.typeName).includes(searchQuery))
@@ -105,6 +110,10 @@ const ProductProvider = ({ children }) => {
         searchObj,
         setSearchObj,
         filterProducts,
+        searchTerm,
+        setSearchTerm,
+        price,
+        setPrice
       }}
     >
       {children}

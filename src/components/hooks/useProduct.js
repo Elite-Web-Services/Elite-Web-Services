@@ -12,6 +12,10 @@ const useProduct = () => {
     searchObj,
     setSearchObj,
     filterProducts,
+    searchTerm,
+    setSearchTerm,
+    price,
+    setPrice
  } = useContext(ProductContext);
 
   return {
@@ -25,6 +29,10 @@ const useProduct = () => {
     searchObj,
     setSearchObj,
     filterProducts,
+    searchTerm,
+    setSearchTerm,
+    price,
+    setPrice
   };
 };
 

@@ -1,23 +1,18 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import useProduct from "../hooks/useProduct";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const { params, setSearchParams, searchObj, setSearchObj } = useProduct();
-
-  // this is just to prevent searchObj from changing every time a char is typed
-  const [searchTerm, setSearchTerm] = useState("");
-
-  useEffect(() => {
-    setSearchTerm(params.get("q"));
-  }, [params]);
+  const navigate = useNavigate();
+  const { searchObj, setSearchObj, searchTerm, setSearchTerm } =
+    useProduct();
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, query: searchTerm });
-        params.set("q", searchTerm);
-        setSearchParams(params);
+        navigate(`/products?q=${searchTerm}&type=${searchObj.type}`);
       }}
     >
       <input
