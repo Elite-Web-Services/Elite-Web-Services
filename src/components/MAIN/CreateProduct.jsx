@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
+import useProduct from "../hooks/useProduct";
 import { Link, useNavigate } from "react-router-dom";
 import {
   createProduct,
@@ -8,7 +9,9 @@ import {
 
 const CreateProduct = () => {
   const navigate = useNavigate();
-  const { token, setProducts, types } = useAuth();
+  const { token } = useAuth();
+  const { setProducts, types } = useProduct();
+
   const [createState, setCreateState] = useState({
     typeId: 1,
     typeName: "",

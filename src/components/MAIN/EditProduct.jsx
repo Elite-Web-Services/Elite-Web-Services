@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useProduct from "../hooks/useProduct";
 import {
   getAllProducts,
   updateProduct,
@@ -9,7 +10,8 @@ import {
 
 const EditProduct = ({ product }) => {
   const navigate = useNavigate();
-  const { token, setProducts, types } = useAuth();
+  const { token } = useAuth();
+  const { setProducts, types } = useProduct();
 
   const [updateState, setUpdateState] = useState({
     typeId: product.typeId,
@@ -44,7 +46,8 @@ const EditProduct = ({ product }) => {
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
-      navigate("/products");
+      navigate.goBack()
+      // ^^^TESTING THIS OUT^^^
     }
   };
 
