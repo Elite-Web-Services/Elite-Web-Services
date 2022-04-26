@@ -35,6 +35,7 @@ const CartProvider = ({ children }) => {
   const addProduct = async (product, addQuantity = 1) => {
     // WE ARE LOGGED IN
     if (user.username) {
+      console.log('user provided: ', user);
       // if product exists in cart, update the quantity
       if (findCartProductIdx(cart, product.id) > -1) {
         const newCart = await incrementQuantity(
@@ -58,7 +59,12 @@ const CartProvider = ({ children }) => {
       let cart = await JSON.parse(localStorage.getItem('cart'));
       // if product exists in cart, update the quantity
       if (findCartProductIdx(cart, product.id) > -1) {
-        const newCart = await incrementQuantity(cart, product.id, addQuantity);
+        const newCart = await incrementQuantity(
+          cart,
+          product.id,
+          addQuantity,
+          user
+        );
         localStorage.setItem('cart', JSON.stringify(newCart));
         setCart(newCart);
         return;
