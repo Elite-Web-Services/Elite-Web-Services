@@ -4,6 +4,7 @@ const {
   createUser,
   getAllUsers,
   addContacts,
+  getUserByEmail,
 } = require("../db/models/user");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -54,11 +55,20 @@ usersRouter.post("/register", async (req, res, next) => {
 
   try {
     const _user = await getUserByUsername(username);
+
     if (_user) {
       res.status(409);
       next({
         name: "UserAlreadyExistsError",
         message: "Username is already taken",
+      });
+    }
+    const _email = await getUserByEmail(email);
+    if (_email) {
+      res.status(409);
+      next({
+        name: "EmailAlreadyInUseError",
+        message: "Email is already registered",
       });
     } else {
       const user = await createUser({
