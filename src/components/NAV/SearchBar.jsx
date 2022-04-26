@@ -1,24 +1,31 @@
-import React, { useState } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState } from "react";
+import useProduct from "../hooks/useProduct";
 
 const SearchBar = () => {
-  let location = useLocation();
-  console.log(location.search)
-  const [search, setSearch] = useState('');
+  const { params, setSearchParams, searchObj, setSearchObj } = useProduct();
+
+  // this is just to prevent searchObj from changing every time a char is typed
+  const [searchTerm, setSearchTerm] = useState("");
+
   return (
-    <form action="/products" method="get"
-    onSubmit={(e)=> {
-      e.preventDefault()
-      location.search="hello"
-      setSearch("hello")
-    }}>
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSearchObj({ ...searchObj, query: searchTerm });
+        params.set("q", searchTerm);
+        setSearchParams(params);
+      }}
+    >
       <input
         className="form-control"
         type="text"
         placeholder="Product Search"
-        name="search"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
       />
-      <input type="submit" value="Search"></input>
+      <button type="submit">Search</button>
     </form>
   );
 };
