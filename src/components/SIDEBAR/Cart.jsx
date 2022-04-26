@@ -6,8 +6,7 @@ import useCart from '../hooks/useCart';
 import EmptyCart from './EmptyCart';
 
 const Cart = () => {
-  const { token } = useAuth();
-  const { cart, setCart } = useCart();
+  const { cart, addProduct, removeProduct } = useCart();
   console.log(cart);
 
   // this fixes weird formatting when only one item in cart
@@ -38,25 +37,30 @@ const Cart = () => {
                   >
                     <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                       <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
-                        {product.productName}
+                        {product.name}
                       </h2>
+                      <h4>Quantity: {product.quantity}</h4>
                       <ul className="d-flex list-unstyled mt-auto">
                         <li className="me-auto">
-                          <Link to={`/viewproduct=${product.productId}`}>
+                          <Link to={`/viewproduct=${product.id}`}>
                             <button className="btn btn-primary">Details</button>
                           </Link>
+                        </li>
+                        <li className="me-auto">
+                          {' '}
+                          <button
+                            className="btn btn-primary"
+                            onClick={() => {
+                              addProduct(product);
+                            }}
+                          >
+                            Add More
+                          </button>
                         </li>
                         <li className="d-flex align-items-center me-3">
                           <button
                             className="btn btn-danger"
-                            onClick={async () => {
-                              const newCart = await deleteCartProduct(
-                                product.productId,
-                                token
-                              );
-                              console.log('new cart', newCart);
-                              setCart(newCart);
-                            }}
+                            onClick={() => removeProduct(product)}
                           >
                             Remove
                           </button>

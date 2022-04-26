@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import {
   addProductToCart,
+  deleteCartProduct,
   getCart,
-  updateCartProductQuantity,
 } from '../../axios-services';
 import useAuth from '../hooks/useAuth';
-import { findCartProductIdx } from './helpers';
+import { findCartProductIdx, incrementQuantity } from './helpers';
 
 export const CartContext = React.createContext();
 
@@ -13,23 +13,36 @@ const CartProvider = ({ children }) => {
   const [cart, setCart] = useState({});
   const { user, token } = useAuth();
 
-  // replace "deleteCartProduct" in other components with this function
-  const removeProduct = () => {
-    // call deleteCartProduct if user.username
+  const removeProduct = async (product) => {
+    if (user.username) {
+      const newCart = await deleteCartProduct(product.id, token);
+      setCart(newCart);
+      return;
+    }
+
+    if (localStorage.getItem('cart')) {
+      let cart = await JSON.parse(localStorage.getItem('cart'));
+      let newProducts = cart.products.filter(
+        (item) => +item.id !== +product.id
+      );
+      cart.products = newProducts;
+      localStorage.setItem('cart', JSON.stringify(cart));
+      setCart(cart);
+      return;
+    }
   };
 
-  const addProduct = async (product, quantity = 1) => {
+  const addProduct = async (product, addQuantity = 1) => {
+    // WE ARE LOGGED IN
     if (user.username) {
       // if product exists in cart, update the quantity
-      let cartProductIdx = findCartProductIdx(cart, product.id);
-      if (cartProductIdx > -1) {
-        let newQuantity = quantity + cart.products[cartProductIdx].quantity;
-        console.log('newQuantity: ', newQuantity);
-        let newCart = await updateCartProductQuantity(
-          token,
-          newQuantity,
-          cart.cartId,
-          product.id
+      if (findCartProductIdx(cart, product.id) > -1) {
+        const newCart = await incrementQuantity(
+          cart,
+          product.id,
+          addQuantity,
+          user,
+          token
         );
         setCart(newCart);
         return;
@@ -40,21 +53,21 @@ const CartProvider = ({ children }) => {
       return;
     }
 
+    // WE ARE GUEST BUT HAVE A CART
     if (localStorage.getItem('cart')) {
-      console.log('THE PRODUCT: ', product);
       let cart = await JSON.parse(localStorage.getItem('cart'));
       // if product exists in cart, update the quantity
-      let cartProductIdx = findCartProductIdx(cart, product.id);
-      if (cartProductIdx > -1) {
-        cart.products[cartProductIdx].quantity += quantity;
-        localStorage.setItem('cart', JSON.stringify(cart));
-        setCart(cart);
+      if (findCartProductIdx(cart, product.id) > -1) {
+        const newCart = await incrementQuantity(cart, product.id, addQuantity);
+        localStorage.setItem('cart', JSON.stringify(newCart));
+        setCart(newCart);
         return;
       }
+      // else add new product
       cart.products.push({
-        productId: product.id,
-        productName: product.name,
-        productDescription: product.description,
+        id: product.id,
+        name: product.name,
+        description: product.description,
         price: product.price,
         imgURL: product.imgURL,
         isPublic: product.isPublic,
@@ -63,14 +76,16 @@ const CartProvider = ({ children }) => {
       localStorage.setItem('cart', JSON.stringify(cart));
       setCart(cart);
       return;
-    } else {
-      console.log('THE PRODUCT: ', product);
+    }
+
+    // WE ARE GUEST BUT DON'T HAVE A CART
+    else {
       let cart = {
         products: [
           {
-            productId: product.id,
-            productName: product.name,
-            productDescription: product.description,
+            id: product.id,
+            name: product.name,
+            description: product.description,
             price: product.price,
             imgURL: product.imgURL,
             isPublic: product.isPublic,
@@ -87,10 +102,12 @@ const CartProvider = ({ children }) => {
   const updateCartState = async () => {
     if (localStorage.getItem('token')) {
       const cart = await getCart(token);
-      console.log('Got the cart from cartcontext: ', cart);
+      console.log('Got the cart from db: ', cart);
       setCart(cart);
     } else if (localStorage.getItem('cart')) {
-      setCart(JSON.parse(localStorage.getItem('cart')));
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      setCart(cart);
+      console.log('Got the cart from localstorage: ', cart);
     }
   };
 
@@ -100,7 +117,7 @@ const CartProvider = ({ children }) => {
   }, [token]);
 
   return (
-    <CartContext.Provider value={{ cart, setCart, addProduct }}>
+    <CartContext.Provider value={{ cart, setCart, addProduct, removeProduct }}>
       {children}
     </CartContext.Provider>
   );

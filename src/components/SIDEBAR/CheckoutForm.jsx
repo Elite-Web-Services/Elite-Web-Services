@@ -1,14 +1,24 @@
 import React from 'react';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 
 const CheckoutForm = ({ total, setIsSubmitPayment }) => {
-  const { user } = useAuth();
-  const { cart } = useCart();
+  const { user, token } = useAuth();
+  const { cart, setCart } = useCart();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitPayment(true);
+  };
+
+  const handleIncrementClick = async (product) => {
+    const newCart = await incrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
+  };
+  const handleDecrementClick = async (product) => {
+    const newCart = await decrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
   };
 
   return (
@@ -30,16 +40,22 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                     key={`checkoutcartproduct:${i}`}
                   >
                     <div>
-                      <h6 className="my-0">{product.productName}</h6>
+                      <h6 className="my-0">{product.name}</h6>
                       <small
                         className="text-muted"
                         style={{ textOverflow: 'ellipsis' }}
                       >
-                        {product.productDescription}
+                        {product.description}
                       </small>
                       <p>
                         <strong>Quantity: {product.quantity}</strong>
                       </p>
+                      <button onClick={() => handleIncrementClick(product)}>
+                        +
+                      </button>
+                      <button onClick={() => handleDecrementClick(product)}>
+                        -
+                      </button>
                     </div>
                     <span className="text-muted">{`$${product.price}/hr`}</span>
                   </li>

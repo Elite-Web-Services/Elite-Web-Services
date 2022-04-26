@@ -8,8 +8,7 @@ const AllUsers = () => {
   const { user, token, allUsers, setAllUsers } = useAuth();
 
   useEffect(() => {
-    // change to user.isAdmin
-    if (!user.username) {
+    if (!user.isAdmin) {
       setIsError(true);
       setErrorMessage('YOU ARE NOT AUTHORIZED');
     } else {
