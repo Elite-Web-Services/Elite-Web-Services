@@ -16,13 +16,11 @@ const Sidebar = () => {
   const handleAdmin = () => {
     setToggleAdminRender(true);
     setToggleCartRender(false);
-    // setToggleProfileRender(false);
   };
 
   const handleCart = () => {
     setToggleAdminRender(false);
     setToggleCartRender(true);
-    // setToggleProfileRender(false);
   };
 
   return (

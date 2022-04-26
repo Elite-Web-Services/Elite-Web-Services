@@ -8,10 +8,12 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import AuthProvider from "./context/AuthContext";
 import Main from "./MAIN/Main";
 import Navbar from "./NAV/Navbar";
+
 import Sidebar from "./SIDEBAR/Sidebar"; //NEW
 import { BrowserRouter as Router } from "react-router-dom";
 import CartProvider from "./context/CartContext";
 import ProductProvider from "./context/ProductContext";
+import ContactProvider from "./context/ContactContext";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -35,15 +37,18 @@ const App = () => {
       <AuthProvider>
         <CartProvider>
           <ProductProvider>
-            <div className="app-container">
-              <h1 className="webTitle">{"ELITE . WEB . SERVICES"}</h1>
-              <Navbar />
-              {/* <p>API Status: {APIHealth}</p> */}
-              <div className="content d-flex justify-content-between">
-                <Main />
-                <Sidebar />
+            <ContactProvider>
+              <div className="app-container">
+                <h1 className="webTitle">{"ELITE . WEB . SERVICES"}</h1>
+                <Navbar />
+                {/* <p>API Status: {APIHealth}</p> */}
+                <div className="content d-flex justify-content-between">
+                  <Main />
+
+                  <Sidebar />
+                </div>
               </div>
-            </div>
+            </ContactProvider>
           </ProductProvider>
         </CartProvider>
       </AuthProvider>

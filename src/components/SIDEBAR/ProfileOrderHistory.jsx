@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import useAuth from "../hooks/useAuth";
-import useCart from "../hooks/useCart";
 import { getOrderHistory } from "../../axios-services";
 
 const ProfileOrderHistory = () => {
