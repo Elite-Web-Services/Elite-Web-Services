@@ -75,13 +75,13 @@ const Sidebar = () => {
               <button
                 className="btn btn-toggle align-items-center rounded collapsed"
                 data-bs-toggle="collapse"
-                data-bs-target="#cart-sidebar-collapse"
+                data-bs-target="#admin-sidebar-collapse"
                 aria-expanded="false"
                 onClick={handleAdmin}
               >
                 ADMIN Controls
               </button>
-              <div className="collapse" id="cart-sidebar-collapse">
+              <div className="collapse" id="admin-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
                     <Link
