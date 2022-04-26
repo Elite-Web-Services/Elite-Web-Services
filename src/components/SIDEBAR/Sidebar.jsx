@@ -46,9 +46,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleProfileOH(true);
                       }}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
-                      Order History{" "}
+                      Order History{' '}
                     </Link>
                   </li>
                   <li>
@@ -57,9 +57,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleProfileContact(true);
                       }}
-                      style={{ textDecoration: "none" }}
+                      style={{ textDecoration: 'none' }}
                     >
-                      Contact Information{" "}
+                      Contact Information{' '}
                     </Link>
                   </li>
                 </ul>

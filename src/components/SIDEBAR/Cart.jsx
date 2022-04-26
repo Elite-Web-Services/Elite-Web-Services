@@ -1,13 +1,13 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { deleteCartProduct } from '../../axios-services';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import EmptyCart from './EmptyCart';
 
 const Cart = () => {
-  const { token } = useAuth();
-  const { cart, setCart } = useCart();
+  const { cart, addProduct, removeProduct, setCart } = useCart();
+  const { user, token } = useAuth();
   console.log(cart);
 
   // this fixes weird formatting when only one item in cart
@@ -15,6 +15,16 @@ const Cart = () => {
   if (cart.products && cart.products.length < 2) {
     rowCols = '';
   }
+
+  const handleIncrementClick = async (product) => {
+    const newCart = await incrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
+  };
+  const handleDecrementClick = async (product) => {
+    const newCart = await decrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
+  };
+
   return (
     <div className="container px-4 py-5">
       {cart.products && cart.products.length > 0 ? (
@@ -38,25 +48,28 @@ const Cart = () => {
                   >
                     <div className="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
                       <h2 className="pt-5 mt-5 mb-4 display-6 lh-1 fw-bold">
-                        {product.productName}
+                        {product.name}
                       </h2>
+                      <h4>Quantity: {product.quantity}</h4>
                       <ul className="d-flex list-unstyled mt-auto">
                         <li className="me-auto">
-                          <Link to={`/viewproduct=${product.productId}`}>
+                          <Link to={`/viewproduct=${product.id}`}>
                             <button className="btn btn-primary">Details</button>
                           </Link>
+                        </li>
+                        <li className="me-auto">
+                          {' '}
+                          <button onClick={() => handleIncrementClick(product)}>
+                            +
+                          </button>
+                          <button onClick={() => handleDecrementClick(product)}>
+                            -
+                          </button>
                         </li>
                         <li className="d-flex align-items-center me-3">
                           <button
                             className="btn btn-danger"
-                            onClick={async () => {
-                              const newCart = await deleteCartProduct(
-                                product.productId,
-                                token
-                              );
-                              console.log('new cart', newCart);
-                              setCart(newCart);
-                            }}
+                            onClick={() => removeProduct(product)}
                           >
                             Remove
                           </button>
