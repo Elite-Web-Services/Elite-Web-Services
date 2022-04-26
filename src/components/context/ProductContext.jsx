@@ -19,8 +19,8 @@ const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
-      query: "",
-      type: "",
+      query: params.get("q") ? params.get("q") : "",
+      type: params.get("type") ? params.get("type") : "",
   })
   const [filterProducts, setFilterProducts] = useState([]);
 
@@ -50,10 +50,14 @@ const ProductProvider = ({ children }) => {
     displayAllTypes();
   }, []);
 
-// CHECK ON STATES
+// ENSURE SEARCH QUERIES STAY IN URL
 useEffect(() => {
-console.log(searchObj)
-  }, [location.search]);
+if (location.pathname == "/products") {
+    params.set("q", searchObj.query)
+    params.set("type", searchObj.type)
+    setSearchParams(params)
+}
+  }, [location.pathname]);
 
   // FILTER POSTS
   useEffect(() => {
@@ -62,15 +66,16 @@ console.log(searchObj)
 
     if (searchObj.type) {
       setFilterProducts(
-        filterProducts.filter((product) => product.typeName === searchObj.type)
+        products.filter((product) => product.typeName === searchObj.type)
       );
     }
 
-    if (searchObj.query) {
-      setFilterProducts(
-        filterProducts.filter((product) => product.name.includes(searchObj.query))
-      );
-    }
+    // if (searchObj.query) {
+    //   setFilterProducts(
+    //     filterProducts.filter((product) => product.name.includes(searchObj.query))
+    //   );
+    // }
+
   }, [products, searchObj]);
 
   return (
