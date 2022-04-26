@@ -11,16 +11,24 @@ export const ProductContext = React.createContext();
 
 const ProductProvider = ({ children }) => {
   const { user, token } = useAuth();
-
+  
   let location = useLocation();
   const params = new URLSearchParams(location.search);
   const [searchParams, setSearchParams] = useSearchParams();
-
+  
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
     query: params.get("q") ? params.get("q") : "",
     type: params.get("type") ? params.get("type") : "",
+    min: 0,
+    max: 0,
+  });
+  
+  const [searchTerm, setSearchTerm] = useState("");
+  const [price, setPrice] = useState({
+    min: "",
+    max: "",
   });
   const [filterProducts, setFilterProducts] = useState([]);
 
@@ -67,28 +75,26 @@ const ProductProvider = ({ children }) => {
 
     // --- Proof of concept ---
     const searchFilter = [];
+    // lowercase the query
+    const searchQuery = searchObj.query.toLowerCase();
+    // lowercase function
+    function tLC(objProp) {
+      return objProp.toLowerCase();
+    }
+
     products.forEach((product) => {
       if (
         product.typeName.includes(searchObj.type) &&
-        product.name.includes(searchObj.query)
+        Number(product.price) >= Number(searchObj.min) &&
+        (searchObj.max == 0 ? true: Number(product.price) <= Number(searchObj.max)) &&
+        (tLC(product.name).includes(searchQuery) ||
+          tLC(product.description).includes(searchQuery) ||
+          tLC(product.typeName).includes(searchQuery))
       ) {
         searchFilter.push(product);
       }
     });
     setFilterProducts(searchFilter);
-    // --- Proof of concept ---
-
-    // if (searchObj.type) {
-    //   setFilterProducts(
-    //     products.filter((product) => product.typeName === searchObj.type)
-    //   );
-    // }
-
-    // if (searchObj.query) {
-    //   setFilterProducts(
-    //     filterProducts.filter((product) => product.name.includes(searchObj.query))
-    //   );
-    // }
   }, [products, searchObj]);
 
   return (
@@ -104,6 +110,10 @@ const ProductProvider = ({ children }) => {
         searchObj,
         setSearchObj,
         filterProducts,
+        searchTerm,
+        setSearchTerm,
+        price,
+        setPrice
       }}
     >
       {children}
