@@ -7,12 +7,8 @@ const useAuth = () => {
     setUser,
     token,
     setToken,
-    products,
-    setProducts,
     allUsers,
     setAllUsers,
-    types,
-    setTypes,
   } = useContext(AuthContext);
 
   return {
@@ -20,12 +16,8 @@ const useAuth = () => {
     setUser,
     token,
     setToken,
-    products,
-    setProducts,
     allUsers,
     setAllUsers,
-    types,
-    setTypes,
   };
 };
 

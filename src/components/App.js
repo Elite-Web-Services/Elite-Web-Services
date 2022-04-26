@@ -1,19 +1,20 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
-import { getAPIHealth } from '../axios-services';
-import '../style/App.css';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import AuthProvider from './context/AuthContext';
-import Main from './MAIN/Main';
-import Navbar from './NAV/Navbar';
-import Sidebar from './SIDEBAR/Sidebar'; //NEW
-import { BrowserRouter as Router } from 'react-router-dom';
-import CartProvider from './context/CartContext';
+import { getAPIHealth } from "../axios-services";
+import "../style/App.css";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AuthProvider from "./context/AuthContext";
+import Main from "./MAIN/Main";
+import Navbar from "./NAV/Navbar";
+import Sidebar from "./SIDEBAR/Sidebar"; //NEW
+import { BrowserRouter as Router } from "react-router-dom";
+import CartProvider from "./context/CartContext";
+import ProductProvider from "./context/ProductContext";
 
 const App = () => {
-  const [APIHealth, setAPIHealth] = useState('');
+  const [APIHealth, setAPIHealth] = useState("");
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -21,7 +22,7 @@ const App = () => {
     // invoke the adapter, await the response, and set the data
     const getAPIStatus = async () => {
       const { healthy } = await getAPIHealth();
-      setAPIHealth(healthy ? 'api is up! :D' : 'api is down :/');
+      setAPIHealth(healthy ? "api is up! :D" : "api is down :/");
     };
 
     // second, after you've defined your getter above
@@ -33,15 +34,17 @@ const App = () => {
     <Router>
       <AuthProvider>
         <CartProvider>
-          <div className="app-container">
-            <h1 className="webTitle">{'ELITE . WEB . SERVICES'}</h1>
-            <Navbar />
-            {/* <p>API Status: {APIHealth}</p> */}
-            <div className="content d-flex justify-content-between">
-              <Main />
-              <Sidebar />
+          <ProductProvider>
+            <div className="app-container">
+              <h1 className="webTitle">{"ELITE . WEB . SERVICES"}</h1>
+              <Navbar />
+              {/* <p>API Status: {APIHealth}</p> */}
+              <div className="content d-flex justify-content-between">
+                <Main />
+                <Sidebar />
+              </div>
             </div>
-          </div>
+          </ProductProvider>
         </CartProvider>
       </AuthProvider>
     </Router>
