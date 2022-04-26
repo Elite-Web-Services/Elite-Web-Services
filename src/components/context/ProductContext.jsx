@@ -13,15 +13,15 @@ const ProductProvider = ({ children }) => {
   const { user, token } = useAuth();
 
   let location = useLocation();
-  const params = new URLSearchParams(location.search)
-  const [searchParams, setSearchParams] = useSearchParams()
+  const params = new URLSearchParams(location.search);
+  const [searchParams, setSearchParams] = useSearchParams();
 
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
-      query: params.get("q") ? params.get("q") : "",
-      type: params.get("type") ? params.get("type") : "",
-  })
+    query: params.get("q") ? params.get("q") : "",
+    type: params.get("type") ? params.get("type") : "",
+  });
   const [filterProducts, setFilterProducts] = useState([]);
 
   // GET ALL PRODUCTS
@@ -50,32 +50,45 @@ const ProductProvider = ({ children }) => {
     displayAllTypes();
   }, []);
 
-// ENSURE SEARCH QUERIES STAY IN URL
-useEffect(() => {
-if (location.pathname == "/products") {
-    params.set("q", searchObj.query)
-    params.set("type", searchObj.type)
-    setSearchParams(params)
-}
+  // ENSURE SEARCH QUERIES STAY IN URL
+  useEffect(() => {
+    if (location.pathname == "/products") {
+      params.set("q", searchObj.query);
+      params.set("type", searchObj.type);
+      setSearchParams(params);
+    }
   }, [location.pathname]);
 
   // FILTER POSTS
   useEffect(() => {
     setFilterProducts(products);
-    console.log(filterProducts)
+    console.log(products);
+    console.log(filterProducts);
 
-    if (searchObj.type) {
-      setFilterProducts(
-        products.filter((product) => product.typeName === searchObj.type)
-      );
-    }
+    // --- Proof of concept ---
+    const searchFilter = [];
+    products.forEach((product) => {
+      if (
+        product.typeName.includes(searchObj.type) &&
+        product.name.includes(searchObj.query)
+      ) {
+        searchFilter.push(product);
+      }
+    });
+    setFilterProducts(searchFilter);
+    // --- Proof of concept ---
+
+    // if (searchObj.type) {
+    //   setFilterProducts(
+    //     products.filter((product) => product.typeName === searchObj.type)
+    //   );
+    // }
 
     // if (searchObj.query) {
     //   setFilterProducts(
     //     filterProducts.filter((product) => product.name.includes(searchObj.query))
     //   );
     // }
-
   }, [products, searchObj]);
 
   return (
@@ -90,7 +103,7 @@ if (location.pathname == "/products") {
         setSearchParams,
         searchObj,
         setSearchObj,
-        filterProducts
+        filterProducts,
       }}
     >
       {children}
