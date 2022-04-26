@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import ProductCard from "./ProductCard";
 import TypeButtons from "./TypeButtons";
+import PriceInput from "./PriceInput";
 
 const Products = () => {
   const { user } = useAuth();
@@ -12,6 +13,7 @@ const Products = () => {
   return (
     <div>
       <TypeButtons />
+      <PriceInput />
 
       {user.isAdmin ? (
         <Link to="/createproduct">

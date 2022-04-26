@@ -21,6 +21,8 @@ const ProductProvider = ({ children }) => {
   const [searchObj, setSearchObj] = useState({
     query: params.get("q") ? params.get("q") : "",
     type: params.get("type") ? params.get("type") : "",
+    min: params.get("min") ? params.get("min") : 0,
+    max: params.get("max") ? params.get("max") : 0,
   });
   const [filterProducts, setFilterProducts] = useState([]);
 
@@ -55,6 +57,8 @@ const ProductProvider = ({ children }) => {
     if (location.pathname == "/products") {
       params.set("q", searchObj.query);
       params.set("type", searchObj.type);
+      params.set("min", searchObj.min);
+      params.set("max", searchObj.max);
       setSearchParams(params);
     }
   }, [location.pathname]);
@@ -67,28 +71,25 @@ const ProductProvider = ({ children }) => {
 
     // --- Proof of concept ---
     const searchFilter = [];
+    // lowercase the query
+    const searchQuery = searchObj.query.toLowerCase();
+    // lowercase function
+    function tLC(objProp) {
+      return objProp.toLowerCase();
+    }
+
     products.forEach((product) => {
       if (
         product.typeName.includes(searchObj.type) &&
-        product.name.includes(searchObj.query)
+        product.price > searchObj.min &&
+        (tLC(product.name).includes(searchQuery) ||
+          tLC(product.description).includes(searchQuery) ||
+          tLC(product.typeName).includes(searchQuery))
       ) {
         searchFilter.push(product);
       }
     });
     setFilterProducts(searchFilter);
-    // --- Proof of concept ---
-
-    // if (searchObj.type) {
-    //   setFilterProducts(
-    //     products.filter((product) => product.typeName === searchObj.type)
-    //   );
-    // }
-
-    // if (searchObj.query) {
-    //   setFilterProducts(
-    //     filterProducts.filter((product) => product.name.includes(searchObj.query))
-    //   );
-    // }
   }, [products, searchObj]);
 
   return (

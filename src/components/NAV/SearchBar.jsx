@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useProduct from "../hooks/useProduct";
 
 const SearchBar = () => {
@@ -6,6 +6,10 @@ const SearchBar = () => {
 
   // this is just to prevent searchObj from changing every time a char is typed
   const [searchTerm, setSearchTerm] = useState("");
+
+  useEffect(() => {
+    setSearchTerm(params.get("q"));
+  }, [params]);
 
   return (
     <form
