@@ -140,26 +140,71 @@ async function createInitialProducts() {
         price: '25',
         isPublic: true,
         imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567503/cld-sample.jpg',
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png',
       },
       {
-        typeId: 2,
+        typeId: 1,
         name: "I'm a great listener",
         description:
           "I don't know much about computers, personally. But I'll make you feel understood.",
         price: '125',
         isPublic: true,
         imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567503/cld-sample.jpg',
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png',
       },
       {
-        typeId: 3,
+        typeId: 1,
         name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
         price: '100',
         isPublic: true,
         imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650567482/sample.jpg',
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png',
+      },
+      {
+        typeId: 1,
+        name: 'Making websites stand out since 2021',
+        description: "Colorblind? I'm here to help.",
+        price: '100',
+        isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_tuq40k.png',
+      },
+      {
+        typeId: 1,
+        name: 'Making websites stand out since 2021',
+        description: "Colorblind? I'm here to help.",
+        price: '100',
+        isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png',
+      },
+      {
+        typeId: 2,
+        name: 'Making websites stand out since 2021',
+        description: "Colorblind? I'm here to help.",
+        price: '100',
+        isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg',
+      },
+      {
+        typeId: 2,
+        name: 'Making websites stand out since 2021',
+        description: "Colorblind? I'm here to help.",
+        price: '100',
+        isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg',
+      },
+      {
+        typeId: 3,
+        name: 'Analysis of your business',
+        description: "Colorblind? I'm here to help.",
+        price: '100',
+        isPublic: true,
+        imgURL:
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999415/service_po98bn.jpg',
       },
     ];
     const products = await Promise.all(

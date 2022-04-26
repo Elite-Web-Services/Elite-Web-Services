@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import { deleteCartProduct } from '../../axios-services';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import EmptyCart from './EmptyCart';
 
 const Cart = () => {
-  const { cart, addProduct, removeProduct } = useCart();
+  const { cart, addProduct, removeProduct, setCart } = useCart();
+  const { user, token } = useAuth();
   console.log(cart);
 
   // this fixes weird formatting when only one item in cart
@@ -14,6 +15,16 @@ const Cart = () => {
   if (cart.products && cart.products.length < 2) {
     rowCols = '';
   }
+
+  const handleIncrementClick = async (product) => {
+    const newCart = await incrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
+  };
+  const handleDecrementClick = async (product) => {
+    const newCart = await decrementQuantity(cart, product.id, 1, user, token);
+    setCart(newCart);
+  };
+
   return (
     <div className="container px-4 py-5">
       {cart.products && cart.products.length > 0 ? (
@@ -48,13 +59,11 @@ const Cart = () => {
                         </li>
                         <li className="me-auto">
                           {' '}
-                          <button
-                            className="btn btn-primary"
-                            onClick={() => {
-                              addProduct(product);
-                            }}
-                          >
-                            Add More
+                          <button onClick={() => handleIncrementClick(product)}>
+                            +
+                          </button>
+                          <button onClick={() => handleDecrementClick(product)}>
+                            -
                           </button>
                         </li>
                         <li className="d-flex align-items-center me-3">

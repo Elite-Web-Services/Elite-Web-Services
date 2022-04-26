@@ -12,7 +12,7 @@ const CheckoutSubmitPayment = ({
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
-  const { token } = useAuth();
+  const { user, token } = useAuth();
   const { cart, setCart } = useCart();
 
   const handleClose = () => {
