@@ -1,27 +1,28 @@
 import React, { useState } from "react";
-import { addContact, getMe } from "../../axios-services";
-import useAuth from "../hooks/useAuth";
+import useContact from "../hooks/useContact";
 
 const ProfileContactInfo = () => {
-  const { token, user } = useAuth();
-  const theUser = user.id;
-  const [newEmail, setNewEmail] = useState(user.email);
-  const [newAddress, setNewAddress] = useState(user.address);
-  const [newAddress2, setNewAddress2] = useState(user.address2);
-  const [newCity, setNewCity] = useState(user.city);
-  const [newZip, setNewZip] = useState(user.zip);
+  const {
+    addContact,
+    contact,
+    setContact,
+    newEmail,
+    setNewEmail,
+    newAddress,
+    setNewAddress,
+    newAddress2,
+    setNewAddress2,
+    newCity,
+    setNewCity,
+    newState,
+    setNewState,
+    newZip,
+    setNewZip,
+  } = useContact();
 
   const handleAddressStored = async (e) => {
     e.preventDefault();
-    const response = await addContact(
-      token,
-      newEmail,
-      theUser,
-      newAddress,
-      newAddress2,
-      newCity,
-      newZip
-    );
+    await addContact();
   };
 
   const handleEmail = (e) => {
@@ -43,7 +44,7 @@ const ProfileContactInfo = () => {
   return (
     <div>
       <div>
-        <h1> bye!</h1>
+        <h1> Update Email and Address below</h1>
       </div>
       <form className="row g-3" onSubmit={handleAddressStored}>
         <div className="col-md-7">

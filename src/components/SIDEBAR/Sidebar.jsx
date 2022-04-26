@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import Admin from "./Admin";
+import Cart from "./Cart";
 import { Link } from "react-router-dom";
 
 const Sidebar = () => {
@@ -15,13 +16,11 @@ const Sidebar = () => {
   const handleAdmin = () => {
     setToggleAdminRender(true);
     setToggleCartRender(false);
-    // setToggleProfileRender(false);
   };
 
   const handleCart = () => {
     setToggleAdminRender(false);
     setToggleCartRender(true);
-    // setToggleProfileRender(false);
   };
 
   return (
@@ -124,7 +123,7 @@ const Sidebar = () => {
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
                   <Link
-                    to="/cart"
+                    to="/checkout"
                     onClick={() => {
                       setToggleCheckout(true);
                     }}
