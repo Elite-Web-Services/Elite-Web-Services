@@ -1,19 +1,20 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Products from './Products';
-import AllUsers from './AllUsers';
-import Cart from '../SIDEBAR/Cart';
-import Checkout from '../SIDEBAR/Checkout';
-import EditProduct from './EditProduct';
-import SingleProduct from './SingleProduct';
-import CreateProduct from './CreateProduct';
-import ProfileContactInfo from '../SIDEBAR/ProfileContactInfo';
-import useAuth from '../hooks/useAuth';
-import ProfileOrderHistory from '../SIDEBAR/ProfileOrderHistory';
-
+import React from "react";
+import { Routes, Route } from "react-router-dom";
+import Products from "./Products";
+import AllUsers from "./AllUsers";
+import Cart from "../SIDEBAR/Cart";
+import Checkout from "../SIDEBAR/Checkout";
+import EditProduct from "./EditProduct";
+import SingleProduct from "./SingleProduct";
+import CreateProduct from "./CreateProduct";
+import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
+import useAuth from "../hooks/useAuth";
+import useProduct from "../hooks/useProduct";
+import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
 
 const Main = () => {
-  const { products, user } = useAuth();
+  const { user } = useAuth();
+  const { products } = useProduct();
 
   return (
     <div className="main">
@@ -39,12 +40,12 @@ const Main = () => {
 
         {Array.isArray(products) && user.isAdmin
           ? products.map((product) => (
-                <Route
-                  key={`editProductLink ${product.id}`}
-                  path={`editproduct=${product.id}`}
-                  element={<EditProduct product={product} />}
-                />
-              ))
+              <Route
+                key={`editProductLink ${product.id}`}
+                path={`editproduct=${product.id}`}
+                element={<EditProduct product={product} />}
+              />
+            ))
           : null}
       </Routes>
     </div>

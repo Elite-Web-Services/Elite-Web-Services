@@ -1,32 +1,52 @@
 import React, { useState } from "react";
-
-import { addContact, getMe } from "../../axios-services";
-import useAuth from "../hooks/useAuth";
+import useContact from "../hooks/useContact";
 
 const ProfileContactInfo = () => {
-  const { token, user, setuser } = useAuth();
-  const theUser = user.id;
-  const [newEmail, setNewEmail] = useState("");
+  const {
+    addContact,
+    contact,
+    setContact,
+    newEmail,
+    setNewEmail,
+    newAddress,
+    setNewAddress,
+    newAddress2,
+    setNewAddress2,
+    newCity,
+    setNewCity,
+    newState,
+    setNewState,
+    newZip,
+    setNewZip,
+  } = useContact();
 
-  console.log("TESTING TESTING:", theUser);
-
-  const handleAddress = async (e) => {
+  const handleAddressStored = async (e) => {
     e.preventDefault();
-    const response = await addContact(token, newEmail, theUser);
-    console.log("UDPATING USER", response);
-    const myInfo = await getMe(user.username, token);
+    await addContact();
   };
 
-  const handleEmail = async (e) => {
+  const handleEmail = (e) => {
     setNewEmail(e.target.value);
+  };
+  const handleAddress = (e) => {
+    setNewAddress(e.target.value);
+  };
+  const handleAddress2 = (e) => {
+    setNewAddress2(e.target.value);
+  };
+  const handleCity = (e) => {
+    setNewCity(e.target.value);
+  };
+  const handleZip = (e) => {
+    setNewZip(e.target.value);
   };
 
   return (
     <div>
       <div>
-        <h1> hi!</h1>
+        <h1> Update Email and Address below</h1>
       </div>
-      <form className="row g-3" onSubmit={handleAddress}>
+      <form className="row g-3" onSubmit={handleAddressStored}>
         <div className="col-md-7">
           <label htmlFor="inputEmail4" className="form-label">
             Email
@@ -54,6 +74,8 @@ const ProfileContactInfo = () => {
             className="form-control"
             id="inputAddress"
             placeholder="1234 Main St"
+            value={newAddress}
+            onChange={handleAddress}
           />
         </div>
         <div className="col-7">
@@ -65,13 +87,21 @@ const ProfileContactInfo = () => {
             className="form-control"
             id="inputAddress2"
             placeholder="Apartment, studio, or floor"
+            value={newAddress2}
+            onChange={handleAddress2}
           />
         </div>
         <div className="col-md-6">
           <label htmlFor="inputCity" className="form-label">
             City
           </label>
-          <input type="text" className="form-control" id="inputCity" />
+          <input
+            type="text"
+            className="form-control"
+            id="inputCity"
+            value={newCity}
+            onChange={handleCity}
+          />
         </div>
         <div className="col-md-4">
           <label htmlFor="inputState" className="form-label">
@@ -87,7 +117,13 @@ const ProfileContactInfo = () => {
           <label htmlFor="inputZip" className="form-label">
             Zip
           </label>
-          <input type="text" className="form-control" id="inputZip" />
+          <input
+            type="text"
+            className="form-control"
+            id="inputZip"
+            value={newZip}
+            onChange={handleZip}
+          />
         </div>
 
         <div className="col-12">

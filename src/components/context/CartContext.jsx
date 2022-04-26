@@ -33,7 +33,6 @@ const CartProvider = ({ children }) => {
   };
 
   const addProduct = async (product, addQuantity = 1) => {
-    // WE ARE LOGGED IN
     if (user.username) {
       console.log('user provided: ', user);
       // if product exists in cart, update the quantity

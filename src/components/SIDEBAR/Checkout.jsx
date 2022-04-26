@@ -1,8 +1,8 @@
-import React, { useState, useEffect, Fragment } from 'react';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import CheckoutForm from './CheckoutForm';
-import CheckoutSubmitPayment from './CheckoutSubmitPayment';
+import React, { useState, useEffect, Fragment } from "react";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import CheckoutForm from "./CheckoutForm";
+import CheckoutSubmitPayment from "./CheckoutSubmitPayment";
 
 const Checkout = () => {
   const [isSubmitPayment, setIsSubmitPayment] = useState(false);

@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import Admin from './Admin';
-import ProfileOrderHistory from './ProfileOrderHistory';
-
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import Admin from "./Admin";
+import Cart from "./Cart";
+import { Link } from "react-router-dom";
 
 const Sidebar = () => {
   const { user } = useAuth();
@@ -17,13 +16,11 @@ const Sidebar = () => {
   const handleAdmin = () => {
     setToggleAdminRender(true);
     setToggleCartRender(false);
-    // setToggleProfileRender(false);
   };
 
   const handleCart = () => {
     setToggleAdminRender(false);
     setToggleCartRender(true);
-    // setToggleProfileRender(false);
   };
 
   return (
@@ -77,13 +74,13 @@ const Sidebar = () => {
               <button
                 className="btn btn-toggle align-items-center rounded collapsed"
                 data-bs-toggle="collapse"
-                data-bs-target="#cart-sidebar-collapse"
+                data-bs-target="#admin-sidebar-collapse"
                 aria-expanded="false"
                 onClick={handleAdmin}
               >
                 ADMIN Controls
               </button>
-              <div className="collapse" id="cart-sidebar-collapse">
+              <div className="collapse" id="admin-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
                     <Link
@@ -91,9 +88,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
-                      Manage Users{' '}
+                      Manage Users{" "}
                     </Link>
                   </li>
                   <li>
@@ -102,9 +99,9 @@ const Sidebar = () => {
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
-                      style={{ textDecoration: 'none' }}
+                      style={{ textDecoration: "none" }}
                     >
-                      Manage Products{' '}
+                      Manage Products{" "}
                     </Link>
                   </li>
                 </ul>
@@ -126,13 +123,13 @@ const Sidebar = () => {
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
                   <Link
-                    to="/cart"
+                    to="/checkout"
                     onClick={() => {
                       setToggleCheckout(true);
                     }}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Checkout{' '}
+                    Checkout{" "}
                   </Link>
                 </li>
                 <li>
@@ -141,9 +138,9 @@ const Sidebar = () => {
                     onClick={() => {
                       setToggleCart(true);
                     }}
-                    style={{ textDecoration: 'none' }}
+                    style={{ textDecoration: "none" }}
                   >
-                    Go to Cart{' '}
+                    Go to Cart{" "}
                   </Link>
                 </li>
               </ul>

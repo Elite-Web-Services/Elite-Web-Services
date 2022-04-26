@@ -35,18 +35,23 @@ async function createUser({ username, password, isAdmin = false }) {
   }
 }
 
-async function addContacts({ id, email }) {
+async function addContacts({ id, email, address, address2, city, state, zip }) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
       UPDATE users 
-      SET email = COALESCE($2, users.email)
+      SET email = COALESCE($2, users.email),
+      address=COALESCE($3, users.address),
+      address2=COALESCE($4, users.address2),
+      city=COALESCE($5, users.city),
+      state=COALESCE($6, users.state),
+      zip=COALESCE($7, users.zip)
       WHERE users.id=$1
       RETURNING *;
       `,
-      [id, email]
+      [id, email, address, address2, city, state, zip]
     );
     console.log("*****DB USERS******", user);
     return user;

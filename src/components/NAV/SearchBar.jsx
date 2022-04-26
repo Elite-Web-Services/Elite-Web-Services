@@ -1,15 +1,30 @@
-import React, { useState } from 'react';
+import React from "react";
+import useProduct from "../hooks/useProduct";
+import { useNavigate } from "react-router-dom";
 
 const SearchBar = () => {
-  const [search, setSearch] = useState('');
+  const navigate = useNavigate();
+  const { searchObj, setSearchObj, searchTerm, setSearchTerm } =
+    useProduct();
+
   return (
-    <form action="/products" method="get">
+    <form
+      onSubmit={(e) => {
+        e.preventDefault();
+        setSearchObj({ ...searchObj, query: searchTerm });
+        navigate(`/products?q=${searchTerm}&type=${searchObj.type}`);
+      }}
+    >
       <input
         className="form-control"
         type="text"
         placeholder="Product Search"
-        name="search"
+        value={searchTerm}
+        onChange={(e) => {
+          setSearchTerm(e.target.value);
+        }}
       />
+      <button type="submit">Search</button>
     </form>
   );
 };
