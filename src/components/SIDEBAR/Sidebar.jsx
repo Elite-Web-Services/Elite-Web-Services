@@ -28,47 +28,7 @@ const Sidebar = () => {
       <div className="d-flex flex-column p-3 bg-white">
         <ul className="list-unstyled ps-0">
           {/* --------------------------------------------MY PROFILE */}
-          {user.username ? (
-            <li className="mb-1">
-              <button
-                className="btn btn-toggle align-items-center rounded collapsed"
-                data-bs-toggle="collapse"
-                data-bs-target="#profile-collapse"
-                aria-expanded="false"
-              >
-                My Profile
-              </button>
-              <div className="collapse" id="profile-collapse">
-                <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                  <li>
-                    <Link
-                      to="/orderHistory"
-                      onClick={() => {
-                        setToggleProfileOH(true);
-                      }}
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Order History{' '}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link
-                      to="/contactinfo"
-                      onClick={() => {
-                        setToggleProfileContact(true);
-                      }}
-                      style={{ textDecoration: 'none' }}
-                    >
-                      Contact Information{' '}
-                    </Link>
-                  </li>
-                </ul>
-              </div>
-            </li>
-          ) : (
-            <h3>GUEST ACCESS</h3>
-          )}
-          {/* ----------------------------------------ADMIN */}
+
           {user.isAdmin ? (
             <li className="mb-1">
               <button
@@ -108,6 +68,48 @@ const Sidebar = () => {
               </div>
             </li>
           ) : null}
+
+          {/* ----------------------------------------ADMIN */}
+          {user.username ? (
+            <li className="mb-1">
+              <button
+                className="btn btn-toggle align-items-center rounded collapsed"
+                data-bs-toggle="collapse"
+                data-bs-target="#profile-collapse"
+                aria-expanded="false"
+              >
+                My Profile
+              </button>
+              <div className="collapse" id="profile-collapse">
+                <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  <li>
+                    <Link
+                      to="/orderHistory"
+                      onClick={() => {
+                        setToggleProfileOH(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Order History{" "}
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      to="/contactinfo"
+                      onClick={() => {
+                        setToggleProfileContact(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+                      Contact Information{" "}
+                    </Link>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          ) : (
+            <h3>GUEST ACCESS</h3>
+          )}
           {/* ----------------------------------------CART */}
           <li className="mb-1">
             <button

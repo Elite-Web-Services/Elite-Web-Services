@@ -12,7 +12,7 @@ module.exports = {
   addContacts,
 };
 
-async function createUser({ username, password, isAdmin = false }) {
+async function createUser({ username, password, email, isAdmin = false }) {
   // CHANGE BCRYPT TO ASYNC SOMEHOW
   const hashedPW = bcrypt.hashSync(password, SALT);
   try {
@@ -20,12 +20,12 @@ async function createUser({ username, password, isAdmin = false }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, "isAdmin")
-      VALUES($1, $2, $3)
+      INSERT INTO users(username, password, email, "isAdmin")
+      VALUES($1, $2, $3, $4)
       ON CONFLICT (username) DO NOTHING
-      RETURNING id, username, "isAdmin";
+      RETURNING id, username,email, "isAdmin";
       `,
-      [username, hashedPW, isAdmin]
+      [username, hashedPW, email, isAdmin]
     );
 
     const cart = await createCart({ userId: user.id, purchased: false });
