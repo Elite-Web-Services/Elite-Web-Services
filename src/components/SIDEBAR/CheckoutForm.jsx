@@ -3,14 +3,20 @@ import { decrementQuantity, incrementQuantity } from "../context/helpers";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 import useContact from "../hooks/useContact";
+import ContactInfo from "./ContactInfo";
 
 const CheckoutForm = ({ total, setIsSubmitPayment }) => {
   const { user, token } = useAuth();
   const { cart, setCart } = useCart();
+  const { addContact } = useContact();
   const [clicked, setClicked] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (clicked) {
+      await addContact();
+    }
+    console.log("ADDCONTACT WHEN CLICKED", clicked);
     setIsSubmitPayment(true);
   };
 
@@ -74,99 +80,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
       <div className="col-md-7 col-lg-8">
         <h4 className="mb-3">Billing address</h4>
         <form className="needs-validation" onSubmit={handleSubmit}>
-          <div className="row g-3">
-            <div className="col-sm-6">
-              <label htmlFor="firstName" className="form-label">
-                First name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder=""
-                value=""
-                required=""
-              />
-            </div>
-
-            <div className="col-sm-6">
-              <label htmlFor="lastName" className="form-label">
-                Last name
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder=""
-                value=""
-                required=""
-              />
-            </div>
-
-            <div className="col-12">
-              <label htmlFor="email" className="form-label">
-                Email <span className="text-muted">(Optional)</span>
-              </label>
-              <input
-                type="email"
-                className="form-control"
-                placeholder={`${user.username || "you"}@example.com`}
-              />
-            </div>
-
-            <div className="col-12">
-              <label htmlFor="address" className="form-label">
-                Address
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="1234 Main St"
-                required=""
-              />
-            </div>
-
-            <div className="col-12">
-              <label htmlFor="address2" className="form-label">
-                Address 2 <span className="text-muted">(Optional)</span>
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder="Apartment or suite"
-              />
-            </div>
-
-            <div className="col-md-5">
-              <label htmlFor="country" className="form-label">
-                Country
-              </label>
-              <select className="form-select" required="">
-                <option value="">Choose...</option>
-                <option>United States</option>
-              </select>
-            </div>
-
-            <div className="col-md-4">
-              <label htmlFor="state" className="form-label">
-                State
-              </label>
-              <select className="form-select" required="">
-                <option value="">Choose...</option>
-                <option>California</option>
-              </select>
-            </div>
-
-            <div className="col-md-3">
-              <label htmlFor="zip" className="form-label">
-                Zip Code
-              </label>
-              <input
-                type="text"
-                className="form-control"
-                placeholder=""
-                required=""
-              />
-            </div>
-          </div>
+          <ContactInfo />
 
           <hr className="my-4" />
 
@@ -174,7 +88,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
             <input
               type="checkbox"
               className="form-check-input"
-              onSubmit={(e) => {
+              onChange={(e) => {
                 setClicked(true);
               }}
             />

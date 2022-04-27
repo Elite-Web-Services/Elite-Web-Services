@@ -15,20 +15,28 @@ const ProfileOrderHistory = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {orderHistory.length > 0 ? (
         <div>
           {orderHistory.map((cart, idx) => {
             return (
-              <div>
-                <h2>{cart.cartId} </h2>
+              <div key={"Order Number:" + idx}>
+                <h2 className="d-block text-gray-dark">
+                  Order Number: {cart.cartId}
+                </h2>
                 {cart.products ? (
-                  <div id="orderHistory">
+                  <div
+                    id="orderHistory"
+                    className="my-3 p-3 bg-body rounded shadow-lg"
+                  >
                     {cart.products.map((product, idx) => {
                       return (
-                        <div key={"Orders Purchased:" + idx}>
+                        <div
+                          key={"Orders Purchased:" + idx}
+                          className="pb-3 mb-0 small lh-sm border-bottom"
+                        >
                           <h3>{product.name}</h3>
-                          <h5>{product.description}</h5>
+                          <p>{product.description}</p>
                         </div>
                       );
                     })}
