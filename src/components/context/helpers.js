@@ -2,9 +2,9 @@ import {
   deleteCartProduct,
   updateCartProductQuantity,
 } from '../../axios-services';
-import useAuth from '../hooks/useAuth';
 
 export const findCartProductIdx = (cart, productId) => {
+  if (cart.products && cart.products.length < 1) return -1;
   let idx = cart.products.findIndex((product) => +product.id === +productId);
   return idx;
 };
@@ -18,7 +18,6 @@ export const incrementQuantity = async (
 ) => {
   let cartProductIdx = findCartProductIdx(cart, productId);
   let newQuantity = addQuantity + cart.products[cartProductIdx].quantity;
-  console.log('USER', user);
   if (user.username) {
     let newCart = await updateCartProductQuantity(
       token,

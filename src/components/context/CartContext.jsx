@@ -34,7 +34,6 @@ const CartProvider = ({ children }) => {
 
   const addProduct = async (product, addQuantity = 1) => {
     if (user.username) {
-      console.log('user provided: ', user);
       // if product exists in cart, update the quantity
       if (findCartProductIdx(cart, product.id) > -1) {
         const newCart = await incrementQuantity(
@@ -44,13 +43,18 @@ const CartProvider = ({ children }) => {
           user,
           token
         );
-        setCart(newCart);
-        return;
+        // setCart(newCart);
+        return newCart;
       }
       // else add new product
-      const newCart = await addProductToCart(token, cart.cartId, product.id, 1);
-      setCart(newCart);
-      return;
+      const newCart = await addProductToCart(
+        token,
+        cart.cartId,
+        product.id,
+        addQuantity
+      );
+      // setCart(newCart);
+      return newCart;
     }
 
     // WE ARE GUEST BUT HAVE A CART
@@ -65,8 +69,8 @@ const CartProvider = ({ children }) => {
           user
         );
         localStorage.setItem('cart', JSON.stringify(newCart));
-        setCart(newCart);
-        return;
+        // setCart(newCart);
+        return newCart;
       }
       // else add new product
       cart.products.push({
@@ -79,8 +83,8 @@ const CartProvider = ({ children }) => {
         quantity: 1,
       });
       localStorage.setItem('cart', JSON.stringify(cart));
-      setCart(cart);
-      return;
+      // setCart(cart);
+      return cart;
     }
 
     // WE ARE GUEST BUT DON'T HAVE A CART
@@ -116,10 +120,30 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const mergeCarts = async () => {
+    if (localStorage.getItem('cart') && localStorage.getItem('token')) {
+      let storedCart = await JSON.parse(localStorage.getItem('cart'));
+      await Promise.all(
+        storedCart.products.map((product) =>
+          addProduct(product, product.quantity)
+        )
+      );
+      localStorage.removeItem('cart');
+      const newCart = await getCart(token);
+      console.log('new cart: ', newCart);
+      setCart(newCart);
+    }
+  };
+
   // get cart
   useEffect(() => {
     updateCartState();
-  }, [token]);
+  }, [user]);
+
+  // merge guest cart with logged in cart
+  useEffect(() => {
+    mergeCarts();
+  }, [cart]);
 
   return (
     <CartContext.Provider value={{ cart, setCart, addProduct, removeProduct }}>

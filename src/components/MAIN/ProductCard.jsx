@@ -1,13 +1,17 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 
 const ProductCard = ({ product, productType }) => {
-
-  const { addProduct } = useCart();
+  const { addProduct, setCart } = useCart();
   const { user } = useAuth();
+
+  const handleAddProduct = async (product) => {
+    const newCart = await addProduct(product);
+    console.log('Added a product, newcart: ', newCart);
+    setCart(newCart);
+  };
 
   return (
     <div className="card mb-4 box-shadow">
@@ -40,10 +44,7 @@ const ProductCard = ({ product, productType }) => {
             </Link>
             <button
               className="btn btn-secondary"
-              onClick={async (event) => {
-                event.preventDefault();
-                addProduct(product);
-              }}
+              onClick={() => handleAddProduct(product)}
             >
               Add To Cart
             </button>
