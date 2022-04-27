@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
-import useAuth from "../hooks/useAuth";
-import { getOrderHistory } from "../../axios-services";
+import React, { useState, useEffect, Fragment } from 'react';
+import useAuth from '../hooks/useAuth';
+import { getOrderHistory } from '../../axios-services';
 
-const ProfileOrderHistory = () => {
+const ProfileOrderHistory = ({ userOrderHistory }) => {
   const [orderHistory, setOrderHistory] = useState([]);
   const { token } = useAuth();
 
@@ -11,7 +11,11 @@ const ProfileOrderHistory = () => {
     setOrderHistory(newOrderHistory);
   };
   useEffect(() => {
-    getHistory();
+    if (userOrderHistory) {
+      setOrderHistory(userOrderHistory);
+    } else {
+      getHistory();
+    }
   }, []);
 
   return (
@@ -20,29 +24,33 @@ const ProfileOrderHistory = () => {
         <div>
           {orderHistory.map((cart, idx) => {
             return (
-              <div key={"Order Number:" + idx}>
-                <h2 className="d-block text-gray-dark">
-                  Order Number: {cart.cartId}
-                </h2>
-                {cart.products ? (
-                  <div
-                    id="orderHistory"
-                    className="my-3 p-3 bg-body rounded shadow-lg"
-                  >
-                    {cart.products.map((product, idx) => {
-                      return (
-                        <div
-                          key={"Orders Purchased:" + idx}
-                          className="pb-3 mb-0 small lh-sm border-bottom"
-                        >
-                          <h3>{product.name}</h3>
-                          <p>{product.description}</p>
-                        </div>
-                      );
-                    })}
+              <Fragment>
+                {cart.products && cart.products.length > 0 ? (
+                  <div>
+                    <h2 className="d-block text-gray-dark">
+                      Order Number: {cart.cartId}
+                    </h2>
+                    {cart.products ? (
+                      <div
+                        id="orderHistory"
+                        className="my-3 p-3 bg-body rounded shadow-lg"
+                      >
+                        {cart.products.map((product, idx) => {
+                          return (
+                            <div
+                              key={'Orders Purchased:' + idx}
+                              className="pb-3 mb-0 small lh-sm border-bottom"
+                            >
+                              <h3>{product.name}</h3>
+                              <p>{product.description}</p>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    ) : null}
                   </div>
                 ) : null}
-              </div>
+              </Fragment>
             );
           })}
         </div>

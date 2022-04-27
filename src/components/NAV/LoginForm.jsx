@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { loginUser } from '../../axios-services/';
 import useAuth from '../hooks/useAuth';
-import { Modal } from 'react-bootstrap';
+import useCart from '../hooks/useCart';
 
 const LoginForm = ({
   setIsLogin,
