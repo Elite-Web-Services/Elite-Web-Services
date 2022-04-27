@@ -2,14 +2,17 @@ import React from "react";
 import useContact from "../hooks/useContact";
 import useAuth from "../hooks/useAuth";
 import ContactInfo from "./ContactInfo";
+import { getMe } from "../../axios-services";
 
 const ProfileContactInfo = () => {
   const { addContact } = useContact();
-  const { user } = useAuth();
+  const { user, setUser, token } = useAuth();
 
   const handleAddressStored = async (e) => {
     e.preventDefault();
     await addContact();
+    const response = await getMe(token);
+    setUser(response);
   };
 
   return (
