@@ -1,11 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import useProduct from '../hooks/useProduct';
 
 const ProductCard = ({ product }) => {
-  const { user } = useAuth();
   const { addProduct, setCart } = useCart();
   const { searchObj } = useProduct();
 

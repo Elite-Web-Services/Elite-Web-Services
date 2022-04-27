@@ -17,7 +17,7 @@ const ManageProducts = () => {
         <Link to="/createproduct">
           <button>Add New Product</button>
         </Link>
-        <Link to="/createcategory">
+        <Link to="/editcategories">
           <button>Edit Categories</button>
         </Link>
 
