@@ -13,7 +13,20 @@ module.exports = {
   getUserByEmail,
 };
 
-async function createUser({ username, password, email, isAdmin = false }) {
+async function createUser({
+  username,
+  password,
+  email,
+  isAdmin = false,
+  firstName,
+  lastName,
+  address,
+  address2,
+  city,
+  state,
+  zip,
+  country,
+}) {
   // CHANGE BCRYPT TO ASYNC SOMEHOW
   const hashedPW = bcrypt.hashSync(password, SALT);
   try {
@@ -21,12 +34,25 @@ async function createUser({ username, password, email, isAdmin = false }) {
       rows: [user],
     } = await client.query(
       `
-      INSERT INTO users(username, password, email, "isAdmin")
-      VALUES($1, $2, $3, $4)
+      INSERT INTO users(username, password, email, "isAdmin","firstName", "lastName", address,address2,city,state,zip, country)
+      VALUES($1, $2, $3, $4,$5,$6,$7,$8,$9,$10,$11, $12)
       ON CONFLICT (username) DO NOTHING
       RETURNING id, username,email, "isAdmin";
       `,
-      [username, hashedPW, email, isAdmin]
+      [
+        username,
+        hashedPW,
+        email,
+        isAdmin,
+        firstName,
+        lastName,
+        address,
+        address2,
+        city,
+        state,
+        zip,
+        country,
+      ]
     );
 
     const cart = await createCart({ userId: user.id, purchased: false });
@@ -36,23 +62,49 @@ async function createUser({ username, password, email, isAdmin = false }) {
   }
 }
 
-async function addContacts({ id, email, address, address2, city, state, zip }) {
+async function addContacts({
+  id,
+  firstName,
+  lastName,
+  email,
+  address,
+  address2,
+  city,
+  state,
+  zip,
+  country,
+}) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
       UPDATE users 
-      SET email = COALESCE($2, users.email),
+      SET 
+      "firstName" = COALESCE($8 ),
+      "lastName" = COALESCE($9),
+      email = COALESCE($2, users.email),
       address=COALESCE($3, users.address),
       address2=COALESCE($4, users.address2),
       city=COALESCE($5, users.city),
       state=COALESCE($6, users.state),
-      zip=COALESCE($7, users.zip)
+      zip=COALESCE($7, users.zip),
+      country=COALESCE($10, users.country)
       WHERE users.id=$1
       RETURNING *;
       `,
-      [id, email, address, address2, city, state, zip]
+      [
+        id,
+        email,
+        address,
+        address2,
+        city,
+        state,
+        zip,
+        firstName,
+        lastName,
+        country,
+      ]
     );
     console.log("*****DB USERS******", user);
     return user;

@@ -334,25 +334,31 @@ export const purchaseCart = async (token, cartId) => {
 
 export const addContact = async (
   token,
+  firstName,
+  lastName,
   email,
   userId,
   address,
   address2,
   city,
   state,
-  zip
+  zip,
+  country
 ) => {
   try {
     const response = await axios.patch(
       `api/users/contact/${userId}`,
       {
         userId,
+        firstName,
+        lastName,
         email,
         address,
         address2,
         city,
         state,
         zip,
+        country,
       },
       {
         headers: {
@@ -361,7 +367,6 @@ export const addContact = async (
         },
       }
     );
-    console.log("response!!!!!!!!", response.data);
     return response.data;
   } catch (error) {
     return error;
