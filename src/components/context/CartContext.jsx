@@ -44,6 +44,7 @@ const CartProvider = ({ children }) => {
           token
         );
         // setCart(newCart);
+        console.log('Context newCart: ', newCart);
         return newCart;
       }
       // else add new product
@@ -54,6 +55,7 @@ const CartProvider = ({ children }) => {
         addQuantity
       );
       // setCart(newCart);
+      console.log('Context newCart: ', newCart);
       return newCart;
     }
 
@@ -70,6 +72,7 @@ const CartProvider = ({ children }) => {
         );
         localStorage.setItem('cart', JSON.stringify(newCart));
         // setCart(newCart);
+        console.log('Context newCart: ', newCart);
         return newCart;
       }
       // else add new product
@@ -83,13 +86,14 @@ const CartProvider = ({ children }) => {
         quantity: 1,
       });
       localStorage.setItem('cart', JSON.stringify(cart));
+      console.log('Context newCart: ', cart);
       // setCart(cart);
       return cart;
     }
 
     // WE ARE GUEST BUT DON'T HAVE A CART
     else {
-      let cart = {
+      let newCart = {
         products: [
           {
             id: product.id,
@@ -103,9 +107,11 @@ const CartProvider = ({ children }) => {
         ],
         purchased: false,
       };
-      localStorage.setItem('cart', JSON.stringify(cart));
+      localStorage.setItem('cart', JSON.stringify(newCart));
+      // setCart(cart);
+      console.log('Context newCart: ', newCart);
+      return newCart;
     }
-    setCart(cart);
   };
 
   const updateCartState = async () => {
