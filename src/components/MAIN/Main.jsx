@@ -10,6 +10,8 @@ import CreateProduct from "./CreateProduct";
 import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
+import ManageProducts from "./ManageProducts";
+import CreateType from "./CreateType";
 import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
 
 const Main = () => {
@@ -25,7 +27,13 @@ const Main = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
+        {user.isAdmin ? 
+        <>
+        <Route path="/manageproducts" element={<ManageProducts />} />
         <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/createcategory" element={<CreateType />} />
+        </>
+        : null}
         <Route path="/" element={<Products />} />
 
         {Array.isArray(products)

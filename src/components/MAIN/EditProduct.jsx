@@ -46,14 +46,13 @@ const EditProduct = ({ product }) => {
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
-      navigate.goBack()
-      // ^^^TESTING THIS OUT^^^
+      navigate("/manageproducts");
     }
   };
 
   return (
     <>
-      <Link to="/products">
+      <Link to="/manageproducts">
         <button className="btn btn-sm btn-outline-secondary">Back</button>
       </Link>
       <div className="card mb-4 box-shadow">
