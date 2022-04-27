@@ -1,8 +1,8 @@
-import React from "react";
-import useContact from "../hooks/useContact";
-import useAuth from "../hooks/useAuth";
-import { USAStates } from "./USAStates";
-import { Countries } from "./Countries";
+import React from 'react';
+import useContact from '../hooks/useContact';
+import useAuth from '../hooks/useAuth';
+import { USAStates } from './USAStates';
+import { Countries } from './Countries';
 
 const ContactInfo = () => {
   const {
@@ -93,7 +93,7 @@ const ContactInfo = () => {
           <input
             type="email"
             className="form-control"
-            placeholder={`${user.username || "you"}@example.com`}
+            placeholder={`${user.username || 'you'}@example.com`}
             value={newEmail}
             onChange={handleEmail}
           />

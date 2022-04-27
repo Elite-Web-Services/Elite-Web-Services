@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import { addContact as editContact } from "../../axios-services";
+import React, { useEffect, useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import { addContact as editContact } from '../../axios-services';
 
 export const ContactContext = React.createContext();
 
@@ -18,8 +18,20 @@ const ContactProvider = ({ children }) => {
   const [newZip, setNewZip] = useState(user.zip);
   const [country, setCountry] = useState(user.country);
 
+  useEffect(() => {
+    setFirstName(user.firstName);
+    setLastName(user.lastName);
+    setNewEmail(user.email);
+    setNewAddress(user.address);
+    setNewAddress2(user.address2);
+    setNewCity(user.city);
+    setNewState(user.state);
+    setNewZip(user.zip);
+    setCountry(user.country);
+  }, [user]);
+
   const addContact = async () => {
-    console.log("ZIPZIPZIZPIZPI", newZip);
+    console.log('ZIPZIPZIZPIZPI', newZip);
     const newContactInfo = await editContact(
       token,
       firstName,
