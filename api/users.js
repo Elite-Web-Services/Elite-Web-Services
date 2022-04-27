@@ -4,6 +4,7 @@ const {
   createUser,
   getAllUsers,
   addContacts,
+  getUserByEmail,
 } = require("../db/models/user");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -50,26 +51,37 @@ usersRouter.post("/login", async (req, res, next) => {
 });
 
 usersRouter.post("/register", async (req, res, next) => {
-  const { username, password } = req.body;
+  const { username, password, email } = req.body;
 
   try {
     const _user = await getUserByUsername(username);
+
     if (_user) {
       res.status(409);
       next({
         name: "UserAlreadyExistsError",
         message: "Username is already taken",
       });
+    }
+    const _email = await getUserByEmail(email);
+    if (_email) {
+      res.status(409);
+      next({
+        name: "EmailAlreadyInUseError",
+        message: "Email is already registered",
+      });
     } else {
       const user = await createUser({
         username,
         password,
+        email,
       });
       console.log(user);
       const token = jwt.sign(
         {
           id: user.id,
           username,
+          email,
           isAdmin: user.isAdmin,
         },
         process.env.JWT_SECRET,
@@ -99,7 +111,7 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
 
 usersRouter.patch("/contact/:userId", async (req, res, next) => {
   const { userId } = req.params;
-  const { email, address, address2, city, zip } = req.body;
+  const { email, address, address2, city, state, zip } = req.body;
   try {
     const updateContacts = await addContacts({
       id: +userId,
@@ -107,6 +119,7 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
       address,
       address2,
       city,
+      state,
       zip: +zip,
     });
 

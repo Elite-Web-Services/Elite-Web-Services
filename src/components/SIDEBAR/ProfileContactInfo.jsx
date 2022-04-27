@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import useContact from "../hooks/useContact";
+import useAuth from "../hooks/useAuth";
+import { USAStates } from "./USAStates";
 
 const ProfileContactInfo = () => {
   const {
@@ -19,6 +21,7 @@ const ProfileContactInfo = () => {
     newZip,
     setNewZip,
   } = useContact();
+  const { user } = useAuth();
 
   const handleAddressStored = async (e) => {
     e.preventDefault();
@@ -37,6 +40,9 @@ const ProfileContactInfo = () => {
   const handleCity = (e) => {
     setNewCity(e.target.value);
   };
+  const handleState = (e) => {
+    setNewState(e.target.value);
+  };
   const handleZip = (e) => {
     setNewZip(e.target.value);
   };
@@ -45,7 +51,19 @@ const ProfileContactInfo = () => {
     <div>
       <div>
         <h1> Update Email and Address below</h1>
+
+        <div className="Current-contact-info">
+          <h4>CURRENT CONTACT INFORMATION</h4>
+          <p>Username: {user.username}</p>
+          <p>Email: {user.email}</p>
+          <p>Address: {user.address}</p>
+          <p>Address2: {user.address2}</p>
+          <p>City: {user.city}</p>
+          <p>State: {user.state}</p>
+          <p>Zip: {user.zip}</p>
+        </div>
       </div>
+
       <form className="row g-3" onSubmit={handleAddressStored}>
         <div className="col-md-7">
           <label htmlFor="inputEmail4" className="form-label">
@@ -63,7 +81,7 @@ const ProfileContactInfo = () => {
           <label htmlFor="inputPassword4" className="form-label">
             Password
           </label>
-          <input type="password" className="form-control" id="inputPassword4" />
+          <input type="password" className="form-contro" id="inputPassword4" />
         </div> */}
         <div className="col-7">
           <label htmlFor="inputAddress" className="form-label">
@@ -103,14 +121,21 @@ const ProfileContactInfo = () => {
             onChange={handleCity}
           />
         </div>
-        <div className="col-md-4">
+        <div className="col-md-3">
           <label htmlFor="inputState" className="form-label">
             State
           </label>
 
-          <select id="inputState" className="form-select">
+          <select
+            id="inputState"
+            className="form-select"
+            value={newState}
+            onChange={handleState}
+          >
             <option selected>Choose...</option>
-            <option>...</option>
+            {USAStates.map((state) => {
+              return <option key={state.abbreviation}>{state.name}</option>;
+            })}
           </select>
         </div>
         <div className="col-md-2">

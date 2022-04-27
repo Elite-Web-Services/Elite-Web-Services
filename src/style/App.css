@@ -71,3 +71,20 @@
   margin: 0.5em;
   border: 5px solid red;
 }
+
+.Current-contact-info {
+  border: 0.25em solid black;
+  margin-left: 2em;
+  max-width: 30rem;
+  margin-bottom: 5em;
+}
+
+.form-select-contacts {
+  margin-left: 2rem;
+}
+.form-label-contacts {
+  margin-left: 2rem;
+}
+.form-input-contacts {
+  margin-left: 2rem;
+}

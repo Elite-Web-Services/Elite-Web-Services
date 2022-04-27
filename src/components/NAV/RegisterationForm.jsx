@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { registerUser } from '../../axios-services';
+import React, { useEffect } from "react";
+import { registerUser } from "../../axios-services";
 // import { useNavigate } from "react-router-dom";
-import useAuth from '../hooks/useAuth';
+import useAuth from "../hooks/useAuth";
+import useContact from "../hooks/useContact";
 
 const RegisterationForm = ({
   setIsLogin,
@@ -16,6 +17,7 @@ const RegisterationForm = ({
   setErrorMessage,
 }) => {
   const { user, setToken } = useAuth();
+  const { newEmail, setNewEmail } = useContact();
 
   useEffect(() => {
     setIsError(false);
@@ -24,10 +26,10 @@ const RegisterationForm = ({
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      const response = await registerUser(username, password);
+      const response = await registerUser(username, password, newEmail);
       setIsError(false);
-      console.log('REGISTER USER RESPONSE: ', response);
-      localStorage.setItem('token', response.token);
+      console.log("REGISTER USER RESPONSE: ", response);
+      localStorage.setItem("token", response.token);
       setToken(response.token);
       setIsLogin(false);
     } catch (error) {
@@ -42,6 +44,9 @@ const RegisterationForm = ({
 
   const handlePassword = (e) => {
     setPassword(e.target.value);
+  };
+  const handleEmail = (e) => {
+    setNewEmail(e.target.value);
   };
 
   return (
@@ -79,6 +84,16 @@ const RegisterationForm = ({
             ></input>
             <label htmlFor="password">Password: </label>
           </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
+              type="text"
+              value={newEmail}
+              onChange={handleEmail}
+              required
+            />
+            <label htmlFor="email">Email: </label>
+          </div>
           <button
             className="w-100 mb-2 btn btn-lg rounded-4 btn-primary"
             type="submit"
@@ -95,12 +110,12 @@ const RegisterationForm = ({
           Go back to
           <span
             className="loginRegisterRedirect"
-            style={{ color: 'blue' }}
+            style={{ color: "blue" }}
             onClick={() => {
               setIsRegister(false);
             }}
           >
-            {' login.'}
+            {" login."}
           </span>
         </small>
       </div>
