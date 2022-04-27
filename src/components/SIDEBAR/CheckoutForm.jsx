@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { decrementQuantity, incrementQuantity } from '../context/helpers';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import useContact from '../hooks/useContact';
+import React, { useState } from "react";
+import { decrementQuantity, incrementQuantity } from "../context/helpers";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import useContact from "../hooks/useContact";
 
 const CheckoutForm = ({ total, setIsSubmitPayment }) => {
   const { user, token } = useAuth();
@@ -30,7 +30,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
         <h4 className="d-flex justify-content-between align-items-center mb-3">
           <span className="text-primary">Your cart</span>
           <span className="badge bg-primary rounded-pill">
-            {cart.products ? cart.products.length : '0'}
+            {cart.products ? cart.products.length : "0"}
           </span>
         </h4>
         <ul className="list-group mb-3">
@@ -45,7 +45,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                       <h6 className="my-0">{product.name}</h6>
                       <small
                         className="text-muted"
-                        style={{ textOverflow: 'ellipsis' }}
+                        style={{ textOverflow: "ellipsis" }}
                       >
                         {product.description}
                       </small>
@@ -108,7 +108,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
               <input
                 type="email"
                 className="form-control"
-                placeholder={`${user.username || 'you'}@example.com`}
+                placeholder={`${user.username || "you"}@example.com`}
               />
             </div>
 

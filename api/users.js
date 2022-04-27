@@ -111,7 +111,7 @@ usersRouter.get("/all", requireUser, async (req, res, next) => {
 
 usersRouter.patch("/contact/:userId", async (req, res, next) => {
   const { userId } = req.params;
-  const { email, address, address2, city, zip } = req.body;
+  const { email, address, address2, city, state, zip } = req.body;
   try {
     const updateContacts = await addContacts({
       id: +userId,
@@ -119,6 +119,7 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
       address,
       address2,
       city,
+      state,
       zip: +zip,
     });
 

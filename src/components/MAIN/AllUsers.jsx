@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import { getAllUsers } from '../../axios-services';
-import useAuth from '../hooks/useAuth';
+import React, { useEffect, useState } from "react";
+import { getAllUsers } from "../../axios-services";
+import useAuth from "../hooks/useAuth";
 
 const AllUsers = () => {
   const [isError, setIsError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState("");
   const { user, token, allUsers, setAllUsers } = useAuth();
 
   useEffect(() => {
     if (!user.isAdmin) {
       setIsError(true);
-      setErrorMessage('YOU ARE NOT AUTHORIZED');
+      setErrorMessage("YOU ARE NOT AUTHORIZED");
     } else {
       setIsError(false);
     }
@@ -18,7 +18,7 @@ const AllUsers = () => {
 
   return (
     <div className="usersContainer">
-      {isError ? <h1 style={{ color: 'red' }}>{errorMessage}</h1> : null}
+      {isError ? <h1 style={{ color: "red" }}>{errorMessage}</h1> : null}
       {allUsers ? (
         <div className="list-group mx-0">
           {allUsers.map((user, i) => {
