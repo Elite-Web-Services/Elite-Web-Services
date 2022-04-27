@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import { Link } from "react-router-dom";
+import DeleteType from "./DeleteType";
+import UpdateType from "./UpdateType";
 import {
   createType,
   getAllTypes,
   updateType,
-  deleteType,
 } from "../../axios-services";
 
 const CreateType = () => {
@@ -16,47 +17,11 @@ const CreateType = () => {
   const [createState, setCreateState] = useState({
     name: "",
   });
-  const [updateState, setUpdateState] = useState({
-    id: 1,
-    name: "",
-  });
-
-  const [deleteState, setDeleteState] = useState({
-    id: 1,
-  });
 
   const [createError, setCreateError] = useState("");
 
   const handleCreateType = async () => {
     const result = await createType(createState.name, token);
-
-    if (result.name === "error") {
-      console.log("error", result);
-      setCreateError(result.message);
-    } else {
-      setCreateError("");
-
-      const newTypes = await getAllTypes();
-      setTypes(newTypes);
-    }
-  };
-
-  const handleUpdateType = async () => {
-    const result = await updateType(updateState.id, updateState.name, token);
-
-    if (result.name === "error") {
-      console.log("error", result);
-      setCreateError(result.message);
-    } else {
-      setCreateError("");
-
-      const newTypes = await getAllTypes();
-      setTypes(newTypes);
-    }
-  };
-
-  const handleDeleteType = async () => {
-    const result = await deleteType(deleteState.id, token);
 
     if (result.name === "error") {
       console.log("error", result);
@@ -95,71 +60,10 @@ const CreateType = () => {
                 required
               />
               <button type="submit">Create Category</button>
+
             </form>
-            {/* UPDATE HERE */}
-            <form
-              className="needs-validation"
-              onSubmit={async (event) => {
-                event.preventDefault();
-                handleUpdateType();
-              }}
-            >
-              {createError ? <h3>Unable to update:{createError}</h3> : null}
-              <select
-                name="category"
-                id="category-select"
-                value={updateState.id}
-                onChange={(e) =>
-                  setUpdateState({
-                    ...updateState,
-                    id: e.target.value,
-                  })
-                }
-                /* this should update the value of the type */
-              >
-                {types.map((type) => {
-                  return (
-                    <option key={"typeList:" + type.id} value={type.id}>
-                      {type.name}
-                    </option>
-                  );
-                })}
-                {/* map over the types, return an <option /> */}
-              </select>
-              <input
-                type="text"
-                placeholder="Name"
-                value={updateState.name}
-                onChange={(event) =>
-                  setUpdateState({ ...updateState, name: event.target.value })
-                }
-              />
-              <button type="submit">Update Category</button>
-            </form>
-            {/* DELETE HERE */}
-            <form
-              onSubmit={async (event) => {
-                event.preventDefault();
-                handleDeleteType();
-              }}
-            >
-              {createError ? <h3>Unable to delete:{createError}</h3> : null}
-              <select
-                name="category"
-                id="category-select"
-                value={deleteState.id}
-                onChange={(e) => setDeleteState({ id: e.target.value })}
-              >
-                {types.map((type) => {
-                  return (
-                    <option key={"typeList:" + type.id} value={type.id}>
-                      {type.name}
-                    </option>
-                  );
-                })}
-              </select>
-              <button type="submit">Delete Category</button>
-            </form>
+            <UpdateType />
+            <DeleteType />
           </div>
         </div>
       </div>
