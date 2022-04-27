@@ -11,6 +11,8 @@ module.exports = {
   deleteProduct,
   createType,
   getAllTypes,
+  updateType,
+  deleteType,
   getOrderHistory,
 };
 
@@ -134,7 +136,7 @@ async function deleteProduct({ productId }) {
   }
 }
 
-async function createType({ name }) {
+async function createType(name) {
   try {
     const {
       rows: [type],
@@ -162,6 +164,43 @@ async function getAllTypes() {
         `);
 
     return rows;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateType({id, name}) {
+  try {
+    const {
+      rows: [type],
+    } = await client.query(
+      `
+          UPDATE types
+          SET name=$2
+          WHERE id=$1
+          RETURNING *;
+        `,[id, name]
+    );
+
+    return type;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteType({ typeId }) {
+  try {
+    const {
+      rows: [type],
+    } = await client.query(
+      `
+    DELETE
+    FROM types
+    WHERE id=$1;
+    `,
+      [typeId]
+    );
+    return type;
   } catch (error) {
     throw error;
   }

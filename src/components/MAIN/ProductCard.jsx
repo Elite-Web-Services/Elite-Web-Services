@@ -1,22 +1,17 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
-import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
+import useProduct from "../hooks/useProduct";
 
-const ProductCard = ({ product, productType }) => {
+const ProductCard = ({ product }) => {
 
   const { addProduct } = useCart();
-  const { user } = useAuth();
+  const { searchObj } = useProduct();
 
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
-        {user.isAdmin ? (
-          <h6 className="card-text">
-            {product.isPublic ? 'Public' : 'Private'}
-          </h6>
-        ) : null}
         <img
           className="card-img-top"
           style={{
@@ -27,7 +22,7 @@ const ProductCard = ({ product, productType }) => {
           alt="Thumbnail [100%x225]"
           src={product.imgURL}
         />
-        {!productType ? (
+        {!searchObj.type ? (
           <h6 className="card-text">Category: {product.typeName}</h6>
         ) : null}
         <h2 className="card-text">{product.name}</h2>
@@ -47,13 +42,6 @@ const ProductCard = ({ product, productType }) => {
             >
               Add To Cart
             </button>
-            {user.isAdmin ? (
-              <Link to={`/editproduct=${product.id}`}>
-                <button className="btn btn-sm btn-outline-secondary">
-                  Edit
-                </button>
-              </Link>
-            ) : null}
           </div>
           <small className="text-muted">${product.price}/hr</small>
         </div>
