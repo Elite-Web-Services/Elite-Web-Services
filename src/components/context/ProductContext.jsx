@@ -47,7 +47,7 @@ const ProductProvider = ({ children }) => {
       };
       displayPublicProducts();
     }
-  }, [user, token]);
+  }, [user]);
 
   // GET ALL TYPES
   useEffect(() => {
@@ -70,11 +70,9 @@ const ProductProvider = ({ children }) => {
   // FILTER POSTS
   useEffect(() => {
     setFilterProducts(products);
-    console.log(products);
-    console.log(filterProducts);
 
-    // --- Proof of concept ---
     const searchFilter = [];
+    if (products.length) {
     // lowercase the query
     const searchQuery = searchObj.query.toLowerCase();
     // lowercase function
@@ -95,6 +93,7 @@ const ProductProvider = ({ children }) => {
       }
     });
     setFilterProducts(searchFilter);
+  }
   }, [products, searchObj]);
 
   return (
