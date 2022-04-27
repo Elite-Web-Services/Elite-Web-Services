@@ -1,15 +1,15 @@
-const productsRouter = require("express").Router();
-const { Product } = require("../db/models");
-const { Cart } = require("../db/models");
-const { requireAdmin } = require("./utils");
+const productsRouter = require('express').Router();
+const { Product } = require('../db/models');
+const { Cart } = require('../db/models');
+const { requireAdmin } = require('./utils');
 
-productsRouter.use("/", (req, res, next) => {
-  console.log("A request is being made to /products");
+productsRouter.use('/', (req, res, next) => {
+  console.log('A request is being made to /products');
 
   next();
 });
 
-productsRouter.get("/all", requireAdmin, async (req, res, next) => {
+productsRouter.get('/all', requireAdmin, async (req, res, next) => {
   try {
     const allProducts = await Product.getAllProducts();
 
@@ -19,7 +19,7 @@ productsRouter.get("/all", requireAdmin, async (req, res, next) => {
   }
 });
 
-productsRouter.get("/", async (req, res, next) => {
+productsRouter.get('/', async (req, res, next) => {
   try {
     const publicProducts = await Product.getPublicProducts();
 
@@ -29,7 +29,7 @@ productsRouter.get("/", async (req, res, next) => {
   }
 });
 
-productsRouter.post("/", requireAdmin, async (req, res, next) => {
+productsRouter.post('/', requireAdmin, async (req, res, next) => {
   // const creatorId = req.user.id;
   const { typeId, name, description, price, isPublic } = req.body;
 
@@ -51,7 +51,7 @@ productsRouter.post("/", requireAdmin, async (req, res, next) => {
   }
 });
 
-productsRouter.patch("/:productId", requireAdmin, async (req, res, next) => {
+productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
   // const creatorId = req.user.id;
   const { typeId, name, description, price, isPublic } = req.body;
@@ -84,7 +84,7 @@ productsRouter.patch("/:productId", requireAdmin, async (req, res, next) => {
   }
 });
 
-productsRouter.delete("/:productId", requireAdmin, async (req, res, next) => {
+productsRouter.delete('/:productId', requireAdmin, async (req, res, next) => {
   try {
     const deletedProduct = await Product.deleteProduct(req.params);
 
@@ -94,7 +94,7 @@ productsRouter.delete("/:productId", requireAdmin, async (req, res, next) => {
   }
 });
 
-productsRouter.get("/types", async (req, res, next) => {
+productsRouter.get('/types', async (req, res, next) => {
   try {
     const types = await Product.getAllTypes();
 
@@ -104,12 +104,26 @@ productsRouter.get("/types", async (req, res, next) => {
   }
 });
 
-productsRouter.get("/orderHistory", async (req, res, next) => {
-  console.log("inside Products API orders", req.user.id);
+productsRouter.get('/orderHistory', async (req, res, next) => {
+  console.log('inside Products API orders', req.user.id);
   try {
     const history = await Product.getOrderHistory(req.user.id);
-
     res.send(history);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+productsRouter.get('/orderHistory/:userId', async (req, res, next) => {
+  const { userId } = req.params;
+  try {
+    if (req.user.isAdmin) {
+      const userHistory = await Product.getOrderHistory(userId);
+      res.send(userHistory);
+    } else {
+      res.status(409);
+      next({ name: 'unauthorized', message: 'this requires admin access' });
+    }
   } catch ({ name, message }) {
     next({ name, message });
   }
