@@ -1,7 +1,6 @@
 import React from "react";
 import useContact from "../hooks/useContact";
 import useAuth from "../hooks/useAuth";
-import { USAStates } from "./USAStates";
 import ContactInfo from "./ContactInfo";
 
 const ProfileContactInfo = () => {
@@ -16,7 +15,7 @@ const ProfileContactInfo = () => {
   return (
     <div>
       <div>
-        <h1> Update Email and Address below</h1>
+        <h1> Update Profile below</h1>
 
         <div className="Current-contact-info">
           <h4>CURRENT CONTACT INFORMATION</h4>

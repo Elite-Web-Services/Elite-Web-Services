@@ -37,7 +37,7 @@ async function createUser({
       INSERT INTO users(username, password, email, "isAdmin","firstName", "lastName", address,address2,city,state,zip, country)
       VALUES($1, $2, $3, $4,$5,$6,$7,$8,$9,$10,$11, $12)
       ON CONFLICT (username) DO NOTHING
-      RETURNING id, username,email, "isAdmin";
+      RETURNING id, username,email, "isAdmin","firstName", "lastName", address, address2, city, state, zip, country ;
       `,
       [
         username,
@@ -74,6 +74,7 @@ async function addContacts({
   zip,
   country,
 }) {
+  console.log("ZIPZIP", zip);
   try {
     const {
       rows: [user],
@@ -81,8 +82,8 @@ async function addContacts({
       `
       UPDATE users 
       SET 
-      "firstName" = COALESCE($8 ),
-      "lastName" = COALESCE($9),
+      "firstName" = COALESCE($8, users."firstName" ),
+      "lastName" = COALESCE($9, users."lastName"),
       email = COALESCE($2, users.email),
       address=COALESCE($3, users.address),
       address2=COALESCE($4, users.address2),
@@ -106,7 +107,6 @@ async function addContacts({
         country,
       ]
     );
-    console.log("*****DB USERS******", user);
     return user;
   } catch (error) {
     console.error("error in addContacts in db");

@@ -19,6 +19,7 @@ const ContactProvider = ({ children }) => {
   const [country, setCountry] = useState(user.country);
 
   const addContact = async () => {
+    console.log("ZIPZIPZIZPIZPI", newZip);
     const newContactInfo = await editContact(
       token,
       firstName,

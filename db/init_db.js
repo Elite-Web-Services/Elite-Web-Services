@@ -38,7 +38,7 @@ async function buildTables() {
       address2 varchar(255),
       city varchar(255),
       state varchar(255),
-      zip varchar(255),
+      zip integer,
       country varchar(255)
     );
     CREATE TABLE types (

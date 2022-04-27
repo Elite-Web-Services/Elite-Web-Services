@@ -13,6 +13,10 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (clicked) {
+      await addContact();
+    }
+    console.log("ADDCONTACT WHEN CLICKED", clicked);
     setIsSubmitPayment(true);
   };
 
@@ -84,7 +88,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
             <input
               type="checkbox"
               className="form-check-input"
-              onSubmit={(e) => {
+              onChange={(e) => {
                 setClicked(true);
               }}
             />
