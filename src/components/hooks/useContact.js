@@ -5,6 +5,10 @@ const useContact = () => {
   const {
     contact,
     setContact,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     newEmail,
     setNewEmail,
     newAddress,
@@ -18,11 +22,17 @@ const useContact = () => {
     newZip,
     setNewZip,
     addContact,
+    country,
+    setCountry,
   } = useContext(ContactContext);
 
   return {
     contact,
     setContact,
+    firstName,
+    setFirstName,
+    lastName,
+    setLastName,
     newEmail,
     setNewEmail,
     newAddress,
@@ -36,6 +46,8 @@ const useContact = () => {
     newZip,
     setNewZip,
     addContact,
+    country,
+    setCountry,
   };
 };
 

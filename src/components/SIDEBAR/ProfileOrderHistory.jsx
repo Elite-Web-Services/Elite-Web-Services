@@ -19,7 +19,7 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       {orderHistory.length > 0 ? (
         <div>
           {orderHistory.map((cart, idx) => {

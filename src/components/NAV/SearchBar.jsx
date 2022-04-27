@@ -1,18 +1,20 @@
 import React from "react";
 import useProduct from "../hooks/useProduct";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 const SearchBar = () => {
   const navigate = useNavigate();
-  const { searchObj, setSearchObj, searchTerm, setSearchTerm } =
-    useProduct();
+  const location = useLocation();
+  const { searchObj, setSearchObj, searchTerm, setSearchTerm } = useProduct();
 
   return (
     <form
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, query: searchTerm });
-        navigate(`/products?q=${searchTerm}&type=${searchObj.type}`);
+        location.pathname === "/manageproducts"
+          ? navigate(`/manageproducts?q=${searchTerm}&type=${searchObj.type}`)
+          : navigate(`/products?q=${searchTerm}&type=${searchObj.type}`);
       }}
     >
       <input

@@ -218,6 +218,30 @@ export const deleteProduct = async (productId, token) => {
   }
 };
 
+export const createType = async (
+  name,
+  token,
+) => {
+  try {
+    const response = await axios.post(
+      `api/products/types`,
+      {
+        name,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getAllTypes = async () => {
   try {
     const response = await axios.get(`api/products/types`, {
@@ -226,6 +250,45 @@ export const getAllTypes = async () => {
       },
     });
 
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const updateType = async (
+  typeId,
+  name,
+  token,
+) => {
+  try {
+    const response = await axios.patch(
+      `api/products/types/${typeId}`,
+      {
+        name,
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+
+    return response.data;
+  } catch (error) {
+    return error;
+  }
+};
+
+export const deleteType = async (typeId, token) => {
+  try {
+    const response = await axios.delete(`api/products/types/${typeId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
     return response.data;
   } catch (error) {
     return error;
@@ -345,25 +408,31 @@ export const purchaseCart = async (token, cartId) => {
 
 export const addContact = async (
   token,
+  firstName,
+  lastName,
   email,
   userId,
   address,
   address2,
   city,
   state,
-  zip
+  zip,
+  country
 ) => {
   try {
     const response = await axios.patch(
       `api/users/contact/${userId}`,
       {
         userId,
+        firstName,
+        lastName,
         email,
         address,
         address2,
         city,
         state,
         zip,
+        country,
       },
       {
         headers: {
@@ -372,6 +441,7 @@ export const addContact = async (
         },
       }
     );
+
     console.log('response!!!!!!!!', response.data);
     return response.data;
   } catch (error) {

@@ -94,7 +94,20 @@ productsRouter.delete('/:productId', requireAdmin, async (req, res, next) => {
   }
 });
 
-productsRouter.get('/types', async (req, res, next) => {
+
+productsRouter.post("/types", requireAdmin, async (req, res, next) => {
+  const { name } = req.body;
+
+  try {
+    const type = await Product.createType(name);
+
+    res.send(type);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+productsRouter.get("/types", async (req, res, next) => {
   try {
     const types = await Product.getAllTypes();
 
@@ -104,8 +117,37 @@ productsRouter.get('/types', async (req, res, next) => {
   }
 });
 
-productsRouter.get('/orderHistory', async (req, res, next) => {
-  console.log('inside Products API orders', req.user.id);
+
+productsRouter.patch("/types/:typeId", requireAdmin, async (req, res, next) => {
+  const { typeId } = req.params;
+  const { name } = req.body;
+
+  const updateFields = {
+    id: typeId,
+    name,
+  };
+
+  try {
+    const updatedType = await Product.updateType(updateFields);
+
+    res.send(updatedType);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+productsRouter.delete("/types/:typeId", requireAdmin, async (req, res, next) => {
+  try {
+    const deletedType = await Product.deleteType(req.params);
+
+    res.send(deletedType);
+  } catch ({ name, message }) {
+    next({ name, message });
+  }
+});
+
+productsRouter.get("/orderHistory", async (req, res, next) => {
+  console.log("inside Products API orders", req.user.id);
   try {
     const history = await Product.getOrderHistory(req.user.id);
     res.send(history);

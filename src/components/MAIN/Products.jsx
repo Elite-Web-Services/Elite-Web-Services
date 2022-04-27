@@ -15,12 +15,6 @@ const Products = () => {
       <TypeButtons />
       <PriceInput />
 
-      {user.isAdmin ? (
-        <Link to="/createproduct">
-          <button>Add New Product</button>
-        </Link>
-      ) : null}
-
       {Array.isArray(filterProducts) ? (
         <div id="productList" className="album py-5 bg-light">
           <div className="container">
