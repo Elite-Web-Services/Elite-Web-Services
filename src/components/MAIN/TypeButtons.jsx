@@ -6,7 +6,7 @@ const TypeButtons = () => {
     useProduct();
 
   return (
-    <div>
+    <div style={{display: "flex",  justifyContent: "space-evenly"}}>
       {searchObj.type ? (
         <button
           onClick={() => {
@@ -21,10 +21,10 @@ const TypeButtons = () => {
 
       {/* Map out the type buttons */}
       {types ? (
-        <div id="typeList">
+        <div id="typeList" style={{justifyContent: "space-evenly"}}>
           {types.map((type, index) => {
             return (
-              <button
+              <button style={{margin: "2rem"}}
                 key={`typeList: ${index}`}
                 onClick={() => {
                   setSearchObj({ ...searchObj, type: type.name });
