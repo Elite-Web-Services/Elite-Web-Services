@@ -9,10 +9,6 @@ const Sidebar = () => {
   const { cart, setCart } = useCart();
   const [toggleAdminRender, setToggleAdminRender] = useState(false);
   const [toggleCartRender, setToggleCartRender] = useState(false);
-  const [toggleProfileOH, setToggleProfileOH] = useState(false);
-  const [toggleProfileContact, setToggleProfileContact] = useState(false);
-  const [toggleCart, setToggleCart] = useState(false);
-  const [toggleCheckout, setToggleCheckout] = useState(false);
 
   const handleIncrementClick = async (product) => {
     const newCart = await incrementQuantity(cart, product.id, 1, user, token);
@@ -58,13 +54,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to="/"
-                      onClick={() => {
-                        setToggleCheckout(true);
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/" style={{ textDecoration: "none" }}>
                       Manage Products{" "}
                     </Link>
                   </li>
@@ -87,24 +77,12 @@ const Sidebar = () => {
               <div className="collapse" id="profile-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <Link
-                      to="/orderHistory"
-                      onClick={() => {
-                        setToggleProfileOH(true);
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/orderHistory" style={{ textDecoration: "none" }}>
                       Order History{" "}
                     </Link>
                   </li>
                   <li>
-                    <Link
-                      to="/contactinfo"
-                      onClick={() => {
-                        setToggleProfileContact(true);
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/contactinfo" style={{ textDecoration: "none" }}>
                       Contact Information{" "}
                     </Link>
                   </li>
@@ -128,24 +106,12 @@ const Sidebar = () => {
             <div className="collapse" id="cart-sidebar-collapse">
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
-                  <Link
-                    to="/checkout"
-                    onClick={() => {
-                      setToggleCheckout(true);
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to="/checkout" style={{ textDecoration: "none" }}>
                     Checkout{" "}
                   </Link>
                 </li>
                 <li>
-                  <Link
-                    to="/cart"
-                    onClick={() => {
-                      setToggleCart(true);
-                    }}
-                    style={{ textDecoration: "none" }}
-                  >
+                  <Link to="/cart" style={{ textDecoration: "none" }}>
                     Go to Cart{" "}
                   </Link>
                 </li>
