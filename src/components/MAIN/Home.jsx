@@ -24,7 +24,7 @@ const Home = () => {
           <div className="text-center">
             <button
               onClick={() => navigate('/products')}
-              className="btn btn-primary btn-lg px-4 gap-3"
+              className="btn btn-success btn-lg px-4 gap-3"
             >
               View Offerings
             </button>

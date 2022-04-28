@@ -29,20 +29,20 @@ const CheckoutSubmitPayment = ({
 
   const handleReject = () => {
     setIsError(true);
-    setErrorMessage('Oops! You need to select the "Yes, Purchase!" button.');
+    setErrorMessage('Oops! You need to select the "Confirm purchase" button.');
   };
 
   return (
     <Modal show={isSubmitPayment} onHide={handleClose}>
       <div className="modal-body p-4 text-center">
         <h5 className="mb-0">
-          {purchased ? 'Good Choice!' : 'Submit payment?'}
+          {purchased ? 'Payment Submitted' : 'Submit payment?'}
         </h5>
         {purchased ? (
           <p>
             {`Order Confirmation number: 978664-${cart.cartId}`}
             <hr />
-            {'We will be in touch :)'}
+            {'Look for a confirmation email.'}
           </p>
         ) : (
           <p className="mb-0">{`You are purchasing an elite package with ${cart.products.length} items with a cost of $${total}/hr.`}</p>
@@ -59,13 +59,13 @@ const CheckoutSubmitPayment = ({
             onClick={handlePurchase}
             className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-right"
           >
-            <strong>Yes, purchase!</strong>
+            <strong>Confirm purchase</strong>
           </button>
           <button
             onClick={handleReject}
             className="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0"
           >
-            Changed my mind.
+            Cancel
           </button>
         </footer>
       )}
