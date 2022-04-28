@@ -123,11 +123,7 @@ async function createInitialTypes() {
   try {
     console.log("Starting to create initial types");
 
-    const typesToCreate = [
-      { name: "Website" },
-      { name: "Consultation" },
-      { name: "Services" },
-    ];
+    const typesToCreate = ["Website", "Consultation", "Services"];
     const types = await Promise.all(typesToCreate.map(Product.createType));
     console.log("Finished creating initial types");
   } catch (error) {
