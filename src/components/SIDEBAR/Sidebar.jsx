@@ -53,19 +53,13 @@ const Sidebar = () => {
               <div className="collapse" id="admin-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <Link
-                      to="/users"
-                      onClick={() => {
-                        setToggleCheckout(true);
-                      }}
-                      style={{ textDecoration: "none" }}
-                    >
+                    <Link to="/users" style={{ textDecoration: "none" }}>
                       Manage Users{" "}
                     </Link>
                   </li>
                   <li>
                     <Link
-                      to="/manageproducts"
+                      to="/"
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
