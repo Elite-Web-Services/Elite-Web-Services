@@ -358,8 +358,8 @@ export const deleteUser = async (userId, token) => {
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log("AXIOS DELETE USER:", response);
-    return response;
+    console.log("AXIOS DELETE USER:", userId);
+    return response.data;
   } catch (error) {
     return error;
   }

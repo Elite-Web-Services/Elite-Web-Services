@@ -148,14 +148,16 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
   }
 });
 
-usersRouter.delete("/users/:userId", requireAdmin, async (req, res, next) => {
+usersRouter.delete("/:userId", requireAdmin, async (req, res, next) => {
+  console.log("REQUEST TO DELETE", req.params);
+  const { userId } = req.params;
+  console.log("USER ID IN API DELETE", userId);
   try {
-    const deleteTheUser = await deleteUser(req.params);
-
-    console.log("REQUEST TO DELETE");
+    const deleteTheUser = await deleteUser(userId);
+    console.log("deleteTheUser", deleteTheUser);
     res.send(deleteTheUser);
   } catch (error) {
-    throw error;
+    next(error);
   }
 });
 
