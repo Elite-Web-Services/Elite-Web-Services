@@ -5,11 +5,13 @@ const {
   getAllUsers,
   addContacts,
   getUserByEmail,
+  deleteUser,
 } = require("../db/models/user");
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const { requireUser } = require("./utils");
+const { requireUser, requireAdmin } = require("./utils");
 const bcrypt = require("bcrypt");
+const { User } = require("../db/models");
 
 usersRouter.use("/", (req, res, next) => {
   console.log("Request to /users is being made.");
@@ -142,6 +144,17 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
     });
   } catch (error) {
     res.status(401);
+    throw error;
+  }
+});
+
+usersRouter.delete("/users/:userId", requireAdmin, async (req, res, next) => {
+  try {
+    const deleteTheUser = await deleteUser(req.params);
+
+    console.log("REQUEST TO DELETE");
+    res.send(deleteTheUser);
+  } catch (error) {
     throw error;
   }
 });
