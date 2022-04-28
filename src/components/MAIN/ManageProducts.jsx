@@ -4,6 +4,7 @@ import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import TypeButtons from "./TypeButtons";
 import PriceInput from "./PriceInput";
+// import PubPrivButtons from "./PubPrivButtons";
 
 const ManageProducts = () => {
   const { user } = useAuth();
@@ -13,6 +14,7 @@ const ManageProducts = () => {
     <div>
       <TypeButtons />
       <PriceInput />
+      {/* <PubPrivButtons /> */}
 
         <Link to="/createproduct">
           <button>Add New Product</button>

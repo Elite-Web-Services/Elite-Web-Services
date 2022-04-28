@@ -11,11 +11,11 @@ export const ProductContext = React.createContext();
 
 const ProductProvider = ({ children }) => {
   const { user, token } = useAuth();
-  
+
   let location = useLocation();
   const params = new URLSearchParams(location.search);
   const [searchParams, setSearchParams] = useSearchParams();
-  
+
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
@@ -23,8 +23,9 @@ const ProductProvider = ({ children }) => {
     type: params.get("type") ? params.get("type") : "",
     min: 0,
     max: 0,
+    isPublic: "",
   });
-  
+
   const [searchTerm, setSearchTerm] = useState("");
   const [price, setPrice] = useState({
     min: "",
@@ -73,27 +74,32 @@ const ProductProvider = ({ children }) => {
 
     const searchFilter = [];
     if (products.length) {
-    // lowercase the query
-    const searchQuery = searchObj.query.toLowerCase();
-    // lowercase function
-    function tLC(objProp) {
-      return objProp.toLowerCase();
-    }
-
-    products.forEach((product) => {
-      if (
-        product.typeName.includes(searchObj.type) &&
-        Number(product.price) >= Number(searchObj.min) &&
-        (searchObj.max == 0 ? true: Number(product.price) <= Number(searchObj.max)) &&
-        (tLC(product.name).includes(searchQuery) ||
-          tLC(product.description).includes(searchQuery) ||
-          tLC(product.typeName).includes(searchQuery))
-      ) {
-        searchFilter.push(product);
+      // lowercase the query
+      const searchQuery = searchObj.query.toLowerCase();
+      // lowercase function
+      function tLC(objProp) {
+        return objProp.toLowerCase();
       }
-    });
-    setFilterProducts(searchFilter);
-  }
+
+      products.forEach((product) => {
+        if (
+          product.typeName.includes(searchObj.type) &&
+          Number(product.price) >= Number(searchObj.min) &&
+          (searchObj.max == 0
+            ? true
+            : Number(product.price) <= Number(searchObj.max)) &&
+          // (!searchObj.isPublic.length
+          //   ? true
+          //   : searchObj.isPublic == product.isPublic) &&
+          (tLC(product.name).includes(searchQuery) ||
+            tLC(product.description).includes(searchQuery) ||
+            tLC(product.typeName).includes(searchQuery))
+        ) {
+          searchFilter.push(product);
+        }
+      });
+      setFilterProducts(searchFilter);
+    }
   }, [products, searchObj]);
 
   return (
@@ -112,7 +118,7 @@ const ProductProvider = ({ children }) => {
         searchTerm,
         setSearchTerm,
         price,
-        setPrice
+        setPrice,
       }}
     >
       {children}

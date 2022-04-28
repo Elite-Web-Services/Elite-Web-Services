@@ -17,7 +17,6 @@ const CreateType = () => {
     const result = await createType(createState.name, token);
 
     if (result.name === "error") {
-      console.log("error", result);
       setCreateError(result.message);
     } else {
       setCreateError("");
@@ -35,7 +34,7 @@ const CreateType = () => {
         handleCreateType();
       }}
     >
-      {createError ? <h3>Unable to create:{createError}</h3> : null}
+      {createError ? <h3>This category already exists!</h3> : null}
       <input
         type="text"
         placeholder="Name"
