@@ -14,12 +14,21 @@ const Home = () => {
         <h1 className="display-5 fw-bold text-center">Elite Web Services</h1>
         <div className="carousel-indicators"></div>
         <div className="col-lg-6 mx-auto">
-          <p className="lead mb-4">
-            Quickly design and customize responsive mobile-first sites with
-            Bootstrap, the world’s most popular front-end open source toolkit,
-            featuring Sass variables and mixins, responsive grid system,
-            extensive prebuilt components, and powerful JavaScript plugins.
+          <p className="lead mb-4 text-center">
+            In the modern age, no business survives without modern solutions.
+            While your revenue may depend on your customers, with the right web
+            solutions you can direct those customers to the choices that mean
+            the difference for your business. It all starts with a modern
+            website, but it doesn't end there. See all products.
           </p>
+          <div className="text-center">
+            <button
+              onClick={() => navigate('/products')}
+              className="btn btn-primary btn-lg px-4 gap-3"
+            >
+              View Offerings
+            </button>
+          </div>
         </div>
       </div>
       <hr className="featurette-divider" />
@@ -29,14 +38,9 @@ const Home = () => {
             <h2 className="featurette-heading">Website design</h2>
             <p className="lead">
               Content about our web design.{' '}
-              <span
-                className="productLink"
-                onClick={() =>
-                  navigate('/products?q=&type=Consultation', { replace: true })
-                }
-              >
-                See our offerings.
-              </span>
+              <a className="productLink" href={`/products?q=&type=Website`}>
+                Browse websites.
+              </a>
             </p>
           </div>
           <div className="col-md-5">
@@ -55,14 +59,12 @@ const Home = () => {
             <h2 className="featurette-heading">Consultations</h2>
             <p className="lead">
               By a trusted team you can count on.{' '}
-              <span
+              <a
                 className="productLink"
-                onClick={() =>
-                  navigate('/products?q=&type=Consultation', { replace: true })
-                }
+                href={`/products?q=&type=Consultation`}
               >
-                See our offerings.
-              </span>
+                See how we can help.
+              </a>
             </p>
           </div>
           <div className="col-md-5 order-md-1">
@@ -81,12 +83,9 @@ const Home = () => {
             <h2 className="featurette-heading">Services</h2>
             <p className="lead">
               Your business depends on them.{' '}
-              <span
-                className="productLink"
-                onClick={() => navigate(`/products?q=&type=Consultation`)}
-              >
-                See our offerings.
-              </span>
+              <a className="productLink" href={`/products?q=&type=Services`}>
+                Get started on a new service.
+              </a>
             </p>
           </div>
           <div className="col-md-5">
