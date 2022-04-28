@@ -25,6 +25,7 @@ export const incrementQuantity = async (
       cart.cartId,
       productId
     );
+    console.log('new cart: ', newCart);
     return newCart;
   } else {
     cart.products[cartProductIdx].quantity = newQuantity;
@@ -34,6 +35,7 @@ export const incrementQuantity = async (
       userId: cart.userId,
       products: cart.products,
     };
+    localStorage.setItem('cart', JSON.stringify(newCart));
     return newCart;
   }
 };
@@ -60,6 +62,7 @@ export const decrementQuantity = async (
         userId: cart.userId,
         products: cart.products.filter((item) => +item.id !== +productId),
       };
+      localStorage.setItem('cart', JSON.stringify(newCart));
       return newCart;
     }
   }
@@ -79,6 +82,7 @@ export const decrementQuantity = async (
       userId: cart.userId,
       products: cart.products,
     };
+    localStorage.setItem('cart', JSON.stringify(newCart));
     return newCart;
   }
 };

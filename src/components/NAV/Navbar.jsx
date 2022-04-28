@@ -1,22 +1,22 @@
-import React, { useState } from "react";
-import LoginBtn from "./LoginBtn";
-import Login from "./Login";
-import useAuth from "../hooks/useAuth";
-import { Link } from "react-router-dom";
-import SearchBar from "./SearchBar";
-import useCart from "../hooks/useCart";
+import React, { useState } from 'react';
+import LoginBtn from './LoginBtn';
+import Login from './Login';
+import useAuth from '../hooks/useAuth';
+import { Link } from 'react-router-dom';
+import SearchBar from './SearchBar';
+import useCart from '../hooks/useCart';
 
 const Navbar = () => {
   const { user } = useAuth();
   const { cart } = useCart();
   const [isLogin, setIsLogin] = useState(false); // change this to modal
   return (
-    <nav className="navbar navbar-expand-md navbar-dark bg-dark">
+    <nav className="navbar p-0 navbar-expand-md navbar-dark bg-dark">
       <div className="container-fluid">
         <a className="navbar-brand">
           <img
-            src="https://res.cloudinary.com/elite-web-services/image/upload/v1650896310/ews_Logo_t7guky.png"
-            width="100px"
+            src="https://res.cloudinary.com/elite-web-services/image/upload/v1651153876/Untitled_Artwork_1_qa34ja.png"
+            width="65px"
           />
         </a>
         <button
@@ -54,7 +54,7 @@ const Navbar = () => {
             <li className="nav-item">
               <Link to="/cart" className="nav-link">
                 <span className="badge bg-success rounded-pill">
-                  {cart.products ? cart.products.length : "0"}
+                  {cart.products ? cart.products.length : '0'}
                 </span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"

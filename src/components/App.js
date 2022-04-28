@@ -39,7 +39,6 @@ const App = () => {
           <ProductProvider>
             <ContactProvider>
               <main>
-                <h1 className="webTitle">{'ELITE . WEB . SERVICES'}</h1>
                 <Navbar />
                 {/* <p>API Status: {APIHealth}</p> */}
                 <div className="content d-flex justify-content-between">
