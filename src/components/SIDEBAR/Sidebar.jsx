@@ -54,7 +54,14 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link
+                      to="/manageproducts"
+                      onClick={() => {
+                        setToggleCheckout(true);
+                      }}
+                      style={{ textDecoration: "none" }}
+                    >
+
                       Manage Products{" "}
                     </Link>
                   </li>
