@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
@@ -20,7 +20,7 @@ import axios from 'axios';
 
 export async function getAPIHealth() {
   try {
-    const { data } = await axios.get('/api/health');
+    const { data } = await axios.get("/api/health");
     return data;
   } catch (err) {
     console.error(err);
@@ -32,7 +32,7 @@ export const getMe = async (token) => {
   try {
     const { data } = await axios.get(`/api/users/me`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -46,7 +46,7 @@ export const getAllUsers = async (token) => {
   try {
     const { data } = await axios.get(`/api/users/all`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -70,7 +70,7 @@ export const loginUser = async (username, password) => {
 
 export async function registerUser(username, password, email) {
   try {
-    const response = await axios.post('/api/users/register', {
+    const response = await axios.post("/api/users/register", {
       username,
       password,
       email,
@@ -86,7 +86,7 @@ export const getAllProducts = async (token) => {
   try {
     const response = await axios.get(`api/products/all`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -101,7 +101,7 @@ export const getPublicProducts = async () => {
   try {
     const response = await axios.get(`api/products`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -131,7 +131,7 @@ export const createProduct = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -164,7 +164,7 @@ export const updateProduct = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -192,7 +192,7 @@ export const updateCartProductQuantity = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -208,7 +208,7 @@ export const deleteProduct = async (productId, token) => {
   try {
     const response = await axios.delete(`api/products/${productId}`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -218,10 +218,7 @@ export const deleteProduct = async (productId, token) => {
   }
 };
 
-export const createType = async (
-  name,
-  token,
-) => {
+export const createType = async (name, token) => {
   try {
     const response = await axios.post(
       `api/products/types`,
@@ -246,7 +243,7 @@ export const getAllTypes = async () => {
   try {
     const response = await axios.get(`api/products/types`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
       },
     });
 
@@ -256,11 +253,7 @@ export const getAllTypes = async () => {
   }
 };
 
-export const updateType = async (
-  typeId,
-  name,
-  token,
-) => {
+export const updateType = async (typeId, name, token) => {
   try {
     const response = await axios.patch(
       `api/products/types/${typeId}`,
@@ -299,7 +292,7 @@ export const getCart = async (token) => {
   try {
     const response = await axios.get(`api/carts`, {
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -327,7 +320,7 @@ export const addProductToCart = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -346,7 +339,7 @@ export const deleteCartProduct = async (productId, token) => {
       },
 
       headers: {
-        'Content-Type': 'application/json',
+        "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
@@ -357,25 +350,40 @@ export const deleteCartProduct = async (productId, token) => {
   }
 };
 
+export const deleteUser = async (userId, token) => {
+  try {
+    const response = await axios.delete(`api/users/${userId}`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log("AXIOS DELETE USER:", response);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
+
 export const getOrderHistory = async (token, userId) => {
   try {
     if (userId) {
       const response = await axios.get(`api/products/orderHistory/${userId}`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('response.data orderhistroy', response.data);
+      console.log("response.data orderhistroy", response.data);
       return response.data;
     } else {
       const response = await axios.get(`api/products/orderHistory/`, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       });
-      console.log('response.data orderhistroy', response.data);
+      console.log("response.data orderhistroy", response.data);
       return response.data;
     }
   } catch (error) {
@@ -392,7 +400,7 @@ export const purchaseCart = async (token, cartId) => {
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
@@ -436,13 +444,13 @@ export const addContact = async (
       },
       {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
           Authorization: `Bearer ${token}`,
         },
       }
     );
 
-    console.log('response!!!!!!!!', response.data);
+    console.log("response!!!!!!!!", response.data);
     return response.data;
   } catch (error) {
     return error;
