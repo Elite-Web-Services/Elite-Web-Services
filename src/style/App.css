@@ -73,7 +73,6 @@
   margin-bottom: 5em;
 }
 
-
 /* MARKETING CONTENT
 -------------------------------------------------- */
 
@@ -134,8 +133,8 @@
   .featurette-heading {
     margin-top: 7rem;
   }
-  
-  .list-group-item {
-  margin-right: 1em;
 
+  .list-group-item {
+    margin-right: 1em;
+  }
 }
