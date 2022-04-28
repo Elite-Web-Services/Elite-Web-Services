@@ -15,7 +15,7 @@ const Products = () => {
       {Array.isArray(filterProducts) ? (
         <div id="productList" >
           <div className="container" >
-            <div className="row">
+            <div className="row" >
               {searchObj.type ? (
                 <h1>{searchObj.type}</h1>
               ) : (

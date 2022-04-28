@@ -14,7 +14,7 @@ const ProductCard = ({ product }) => {
   };
 
   return (
-    <div className="card mb-4 box-shadow">
+    <div className="card mb-4 box-shadow" style={{flexGrow: "1"}}>
       <div className="card-body">
       {!searchObj.type ? (
           <h6 className="card-text">{product.typeName}</h6>

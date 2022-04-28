@@ -10,7 +10,7 @@ const SearchBar = () => {
   return (
     <form
     className="form-inline mt-2 mt-md-0"
-      style={{ width: "60%"}}
+      style={{ flexGrow: "1", display: "flex", margin: "0 3rem 0 3rem"}}
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, query: searchTerm });
@@ -21,7 +21,7 @@ const SearchBar = () => {
     >
       <input
       className="needs-validation mr-sm-2"
-        style={{ width: "75%", padding: ".25rem"}}
+        style={{ flexGrow: "1", padding: ".25rem"}}
         type="text"
         placeholder="Search"
         value={searchTerm}
