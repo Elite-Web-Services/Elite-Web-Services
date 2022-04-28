@@ -59,7 +59,7 @@ const Sidebar = () => {
                   </li>
                   <li>
                     <Link
-                      to="/"
+                      to="/manageproducts"
                       onClick={() => {
                         setToggleCheckout(true);
                       }}
