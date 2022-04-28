@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import { Link } from 'react-router-dom';
-import { decrementQuantity, incrementQuantity } from '../context/helpers';
+import React, { useState } from "react";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import { Link } from "react-router-dom";
+import { decrementQuantity, incrementQuantity } from "../context/helpers";
 
 const Sidebar = () => {
   const { user, token } = useAuth();
@@ -49,13 +49,13 @@ const Sidebar = () => {
               <div className="collapse" id="admin-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <Link to="/users" style={{ textDecoration: 'none' }}>
-                      Manage Users{' '}
+                    <Link to="/users" style={{ textDecoration: "none" }}>
+                      Manage Users{" "}
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" style={{ textDecoration: 'none' }}>
-                      Manage Products{' '}
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      Manage Products{" "}
                     </Link>
                   </li>
                 </ul>
@@ -77,13 +77,13 @@ const Sidebar = () => {
               <div className="collapse" id="profile-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                   <li>
-                    <Link to="/orderHistory" style={{ textDecoration: 'none' }}>
-                      Order History{' '}
+                    <Link to="/orderHistory" style={{ textDecoration: "none" }}>
+                      Order History{" "}
                     </Link>
                   </li>
                   <li>
-                    <Link to="/contactinfo" style={{ textDecoration: 'none' }}>
-                      Contact Information{' '}
+                    <Link to="/contactinfo" style={{ textDecoration: "none" }}>
+                      Contact Information{" "}
                     </Link>
                   </li>
                 </ul>
@@ -106,13 +106,13 @@ const Sidebar = () => {
             <div className="collapse" id="cart-sidebar-collapse">
               <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                 <li>
-                  <Link to="/checkout" style={{ textDecoration: 'none' }}>
-                    Checkout{' '}
+                  <Link to="/checkout" style={{ textDecoration: "none" }}>
+                    Checkout{" "}
                   </Link>
                 </li>
                 <li>
-                  <Link to="/cart" style={{ textDecoration: 'none' }}>
-                    Go to Cart{' '}
+                  <Link to="/cart" style={{ textDecoration: "none" }}>
+                    Go to Cart{" "}
                   </Link>
                 </li>
               </ul>
@@ -120,11 +120,11 @@ const Sidebar = () => {
           </li>
         </ul>
         {/* -------------------------------------RENDER MENU */}
-        <div className="col-md-5 col-lg-4 order-md-last">
-          <h4 className="d-flex justify-content-between align-items-center mb-3">
+        <div className="list-group list-group-flush border-bottom scrollarea">
+          <h4 className="d-flex justify-content-around align-items-center mb-3">
             <span className="text-primary">Your cart</span>
             <span className="badge bg-primary rounded-pill">
-              {cart.products ? cart.products.length : '0'}
+              {cart.products ? cart.products.length : "0"}
             </span>
           </h4>
           <ul className="list-group mb-3">
@@ -135,11 +135,13 @@ const Sidebar = () => {
                       className="list-group-item d-flex justify-content-between lh-sm"
                       key={`checkoutcartproduct:${i}`}
                     >
-                      <div>
-                        <h6 className="my-0">{product.name}</h6>
+                      <div className="">
+                        <h6 className="mb-1">{product.name}</h6>
 
                         <p>
-                          <strong>Quantity: {product.quantity}</strong>
+                          <strong className="col-10 mb-1 small">
+                            Quantity: {product.quantity}
+                          </strong>
                         </p>
                         <button onClick={() => handleIncrementClick(product)}>
                           +
