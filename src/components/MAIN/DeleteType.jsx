@@ -37,7 +37,7 @@ const DeleteType = () => {
                 handleDeleteType();
               }}
             >
-              {deleteError ? <p>Unable to delete:{deleteError}</p> : null}
+              {deleteError ? <p>Unable to delete: Cannot delete this category while there are products listed under it.</p> : null}
               <select
                 name="category"
                 id="category-select"

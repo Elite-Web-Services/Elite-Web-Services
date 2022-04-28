@@ -11,7 +11,7 @@ import ProfileContactInfo from "../SIDEBAR/ProfileContactInfo";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import ManageProducts from "./ManageProducts";
-import CreateType from "./CreateType";
+import EditTypes from "./EditTypes";
 import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
 
 const Main = () => {
@@ -31,7 +31,7 @@ const Main = () => {
         <>
         <Route path="/manageproducts" element={<ManageProducts />} />
         <Route path="/createproduct" element={<CreateProduct />} />
-        <Route path="/createcategory" element={<CreateType />} />
+        <Route path="/editcategories" element={<EditTypes />} />
         </>
         : null}
         <Route path="/" element={<Products />} />
