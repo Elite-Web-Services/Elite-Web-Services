@@ -20,7 +20,7 @@ const Main = () => {
   const { products } = useProduct();
 
   return (
-    <div className="main">
+    <div className="main" style={{backgroundColor: "gray"}}>
       <Routes>
         <Route path="/users/" element={<AllUsers />} />
         <Route path="/contactinfo" element={<ProfileContactInfo />} />

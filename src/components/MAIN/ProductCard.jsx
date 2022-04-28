@@ -16,35 +16,35 @@ const ProductCard = ({ product }) => {
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
+      {!searchObj.type ? (
+          <h6 className="card-text">{product.typeName}</h6>
+        ) : null}
         <img
           className="card-img-top"
           style={{
             height: 225 + 'px',
             width: '100%',
+            height: '100%',
             display: 'block',
           }}
           alt="Thumbnail [100%x225]"
           src={product.imgURL}
         />
-        {!searchObj.type ? (
-          <h6 className="card-text">Category: {product.typeName}</h6>
-        ) : null}
-        <h2 className="card-text">{product.name}</h2>
+        <h4 className="card-text">{product.name}</h4>
         <p className="card-text">{product.description}</p>
-        {/* remove later */}
         <div className="d-flex justify-content-between align-items-center">
           <div className="btn-group">
             <Link to={`/viewproduct=${product.id}`}>
               <button className="btn btn-sm btn-outline-secondary">View</button>
             </Link>
+          </div>
+          <small className="text-muted">${product.price}/hr</small>
             <button
-              className="btn btn-secondary"
+              className="btn btn-outline-success my-2 my-sm-0"
               onClick={() => handleAddProduct(product)}
             >
               Add To Cart
             </button>
-          </div>
-          <small className="text-muted">${product.price}/hr</small>
         </div>
       </div>
     </div>

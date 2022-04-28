@@ -9,6 +9,8 @@ const SearchBar = () => {
 
   return (
     <form
+    className="form-inline mt-2 mt-md-0"
+      style={{ width: "60%"}}
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, query: searchTerm });
@@ -18,15 +20,32 @@ const SearchBar = () => {
       }}
     >
       <input
-        className="form-control"
+      className="needs-validation mr-sm-2"
+        style={{ width: "75%", padding: ".25rem"}}
         type="text"
-        placeholder="Product Search"
+        placeholder="Search"
         value={searchTerm}
         onChange={(e) => {
           setSearchTerm(e.target.value);
         }}
       />
-      <button type="submit">Search</button>
+      <button type="submit" className="btn btn-outline-success my-2 my-sm-0">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="20"
+          height="20"
+          viewBox="0 2 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          className="mx-3"
+        >
+          <circle cx="10.5" cy="10.5" r="7.5"></circle>
+          <line x1="21" y1="21" x2="15.8" y2="15.8"></line>
+        </svg>
+      </button>
     </form>
   );
 };
