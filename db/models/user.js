@@ -11,6 +11,7 @@ module.exports = {
   getUserByUsername,
   addContacts,
   getUserByEmail,
+  deleteUser,
 };
 
 async function createUser({
@@ -161,6 +162,25 @@ async function getUserByEmail(email) {
       [email]
     );
 
+    return user;
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteUser({ userId }) {
+  try {
+    const {
+      rows: [user],
+    } = await client.query(
+      `
+      DELETE
+      FROM users
+      WHERE id=$1;
+      `,
+      [userId]
+    );
+    console.log("deleting user", user);
     return user;
   } catch (error) {
     throw error;
