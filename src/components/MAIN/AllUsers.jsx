@@ -26,13 +26,9 @@ const AllUsers = () => {
     setUserOrderHistory(orderHistory);
   };
 
-  const handleSelect = async () => {};
-
-  const handleDeleteUser = async (userId) => {
-    const response = await deleteUser(userId, token);
-    console.log("DELETE USER: ", userId);
-
-    setSelected(true);
+  const handleDeleteUser = async (_user) => {
+    const response = await deleteUser(_user.id, token);
+    console.log("USER ID FOR DELETION", _user.id);
   };
 
   return (
@@ -40,7 +36,7 @@ const AllUsers = () => {
       <div className="table-responsive">
         {isError ? <h1 style={{ color: "red" }}>{errorMessage}</h1> : null}
         {allUsers ? (
-          <div className="table table-striped table-sm">
+          <table className="table table-striped table-sm">
             <thead>
               <tr>
                 <th scope="col">check</th>
@@ -50,36 +46,43 @@ const AllUsers = () => {
               </tr>
             </thead>
             <tbody>
-              {allUsers.map((user, i) => {
+              {allUsers.map((_user, i) => {
                 return (
                   <tr key={`allusersTable:${i}`}>
-                    <td>
+                    {/* <td>
                       <input
                         className="form-check-input flex-shrink-0"
                         type="checkbox"
                         value={user.id}
-                        onChange={handleDeleteUser}
+                        onChange={handleSelect}
                       ></input>
-                    </td>
-                    <td>{user.id}</td>
-                    <td>{user.username}</td>
-                    <td>{user.isAdmin ? "Admin" : "User"}</td>
+                    </td> */}
+                    <td>{_user.id}</td>
+                    <td>{_user.username}</td>
+                    <td>{_user.isAdmin ? "Admin" : "User"}</td>
                     <td>
                       <div
                         className="nav-link"
-                        onClick={() => handleSeeHistory(user.id)}
+                        onClick={() => handleSeeHistory(_user.id)}
                       >
                         See order history
                       </div>
                     </td>
                     <td>
-                      <div>{selected && user.id ? <DeleteUser /> : null}</div>{" "}
+                      <button
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleDeleteUser(_user);
+                        }}
+                      >
+                        Delete user
+                      </button>
                     </td>
                   </tr>
                 );
               })}
             </tbody>
-          </div>
+          </table>
         ) : null}
       </div>
       <div>

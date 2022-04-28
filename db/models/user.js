@@ -168,7 +168,8 @@ async function getUserByEmail(email) {
   }
 }
 
-async function deleteUser({ userId }) {
+async function deleteUser(userId) {
+  console.log("DELETE USER DB", userId);
   try {
     const {
       rows: [user],
@@ -176,10 +177,13 @@ async function deleteUser({ userId }) {
       `
       DELETE
       FROM users
-      WHERE id=$1;
-      `,
+	    
+    WHERE users.id=$1
+    RETURNING *;
+    `,
       [userId]
     );
+
     console.log("deleting user", user);
     return user;
   } catch (error) {

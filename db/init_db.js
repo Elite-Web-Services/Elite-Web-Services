@@ -47,7 +47,7 @@ async function buildTables() {
       );
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
-      "typeId" INTEGER REFERENCES types(id),
+      "typeId" INTEGER REFERENCES types(id) ON DELETE CASCADE,
       name VARCHAR(255) NOT NULL,
       description varchar(255),
       price varchar(255),
@@ -56,13 +56,13 @@ async function buildTables() {
       );
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
-        "userId" INTEGER REFERENCES users(id),
+        "userId" INTEGER REFERENCES users(id) ON DELETE CASCADE,
         purchased BOOLEAN DEFAULT false
       );
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,
-        "cartId" INTEGER REFERENCES carts(id),
-        "productId" INTEGER REFERENCES products(id),
+        "cartId" INTEGER REFERENCES carts(id) ON DELETE CASCADE,
+        "productId" INTEGER REFERENCES products(id) ON DELETE CASCADE,
         quantity INTEGER NOT NULL,
         "purchasedCost" INTEGER
       );
@@ -123,7 +123,11 @@ async function createInitialTypes() {
   try {
     console.log("Starting to create initial types");
 
-    const typesToCreate = ["Website","Consultation","Services",];
+    const typesToCreate = [
+      { name: "Website" },
+      { name: "Consultation" },
+      { name: "Services" },
+    ];
     const types = await Promise.all(typesToCreate.map(Product.createType));
     console.log("Finished creating initial types");
   } catch (error) {
