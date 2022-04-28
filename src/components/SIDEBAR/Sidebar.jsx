@@ -31,7 +31,7 @@ const Sidebar = () => {
 
   return (
     <div className="sideBarContainer">
-      <div className="d-flex flex-column p-3 bg-white">
+      <div className="d-flex flex-column p-3 bg-whit sideBarWidth">
         <ul className="list-unstyled ps-0">
           {/* --------------------------------------------MY PROFILE */}
 
@@ -120,7 +120,7 @@ const Sidebar = () => {
           </li>
         </ul>
         {/* -------------------------------------RENDER MENU */}
-        <div className="col-md-5 col-lg-4 order-md-last">
+        <div className="list-group list-group-flush border-bottom scrollarea">
           <h4 className="d-flex justify-content-between align-items-center mb-3">
             <span className="text-primary">Your cart</span>
             <span className="badge bg-primary rounded-pill">
