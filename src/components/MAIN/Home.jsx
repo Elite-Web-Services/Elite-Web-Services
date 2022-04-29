@@ -38,7 +38,7 @@ const Home = () => {
           <div className="col-md-7 ">
             <h2 className="featurette-heading">Website design</h2>
             <p className="lead">
-              Content about our web design.{" "}
+              Beatuiful designs that make your business stand out.{' '}
               <a className="productLink" href={`/products?q=&type=Website`}>
                 Browse websites.
               </a>
@@ -59,7 +59,8 @@ const Home = () => {
           <div className="col-md-7 order-md-2 ">
             <h2 className="featurette-heading">Consultations</h2>
             <p className="lead">
-              By a trusted team you can count on.{" "}
+              We know data. You have it. Let's get together and analyze it.{' '}
+
               <a
                 className="productLink"
                 href={`/products?q=&type=Consultation`}
@@ -83,7 +84,9 @@ const Home = () => {
           <div className="col-md-7 ">
             <h2 className="featurette-heading">Services</h2>
             <p className="lead">
-              Your business depends on them.{" "}
+
+              When your businesss needs require ongoing support, we've got you
+              covered.{' '}
               <a className="productLink" href={`/products?q=&type=Services`}>
                 Get started on a new service.
               </a>
@@ -140,7 +143,7 @@ const Home = () => {
             />
             <h2>Daniel</h2>
             <p>
-              His love for websites and started with geocities and the rest is
+              His love for websites started with geocities and the rest is
               history.
             </p>
           </div>
