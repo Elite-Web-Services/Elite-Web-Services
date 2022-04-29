@@ -12,7 +12,7 @@ const Products = () => {
       <TypeButtons />
       <PriceInput />
 
-      {Array.isArray(filterProducts) ? (
+      {Array.isArray(filterProducts) && filterProducts.length? (
         <div id="productList" >
           <div className="container" >
             <div className="row" >
@@ -30,7 +30,7 @@ const Products = () => {
           </div>
         </div>
       ) : (
-        <h5>Sorry, we couldn't find anything that matched your search!</h5>
+        <h5 style={{display: "flex", margin: "4rem", justifyContent: "center" }}>Sorry, we couldn't find anything that matched your search!</h5>
       )}
     </div>
   );
