@@ -57,7 +57,8 @@ async function buildTables() {
       CREATE TABLE carts (
         id SERIAL PRIMARY KEY,
         "userId" INTEGER REFERENCES users(id) ON DELETE CASCADE,
-        purchased BOOLEAN DEFAULT false
+        purchased BOOLEAN DEFAULT false,
+        "purchaseDate" date
       );
       CREATE TABLE cart_products (
         id SERIAL PRIMARY KEY,

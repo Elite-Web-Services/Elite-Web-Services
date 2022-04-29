@@ -10,6 +10,7 @@ const CheckoutSubmitPayment = ({
   setIsSubmitPayment,
 }) => {
   const [isError, setIsError] = useState(false);
+  const [purchasedCartId, setPurchasedCartId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
   const { user, token } = useAuth();
@@ -22,9 +23,14 @@ const CheckoutSubmitPayment = ({
 
   const handlePurchase = async () => {
     setPurchased(true);
-    const newCart = await purchaseCart(token, cart.cartId);
-    console.log('NEW CART AFTER PURCHASING, ', newCart);
-    setCart(newCart);
+    if (user.username) {
+      setPurchasedCartId(cart.cartId);
+      const newCart = await purchaseCart(token, cart.cartId);
+      setCart(newCart);
+    } else {
+      localStorage.removeItem('cart');
+      setCart({});
+    }
   };
 
   const handleReject = () => {
@@ -40,7 +46,7 @@ const CheckoutSubmitPayment = ({
         </h5>
         {purchased ? (
           <p>
-            {`Order Confirmation number: 978664-${cart.cartId}`}
+            {`Order Confirmation number: 978664-${purchasedCartId}`}
             <hr />
             {'Look for a confirmation email.'}
           </p>
