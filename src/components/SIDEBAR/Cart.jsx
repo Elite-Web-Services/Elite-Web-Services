@@ -4,11 +4,16 @@ import { decrementQuantity, incrementQuantity } from "../context/helpers";
 import useAuth from "../hooks/useAuth";
 import useCart from "../hooks/useCart";
 import EmptyCart from "./EmptyCart";
+import { toast, Zoom, Bounce } from "react-toastify";
 
 const Cart = () => {
   const { cart, addProduct, removeProduct, setCart } = useCart();
   const { user, token } = useAuth();
   console.log(cart);
+
+  const removeToast = () => {
+    toast.error("Product removed from cart.", { theme: "colored" });
+  };
 
   // this fixes weird formatting when only one item in cart
   let rowCols = "row-cols-lg-3";
@@ -53,7 +58,6 @@ const Cart = () => {
                         </h2>
                         <h4>Quantity: {product.quantity}</h4>
                         <div className="d-flex">
-
                           <button onClick={() => handleIncrementClick(product)}>
                             +
                           </button>
@@ -72,7 +76,10 @@ const Cart = () => {
                           <li className="d-flex align-items-center me-3">
                             <button
                               className="btn btn-danger"
-                              onClick={() => removeProduct(product)}
+                              onClick={() => {
+                                removeToast();
+                                removeProduct(product);
+                              }}
                             >
                               Remove
                             </button>
