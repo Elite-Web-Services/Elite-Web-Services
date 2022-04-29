@@ -3,14 +3,20 @@ import useContact from "../hooks/useContact";
 import useAuth from "../hooks/useAuth";
 import ContactInfo from "./ContactInfo";
 import { getMe } from "../../axios-services";
+import { toast, Zoom, Bounce } from "react-toastify";
 
 const ProfileContactInfo = () => {
   const { addContact } = useContact();
   const { user, setUser, token } = useAuth();
 
+  const successToast = (e) => {
+    toast.success("CONTACTS SAVED!", {});
+  };
+
   const handleAddressStored = async (e) => {
     e.preventDefault();
     await addContact();
+    successToast();
     const response = await getMe(token);
     setUser(response);
   };

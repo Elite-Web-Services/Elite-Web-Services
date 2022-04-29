@@ -2,15 +2,18 @@ import React, { Fragment, useEffect, useState } from "react";
 import { getAllUsers, getOrderHistory } from "../../axios-services";
 import useAuth from "../hooks/useAuth";
 import ProfileOrderHistory from "../SIDEBAR/ProfileOrderHistory";
-import DeleteUser from "./DeleteUser";
 import { deleteUser } from "../../axios-services";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 const AllUsers = () => {
   const [isError, setIsError] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const { user, token, allUsers, setAllUsers } = useAuth();
   const [userOrderHistory, setUserOrderHistory] = useState([]);
-  const [selected, setSelected] = useState(false);
+
+  const successToast = (e) => {
+    toast.success("User Deletion Successful", { theme: "colored" });
+  };
 
   useEffect(() => {
     if (!user.isAdmin) {
@@ -28,6 +31,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = async (_user) => {
     const response = await deleteUser(_user.id, token);
+    successToast();
     console.log("USER ID FOR DELETION", _user.id);
   };
 
