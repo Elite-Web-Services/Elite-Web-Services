@@ -3,6 +3,8 @@ body {
   background: url('https://res.cloudinary.com/elite-web-services/image/upload/v1651168888/SL_042620_30310_15_q1z153.jpg');
   background-size: cover;
   background-repeat: no-repeat;
+  margin: 0;
+  padding: 0;
 }
 
 /* NAVBAR START */
@@ -27,19 +29,20 @@ body {
 /* NAVBAR END */
 /* MAIN START */
 main {
-  height: 100vh !important;
-  overflow: hidden;
+  /* height: 100vh !important;
+  overflow: hidden; */
   /* position: relative; */
 }
 
 .main {
   flex-grow: 1;
-  height: 100%;
-  overflow-y: scroll;
+  /* height: 100%; */
+  /* overflow-y: scroll; */
+  padding: 0 25px;
 }
 
 .content {
-  height: 90vh;
+  /* height: 100%; */
 }
 
 .app-container {

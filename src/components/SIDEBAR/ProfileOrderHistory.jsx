@@ -28,8 +28,9 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
                 {cart.products && cart.products.length > 0 ? (
                   <div>
                     <h2 className="d-block text-gray-dark">
-                      Order Number: {cart.cartId}
+                      Order Number: 978664-{cart.cartId}
                     </h2>
+                    <p>Purchased {cart.purchaseDate.slice(0, 10)}</p>
                     {cart.products ? (
                       <div
                         id="orderHistory"
@@ -43,6 +44,7 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
                             >
                               <h3>{product.name}</h3>
                               <p>{product.description}</p>
+                              <p>Cost: ${product.price}/hr</p>
                             </div>
                           );
                         })}
