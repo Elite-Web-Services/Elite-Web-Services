@@ -93,6 +93,7 @@ const ProductProvider = ({ children }) => {
           //   : searchObj.isPublic == product.isPublic) &&
           (tLC(product.name).includes(searchQuery) ||
             tLC(product.description).includes(searchQuery) ||
+            tLC(product.fullDescription).includes(searchQuery) ||
             tLC(product.typeName).includes(searchQuery))
         ) {
           searchFilter.push(product);

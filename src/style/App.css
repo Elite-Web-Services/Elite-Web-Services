@@ -146,6 +146,10 @@ main {
   letter-spacing: -0.05rem;
 }
 
+.back-button {
+  margin: 1rem 0 0 1rem
+}
+
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 

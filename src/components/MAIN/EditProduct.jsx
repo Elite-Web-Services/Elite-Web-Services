@@ -44,9 +44,7 @@ const EditProduct = ({ product }) => {
       updateState.imgURL
     );
 
-    console.log(result);
     if (result.error) {
-      console.log("error", result);
       setUpdateError(result.error);
       failureToast(result.error);
     } else {
@@ -62,12 +60,22 @@ const EditProduct = ({ product }) => {
   return (
     <>
       <Link to="/manageproducts">
-        <button className="btn btn-sm btn-outline-secondary">Back</button>
+        <button className="btn btn-sm btn-outline-secondary back-button">Back</button>
       </Link>
       <div className="card mb-4 box-shadow">
         {product ? (
           <div className="card-body">
             <div className="d-flex justify-content-between align-items-center">
+            <img
+              style={{
+                height: 225 + "px",
+                width: "100%",
+                height: "100%",
+                display: "block",
+              }}
+              alt="Thumbnail [100%x225]"
+              src={product.imgURL}
+            />
               <form
                 className="needs-validation"
                 onSubmit={async (event) => {

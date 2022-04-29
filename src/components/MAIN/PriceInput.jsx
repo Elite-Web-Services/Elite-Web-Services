@@ -6,14 +6,17 @@ const PriceInput = () => {
 
   return (
     <form
+    style={{justifySelf: "right"}}
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, min: price.min, max: price.max });
       }}
     >
+      <label htmlFor="Min">$</label>
       <input
+      style={{width: "4rem"}}
         type="number"
-        placeholder="Minimum Price"
+        placeholder="Min"
         value={price.min}
         onChange={(event) => {
           setPrice({
@@ -22,9 +25,11 @@ const PriceInput = () => {
           });
         }}
       />
+      <label htmlFor="Max">$</label>
       <input
+      style={{width: "4rem"}}
         type="number"
-        placeholder="Maximum Price"
+        placeholder="Max"
         value={price.max}
         onChange={(event) => {
           setPrice({
