@@ -2,10 +2,8 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import { Link, useNavigate } from "react-router-dom";
-import {
-  createProduct,
-  getAllProducts,
-} from "../../axios-services";
+import { createProduct, getAllProducts } from "../../axios-services";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 const CreateProduct = () => {
   const navigate = useNavigate();
@@ -24,6 +22,13 @@ const CreateProduct = () => {
 
   const [createError, setCreateError] = useState("");
 
+  const successToast = (e) => {
+    toast.success("Product creation successful!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
+  };
+
   const handleCreateProduct = async () => {
     const result = await createProduct(
       token,
@@ -37,12 +42,14 @@ const CreateProduct = () => {
     if (result.name === "error") {
       console.log("error", result);
       setCreateError(result.message);
+      failureToast(result.message);
     } else {
       setCreateError("");
 
-        const newProducts = await getAllProducts(token);
-        setProducts(newProducts);
-        navigate("/manageproducts");
+      const newProducts = await getAllProducts(token);
+      setProducts(newProducts);
+      successToast();
+      navigate("/manageproducts");
     }
   };
 

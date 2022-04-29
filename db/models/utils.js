@@ -7,6 +7,7 @@ const mapProducts = (cart) => {
         map[row.cartId] = {
           cartId: row.cartId,
           purchased: row.purchased,
+          purchaseDate: row.purchaseDate,
           userId: row.userId,
           products: [],
         };
@@ -30,6 +31,16 @@ const mapProducts = (cart) => {
   }
 };
 
+const today = () => {
+  let today = new Date();
+  let dd = String(today.getDate()).padStart(2, '0');
+  let mm = String(today.getMonth() + 1).padStart(2, '0');
+  let yyyy = today.getFullYear();
+  today = yyyy + '-' + mm + '-' + dd;
+  return today;
+};
+
 module.exports = {
   mapProducts,
+  today,
 };

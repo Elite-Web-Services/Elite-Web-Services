@@ -2,6 +2,14 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import { createType, getAllTypes } from "../../axios-services";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+
+const successToast = (e) => {
+  toast.success("Type creation successful!", { theme: "colored" });
+};
+const failureToast = (error) => {
+  toast.error(error, { theme: "colored" });
+};
 
 const CreateType = () => {
   const { token } = useAuth();
@@ -18,11 +26,13 @@ const CreateType = () => {
 
     if (result.name === "error") {
       setCreateError(result.message);
+      failureToast(result.message);
     } else {
       setCreateError("");
 
       const newTypes = await getAllTypes();
       setTypes(newTypes);
+      successToast();
     }
   };
 

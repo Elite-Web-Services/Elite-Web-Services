@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
-import { loginUser } from '../../axios-services/';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
+import React, { useEffect } from "react";
+import { loginUser } from "../../axios-services/";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import { toast, Zoom, Bounce } from "react-toastify";
 
 const LoginForm = ({
   setIsLogin,
@@ -21,18 +22,27 @@ const LoginForm = ({
     setIsError(false);
   }, []);
 
+  const successToast = (e) => {
+    toast.success("Log In Successful!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const response = await loginUser(username, password);
       setIsError(false);
-      console.log('LOGINUSER RESPONSE: ', response);
-      localStorage.setItem('token', response.token);
+      console.log("LOGINUSER RESPONSE: ", response);
+      localStorage.setItem("token", response.token);
       setToken(response.token);
       setIsLogin(false);
+      successToast();
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);
+      failureToast(error.message);
     }
   };
 
@@ -87,12 +97,12 @@ const LoginForm = ({
           Don't have an account?
           <span
             className="loginRegisterRedirect"
-            style={{ color: 'blue' }}
+            style={{ color: "blue" }}
             onClick={() => {
               setIsRegister(true);
             }}
           >
-            {' Register instead.'}
+            {" Register instead."}
           </span>
         </small>
       </div>

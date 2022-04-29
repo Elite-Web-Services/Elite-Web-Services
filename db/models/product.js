@@ -1,6 +1,6 @@
 // grab our db client connection to use with our adapters
-const client = require("../client");
-const { mapProducts } = require("./utils");
+const client = require('../client');
+const { mapProducts } = require('./utils');
 
 module.exports = {
   // add your database adapter fns here
@@ -95,7 +95,7 @@ async function getPublicProducts() {
 async function updateProduct(fields = {}) {
   const setString = Object.keys(fields)
     .map((key, index) => `"${key}"=$${index + 1}`)
-    .join(", ");
+    .join(', ');
 
   // return early if this is called without fields
   if (setString.length === 0) {
@@ -172,7 +172,7 @@ async function getAllTypes() {
   }
 }
 
-async function updateType({id, name}) {
+async function updateType({ id, name }) {
   try {
     const {
       rows: [type],
@@ -182,7 +182,8 @@ async function updateType({id, name}) {
           SET name=$2
           WHERE id=$1
           RETURNING *;
-        `,[id, name]
+        `,
+      [id, name]
     );
 
     return type;
@@ -215,6 +216,7 @@ async function getOrderHistory(userId) {
       `
     SELECT 
 	    purchased, 
+      "purchaseDate",
       "userId", 
       carts.id as "cartId", 
       "productId", 

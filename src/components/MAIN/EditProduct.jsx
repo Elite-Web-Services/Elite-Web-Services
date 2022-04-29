@@ -7,6 +7,7 @@ import {
   updateProduct,
   deleteProduct,
 } from "../../axios-services";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 const EditProduct = ({ product }) => {
   const navigate = useNavigate();
@@ -24,6 +25,12 @@ const EditProduct = ({ product }) => {
   });
 
   const [updateError, setUpdateError] = useState("");
+  const successToast = (e) => {
+    toast.success("Product updated!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
+  };
 
   const handleUpdateProduct = async () => {
     const result = await updateProduct(
@@ -39,11 +46,13 @@ const EditProduct = ({ product }) => {
 
     if (result.error) {
       setUpdateError(result.error);
+      failureToast(result.error);
     } else {
       setUpdateError("");
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
+      successToast();
       navigate("/manageproducts");
     }
   };
