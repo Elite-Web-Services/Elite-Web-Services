@@ -15,7 +15,7 @@ import CartProvider from "./context/CartContext";
 import ProductProvider from "./context/ProductContext";
 import ContactProvider from "./context/ContactContext";
 import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState("");
@@ -51,6 +51,7 @@ const App = () => {
                     newestOnTop={false}
                     closeOnClick
                     rtl={false}
+                    theme={"colored"}
                     pauseOnFocusLoss
                     draggable
                     pauseOnHover
