@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import { decrementQuantity, incrementQuantity } from "../context/helpers";
-import useAuth from "../hooks/useAuth";
-import useCart from "../hooks/useCart";
-import useContact from "../hooks/useContact";
-import ContactInfo from "./ContactInfo";
+import React, { useState } from 'react';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
+import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
+import useContact from '../hooks/useContact';
+import ContactInfo from './ContactInfo';
 
 const CheckoutForm = ({ total, setIsSubmitPayment }) => {
   const { user, token } = useAuth();
@@ -16,7 +16,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
     if (clicked) {
       await addContact();
     }
-    console.log("ADDCONTACT WHEN CLICKED", clicked);
+    console.log('ADDCONTACT WHEN CLICKED', clicked);
     setIsSubmitPayment(true);
   };
 
@@ -36,7 +36,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
         <h4 className="d-flex justify-content-between align-items-center mb-3">
           <span className="text-primary">Your cart</span>
           <span className="badge bg-primary rounded-pill">
-            {cart.products ? cart.products.length : "0"}
+            {cart.products ? cart.products.length : '0'}
           </span>
         </h4>
         <ul className="list-group mb-3">
@@ -51,7 +51,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                       <h6 className="my-0">{product.name}</h6>
                       <small
                         className="text-muted"
-                        style={{ textOverflow: "ellipsis" }}
+                        style={{ textOverflow: 'ellipsis' }}
                       >
                         {product.description}
                       </small>
@@ -102,12 +102,12 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
           <h4 className="mb-3">Payment</h4>
 
           <div className="my-3">
-            <div className="form-check">
+            <div className="form-check" required="true">
               <input
                 name="paymentMethod"
                 type="radio"
                 className="form-check-input"
-                required=""
+                required="true"
               />
               <label className="form-check-label" htmlFor="credit">
                 Credit card
@@ -146,7 +146,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                required=""
+                required="true"
               />
               <small className="text-muted">
                 Full name as displayed on card or IOU
@@ -163,7 +163,7 @@ const CheckoutForm = ({ total, setIsSubmitPayment }) => {
                 className="form-control"
                 name="payment-number"
                 placeholder=""
-                required=""
+                required="true"
               />
             </div>
           </div>

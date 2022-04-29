@@ -1,4 +1,4 @@
-const { application_name } = require("pg/lib/defaults");
+const { application_name } = require('pg/lib/defaults');
 const {
   client,
   Product,
@@ -7,12 +7,12 @@ const {
   Cart,
   // declare your model imports here
   // for example, User
-} = require("./");
+} = require('./');
 
 async function buildTables() {
   try {
     client.connect();
-    console.log("Started dropping tables");
+    console.log('Started dropping tables');
 
     // drop tables in correct order
     await client.query(`
@@ -22,7 +22,7 @@ async function buildTables() {
     DROP TABLE IF EXISTS types;
     DROP TABLE IF EXISTS users;
     `);
-    console.log("Finished dropping tables");
+    console.log('Finished dropping tables');
 
     // build tables in correct order
     await client.query(`
@@ -68,164 +68,164 @@ async function buildTables() {
       );
     `);
 
-    console.log("Finished creating tables");
+    console.log('Finished creating tables');
   } catch (error) {
-    console.log("Problem with building tables");
+    console.log('Problem with building tables');
     throw error;
   }
 }
 
 async function createInitialUsers() {
   try {
-    console.log("Starting to create users...");
+    console.log('Starting to create users...');
     const usersToCreate = [
-      { username: "Guest", password: "guestUserPassword" },
+      { username: 'Guest', password: 'guestUserPassword' },
       {
-        username: "KDawg",
-        password: "dawgiedawgworld",
-        firstName: "Kevin",
-        lastName: "Hongkham",
-        email: "Kevin@Kevin.com",
-        address: "12346 Kevin on Kevin St.",
+        username: 'KDawg',
+        password: 'dawgiedawgworld',
+        firstName: 'Kevin',
+        lastName: 'Hongkham',
+        email: 'Kevin@Kevin.com',
+        address: '12346 Kevin on Kevin St.',
         address2: "apt. Dan's",
-        city: "Kevinsville",
-        state: "Georgia",
-        zip: "123456",
-        country: "USA",
+        city: 'Kevinsville',
+        state: 'Georgia',
+        zip: '123456',
+        country: 'USA',
       },
       {
-        username: "daniel",
-        password: "daniel",
+        username: 'daniel',
+        password: 'daniel',
         isAdmin: true,
-        firstName: "Daniel",
-        lastName: "Forkner",
-        email: "daniel@daniel.com",
-        address: "12346 Daniel on Daniel St.",
+        firstName: 'Daniel',
+        lastName: 'Forkner',
+        email: 'daniel@daniel.com',
+        address: '12346 Daniel on Daniel St.',
         address2: "apt. Dan's",
-        city: "Danielsville",
-        state: "Georgia",
-        zip: "123456",
-        country: "USA",
+        city: 'Danielsville',
+        state: 'Georgia',
+        zip: '123456',
+        country: 'USA',
       },
-      { username: "DanDigidy", password: "TheDFrameWork" },
-      { username: "HaytersGonHay8", password: "Hayyoooo1" },
-      { username: "kevin", password: "kevinkevin" },
+      { username: 'DanDigidy', password: 'TheDFrameWork' },
+      { username: 'HaytersGonHay8', password: 'Hayyoooo1' },
+      { username: 'kevin', password: 'kevinkevin' },
     ];
     const users = await Promise.all(usersToCreate.map(User.createUser));
-    console.log("Finished creating users!");
+    console.log('Finished creating users!');
   } catch (error) {
-    console.error("Error creating users!");
+    console.error('Error creating users!');
     throw error;
   }
 }
 
 async function createInitialTypes() {
   try {
-    console.log("Starting to create initial types");
+    console.log('Starting to create initial types');
 
-    const typesToCreate = ["Website", "Consultation", "Services"];
+    const typesToCreate = ['Website', 'Consultation', 'Services'];
     const types = await Promise.all(typesToCreate.map(Product.createType));
-    console.log("Finished creating initial types");
+    console.log('Finished creating initial types');
   } catch (error) {
-    console.error("Error creating initial types");
+    console.error('Error creating initial types');
     throw error;
   }
 }
 
 async function createInitialProducts() {
   try {
-    console.log("Starting to create initial products");
+    console.log('Starting to create initial products');
 
     const productsToCreate = [
       {
         typeId: 1,
-        name: "Great Value",
+        name: 'Great Value',
         description:
-          "I will make you a brand new website for CHEAP using 100% HTML.",
-        price: "25",
+          'I will make you a brand new website for CHEAP using 100% HTML.',
+        price: '25',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png',
       },
       {
         typeId: 1,
         name: "I'm a great listener",
         description:
           "I don't know much about computers, personally. But I'll make you feel understood.",
-        price: "125",
+        price: '125',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png',
       },
       {
         typeId: 1,
-        name: "Making websites stand out since 2021",
+        name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png',
       },
       {
         typeId: 1,
-        name: "Making websites stand out since 2021",
+        name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_tuq40k.png",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_tuq40k.png',
       },
       {
         typeId: 1,
-        name: "Making websites stand out since 2021",
+        name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png',
       },
       {
         typeId: 2,
-        name: "Making websites stand out since 2021",
+        name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg',
       },
       {
         typeId: 2,
-        name: "Making websites stand out since 2021",
+        name: 'Making websites stand out since 2021',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg',
       },
       {
         typeId: 3,
-        name: "Analysis of your business",
+        name: 'Analysis of your business',
         description: "Colorblind? I'm here to help.",
-        price: "100",
+        price: '100',
         isPublic: true,
         imgURL:
-          "https://res.cloudinary.com/elite-web-services/image/upload/v1650999415/service_po98bn.jpg",
+          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999415/service_po98bn.jpg',
       },
     ];
     const products = await Promise.all(
       productsToCreate.map(Product.createProduct)
     );
 
-    console.log("Finished creating initial products");
+    console.log('Finished creating initial products');
   } catch (error) {
-    console.error("Error creating initial products");
+    console.error('Error creating initial products');
     throw error;
   }
 }
 
 async function addInitialProductsToCarts() {
   try {
-    console.log("Starting to add initial products to carts");
+    console.log('Starting to add initial products to carts');
 
     const productsToAdd = [
       { cartId: 2, productId: 1, quantity: 1 },
@@ -238,7 +238,7 @@ async function addInitialProductsToCarts() {
       productsToAdd.map(CartProduct.addProductToCart)
     );
 
-    console.log("Finished adding products to carts");
+    console.log('Finished adding products to carts');
   } catch (error) {
     throw error;
   }
@@ -246,9 +246,9 @@ async function addInitialProductsToCarts() {
 
 async function retrieveCart() {
   try {
-    console.log("Starting to retrieve cart for userId 2");
+    console.log('Starting to retrieve cart for userId 2');
     const cart = await Cart.getCart(2);
-    console.log("Got the cart: ", cart);
+    console.log('Got the cart: ', cart);
   } catch (error) {
     throw error;
   }
