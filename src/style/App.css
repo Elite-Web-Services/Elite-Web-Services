@@ -13,6 +13,10 @@ body {
   width: 100%;
 }
 
+.nav-link:hover {
+  cursor: pointer;
+}
+
 .loginRegisterRedirect:hover {
   cursor: pointer;
 }
@@ -160,7 +164,7 @@ main {
 
 @media (min-width: 62em) {
   .featurette-heading {
-    margin-top: 7rem;
+    margin-top: 3rem;
   }
 
   .list-group-item {
