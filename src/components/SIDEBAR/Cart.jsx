@@ -1,9 +1,9 @@
-import React, { Fragment } from 'react';
-import { Link } from 'react-router-dom';
-import { decrementQuantity, incrementQuantity } from '../context/helpers';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import EmptyCart from './EmptyCart';
+import React, { Fragment } from "react";
+import { Link } from "react-router-dom";
+import { decrementQuantity, incrementQuantity } from "../context/helpers";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import EmptyCart from "./EmptyCart";
 
 const Cart = () => {
   const { cart, addProduct, removeProduct, setCart } = useCart();
@@ -11,9 +11,9 @@ const Cart = () => {
   console.log(cart);
 
   // this fixes weird formatting when only one item in cart
-  let rowCols = 'row-cols-lg-3';
+  let rowCols = "row-cols-lg-3";
   if (cart.products && cart.products.length < 2) {
-    rowCols = '';
+    rowCols = "";
   }
 
   const handleIncrementClick = async (product) => {
@@ -30,7 +30,7 @@ const Cart = () => {
       {cart.products && cart.products.length > 0 ? (
         <Fragment>
           <h2 className="pb-2 border-bottom">
-            Cart{' '}
+            Cart{" "}
             <Link to="/checkout">
               <button className="btn btn-outline-success">Checkout</button>
             </Link>
@@ -42,7 +42,7 @@ const Cart = () => {
               return (
                 <div className="col">
                   <div
-                    key={'cart' + index}
+                    key={"cart" + index}
                     className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
                     style={{ backgroundImage: `url(${product.imgURL})` }}
                   >
@@ -58,7 +58,7 @@ const Cart = () => {
                           </Link>
                         </li>
                         <li className="me-auto">
-                          {' '}
+                          {" "}
                           <button onClick={() => handleIncrementClick(product)}>
                             +
                           </button>
