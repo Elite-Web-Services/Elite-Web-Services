@@ -31,13 +31,14 @@ productsRouter.get('/', async (req, res, next) => {
 
 productsRouter.post('/', requireAdmin, async (req, res, next) => {
   // const creatorId = req.user.id;
-  const { typeId, name, description, price, isPublic } = req.body;
+  const { typeId, name, description, fullDescription, price, isPublic } = req.body;
 
   const productsData = {
     // creatorId,
     typeId,
     name,
     description,
+    fullDescription,
     price,
     isPublic,
   };
@@ -54,7 +55,7 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
   // const creatorId = req.user.id;
-  const { typeId, name, description, price, isPublic } = req.body;
+  const { typeId, name, description, fullDescription, price, isPublic } = req.body;
 
   const updateFields = {
     // creatorId,
@@ -62,6 +63,7 @@ productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
     typeId,
     name,
     description,
+    fullDescription,
     price,
     isPublic,
   };

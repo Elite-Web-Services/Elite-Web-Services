@@ -20,6 +20,7 @@ async function createProduct({
   typeId,
   name,
   description,
+  fullDescription,
   price,
   isPublic,
   imgURL,
@@ -29,11 +30,11 @@ async function createProduct({
       rows: [product],
     } = await client.query(
       `
-          INSERT INTO products("typeId", name, description, price, "isPublic", "imgURL") 
-          VALUES($1, $2, $3, $4, $5, $6) 
+          INSERT INTO products("typeId", name, description, "fullDescription", price, "isPublic", "imgURL") 
+          VALUES($1, $2, $3, $4, $5, $6, $7) 
           RETURNING *;
           `,
-      [typeId, name, description, price, isPublic, imgURL]
+      [typeId, name, description, fullDescription, price, isPublic, imgURL]
     );
 
     return product;
@@ -51,6 +52,7 @@ async function getAllProducts() {
         types.id AS "typeId",
         types.name AS "typeName",
         products.description AS description,
+        products."fullDescription" AS "fullDescription",
         products.price AS price,
         products."isPublic" AS "isPublic",
         products."imgURL" AS "imgURL"
@@ -74,6 +76,7 @@ async function getPublicProducts() {
         types.id AS "typeId",
         types.name AS "typeName",
         products.description AS description,
+        products."fullDescription" AS "fullDescription",
         products.price AS price,
         products."isPublic" AS "isPublic",
         products."imgURL" AS "imgURL"

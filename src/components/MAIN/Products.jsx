@@ -9,18 +9,22 @@ const Products = () => {
 
   return (
     <div>
+      <div
+      // className="navbar-dark bg-dark"
+      style={{marginBottom: "1rem", position: "sticky", top: "0", zIndex: "100"}}>
       <TypeButtons />
       <PriceInput />
+      </div>
 
       {Array.isArray(filterProducts) && filterProducts.length? (
         <div id="productList" >
           <div className="container" >
             <div className="row" >
-              {searchObj.type ? (
+              {/* {searchObj.type ? (
                 <h1>{searchObj.type}</h1>
               ) : (
                 <h1>All Products</h1>
-              )}
+              )} */}
               {filterProducts.map((product) => (
                 <div key={"productList:" + product.id} className="col-md-4" >
                   <ProductCard product={product} />
