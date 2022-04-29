@@ -3,14 +3,24 @@ import { Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import { addProductToCart } from "../../axios-services";
 import useCart from "../hooks/useCart";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 const SingleProduct = ({ product }) => {
   const { token, user } = useAuth();
   const { cart, setCart } = useCart();
+
+  const successToast = (e) => {
+    toast.success("Product added to Cart ", {
+      theme: "colored",
+      autoClose: 1000,
+    });
+  };
   return (
     <>
       <Link to="/products">
-        <button className="btn btn-sm btn-outline-secondary back-button">Back</button>
+        <button className="btn btn-sm btn-outline-secondary back-button">
+          Back
+        </button>
       </Link>
       <div className="card mb-4 box-shadow">
         <div className="card-body">
@@ -41,6 +51,7 @@ const SingleProduct = ({ product }) => {
                     1
                   );
                   setCart(newCart);
+                  successToast();
                 }}
               >
                 Add To Cart
