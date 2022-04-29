@@ -9,6 +9,7 @@ const TypeButtons = () => {
     <div style={{display: "flex",  justifyContent: "space-evenly"}}>
       {searchObj.type ? (
         <button
+        style={{margin: "2rem 0 2rem 0"}}
           onClick={() => {
             setSearchObj({ ...searchObj, type: "" });
             params.set("type", "");

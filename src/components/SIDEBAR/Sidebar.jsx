@@ -54,7 +54,7 @@ const Sidebar = () => {
                     </Link>
                   </li>
                   <li>
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                    <Link to="/manageproducts" style={{ textDecoration: "none" }}>
                       Manage Products{" "}
                     </Link>
                   </li>
