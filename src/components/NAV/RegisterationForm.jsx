@@ -3,6 +3,8 @@ import { registerUser } from "../../axios-services";
 // import { useNavigate } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
 import useContact from "../hooks/useContact";
+import "react-toastify/dist/ReactToastify.css";
+import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
 
 const RegisterationForm = ({
   setIsLogin,
@@ -23,6 +25,13 @@ const RegisterationForm = ({
     setIsError(false);
   }, []);
 
+  const successToast = (e) => {
+    toast.success("Registration Success!", { theme: "colored" });
+  };
+  const failureToast = (error) => {
+    toast.error(error, { theme: "colored" });
+  };
+
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
@@ -32,9 +41,11 @@ const RegisterationForm = ({
       localStorage.setItem("token", response.token);
       setToken(response.token);
       setIsLogin(false);
+      successToast();
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);
+      failureToast(error.message);
     }
   };
 
