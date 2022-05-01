@@ -7,13 +7,14 @@ import PriceInput from "./PriceInput";
 // import PubPrivButtons from "./PubPrivButtons";
 
 const ManageProducts = () => {
-  const { user } = useAuth();
-  const { searchObj, filterProducts } = useProduct();
+  const { filterProducts } = useProduct();
 
   return (
     <div>
-      <TypeButtons />
-      <PriceInput />
+      <div className="navbar-dark bg-dark">
+        <TypeButtons />
+        <PriceInput />
+      </div>
 
       <Link to="/createproduct">
         <button>Add New Product</button>
@@ -30,18 +31,22 @@ const ManageProducts = () => {
                 <th scope="col">id</th>
                 <th scope="col">name</th>
                 <th scope="col">Category</th>
-                <th scope="col">Description</th>
                 <th scope="col">Price</th>
+                <th scope="col">Visibility</th>
+                <th className="table-description" scope="col">
+                  Description
+                </th>
               </tr>
             </thead>
             <tbody>
               {filterProducts.map((product) => (
-                <tr key={`allusersTable:`}>
+                <tr key={`manageProductsTable: ${product.id}`}>
                   <td>{product.id}</td>
                   <td>{product.name}</td>
                   <td>{product.typeName}</td>
-                  <td>{product.description}</td>
                   <td>${product.price}/hr</td>
+                  <td>{product.isPublic ? "Public" : "Private"}</td>
+                  <td className="table-description">{product.description}</td>
                   <td>
                     <Link to={`/editproduct=${product.id}`}>
                       <button className="btn btn-sm btn-outline-secondary">

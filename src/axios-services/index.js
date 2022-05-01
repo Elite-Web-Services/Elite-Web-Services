@@ -149,6 +149,7 @@ export const updateProduct = async (
   typeId,
   name,
   description,
+  fullDescription,
   price,
   isPublic
 ) => {
@@ -159,6 +160,7 @@ export const updateProduct = async (
         typeId,
         name,
         description,
+        fullDescription,
         price,
         isPublic,
       },

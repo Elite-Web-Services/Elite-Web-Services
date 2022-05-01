@@ -25,12 +25,10 @@ const ProductCard = ({ product }) => {
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
-
           <h6 className="card-text">{product.typeName}</h6>
         <img
           className="card-img-top"
           style={{
-            height: 225 + "px",
             width: "100%",
             height: "100%",
             display: "block",
@@ -51,7 +49,7 @@ const ProductCard = ({ product }) => {
             className="btn btn-outline-success my-2 my-sm-0"
             onClick={() => handleAddProduct(product)}
           >
-            Add To Cart
+            Add to Cart
           </button>
         </div>
       </div>
