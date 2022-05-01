@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import useAuth from "../hooks/useAuth";
 import useProduct from "../hooks/useProduct";
 import { createType, getAllTypes } from "../../axios-services";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { toast } from "react-toastify";
 
 const successToast = (e) => {
   toast.success("Type creation successful!", { theme: "colored" });
@@ -44,15 +44,21 @@ const CreateType = () => {
         handleCreateType();
       }}
     >
-      {createError ? <h3>This category already exists!</h3> : null}
+      {createError ? <p style={{color:"red"}}>This category already exists!</p> : null}
+      <div
+                className="d-flex justify-content-between align-items-center"
+                style={{ margin: "1rem" }}
+              >
       <input
+      style={{ padding: ".5rem", width: "50%" }}
         type="text"
         placeholder="Name"
         value={createState.name}
         onChange={(event) => setCreateState({ name: event.target.value })}
         required
       />
-      <button type="submit">Create Category</button>
+      <button className="btn btn-success" type="submit">Create Category</button>
+      </div>
     </form>
   );
 };

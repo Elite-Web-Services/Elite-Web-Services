@@ -30,17 +30,16 @@ productsRouter.get('/', async (req, res, next) => {
 });
 
 productsRouter.post('/', requireAdmin, async (req, res, next) => {
-  // const creatorId = req.user.id;
-  const { typeId, name, description, fullDescription, price, isPublic } = req.body;
+  const { typeId, name, description, fullDescription, price, isPublic, imgURL } = req.body;
 
   const productsData = {
-    // creatorId,
     typeId,
     name,
     description,
     fullDescription,
     price,
     isPublic,
+    imgURL,
   };
 
   try {
@@ -54,11 +53,9 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
 productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
-  // const creatorId = req.user.id;
   const { typeId, name, description, fullDescription, price, isPublic } = req.body;
 
   const updateFields = {
-    // creatorId,
     id: productId,
     typeId,
     name,
@@ -69,18 +66,9 @@ productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   };
 
   try {
-    // const originalProduct = await Product.getProductById(productId);
-
-    // if (originalProduct.creatorId === req.user.id) {
     const updatedProduct = await Product.updateProduct(updateFields);
 
     res.send(updatedProduct);
-    // } else {
-    //   next({
-    //     name: "UnauthorizedUserError",
-    //     message: "You cannot update a product that is not yours",
-    //   });
-    // }
   } catch ({ name, message }) {
     next({ name, message });
   }

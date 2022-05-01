@@ -116,8 +116,10 @@ export const createProduct = async (
   typeId,
   name,
   description,
+  fullDescription,
   price,
-  isPublic
+  isPublic,
+  imgURL,
 ) => {
   try {
     const response = await axios.post(
@@ -126,8 +128,10 @@ export const createProduct = async (
         typeId,
         name,
         description,
+        fullDescription,
         price,
         isPublic,
+        imgURL,
       },
       {
         headers: {

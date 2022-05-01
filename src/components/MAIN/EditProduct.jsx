@@ -45,7 +45,7 @@ const EditProduct = ({ product }) => {
       updateState.isPublic,
       updateState.imgURL
     );
-    console.log(result)
+    console.log(result);
 
     if (result.name == "error") {
       setUpdateError(result.message);
@@ -75,7 +75,7 @@ const EditProduct = ({ product }) => {
       successToast("Product deleted");
       navigate("/manageproducts");
     }
-  }
+  };
 
   return (
     <>
@@ -90,7 +90,7 @@ const EditProduct = ({ product }) => {
       >
         {product ? (
           <div className="card-body">
-            <div style={{ margin: "2rem 3rem 5rem 3rem" }}>
+            <div style={{ margin: "2rem 12.5rem 5rem 12.5rem" }}>
               <img
                 style={{
                   width: "100%",
@@ -109,7 +109,10 @@ const EditProduct = ({ product }) => {
               }}
             >
               {/* Start inputs here */}
-              <div className="row" style={{display:"flex", justifyContent: "center"}}>
+              <div
+                className="row"
+                style={{ display: "flex", justifyContent: "center" }}
+              >
                 <div className="col-md-5 mb-3">
                   <select
                     style={{ padding: ".5rem", width: "100%" }}
@@ -153,6 +156,7 @@ const EditProduct = ({ product }) => {
                   </select>
                 </div>
               </div>
+              {/* Text inputs start here */}
               <div className="mb-3">
                 <label htmlFor="name">Title</label>
                 <div className="input-group">
@@ -186,23 +190,23 @@ const EditProduct = ({ product }) => {
                     }
                   />
                 </div>
-                <div className="mb-3">
-                  <label htmlFor="fullDescription">Full Description</label>
-                  <div className="input-group">
-                    <textarea
-                      className="form-control"
-                      style={{ height: "10rem" }}
-                      type="text"
-                      placeholder={product.fullDescription}
-                      value={updateState.fullDescription}
-                      onChange={(event) =>
-                        setUpdateState({
-                          ...updateState,
-                          fullDescription: event.target.value,
-                        })
-                      }
-                    />
-                  </div>
+              </div>
+              <div className="mb-3">
+                <label htmlFor="fullDescription">Full Description</label>
+                <div className="input-group">
+                  <textarea
+                    className="form-control"
+                    style={{ height: "10rem" }}
+                    type="text"
+                    placeholder={product.fullDescription}
+                    value={updateState.fullDescription}
+                    onChange={(event) =>
+                      setUpdateState({
+                        ...updateState,
+                        fullDescription: event.target.value,
+                      })
+                    }
+                  />
                 </div>
               </div>
               <div className="mb-3">
@@ -239,19 +243,22 @@ const EditProduct = ({ product }) => {
                 />
               </div>
               {updateError ? <h5>Unable to edit: {updateError}</h5> : null}
-              <div className="d-flex justify-content-between align-items-center" style={{margin: "1rem"}}>
-                  <button className="btn btn-info" type="submit">
-                    Update Product
-                  </button>
-                  <button
-                    className="btn btn-danger"
-                    onClick={async (event) => {
-                      event.preventDefault();
-                      await handleDeleteProduct();
-                    }}
-                  >
-                    Delete Product
-                  </button>
+              <div
+                className="d-flex justify-content-between align-items-center"
+                style={{ margin: "1rem" }}
+              >
+                <button className="btn btn-info" type="submit">
+                  Update Product
+                </button>
+                <button
+                  className="btn btn-danger"
+                  onClick={async (event) => {
+                    event.preventDefault();
+                    await handleDeleteProduct();
+                  }}
+                >
+                  Delete Product
+                </button>
               </div>
             </form>
           </div>

@@ -11,17 +11,35 @@ const ManageProducts = () => {
 
   return (
     <div>
-      <div className="navbar-dark bg-dark">
+      <div
+        className="navbar-dark bg-dark"
+        style={{
+          marginBottom: "1rem",
+          position: "sticky",
+          top: "0",
+          zIndex: "100",
+        }}
+      >
+        <div className="hide-price">
+          <PriceInput />
+        </div>
         <TypeButtons />
-        <PriceInput />
       </div>
 
+<div
+style={{display: "flex", justifyContent: "center", justifyContent: "space-evenly", margin: "2rem"}}>
       <Link to="/createproduct">
-        <button>Add New Product</button>
+        <button
+        className="btn btn-outline-success"
+        style={{width: "12rem", padding: "1rem"}}
+        >Add New Product</button>
       </Link>
       <Link to="/editcategories">
-        <button>Edit Categories</button>
+        <button className="btn btn-outline-success"
+        style={{width: "12rem", padding: "1rem"}}
+        >Edit Categories</button>
       </Link>
+      </div>
 
       {Array.isArray(filterProducts) && filterProducts.length ? (
         <div className="table-responsive">
