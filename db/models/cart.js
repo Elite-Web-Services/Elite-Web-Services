@@ -16,12 +16,11 @@ async function createCart({ userId, purchased = false }) {
       `
         INSERT INTO carts("userId", purchased)
         VALUES($1, $2)
-        RETURNING *;
+        RETURNING carts.id as "cartId", *;
         `,
       [userId, purchased]
     );
-
-    return cart;
+    return mapProducts([cart]);
   } catch (error) {
     throw error;
   }
@@ -62,7 +61,6 @@ async function purchaseCart(cartId) {
     `,
       [cartId, date]
     );
-
     return cart;
   } catch (error) {
     throw error;

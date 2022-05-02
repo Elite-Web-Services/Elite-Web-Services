@@ -22,7 +22,6 @@ const CartProvider = ({ children }) => {
       );
     }
     setTotal(newTotal);
-    console.log('NEW TOTAL: ', newTotal);
   }, [cart]);
 
   const removeProduct = async (product) => {

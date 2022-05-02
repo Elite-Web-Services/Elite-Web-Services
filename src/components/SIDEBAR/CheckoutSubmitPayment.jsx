@@ -3,7 +3,8 @@ import { Modal, ModalHeader } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth';
 import { purchaseCart } from '../../axios-services';
 import useCart from '../hooks/useCart';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
+
 
 const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
   const [isError, setIsError] = useState(false);
