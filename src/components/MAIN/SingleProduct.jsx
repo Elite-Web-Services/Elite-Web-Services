@@ -22,17 +22,19 @@ const SingleProduct = ({ product }) => {
           Back
         </button>
       </Link>
-      <div className="card mb-4 box-shadow" style={{ margin: "2rem 3rem 0 3rem" }}>
+      <div className="card mb-4 box-shadow"
+      style={{ margin: "2rem 3rem 0 3rem" }}
+      >
         <div className="card-body">
           <div className="d-flex justify-content-between align-items-center">
             <h6 className="card-text">{product.typeName}</h6>
             <h6 className="card-text">${product.price}/hr</h6>
           </div>
-          <div className="row">
+          <div className="my-row">
             <img
-              className="col-md-4"
+              className="my-col-md-4"
               style={{
-                height: 225 + "px",
+
                 width: "50%",
                 height: "50%",
                 display: "block",

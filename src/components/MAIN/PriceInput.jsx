@@ -1,20 +1,23 @@
-import React, { useState } from "react";
+import React from "react";
 import useProduct from "../hooks/useProduct";
 
 const PriceInput = () => {
   const { searchObj, setSearchObj, setPrice, price } = useProduct();
 
   return (
+    <div 
+    style={{display: "flex", justifyContent: "right", padding: ".5rem"}}>
     <form
-    style={{justifySelf: "right"}}
+    style={{display: "flex"}}
       onSubmit={(e) => {
         e.preventDefault();
         setSearchObj({ ...searchObj, min: price.min, max: price.max });
       }}
     >
-      <label htmlFor="Min">$</label>
+      {/* <label style={{color: "green"}}htmlFor="Min">$</label> */}
       <input
-      style={{width: "4rem"}}
+      className="needs-validation mr-sm-2"
+      style={{width: "4rem", padding: ".25rem"}}
         type="number"
         placeholder="Min"
         value={price.min}
@@ -25,9 +28,10 @@ const PriceInput = () => {
           });
         }}
       />
-      <label htmlFor="Max">$</label>
+      {/* <label style={{color: "green"}} htmlFor="Max">$</label> */}
       <input
-      style={{width: "4rem"}}
+      className="needs-validation mr-sm-2"
+      style={{width: "4rem", padding: ".25rem"}}
         type="number"
         placeholder="Max"
         value={price.max}
@@ -38,8 +42,10 @@ const PriceInput = () => {
           });
         }}
       />
-      <button type="submit">Search</button>
+      <button className="btn btn-outline-success my-2 my-sm-0"
+      type="submit">Search by Price/hr</button>
     </form>
+    </div>
   );
 };
 

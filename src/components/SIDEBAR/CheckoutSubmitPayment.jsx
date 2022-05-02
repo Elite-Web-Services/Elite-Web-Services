@@ -5,17 +5,14 @@ import { purchaseCart } from '../../axios-services';
 import useCart from '../hooks/useCart';
 import { toast } from 'react-toastify';
 
-const CheckoutSubmitPayment = ({
-  total,
-  isSubmitPayment,
-  setIsSubmitPayment,
-}) => {
+
+const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
   const [isError, setIsError] = useState(false);
   const [purchasedCartId, setPurchasedCartId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
   const { user, token } = useAuth();
-  const { cart, setCart } = useCart();
+  const { cart, setCart, total } = useCart();
 
   const handleClose = () => {
     setIsSubmitPayment(false);

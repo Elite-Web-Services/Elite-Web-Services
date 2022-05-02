@@ -1,10 +1,10 @@
-import React, { Fragment } from "react";
-import { Link } from "react-router-dom";
-import { decrementQuantity, incrementQuantity } from "../context/helpers";
-import useAuth from "../hooks/useAuth";
-import useCart from "../hooks/useCart";
-import EmptyCart from "./EmptyCart";
-import { toast, Zoom, Bounce } from "react-toastify";
+import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
+import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
+import EmptyCart from './EmptyCart';
+import { toast, Zoom, Bounce } from 'react-toastify';
 
 const Cart = () => {
   const { cart, addProduct, removeProduct, setCart } = useCart();
@@ -12,13 +12,13 @@ const Cart = () => {
   console.log(cart);
 
   const removeToast = () => {
-    toast.error("Product removed from cart.", { theme: "colored" });
+    toast.error('Product removed from cart.', { theme: 'colored' });
   };
 
   // this fixes weird formatting when only one item in cart
-  let rowCols = "row-cols-lg-3";
+  let rowCols = 'row-cols-lg-3';
   if (cart.products && cart.products.length < 2) {
-    rowCols = "";
+    rowCols = '';
   }
 
   const handleIncrementClick = async (product) => {
@@ -35,7 +35,7 @@ const Cart = () => {
       {cart.products && cart.products.length > 0 ? (
         <Fragment>
           <h2 className="pb-2 border-bottom">
-            Cart{" "}
+            Cart{' '}
             <Link to="/checkout">
               <button className="btn btn-outline-success">Checkout</button>
             </Link>
@@ -47,8 +47,8 @@ const Cart = () => {
               return (
                 <div className="col cartCard">
                   <div
-                    key={"cart" + index}
-                    className="card card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
+                    key={'cart' + index}
+                    className="card cartCardImg card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"
                     style={{ backgroundImage: `url(${product.imgURL})` }}
                   >
                     <div className="transparentLayer">
@@ -68,7 +68,7 @@ const Cart = () => {
                         <ul className="d-flex list-unstyled mt-auto">
                           <li className="me-auto">
                             <Link to={`/viewproduct=${product.id}`}>
-                              <button className="btn btn-outline-success">
+                              <button className="btn btn-success">
                                 Details
                               </button>
                             </Link>

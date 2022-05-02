@@ -5,7 +5,7 @@ const Home = () => {
   const navigate = useNavigate();
   return (
     <Fragment>
-      <div clasName="px-4 py-5 my-5 text-center">
+      <div className="px-4 py-5 my-5 text-center">
         <img
           className="d-block mx-auto mb-4"
           src="https://res.cloudinary.com/elite-web-services/image/upload/v1651153876/Untitled_Artwork_1_qa34ja.png"
