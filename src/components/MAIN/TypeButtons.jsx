@@ -11,6 +11,7 @@ const TypeButtons = () => {
         <div id="typeList" style={{ display: "flex", justifyContent: "space-between" }}>
           {searchObj.type ? (
             <button
+            className="btn btn-outline-success my-2 my-sm-0"
             style={{ flexGrow: "1"}}
               onClick={() => {
                 setSearchObj({ ...searchObj, type: "" });
@@ -24,7 +25,8 @@ const TypeButtons = () => {
           {types.map((type, index) => {
             return (
               <button
-              style={{ flexGrow: "1"}}
+              className="btn btn-outline-success my-2 my-sm-0"
+              style={{ flexGrow: "1", border: "success"}}
                 key={`typeList: ${index}`}
                 onClick={() => {
                   setSearchObj({ ...searchObj, type: type.name });

@@ -1,20 +1,14 @@
 body {
   background-color: #c9ced2 !important;
-  background: url('https://res.cloudinary.com/elite-web-services/image/upload/v1651168888/SL_042620_30310_15_q1z153.jpg');
+  background: url("https://res.cloudinary.com/elite-web-services/image/upload/v1651168888/SL_042620_30310_15_q1z153.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  margin: 0;
-  padding: 0;
 }
 
 /* NAVBAR START */
 
 .navbar {
   width: 100%;
-}
-
-.nav-link:hover {
-  cursor: pointer;
 }
 
 .loginRegisterRedirect:hover {
@@ -33,20 +27,19 @@ body {
 /* NAVBAR END */
 /* MAIN START */
 main {
-  /* height: 100vh !important;
-  overflow: hidden; */
+  height: 100vh !important;
+  overflow: hidden;
   /* position: relative; */
 }
 
 .main {
   flex-grow: 1;
-  /* height: 100%; */
-  /* overflow-y: scroll; */
-  padding: 0 25px;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .content {
-  /* height: 100%; */
+  height: 90vh;
 }
 
 .app-container {
@@ -61,7 +54,27 @@ main {
   text-align: center;
   padding: 1rem;
 }
-/* MAIN END */
+
+
+.back-button {
+  margin: 1rem 0 0 1rem;
+}
+
+.card-body {
+  background-color: rgb(246, 246, 246);
+}
+
+.my-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.my-row > * {
+  flex-shrink: 0;
+  max-width: 100%;
+  padding-right: 0.5rem;
+  padding-left: 0.5rem;
+}
 
 /* CART START */
 .transparentLayer {
@@ -80,21 +93,25 @@ h4 {
 }
 /* CART END */
 
+
+/* MAIN END */
 /* SIDEBAR START */
 .sideBarContainer {
   border-left: 1px solid black;
   box-shadow: -10px 0px 10px 1px #aaaaaa;
 }
 
+/*
 #sidebar_container {
-  /* width: 100%;
+width: 100%;
   height: 15em;
   background: blue;
   display: flex;
   justify-content: left;
   flex-direction: column;
-  border: 5px solid black; */
+  border: 5px solid black; 
 }
+*/
 /* SIDEBAR END */
 
 .cart_products_list {
@@ -153,10 +170,6 @@ h4 {
   letter-spacing: -0.05rem;
 }
 
-.back-button {
-  margin: 1rem 0 0 1rem;
-}
-
 /* RESPONSIVE CSS
 -------------------------------------------------- */
 
@@ -175,10 +188,51 @@ h4 {
 
 @media (min-width: 62em) {
   .featurette-heading {
-    margin-top: 3rem;
+    margin-top: 7rem;
   }
 
   .list-group-item {
     margin-right: 1em;
+  }
+}
+
+/* PRODUCTS IN MAIN */
+@media (max-width: 768px) {
+  .my-col-md-4 {
+    flex-grow: 1;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .my-col-md-4 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+}
+
+@media (min-width: 1000px) {
+  .my-col-md-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+}
+
+@media (max-width: 768px) {
+  .table-description {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .hide-price {
+    display: none;
+  }
+}
+
+/* searchBar */
+@media (min-width: 768px) {
+  .small-view-search {
+    display: none;
   }
 }

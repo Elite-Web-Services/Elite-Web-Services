@@ -47,7 +47,7 @@ async function buildTables() {
       );
     CREATE TABLE products (
       id SERIAL PRIMARY KEY,
-      "typeId" INTEGER REFERENCES types(id) ON DELETE CASCADE,
+      "typeId" INTEGER REFERENCES types(id),
       name VARCHAR(255) NOT NULL,
       description varchar(255),
       "fullDescription" varchar(600),
