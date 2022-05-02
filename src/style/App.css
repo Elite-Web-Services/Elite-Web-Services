@@ -1,6 +1,6 @@
 body {
   background-color: #c9ced2 !important;
-  background: url("https://res.cloudinary.com/elite-web-services/image/upload/v1651168888/SL_042620_30310_15_q1z153.jpg");
+  background: url('https://res.cloudinary.com/elite-web-services/image/upload/v1651168888/SL_042620_30310_15_q1z153.jpg');
   background-size: cover;
   background-repeat: no-repeat;
 }
@@ -9,6 +9,12 @@ body {
 
 .navbar {
   width: 100%;
+  height: 5rem;
+}
+
+#expandedNavbar {
+  background-color: rgba(var(--bs-dark-rgb), var(--bs-bg-opacity)) !important;
+  z-index: 999;
 }
 
 .loginRegisterRedirect:hover {
@@ -39,7 +45,7 @@ main {
 }
 
 .content {
-  height: 90vh;
+  height: calc(calc(100vh - 5rem));
 }
 
 .app-container {
@@ -54,7 +60,6 @@ main {
   text-align: center;
   padding: 1rem;
 }
-
 
 .back-button {
   margin: 1rem 0 0 1rem;
@@ -92,7 +97,6 @@ h4 {
   background-repeat: no-repeat;
 }
 /* CART END */
-
 
 /* MAIN END */
 /* SIDEBAR START */
