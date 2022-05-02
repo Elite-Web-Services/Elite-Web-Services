@@ -155,7 +155,8 @@ export const updateProduct = async (
   description,
   fullDescription,
   price,
-  isPublic
+  isPublic, 
+  imgURL
 ) => {
   try {
     const response = await axios.patch(
@@ -167,6 +168,7 @@ export const updateProduct = async (
         fullDescription,
         price,
         isPublic,
+        imgURL,
       },
       {
         headers: {

@@ -53,7 +53,7 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
 productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
-  const { typeId, name, description, fullDescription, price, isPublic } = req.body;
+  const { typeId, name, description, fullDescription, price, isPublic, imgURL } = req.body;
 
   const updateFields = {
     id: productId,
@@ -63,6 +63,7 @@ productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
     fullDescription,
     price,
     isPublic,
+    imgURL,
   };
 
   try {

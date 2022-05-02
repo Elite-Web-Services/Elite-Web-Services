@@ -1,4 +1,3 @@
-const { application_name } = require('pg/lib/defaults');
 const {
   client,
   Product,
@@ -49,9 +48,9 @@ async function buildTables() {
       id SERIAL PRIMARY KEY,
       "typeId" INTEGER REFERENCES types(id),
       name VARCHAR(255) NOT NULL,
-      description varchar(255),
-      "fullDescription" varchar(600),
-      price varchar(255),
+      description varchar(255) NOT NULL,
+      "fullDescription" varchar(1000),
+      price varchar(255) NOT NULL,
       "isPublic" BOOLEAN DEFAULT true,
       "imgURL" text
       );
@@ -135,116 +134,135 @@ async function createInitialTypes() {
 }
 
 async function createInitialProducts() {
+  const loremIpsum = "Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut atque quo perferendis, mollitia fugit recusandae optio necessitatibus minima iusto quae corporis cumque sequi itaque vitae rem? Dolorum, quis molestiae! Reiciendis."
+
   try {
     console.log('Starting to create initial products');
 
+
     const productsToCreate = [
-      {
-        typeId: 1,
-        name: 'Great Value',
-        description:
-
-          "I will make you a brand new website for CHEAP using 100% HTML.",
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "25",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png',
-      },
-      {
-        typeId: 1,
-        name: "I'm a great listener",
-        description:
-          "I don't know much about computers, personally. But I'll make you feel understood.",
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "125",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png',
-      },
-      {
-        typeId: 1,
-        name: 'Making websites stand out since 2021',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png',
-      },
-      {
-        typeId: 1,
-        name: 'Making websites stand out since 2021',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_tuq40k.png',
-      },
-      {
-        typeId: 1,
-        name: 'Making websites stand out since 2021',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png',
-      },
-      {
-        typeId: 2,
-        name: 'Making websites stand out since 2021',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg',
-      },
-      {
-        typeId: 2,
-        name: 'Making websites stand out since 2021',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg',
-      },
-      {
-        typeId: 3,
-        name: 'Analysis of your business',
-        description: "Colorblind? I'm here to help.",
-
-        fullDescription:
-          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-        price: "100",
-
-        isPublic: true,
-        imgURL:
-          'https://res.cloudinary.com/elite-web-services/image/upload/v1650999415/service_po98bn.jpg',
-      },
-    ];
+        {
+            typeId: 3,
+            name: 'Front-End Management',
+            description: "Struggling to keep up with modern technologies? You're in the right place.",
+            fullDescription: loremIpsum + loremIpsum,
+            price: 199.99,
+            isPublic: true,
+            imgURL:
+              'https://instabug.com/blog/wp-content/uploads/2017/09/Featured.jpg',
+          },
+          {
+            typeId: 2,
+            name: 'Analysis of your business',
+            description: "Not all things in tech revolve around coding. Seek business and financial consultation from trained professionals here.",
+            fullDescription: loremIpsum + loremIpsum,
+            price: 599.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg',
+          },
+          {
+            typeId: 1,
+            name: 'Add to your Wesbsite',
+            description: "If you already have a site of your own up and running but need help adding more functionality for your clients, this is the place for you.",
+            fullDescription: loremIpsum,
+            price: 299.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png',
+          },
+          {
+            typeId: 3,
+            name: 'Database Management',
+            description: "Whether old or new, every good database needs health check ups.",
+            fullDescription: loremIpsum + loremIpsum,
+            price: 599.99,
+            isPublic: true,
+            imgURL:
+              'https://help.spreadsheetweb.com/wp-content/uploads/2019/04/Data-management-and-analysis-scaled.jpg',
+          },
+          {
+            typeId: 2,
+            name: 'Website Planning',
+            description: "Looking to build a site but don't know where to start? Talk with one of our experts.",
+            fullDescription: loremIpsum,
+            price: 149.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg',
+          },
+          {
+            typeId: 1,
+            name: 'Forum Site',
+            description: "Does your company staff work from home? Or do you deal with sensitive information? Let our experts create a messaging site for you.",
+            fullDescription: loremIpsum,
+            price: 499.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png',
+          },
+          {
+            typeId: 3,
+            name: 'App Development',
+            description: "Looking to expand your outreach with a mobile phone app? Look no further.",
+            fullDescription: loremIpsum + loremIpsum,
+            price: 799.99,
+            isPublic: true,
+            imgURL:
+              'https://www.avi.com/wp-content/uploads/2018/07/dreamstime_l_66721609.jpg',
+          },
+          {
+            typeId: 2,
+            name: 'A Crash Course in Advertising',
+            description: "Learn how to navigate the lucrative world of advertising within the web",
+            fullDescription: loremIpsum,
+            price: 399.99,
+            isPublic: true,
+            imgURL:
+              'https://sumtotalmarketing.com/wp-content/uploads/2020/10/vectorstock_1669719-1024x731.jpg',
+          },
+          {
+            typeId: 1,
+            name: 'E-Commerce Site',
+            description: "We will create an online store to help you sell your line of products!",
+            fullDescription: loremIpsum,
+            price: 999.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png',
+          },
+          {
+            typeId: 3,
+            name: 'Visual Design',
+            description: "Make your website stand out and give your users customizable viewing options like dark mode!",
+            fullDescription: loremIpsum,
+            price: 199.99,
+            isPublic: true,
+            imgURL:
+              'https://www.creativefaze.com/sites/default/files/webdesign.jpg',
+          },
+          {
+            typeId: 2,
+            name: "Security Consulting",
+            description:
+              "Learn about the latest technologies in the industry to keep your company's and clients' information safe.",
+            fullDescription: loremIpsum,
+            price: 224.99,
+            isPublic: true,
+            imgURL:
+              'https://securityintelligence.com/wp-content/uploads/2015/03/Data-Security.jpg',
+          },
+          {
+            typeId: 1,
+            name: 'Build Your First Site',
+            description: "Let one of our professionals build a basic site that represents you and your company.",
+            fullDescription: loremIpsum + loremIpsum,
+            price: 599.99,
+            isPublic: true,
+            imgURL:
+              'https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png',
+          },
+    ]
     const products = await Promise.all(
       productsToCreate.map(Product.createProduct)
     );
