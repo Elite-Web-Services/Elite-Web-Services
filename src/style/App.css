@@ -55,6 +55,7 @@ main {
   padding: 1rem;
 }
 
+
 .back-button {
   margin: 1rem 0 0 1rem;
 }
@@ -74,6 +75,24 @@ main {
   padding-right: 0.5rem;
   padding-left: 0.5rem;
 }
+
+/* CART START */
+.transparentLayer {
+  background-color: rgba(255, 255, 255, 0.7);
+  height: 100%;
+}
+
+.cartCard h2,
+h4 {
+  color: green;
+}
+
+.cartCardImg {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+/* CART END */
+
 
 /* MAIN END */
 /* SIDEBAR START */

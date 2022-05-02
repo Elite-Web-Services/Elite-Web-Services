@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import { Modal, ModalHeader } from "react-bootstrap";
-import useAuth from "../hooks/useAuth";
-import { purchaseCart } from "../../axios-services";
-import useCart from "../hooks/useCart";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import React, { useState } from 'react';
+import { Modal, ModalHeader } from 'react-bootstrap';
+import useAuth from '../hooks/useAuth';
+import { purchaseCart } from '../../axios-services';
+import useCart from '../hooks/useCart';
+import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
 
-const CheckoutSubmitPayment = ({
-  total,
-  isSubmitPayment,
-  setIsSubmitPayment,
-}) => {
+const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
   const [isError, setIsError] = useState(false);
   const [purchasedCartId, setPurchasedCartId] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [purchased, setPurchased] = useState(false);
   const { user, token } = useAuth();
-  const { cart, setCart } = useCart();
+  const { cart, setCart, total } = useCart();
 
   const handleClose = () => {
     setIsSubmitPayment(false);
@@ -28,14 +24,13 @@ const CheckoutSubmitPayment = ({
     if (user.username) {
       setPurchasedCartId(cart.cartId);
       successToast();
-    const newCart = await purchaseCart(token, cart.cartId);
-    console.log("NEW CART AFTER PURCHASING, ", newCart);
-    setCart(newCart);
+      const newCart = await purchaseCart(token, cart.cartId);
+      console.log('NEW CART AFTER PURCHASING, ', newCart);
+      setCart(newCart);
     } else {
       localStorage.removeItem('cart');
       setCart({});
     }
-
   };
 
   const handleReject = () => {
@@ -46,24 +41,24 @@ const CheckoutSubmitPayment = ({
 
   const successToast = (e) => {
     toast.success("Purchase Confirmed! You'll be contacted shortly.", {
-      theme: "colored",
+      theme: 'colored',
     });
   };
   const failureToast = (error) => {
-    toast.warn("Please click on 'Confirm purchase' ", { theme: "colored" });
+    toast.warn("Please click on 'Confirm purchase' ", { theme: 'colored' });
   };
 
   return (
     <Modal show={isSubmitPayment} onHide={handleClose}>
       <div className="modal-body p-4 text-center">
         <h5 className="mb-0">
-          {purchased ? "Payment Submitted" : "Submit payment?"}
+          {purchased ? 'Payment Submitted' : 'Submit payment?'}
         </h5>
         {purchased ? (
           <p>
             {`Order Confirmation number: 978664-${purchasedCartId}`}
             <hr />
-            {"Look for a confirmation email."}
+            {'Look for a confirmation email.'}
           </p>
         ) : (
           <p className="mb-0">{`You are purchasing an elite package with ${cart.products.length} items with a cost of $${total}/hr.`}</p>
