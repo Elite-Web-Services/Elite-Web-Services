@@ -47,11 +47,11 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
                               <h3>{product.name}</h3>
                               <p>{product.description}</p>
                               <p>Quantity: {product.quantity}</p>
-                              <p>Cost: ${product.price}/hr</p>
+                              <p>Cost: ${product.price}</p>
                             </div>
                           );
                         })}
-                        <h4>Total Purchase Cost: ${total}/hr</h4>
+                        <h4>Total Purchase Cost: ${cart.totalCost}</h4>
                       </div>
                     ) : null}
                   </div>

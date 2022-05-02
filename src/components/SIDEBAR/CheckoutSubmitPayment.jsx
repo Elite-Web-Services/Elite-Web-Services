@@ -5,7 +5,6 @@ import { purchaseCart } from '../../axios-services';
 import useCart from '../hooks/useCart';
 import { toast } from 'react-toastify';
 
-
 const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
   const [isError, setIsError] = useState(false);
   const [purchasedCartId, setPurchasedCartId] = useState('');
@@ -62,7 +61,7 @@ const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
             {'Look for a confirmation email.'}
           </p>
         ) : (
-          <p className="mb-0">{`You are purchasing an elite package with ${cart.products.length} items with a cost of $${total}/hr.`}</p>
+          <p className="mb-0">{`You are purchasing an elite package with ${cart.products.length} items with a total cost of $${total}.`}</p>
         )}
       </div>
       {isError && !purchased ? (
