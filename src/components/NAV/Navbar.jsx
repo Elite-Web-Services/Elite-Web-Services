@@ -11,8 +11,11 @@ const Navbar = () => {
   const { cart } = useCart();
   const [isLogin, setIsLogin] = useState(false); // change this to modal
   return (
-    <nav className="navbar p-0 navbar-expand-md navbar-dark bg-dark">
-      <div className="container-fluid">
+    <nav
+      id="navbar"
+      className="navbar p-0 navbar-expand-md navbar-dark bg-dark"
+    >
+      <div id="expandedNavbar" className="container-fluid">
         <a className="navbar-brand">
           <img
             src="https://res.cloudinary.com/elite-web-services/image/upload/v1651153876/Untitled_Artwork_1_qa34ja.png"
