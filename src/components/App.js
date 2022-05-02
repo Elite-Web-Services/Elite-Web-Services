@@ -45,7 +45,7 @@ const App = () => {
                 {/* <p>API Status: {APIHealth}</p> */}
                 <div className="content d-flex justify-content-between">
                   <ToastContainer
-                    position="top-right"
+                    position="bottom-left"
                     autoClose={3000}
                     hideProgressBar={false}
                     newestOnTop={false}
