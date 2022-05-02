@@ -146,7 +146,7 @@ async function createInitialProducts() {
             name: 'Front-End Management',
             description: "Struggling to keep up with modern technologies? You're in the right place.",
             fullDescription: loremIpsum + loremIpsum,
-            price: 199.99,
+            price: 199,
             isPublic: true,
             imgURL:
               'https://instabug.com/blog/wp-content/uploads/2017/09/Featured.jpg',
@@ -156,7 +156,7 @@ async function createInitialProducts() {
             name: 'Analysis of your business',
             description: "Not all things in tech revolve around coding. Seek business and financial consultation from trained professionals here.",
             fullDescription: loremIpsum + loremIpsum,
-            price: 599.99,
+            price: 599,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999321/consulting1_nz7vep.jpg',
@@ -166,7 +166,7 @@ async function createInitialProducts() {
             name: 'Add to your Wesbsite',
             description: "If you already have a site of your own up and running but need help adding more functionality for your clients, this is the place for you.",
             fullDescription: loremIpsum,
-            price: 299.99,
+            price: 299,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_3_x7mpsh.png',
@@ -176,7 +176,7 @@ async function createInitialProducts() {
             name: 'Database Management',
             description: "Whether old or new, every good database needs health check ups.",
             fullDescription: loremIpsum + loremIpsum,
-            price: 599.99,
+            price: 599,
             isPublic: true,
             imgURL:
               'https://help.spreadsheetweb.com/wp-content/uploads/2019/04/Data-management-and-analysis-scaled.jpg',
@@ -186,7 +186,7 @@ async function createInitialProducts() {
             name: 'Website Planning',
             description: "Looking to build a site but don't know where to start? Talk with one of our experts.",
             fullDescription: loremIpsum,
-            price: 149.99,
+            price: 149,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg',
@@ -196,7 +196,7 @@ async function createInitialProducts() {
             name: 'Forum Site',
             description: "Does your company staff work from home? Or do you deal with sensitive information? Let our experts create a messaging site for you.",
             fullDescription: loremIpsum,
-            price: 499.99,
+            price: 499,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_2_uxkaab.png',
@@ -206,7 +206,7 @@ async function createInitialProducts() {
             name: 'App Development',
             description: "Looking to expand your outreach with a mobile phone app? Look no further.",
             fullDescription: loremIpsum + loremIpsum,
-            price: 799.99,
+            price: 799,
             isPublic: true,
             imgURL:
               'https://www.avi.com/wp-content/uploads/2018/07/dreamstime_l_66721609.jpg',
@@ -216,7 +216,7 @@ async function createInitialProducts() {
             name: 'A Crash Course in Advertising',
             description: "Learn how to navigate the lucrative world of advertising within the web",
             fullDescription: loremIpsum,
-            price: 399.99,
+            price: 399,
             isPublic: true,
             imgURL:
               'https://sumtotalmarketing.com/wp-content/uploads/2020/10/vectorstock_1669719-1024x731.jpg',
@@ -226,7 +226,7 @@ async function createInitialProducts() {
             name: 'E-Commerce Site',
             description: "We will create an online store to help you sell your line of products!",
             fullDescription: loremIpsum,
-            price: 999.99,
+            price: 999,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_1_k4jp4i.png',
@@ -236,7 +236,7 @@ async function createInitialProducts() {
             name: 'Visual Design',
             description: "Make your website stand out and give your users customizable viewing options like dark mode!",
             fullDescription: loremIpsum,
-            price: 199.99,
+            price: 199,
             isPublic: true,
             imgURL:
               'https://www.creativefaze.com/sites/default/files/webdesign.jpg',
@@ -247,7 +247,7 @@ async function createInitialProducts() {
             description:
               "Learn about the latest technologies in the industry to keep your company's and clients' information safe.",
             fullDescription: loremIpsum,
-            price: 224.99,
+            price: 224,
             isPublic: true,
             imgURL:
               'https://securityintelligence.com/wp-content/uploads/2015/03/Data-Security.jpg',
@@ -257,7 +257,7 @@ async function createInitialProducts() {
             name: 'Build Your First Site',
             description: "Let one of our professionals build a basic site that represents you and your company.",
             fullDescription: loremIpsum + loremIpsum,
-            price: 599.99,
+            price: 599,
             isPublic: true,
             imgURL:
               'https://res.cloudinary.com/elite-web-services/image/upload/v1650999020/websiteTemplate_4_tcl71q.png',
