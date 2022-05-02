@@ -1,21 +1,19 @@
+import React, { useState } from 'react';
+import { decrementQuantity, incrementQuantity } from '../context/helpers';
+import useAuth from '../hooks/useAuth';
+import useCart from '../hooks/useCart';
+import useContact from '../hooks/useContact';
+import ContactInfo from './ContactInfo';
+import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
 
-import React, { useState } from "react";
-import { decrementQuantity, incrementQuantity } from "../context/helpers";
-import useAuth from "../hooks/useAuth";
-import useCart from "../hooks/useCart";
-import useContact from "../hooks/useContact";
-import ContactInfo from "./ContactInfo";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
-
-
-const CheckoutForm = ({ total, setIsSubmitPayment }) => {
+const CheckoutForm = ({ setIsSubmitPayment }) => {
   const { user, token } = useAuth();
-  const { cart, setCart } = useCart();
+  const { cart, setCart, total } = useCart();
   const { addContact } = useContact();
   const [clicked, setClicked] = useState(false);
 
   const successToast = (e) => {
-    toast.success("Contact updated successfully!", { theme: "colored" });
+    toast.success('Contact updated successfully!', { theme: 'colored' });
   };
 
   const handleSubmit = async (e) => {
