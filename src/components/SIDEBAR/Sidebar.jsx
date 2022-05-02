@@ -125,47 +125,55 @@ const Sidebar = () => {
                       Go to Cart{' '}
                     </Link>
                   </li>
+                  {/* -------------------------------------RENDER MENU */}
+                  <div className="list-group list-group-flush border-bottom scrollarea">
+                    <h4 className="d-flex justify-content-around align-items-center mb-3">
+                      <span className="text-primary">Your cart</span>
+                      <span className="badge bg-primary rounded-pill">
+                        {cart.products ? cart.products.length : '0'}
+                      </span>
+                    </h4>
+                    <ul className="list-group mb-3">
+                      {cart.products
+                        ? cart.products.map((product, i) => {
+                            return (
+                              <li
+                                className="list-group-item d-flex justify-content-between lh-sm"
+                                key={`checkoutcartproduct:${i}`}
+                              >
+                                <div className="">
+                                  <h6 className="mb-1">{product.name}</h6>
+
+                                  <p>
+                                    <strong className="col-10 mb-1 small">
+                                      Quantity: {product.quantity}
+                                    </strong>
+                                  </p>
+                                  <button
+                                    onClick={() =>
+                                      handleIncrementClick(product)
+                                    }
+                                  >
+                                    +
+                                  </button>
+                                  <button
+                                    onClick={() =>
+                                      handleDecrementClick(product)
+                                    }
+                                  >
+                                    -
+                                  </button>
+                                </div>
+                              </li>
+                            );
+                          })
+                        : null}
+                    </ul>
+                  </div>
                 </ul>
               </div>
             </li>
           </ul>
-          {/* -------------------------------------RENDER MENU */}
-          <div className="list-group list-group-flush border-bottom scrollarea">
-            <h4 className="d-flex justify-content-around align-items-center mb-3">
-              <span className="text-primary">Your cart</span>
-              <span className="badge bg-primary rounded-pill">
-                {cart.products ? cart.products.length : '0'}
-              </span>
-            </h4>
-            <ul className="list-group mb-3">
-              {cart.products
-                ? cart.products.map((product, i) => {
-                    return (
-                      <li
-                        className="list-group-item d-flex justify-content-between lh-sm"
-                        key={`checkoutcartproduct:${i}`}
-                      >
-                        <div className="">
-                          <h6 className="mb-1">{product.name}</h6>
-
-                          <p>
-                            <strong className="col-10 mb-1 small">
-                              Quantity: {product.quantity}
-                            </strong>
-                          </p>
-                          <button onClick={() => handleIncrementClick(product)}>
-                            +
-                          </button>
-                          <button onClick={() => handleDecrementClick(product)}>
-                            -
-                          </button>
-                        </div>
-                      </li>
-                    );
-                  })
-                : null}
-            </ul>
-          </div>
         </div>
       </div>
     </div>

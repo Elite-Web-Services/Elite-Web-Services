@@ -10,8 +10,20 @@ import { findCartProductIdx, incrementQuantity } from './helpers';
 export const CartContext = React.createContext();
 
 const CartProvider = ({ children }) => {
+  const [total, setTotal] = useState(0);
   const [cart, setCart] = useState({});
   const { user, token } = useAuth();
+
+  useEffect(() => {
+    let newTotal = 0;
+    if (cart.products) {
+      cart.products.forEach(
+        (product) => (newTotal += +product.price * +product.quantity)
+      );
+    }
+    setTotal(newTotal);
+    console.log('NEW TOTAL: ', newTotal);
+  }, [cart]);
 
   const removeProduct = async (product) => {
     if (user.username) {
@@ -152,7 +164,9 @@ const CartProvider = ({ children }) => {
   }, [cart]);
 
   return (
-    <CartContext.Provider value={{ cart, setCart, addProduct, removeProduct }}>
+    <CartContext.Provider
+      value={{ cart, setCart, total, addProduct, removeProduct }}
+    >
       {children}
     </CartContext.Provider>
   );
