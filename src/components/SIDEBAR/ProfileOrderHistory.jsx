@@ -1,10 +1,12 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import useAuth from '../hooks/useAuth';
 import { getOrderHistory } from '../../axios-services';
+import useCart from '../hooks/useCart';
 
 const ProfileOrderHistory = ({ userOrderHistory }) => {
   const [orderHistory, setOrderHistory] = useState([]);
   const { token } = useAuth();
+  const { total } = useCart();
 
   const getHistory = async () => {
     let newOrderHistory = await getOrderHistory(token);
@@ -44,10 +46,12 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
                             >
                               <h3>{product.name}</h3>
                               <p>{product.description}</p>
+                              <p>Quantity: {product.quantity}</p>
                               <p>Cost: ${product.price}/hr</p>
                             </div>
                           );
                         })}
+                        <h4>Total Purchase Cost: ${total}/hr</h4>
                       </div>
                     ) : null}
                   </div>
