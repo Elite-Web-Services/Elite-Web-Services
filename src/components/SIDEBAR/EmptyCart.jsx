@@ -19,10 +19,11 @@ const EmptyCart = () => {
             Your elite web solution is around the corner
           </h1>
           <p className="lead">
-            Quickly design and customize responsive mobile-first sites with
-            Bootstrap, the world’s most popular front-end open source toolkit,
-            featuring Sass variables and mixins, responsive grid system,
-            extensive prebuilt components, and powerful JavaScript plugins.
+            In the modern age, no business survives without modern solutions.
+            While your revenue may depend on your customers, with the right web
+            solutions you can direct those customers to the choices that mean
+            the difference for your business. It all starts with a modern
+            website, but it doesn't end there. See all products.
           </p>
           <div className="d-grid gap-2 d-md-flex justify-content-md-start">
             <Link to="/products">

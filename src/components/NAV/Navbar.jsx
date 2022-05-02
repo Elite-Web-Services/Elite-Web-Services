@@ -72,6 +72,13 @@ const Navbar = () => {
                 Cart
               </Link>
             </li>
+            {cart.products && cart.products.length > 0 ? (
+              <li className="nav-item">
+                <Link to="/checkout" className="nav-link">
+                  <button className="btn btn-sm btn-success">Checkout</button>
+                </Link>
+              </li>
+            ) : null}
           </ul>
           <SearchBar />
         </div>
