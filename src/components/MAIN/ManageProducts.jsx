@@ -62,7 +62,7 @@ style={{display: "flex", justifyContent: "center", justifyContent: "space-evenly
                   <td>{product.id}</td>
                   <td>{product.name}</td>
                   <td>{product.typeName}</td>
-                  <td>${product.price}/hr</td>
+                  <td>${product.price}</td>
                   <td>{product.isPublic ? "Public" : "Private"}</td>
                   <td className="table-description">{product.description}</td>
                   <td>

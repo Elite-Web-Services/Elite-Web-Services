@@ -44,7 +44,7 @@ const ProductCard = ({ product }) => {
               <button className="btn btn-sm btn-outline-secondary">View</button>
             </Link>
           </div>
-          <small className="text-muted">${product.price}/hr</small>
+          <small className="text-muted">${product.price}</small>
           <button
             className="btn btn-outline-success my-2 my-sm-0"
             onClick={() => handleAddProduct(product)}

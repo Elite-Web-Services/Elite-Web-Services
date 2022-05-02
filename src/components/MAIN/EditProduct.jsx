@@ -227,7 +227,7 @@ const EditProduct = ({ product }) => {
                 </div>
               </div>
               <div className="col-md-5 mb-3">
-                <label htmlFor="price">Price/hr</label>
+                <label htmlFor="price">Price</label>
                 <input
                   className="form-control"
                   style={{ width: "50%" }}
