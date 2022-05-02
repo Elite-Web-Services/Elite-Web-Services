@@ -10,6 +10,7 @@ const mapProducts = (cart) => {
           purchased: row.purchased,
           purchaseDate: row.purchaseDate,
           userId: row.userId,
+          totalCost: 0,
           products: [],
         };
       }
@@ -23,6 +24,7 @@ const mapProducts = (cart) => {
           isPublic: row.isPublic,
           imgURL: row.imgURL,
         });
+        map[row.cartId].totalCost += row.price * row.quantity;
       }
     }
     console.log('map: ', map);

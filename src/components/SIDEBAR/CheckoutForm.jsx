@@ -71,14 +71,14 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
                         -
                       </button>
                     </div>
-                    <span className="text-muted">{`$${product.price}/hr`}</span>
+                    <span className="text-muted">{`$${product.price}`}</span>
                   </li>
                 );
               })
             : null}
           <li className="list-group-item d-flex justify-content-between">
             <span>Total</span>
-            <strong>{`$${total}/hr`}</strong>
+            <strong>{`$${total}`}</strong>
           </li>
         </ul>
       </div>
