@@ -81,6 +81,12 @@ main {
   padding-left: 0.5rem;
 }
 
+.rounded-circle:hover {
+  transform: scale(1.15);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
 /* CART START */
 .transparentLayer {
   background-color: rgba(255, 255, 255, 0.7);
