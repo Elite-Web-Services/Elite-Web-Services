@@ -1,9 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import useProduct from "../hooks/useProduct";
-import TypeButtons from "./TypeButtons";
-import PriceInput from "./PriceInput";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useProduct from '../hooks/useProduct';
+import TypeButtons from './TypeButtons';
+import PriceInput from './PriceInput';
 // import PubPrivButtons from "./PubPrivButtons";
 
 const ManageProducts = () => {
@@ -14,10 +13,10 @@ const ManageProducts = () => {
       <div
         className="navbar-dark bg-dark"
         style={{
-          marginBottom: "1rem",
-          position: "sticky",
-          top: "0",
-          zIndex: "100",
+          marginBottom: '1rem',
+          position: 'sticky',
+          top: '0',
+          zIndex: '100',
         }}
       >
         <div className="hide-price">
@@ -26,19 +25,29 @@ const ManageProducts = () => {
         <TypeButtons />
       </div>
 
-<div
-style={{display: "flex", justifyContent: "center", justifyContent: "space-evenly", margin: "2rem"}}>
-      <Link to="/createproduct">
-        <button
-        className="btn btn-outline-success"
-        style={{width: "12rem", padding: "1rem"}}
-        >Add New Product</button>
-      </Link>
-      <Link to="/editcategories">
-        <button className="btn btn-outline-success"
-        style={{width: "12rem", padding: "1rem"}}
-        >Edit Categories</button>
-      </Link>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-evenly',
+          margin: '2rem',
+        }}
+      >
+        <Link to="/createproduct">
+          <button
+            className="btn btn-outline-success"
+            style={{ width: '12rem', padding: '1rem' }}
+          >
+            Add New Product
+          </button>
+        </Link>
+        <Link to="/editcategories">
+          <button
+            className="btn btn-outline-success"
+            style={{ width: '12rem', padding: '1rem' }}
+          >
+            Edit Categories
+          </button>
+        </Link>
       </div>
 
       {Array.isArray(filterProducts) && filterProducts.length ? (
@@ -63,7 +72,7 @@ style={{display: "flex", justifyContent: "center", justifyContent: "space-evenly
                   <td>{product.name}</td>
                   <td>{product.typeName}</td>
                   <td>${product.price}</td>
-                  <td>{product.isPublic ? "Public" : "Private"}</td>
+                  <td>{product.isPublic ? 'Public' : 'Private'}</td>
                   <td className="table-description">{product.description}</td>
                   <td>
                     <Link to={`/editproduct=${product.id}`}>
@@ -79,7 +88,7 @@ style={{display: "flex", justifyContent: "center", justifyContent: "space-evenly
         </div>
       ) : (
         <h5
-          style={{ display: "flex", margin: "4rem", justifyContent: "center" }}
+          style={{ display: 'flex', margin: '4rem', justifyContent: 'center' }}
         >
           Sorry, we couldn't find anything that matched your search!
         </h5>

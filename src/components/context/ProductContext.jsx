@@ -1,11 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect } from 'react';
 import {
   getAllProducts,
   getPublicProducts,
   getAllTypes,
-} from "../../axios-services";
-import { useLocation, useSearchParams } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
+} from '../../axios-services';
+import { useLocation, useSearchParams } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
 
 export const ProductContext = React.createContext();
 
@@ -19,17 +19,17 @@ const ProductProvider = ({ children }) => {
   const [products, setProducts] = useState([]);
   const [types, setTypes] = useState([]);
   const [searchObj, setSearchObj] = useState({
-    query: params.get("q") ? params.get("q") : "",
-    type: params.get("type") ? params.get("type") : "",
+    query: params.get('q') ? params.get('q') : '',
+    type: params.get('type') ? params.get('type') : '',
     min: 0,
     max: 0,
-    isPublic: "",
+    isPublic: '',
   });
 
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const [price, setPrice] = useState({
-    min: "",
-    max: "",
+    min: '',
+    max: '',
   });
   const [filterProducts, setFilterProducts] = useState([]);
 
@@ -61,9 +61,9 @@ const ProductProvider = ({ children }) => {
 
   // ENSURE SEARCH QUERIES STAY IN URL
   useEffect(() => {
-    if (location.pathname == "/products") {
-      params.set("q", searchObj.query);
-      params.set("type", searchObj.type);
+    if (location.pathname === '/products') {
+      params.set('q', searchObj.query);
+      params.set('type', searchObj.type);
       setSearchParams(params);
     }
   }, [location.pathname]);
@@ -85,7 +85,7 @@ const ProductProvider = ({ children }) => {
         if (
           product.typeName.includes(searchObj.type) &&
           Number(product.price) >= Number(searchObj.min) &&
-          (searchObj.max == 0
+          (searchObj.max === 0
             ? true
             : Number(product.price) <= Number(searchObj.max)) &&
           // (!searchObj.isPublic.length
