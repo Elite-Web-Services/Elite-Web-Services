@@ -5,7 +5,7 @@ import { createType, getAllTypes } from "../../axios-services";
 import { toast } from "react-toastify";
 
 const successToast = (e) => {
-  toast.success("Type creation successful!", { theme: "colored" });
+  toast.success("Category creation successful!", { theme: "colored" });
 };
 const failureToast = (error) => {
   toast.error(error, { theme: "colored" });
@@ -26,7 +26,7 @@ const CreateType = () => {
 
     if (result.name === "error") {
       setCreateError(result.message);
-      failureToast(result.message);
+      failureToast("Cannot create new category");
     } else {
       setCreateError("");
 

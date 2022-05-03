@@ -15,7 +15,7 @@ const LoginForm = ({
   errorMessage,
   setErrorMessage,
 }) => {
-  const { user, setToken } = useAuth();
+  const { setToken } = useAuth();
 
   useEffect(() => {
     setIsError(false);

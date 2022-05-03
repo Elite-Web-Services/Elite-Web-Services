@@ -3,12 +3,15 @@ import { Link } from 'react-router-dom';
 import useProduct from '../hooks/useProduct';
 import TypeButtons from './TypeButtons';
 import PriceInput from './PriceInput';
-// import PubPrivButtons from "./PubPrivButtons";
+import useAuth from '../hooks/useAuth';
 
 const ManageProducts = () => {
   const { filterProducts } = useProduct();
+  const { user } = useAuth();
 
   return (
+    <>
+    {user.isAdmin ? 
     <div>
       <div
         className="navbar-dark bg-dark"
@@ -94,6 +97,8 @@ const ManageProducts = () => {
         </h5>
       )}
     </div>
+    :  <h1 style={{ color: 'red', display: 'flex', margin: '4rem', justifyContent: 'center' }}>You are not authorized</h1>}
+    </>
   );
 };
 

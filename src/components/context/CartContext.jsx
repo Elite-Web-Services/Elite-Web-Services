@@ -120,16 +120,6 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  const updateCartState = async () => {
-    if (localStorage.getItem('token')) {
-      const cart = await getCart(token);
-      setCart(cart);
-    } else if (localStorage.getItem('cart')) {
-      const cart = JSON.parse(localStorage.getItem('cart'));
-      setCart(cart);
-    }
-  };
-
   const mergeCarts = async () => {
     if (localStorage.getItem('cart') && localStorage.getItem('token')) {
       let storedCart = await JSON.parse(localStorage.getItem('cart'));
@@ -146,8 +136,17 @@ const CartProvider = ({ children }) => {
 
   // get cart
   useEffect(() => {
-    updateCartState();
-  }, [user]);
+    const updateCartState = async () => {
+      if (localStorage.getItem('token')) {
+        const cart = await getCart(token);
+        setCart(cart);
+      } else if (localStorage.getItem('cart')) {
+        const cart = JSON.parse(localStorage.getItem('cart'));
+        setCart(cart);
+      }
+    };
+    updateCartState()
+  }, [token]);
 
   // merge guest cart with logged in cart
   useEffect(() => {

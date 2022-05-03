@@ -107,12 +107,12 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
           <h4 className="mb-3">Payment</h4>
 
           <div className="my-3">
-            <div className="form-check" required="true">
+            <div className="form-check" required>
               <input
                 name="paymentMethod"
                 type="radio"
                 className="form-check-input"
-                required="true"
+                required
               />
               <label className="form-check-label" htmlFor="credit">
                 Credit card
@@ -123,7 +123,7 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
                 name="paymentMethod"
                 type="radio"
                 className="form-check-input"
-                required=""
+                required
               />
               <label className="form-check-label" htmlFor="debit">
                 Debit card
@@ -134,7 +134,7 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
                 name="paymentMethod"
                 type="radio"
                 className="form-check-input"
-                required=""
+                required
               />
               <label className="form-check-label" htmlFor="paypal">
                 IOU
@@ -151,7 +151,7 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
                 type="text"
                 className="form-control"
                 placeholder=""
-                required="true"
+                required
               />
               <small className="text-muted">
                 Full name as displayed on card or IOU
@@ -168,7 +168,7 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
                 className="form-control"
                 name="payment-number"
                 placeholder=""
-                required="true"
+                required
               />
             </div>
           </div>

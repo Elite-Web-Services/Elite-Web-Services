@@ -67,11 +67,10 @@ const EditProduct = ({ product }) => {
       failureToast('Unable to delete product');
     } else {
       setUpdateError('');
-
       const newProducts = await getAllProducts(token);
+      navigate('/manageproducts');
       setProducts(newProducts);
       successToast('Product deleted');
-      navigate('/manageproducts');
     }
   };
 
