@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import { loginUser } from '../../axios-services/';
 import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import { toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const LoginForm = ({
   setIsLogin,

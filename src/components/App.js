@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
@@ -17,8 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from 'react-toastify';
 
 const App = () => {
-  const [APIHealth, setAPIHealth] = useState('');
-
   return (
     <Router>
       <AuthProvider>

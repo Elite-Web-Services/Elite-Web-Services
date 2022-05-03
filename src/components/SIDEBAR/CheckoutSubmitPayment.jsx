@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Modal, ModalHeader } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 import useAuth from '../hooks/useAuth';
 import { purchaseCart } from '../../axios-services';
 import useCart from '../hooks/useCart';

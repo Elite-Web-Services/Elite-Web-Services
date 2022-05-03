@@ -28,13 +28,14 @@ const Main = () => {
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/cart" element={<Cart />} />
         <Route path="/products" element={<Products />} />
-        {user.isAdmin ? (
-          <>
-            <Route path="/manageproducts" element={<ManageProducts />} />
-            <Route path="/createproduct" element={<CreateProduct />} />
-            <Route path="/editcategories" element={<EditTypes />} />
-          </>
-        ) : null}
+        {/* add check for admin into components. either navigate away, or display unauthorized error */}
+        {/* {user.isAdmin ? (
+          <> */}
+        <Route path="/manageproducts" element={<ManageProducts />} />
+        <Route path="/createproduct" element={<CreateProduct />} />
+        <Route path="/editcategories" element={<EditTypes />} />
+        {/* </>
+        ) : null} */}
         <Route path="/" element={<Home />} />
 
         {Array.isArray(products)

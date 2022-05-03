@@ -46,7 +46,7 @@ const EditProduct = ({ product }) => {
       updateState.imgURL
     );
 
-    if (result.name == 'error') {
+    if (result.name === 'error') {
       setUpdateError(result.message);
       failureToast('Unable to update product');
     } else {
@@ -62,7 +62,7 @@ const EditProduct = ({ product }) => {
   const handleDeleteProduct = async () => {
     const result = await deleteProduct(product.id, token);
 
-    if (result.name == 'error') {
+    if (result.name === 'error') {
       setUpdateError(result.message);
       failureToast('Unable to delete product');
     } else {
