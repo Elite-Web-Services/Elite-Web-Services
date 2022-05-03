@@ -1,13 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import { addProductToCart } from "../../axios-services";
 import useCart from "../hooks/useCart";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import { toast } from "react-toastify";
 
 const SingleProduct = ({ product }) => {
-  const { token, user } = useAuth();
-  const { cart, setCart } = useCart();
+  const { setCart, addProduct, } = useCart();
 
   const successToast = (e) => {
     toast.success("Product added to Cart ", {
@@ -15,6 +12,13 @@ const SingleProduct = ({ product }) => {
       autoClose: 1000,
     });
   };
+
+  const handleAddProduct = async () => {
+    const newCart = await addProduct(product);
+    setCart(newCart);
+    successToast();
+  };
+
   return (
     <>
       <Link to="/products">
@@ -50,25 +54,16 @@ const SingleProduct = ({ product }) => {
           <p className="card-text" style={{ margin: "2rem" }}>
             {product.fullDescription}
           </p>
-          {/* <div className="d-flex justify-content-between align-items-center"> */}
             <div className="btn-group" style={{display: "flex"}}>
               <button
                 className="btn btn-outline-success my-2 my-sm-0"
                 onClick={async (event) => {
                   event.preventDefault();
-                  const newCart = await addProductToCart(
-                    token,
-                    cart.cartId,
-                    product.id,
-                    1
-                  );
-                  setCart(newCart);
-                  successToast();
+                  handleAddProduct()
                 }}
               >
                 Add To Cart
               </button>
-            {/* </div> */}
           </div>
         </div>
       </div>
