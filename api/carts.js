@@ -7,8 +7,6 @@ cartsRouter.get('/', requireUser, async (req, res, next) => {
   try {
     const [cart] = await Cart.getCart(req.user.id);
     res.send(cart);
-
-    // come back to catch errors
   } catch (error) {
     throw error;
   }
@@ -23,11 +21,8 @@ cartsRouter.post('/addProduct', requireUser, async (req, res, next) => {
       quantity,
       purchasedCost,
     });
-
     const [cart] = await Cart.getCart(req.user.id);
-
     res.send(cart);
-    // come back to catch errors
   } catch (error) {
     throw error;
   }

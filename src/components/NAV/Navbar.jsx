@@ -16,10 +16,11 @@ const Navbar = () => {
       className="navbar p-0 navbar-expand-md navbar-dark bg-dark"
     >
       <div id="expandedNavbar" className="container-fluid">
-        <a className="navbar-brand">
+        <a href="/" className="navbar-brand">
           <img
             src="https://res.cloudinary.com/elite-web-services/image/upload/v1651153876/Untitled_Artwork_1_qa34ja.png"
             width="65px"
+            alt="site logo"
           />
         </a>
         <button

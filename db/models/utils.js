@@ -1,6 +1,5 @@
 const mapProducts = (cart) => {
   let map = {};
-  console.log('Cart in utils', cart);
 
   if (cart.length) {
     for (const row of cart) {
@@ -27,7 +26,6 @@ const mapProducts = (cart) => {
         map[row.cartId].totalCost += row.price * row.quantity;
       }
     }
-    console.log('map: ', map);
     return Object.values(map);
   } else {
     return cart;

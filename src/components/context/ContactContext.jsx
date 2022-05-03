@@ -31,7 +31,6 @@ const ContactProvider = ({ children }) => {
   }, [user]);
 
   const addContact = async () => {
-    console.log('ZIPZIPZIZPIZPI', newZip);
     const newContactInfo = await editContact(
       token,
       firstName,

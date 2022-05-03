@@ -1,9 +1,9 @@
-import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import useProduct from "../hooks/useProduct";
-import { Link, useNavigate } from "react-router-dom";
-import { createProduct, getAllProducts } from "../../axios-services";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import useProduct from '../hooks/useProduct';
+import { Link, useNavigate } from 'react-router-dom';
+import { createProduct, getAllProducts } from '../../axios-services';
+import { toast } from 'react-toastify';
 
 const CreateProduct = () => {
   const navigate = useNavigate();
@@ -12,22 +12,22 @@ const CreateProduct = () => {
 
   const [createState, setCreateState] = useState({
     typeId: 1,
-    typeName: "",
-    name: "",
-    description: "",
-    fullDescription: "",
-    price: "",
+    typeName: '',
+    name: '',
+    description: '',
+    fullDescription: '',
+    price: '',
     isPublic: true,
-    imgURL: "",
+    imgURL: '',
   });
 
-  const [createError, setCreateError] = useState("");
+  const [createError, setCreateError] = useState('');
 
   const successToast = (e) => {
-    toast.success("Product creation successful!", { theme: "colored" });
+    toast.success('Product creation successful!', { theme: 'colored' });
   };
   const failureToast = (error) => {
-    toast.error(error, { theme: "colored" });
+    toast.error(error, { theme: 'colored' });
   };
 
   const handleCreateProduct = async () => {
@@ -42,17 +42,16 @@ const CreateProduct = () => {
       createState.imgURL
     );
 
-    if (result.name === "error") {
-      console.log("error", result);
+    if (result.name === 'error') {
       setCreateError(result.message);
-      failureToast("Unable to create product");
+      failureToast('Unable to create product');
     } else {
-      setCreateError("");
+      setCreateError('');
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
       successToast();
-      navigate("/manageproducts");
+      navigate('/manageproducts');
     }
   };
 
@@ -65,9 +64,9 @@ const CreateProduct = () => {
       </Link>
       <div
         className="card mb-4 box-shadow"
-        style={{ margin: "2rem 3rem 0 3rem" }}
+        style={{ margin: '2rem 3rem 0 3rem' }}
       >
-        <div className="card-body" style={{paddingTop: "2rem"}}>
+        <div className="card-body" style={{ paddingTop: '2rem' }}>
           <form
             className="needs-validation"
             onSubmit={async (event) => {
@@ -77,12 +76,12 @@ const CreateProduct = () => {
           >
             <div
               className="row"
-              style={{ display: "flex", justifyContent: "center" }}
+              style={{ display: 'flex', justifyContent: 'center' }}
             >
               {/* sets isPublic to either true or false */}
               <div className="col-md-5 mb-3">
                 <select
-                  style={{ padding: ".5rem", width: "100%" }}
+                  style={{ padding: '.5rem', width: '100%' }}
                   name="isPublic"
                   id="select-public"
                   value={createState.isPublic}
@@ -99,7 +98,7 @@ const CreateProduct = () => {
               </div>
               <div className="col-md-5 mb-3">
                 <select
-                  style={{ padding: ".5rem", width: "100%" }}
+                  style={{ padding: '.5rem', width: '100%' }}
                   name="category"
                   id="category-select"
                   value={createState.typeId}
@@ -110,7 +109,7 @@ const CreateProduct = () => {
                 >
                   {types.map((type) => {
                     return (
-                      <option key={"typeList:" + type.id} value={type.id}>
+                      <option key={'typeList:' + type.id} value={type.id}>
                         {type.name}
                       </option>
                     );
@@ -159,7 +158,7 @@ const CreateProduct = () => {
               <div className="input-group">
                 <textarea
                   className="form-control"
-                  style={{ height: "10rem" }}
+                  style={{ height: '10rem' }}
                   type="text"
                   placeholder="Full Description"
                   value={createState.fullDescription}
@@ -190,10 +189,10 @@ const CreateProduct = () => {
               </div>
             </div>
             <div className="col-md-5 mb-3">
-            <label htmlFor="price">Price</label>
+              <label htmlFor="price">Price</label>
               <input
-              className="form-control"
-              style={{ width: "50%" }}
+                className="form-control"
+                style={{ width: '50%' }}
                 type="number"
                 placeholder="Price"
                 value={createState.price}
@@ -208,7 +207,7 @@ const CreateProduct = () => {
             {createError ? <p>Unable to create:{createError}</p> : null}
             <button
               className="btn btn-success"
-              style={{ margin: "1.5rem 0 .5rem 0", width: "100%" }}
+              style={{ margin: '1.5rem 0 .5rem 0', width: '100%' }}
               type="submit"
             >
               Create Product

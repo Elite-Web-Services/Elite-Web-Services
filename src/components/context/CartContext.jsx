@@ -55,7 +55,6 @@ const CartProvider = ({ children }) => {
           token
         );
         // setCart(newCart);
-        console.log('Context newCart: ', newCart);
         return newCart;
       }
       // else add new product
@@ -66,7 +65,6 @@ const CartProvider = ({ children }) => {
         addQuantity
       );
       // setCart(newCart);
-      console.log('Context newCart: ', newCart);
       return newCart;
     }
 
@@ -83,7 +81,6 @@ const CartProvider = ({ children }) => {
         );
         localStorage.setItem('cart', JSON.stringify(newCart));
         // setCart(newCart);
-        console.log('Context newCart: ', newCart);
         return newCart;
       }
       // else add new product
@@ -97,7 +94,6 @@ const CartProvider = ({ children }) => {
         quantity: 1,
       });
       localStorage.setItem('cart', JSON.stringify(cart));
-      console.log('Context newCart: ', cart);
       // setCart(cart);
       return cart;
     }
@@ -120,7 +116,6 @@ const CartProvider = ({ children }) => {
       };
       localStorage.setItem('cart', JSON.stringify(newCart));
       // setCart(cart);
-      console.log('Context newCart: ', newCart);
       return newCart;
     }
   };
@@ -128,12 +123,10 @@ const CartProvider = ({ children }) => {
   const updateCartState = async () => {
     if (localStorage.getItem('token')) {
       const cart = await getCart(token);
-      console.log('Got the cart from db: ', cart);
       setCart(cart);
     } else if (localStorage.getItem('cart')) {
       const cart = JSON.parse(localStorage.getItem('cart'));
       setCart(cart);
-      console.log('Got the cart from localstorage: ', cart);
     }
   };
 
@@ -147,7 +140,6 @@ const CartProvider = ({ children }) => {
       );
       localStorage.removeItem('cart');
       const newCart = await getCart(token);
-      console.log('new cart: ', newCart);
       setCart(newCart);
     }
   };

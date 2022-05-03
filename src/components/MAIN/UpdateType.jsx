@@ -1,56 +1,54 @@
-import React, { useState } from "react";
-import useAuth from "../hooks/useAuth";
-import useProduct from "../hooks/useProduct";
-import { getAllTypes, updateType, deleteType } from "../../axios-services";
-import { toast } from "react-toastify";
+import React, { useState } from 'react';
+import useAuth from '../hooks/useAuth';
+import useProduct from '../hooks/useProduct';
+import { getAllTypes, updateType, deleteType } from '../../axios-services';
+import { toast } from 'react-toastify';
 
 const UpdateType = () => {
   const { token } = useAuth();
   const { types, setTypes } = useProduct();
 
   const [updateId, setUpdateId] = useState(1);
-  const [updateName, setUpdateName] = useState("");
+  const [updateName, setUpdateName] = useState('');
 
-  const [updateError, setUpdateError] = useState("");
+  const [updateError, setUpdateError] = useState('');
 
-  const [deleteError, setDeleteError] = useState("");
+  const [deleteError, setDeleteError] = useState('');
 
   const successToast = (message) => {
-    toast.success(message, { theme: "colored" });
+    toast.success(message, { theme: 'colored' });
   };
   const failureToast = (error) => {
-    toast.error(error, { theme: "colored" });
+    toast.error(error, { theme: 'colored' });
   };
 
   const handleUpdateType = async () => {
     const result = await updateType(updateId, updateName, token);
 
-    if (result.name === "error") {
-      console.log("error", result);
+    if (result.name === 'error') {
       setUpdateError(result.message);
-      failureToast("Unable to update category");
+      failureToast('Unable to update category');
     } else {
-      setUpdateError("");
+      setUpdateError('');
 
       const newTypes = await getAllTypes();
       setTypes(newTypes);
-      successToast("Successfully updated category");
+      successToast('Successfully updated category');
     }
   };
 
   const handleDeleteType = async () => {
     const result = await deleteType(updateId, token);
 
-    if (result.name === "error") {
-      console.log("error", result);
+    if (result.name === 'error') {
       setDeleteError(result.message);
-      failureToast("Unable to delete category");
+      failureToast('Unable to delete category');
     } else {
-      setDeleteError("");
+      setDeleteError('');
 
       const newTypes = await getAllTypes();
       setTypes(newTypes);
-      successToast("Successfully deleted category");
+      successToast('Successfully deleted category');
     }
   };
 
@@ -64,11 +62,11 @@ const UpdateType = () => {
     >
       <div
         className="row"
-        style={{ display: "flex", justifyContent: "center" }}
+        style={{ display: 'flex', justifyContent: 'center' }}
       >
-        <div className="col-md-5 mb-3" style={{display:"flex"}}>
+        <div className="col-md-5 mb-3" style={{ display: 'flex' }}>
           <select
-          style={{ padding: ".5rem", width: "100%" }}
+            style={{ padding: '.5rem', width: '100%' }}
             name="category"
             id="category-select"
             value={updateId}
@@ -79,7 +77,7 @@ const UpdateType = () => {
           >
             {types.map((type) => {
               return (
-                <option key={"typeList:" + type.id} value={type.id}>
+                <option key={'typeList:' + type.id} value={type.id}>
                   {type.name}
                 </option>
               );
@@ -87,9 +85,9 @@ const UpdateType = () => {
             {/* map over the types, return an <option /> */}
           </select>
         </div>
-        <div className="col-md-5 mb-3" style={{display:"flex"}}>
+        <div className="col-md-5 mb-3" style={{ display: 'flex' }}>
           <input
-          style={{ padding: ".5rem", width: "100%" }}
+            style={{ padding: '.5rem', width: '100%' }}
             type="text"
             placeholder="New Name"
             value={updateName}
@@ -99,17 +97,17 @@ const UpdateType = () => {
         </div>
       </div>
       {updateError ? (
-        <p style={{ color: "red" }}>Unable to update:{updateError}</p>
+        <p style={{ color: 'red' }}>Unable to update:{updateError}</p>
       ) : null}
       {deleteError ? (
-        <p style={{ color: "red" }}>
+        <p style={{ color: 'red' }}>
           Unable to delete: Cannot delete this category while there are products
           listed under it.
         </p>
       ) : null}
       <div
         className="d-flex justify-content-between align-items-center"
-        style={{ margin: "1rem" }}
+        style={{ margin: '1rem' }}
       >
         <button className="btn btn-info" type="submit">
           Update Category

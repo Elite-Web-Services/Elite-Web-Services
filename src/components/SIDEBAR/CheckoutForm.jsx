@@ -22,7 +22,6 @@ const CheckoutForm = ({ setIsSubmitPayment }) => {
       await addContact();
       successToast();
     }
-    console.log('ADDCONTACT WHEN CLICKED', clicked);
     setIsSubmitPayment(true);
   };
 

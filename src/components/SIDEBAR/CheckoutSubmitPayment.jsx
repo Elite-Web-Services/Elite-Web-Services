@@ -25,7 +25,6 @@ const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
       setPurchasedCartId(cart.cartId);
       successToast();
       const newCart = await purchaseCart(token, cart.cartId);
-      console.log('NEW CART AFTER PURCHASING, ', newCart);
       setCart(newCart);
     } else {
       localStorage.removeItem('cart');
