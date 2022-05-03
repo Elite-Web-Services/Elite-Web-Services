@@ -1,8 +1,8 @@
-import React from 'react';
-import useAuth from '../hooks/useAuth';
-import useCart from '../hooks/useCart';
-import { Link } from 'react-router-dom';
-import { decrementQuantity, incrementQuantity } from '../context/helpers';
+import React from "react";
+import useAuth from "../hooks/useAuth";
+import useCart from "../hooks/useCart";
+import { Link } from "react-router-dom";
+import { decrementQuantity, incrementQuantity } from "../context/helpers";
 
 const Sidebar = () => {
   const { user, token } = useAuth();
@@ -19,7 +19,7 @@ const Sidebar = () => {
 
   return (
     <div className="sideBarContainer col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-      <div className="position-sticky pt-3" style={{ top: '0' }}>
+      <div className="position-sticky pt-3" style={{ top: "0" }}>
         <div className="d-flex flex-column p-3 bg-white">
           <ul className="list-unstyled ps-0">
             {/* --------------------------------------------MY PROFILE */}
@@ -37,16 +37,16 @@ const Sidebar = () => {
                 <div className="collapse" id="admin-sidebar-collapse">
                   <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                     <li>
-                      <Link to="/users" style={{ textDecoration: 'none' }}>
-                        Manage Users{' '}
+                      <Link to="/users" style={{ textDecoration: "none" }}>
+                        Manage Users{" "}
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="/manageproducts"
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: "none" }}
                       >
-                        Manage Products{' '}
+                        Manage Products{" "}
                       </Link>
                     </li>
                   </ul>
@@ -70,17 +70,17 @@ const Sidebar = () => {
                     <li>
                       <Link
                         to="/orderHistory"
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: "none" }}
                       >
-                        Order History{' '}
+                        Order History{" "}
                       </Link>
                     </li>
                     <li>
                       <Link
                         to="/contactinfo"
-                        style={{ textDecoration: 'none' }}
+                        style={{ textDecoration: "none" }}
                       >
-                        Contact Information{' '}
+                        Contact Information{" "}
                       </Link>
                     </li>
                   </ul>
@@ -101,14 +101,16 @@ const Sidebar = () => {
               </button>
               <div className="collapse" id="cart-sidebar-collapse">
                 <ul className="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                  {cart.products && cart.products.length > 0 ? (
+                    <li>
+                      <Link to="/checkout" style={{ textDecoration: "none" }}>
+                        Checkout
+                      </Link>
+                    </li>
+                  ) : null}
                   <li>
-                    <Link to="/checkout" style={{ textDecoration: 'none' }}>
-                      Checkout{' '}
-                    </Link>
-                  </li>
-                  <li>
-                    <Link to="/cart" style={{ textDecoration: 'none' }}>
-                      Go to Cart{' '}
+                    <Link to="/cart" style={{ textDecoration: "none" }}>
+                      Go to Cart{" "}
                     </Link>
                   </li>
                   {/* -------------------------------------RENDER MENU */}
@@ -116,7 +118,7 @@ const Sidebar = () => {
                     <h4 className="d-flex justify-content-around align-items-center mb-3">
                       <span className="text-primary">Your cart</span>
                       <span className="badge bg-primary rounded-pill">
-                        {cart.products ? cart.products.length : '0'}
+                        {cart.products ? cart.products.length : "0"}
                       </span>
                     </h4>
                     <ul className="list-group mb-3">
