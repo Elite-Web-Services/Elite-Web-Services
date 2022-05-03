@@ -120,35 +120,38 @@ const CartProvider = ({ children }) => {
     }
   };
 
+  const updateCartState = async () => {
+    if (localStorage.getItem('token')) {
+      const cart = await getCart(token);
+      setCart(cart);
+    } else if (localStorage.getItem('cart')) {
+      const cart = JSON.parse(localStorage.getItem('cart'));
+      setCart(cart);
+    }
+  };
+
+  const mergeCarts = async () => {
+    if (localStorage.getItem('cart') && localStorage.getItem('token')) {
+      let storedCart = await JSON.parse(localStorage.getItem('cart'));
+      await Promise.all(
+        storedCart.products.map((product) =>
+          addProduct(product, product.quantity)
+        )
+      );
+      localStorage.removeItem('cart');
+      const newCart = await getCart(token);
+      setCart(newCart);
+    }
+  };
+
   // get cart
   useEffect(() => {
-    const updateCartState = async () => {
-      if (localStorage.getItem('token')) {
-        const cart = await getCart(token);
-        setCart(cart);
-      } else if (localStorage.getItem('cart')) {
-        const cart = JSON.parse(localStorage.getItem('cart'));
-        setCart(cart);
-      }
-    };
     updateCartState();
-  }, [token]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [user]);
 
   // merge guest cart with logged in cart
   useEffect(() => {
-    const mergeCarts = async () => {
-      if (localStorage.getItem('cart') && localStorage.getItem('token')) {
-        let storedCart = await JSON.parse(localStorage.getItem('cart'));
-        await Promise.all(
-          storedCart.products.map((product) =>
-            addProduct(product, product.quantity)
-          )
-        );
-        localStorage.removeItem('cart');
-        const newCart = await getCart(token);
-        setCart(newCart);
-      }
-    };
     mergeCarts();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);

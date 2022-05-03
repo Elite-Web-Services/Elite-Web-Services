@@ -49,7 +49,7 @@ const ProductProvider = ({ children }) => {
       displayPublicProducts();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [user, token]);
+  }, [user]);
 
   // GET ALL TYPES
   useEffect(() => {
