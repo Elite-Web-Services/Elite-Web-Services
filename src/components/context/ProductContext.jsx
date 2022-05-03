@@ -48,6 +48,7 @@ const ProductProvider = ({ children }) => {
       };
       displayPublicProducts();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user, token]);
 
   // GET ALL TYPES
@@ -57,6 +58,7 @@ const ProductProvider = ({ children }) => {
       setTypes(data);
     };
     displayAllTypes();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // ENSURE SEARCH QUERIES STAY IN URL
@@ -66,6 +68,7 @@ const ProductProvider = ({ children }) => {
       params.set('type', searchObj.type);
       setSearchParams(params);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   // FILTER POSTS
@@ -85,7 +88,9 @@ const ProductProvider = ({ children }) => {
         if (
           product.typeName.includes(searchObj.type) &&
           Number(product.price) >= Number(searchObj.min) &&
-          (Number(searchObj.max) ? Number(product.price) <= Number(searchObj.max) : true) &&
+          (Number(searchObj.max)
+            ? Number(product.price) <= Number(searchObj.max)
+            : true) &&
           (tLC(product.name).includes(searchQuery) ||
             tLC(product.description).includes(searchQuery) ||
             tLC(product.fullDescription).includes(searchQuery) ||
@@ -96,6 +101,7 @@ const ProductProvider = ({ children }) => {
       });
       setFilterProducts(searchFilter);
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [products, searchObj]);
 
   return (

@@ -14,22 +14,22 @@ const AuthProvider = ({ children }) => {
     setAllUsers(users);
   };
 
-  const getUser = async () => {
-    if (localStorage.getItem('token')) {
-      const user = await getMe(token);
-      setUser(user);
-
-      if (user.isAdmin) {
-        getAllTheUsers();
-      }
-    } else {
-      setUser({});
-      setAllUsers([]);
-    }
-  };
-
   useEffect(() => {
+    const getUser = async () => {
+      if (localStorage.getItem('token')) {
+        const user = await getMe(token);
+        setUser(user);
+
+        if (user.isAdmin) {
+          getAllTheUsers();
+        }
+      } else {
+        setUser({});
+        setAllUsers([]);
+      }
+    };
     getUser();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   return (

@@ -120,20 +120,6 @@ const CartProvider = ({ children }) => {
     }
   };
 
-  const mergeCarts = async () => {
-    if (localStorage.getItem('cart') && localStorage.getItem('token')) {
-      let storedCart = await JSON.parse(localStorage.getItem('cart'));
-      await Promise.all(
-        storedCart.products.map((product) =>
-          addProduct(product, product.quantity)
-        )
-      );
-      localStorage.removeItem('cart');
-      const newCart = await getCart(token);
-      setCart(newCart);
-    }
-  };
-
   // get cart
   useEffect(() => {
     const updateCartState = async () => {
@@ -145,12 +131,26 @@ const CartProvider = ({ children }) => {
         setCart(cart);
       }
     };
-    updateCartState()
+    updateCartState();
   }, [token]);
 
   // merge guest cart with logged in cart
   useEffect(() => {
+    const mergeCarts = async () => {
+      if (localStorage.getItem('cart') && localStorage.getItem('token')) {
+        let storedCart = await JSON.parse(localStorage.getItem('cart'));
+        await Promise.all(
+          storedCart.products.map((product) =>
+            addProduct(product, product.quantity)
+          )
+        );
+        localStorage.removeItem('cart');
+        const newCart = await getCart(token);
+        setCart(newCart);
+      }
+    };
     mergeCarts();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [cart]);
 
   return (

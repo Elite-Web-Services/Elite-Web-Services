@@ -4,10 +4,10 @@ import { decrementQuantity, incrementQuantity } from '../context/helpers';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import EmptyCart from './EmptyCart';
-import { toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const Cart = () => {
-  const { cart, addProduct, removeProduct, setCart } = useCart();
+  const { cart, removeProduct, setCart } = useCart();
   const { user, token } = useAuth();
 
   const removeToast = () => {

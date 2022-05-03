@@ -4,7 +4,7 @@ import { registerUser } from '../../axios-services';
 import useAuth from '../hooks/useAuth';
 import useContact from '../hooks/useContact';
 import 'react-toastify/dist/ReactToastify.css';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const RegisterationForm = ({
   setIsLogin,
@@ -18,11 +18,12 @@ const RegisterationForm = ({
   errorMessage,
   setErrorMessage,
 }) => {
-  const { user, setToken } = useAuth();
+  const { setToken } = useAuth();
   const { newEmail, setNewEmail } = useContact();
 
   useEffect(() => {
     setIsError(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const successToast = (e) => {
