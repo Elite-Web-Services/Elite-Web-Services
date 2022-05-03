@@ -149,7 +149,7 @@ async function createInitialProducts() {
             price: 199,
             isPublic: true,
             imgURL:
-              'https://instabug.com/blog/wp-content/uploads/2017/09/Featured.jpg',
+              'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651530324/EliteWebServices/Front-End-Management_zy4qau.jpg',
           },
           {
             typeId: 2,
@@ -179,7 +179,7 @@ async function createInitialProducts() {
             price: 599,
             isPublic: true,
             imgURL:
-              'https://help.spreadsheetweb.com/wp-content/uploads/2019/04/Data-management-and-analysis-scaled.jpg',
+              'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651530312/EliteWebServices/Database-Management_alai74.jpg',
           },
           {
             typeId: 2,
@@ -209,7 +209,7 @@ async function createInitialProducts() {
             price: 799,
             isPublic: true,
             imgURL:
-              'https://www.avi.com/wp-content/uploads/2018/07/dreamstime_l_66721609.jpg',
+              'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651530317/EliteWebServices/App-Development_in8ilg.jpg',
           },
           {
             typeId: 2,
@@ -218,8 +218,7 @@ async function createInitialProducts() {
             fullDescription: loremIpsum,
             price: 399,
             isPublic: true,
-            imgURL:
-              'https://sumtotalmarketing.com/wp-content/uploads/2020/10/vectorstock_1669719-1024x731.jpg',
+            imgURL: 'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651531109/EliteWebServices/Crash-Course_o6umvq.jpg',
           },
           {
             typeId: 1,
@@ -239,7 +238,7 @@ async function createInitialProducts() {
             price: 199,
             isPublic: true,
             imgURL:
-              'https://www.creativefaze.com/sites/default/files/webdesign.jpg',
+              'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651530319/EliteWebServices/Visual-Design_fpqlgn.jpg',
           },
           {
             typeId: 2,
@@ -250,7 +249,7 @@ async function createInitialProducts() {
             price: 224,
             isPublic: true,
             imgURL:
-              'https://securityintelligence.com/wp-content/uploads/2015/03/Data-Security.jpg',
+              'https://res.cloudinary.com/dezxd4zbm/image/upload/v1651530326/EliteWebServices/Security-Consulting_t2eird.jpg',
           },
           {
             typeId: 1,
