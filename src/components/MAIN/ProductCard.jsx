@@ -1,23 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import useCart from "../hooks/useCart";
-import useProduct from "../hooks/useProduct";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import useCart from '../hooks/useCart';
+import useProduct from '../hooks/useProduct';
+import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
 
 const ProductCard = ({ product }) => {
   const { addProduct, setCart } = useCart();
   const { searchObj } = useProduct();
 
   const successToast = (e) => {
-    toast.success("Product added to Cart ", {
-      theme: "colored",
+    toast.success('Product added to Cart ', {
+      theme: 'colored',
       autoClose: 1000,
     });
   };
 
   const handleAddProduct = async (product) => {
     const newCart = await addProduct(product);
-    console.log("Added a product, newcart: ", newCart);
     setCart(newCart);
     successToast();
   };
@@ -25,13 +24,13 @@ const ProductCard = ({ product }) => {
   return (
     <div className="card mb-4 box-shadow">
       <div className="card-body">
-          <h6 className="card-text">{product.typeName}</h6>
+        <h6 className="card-text">{product.typeName}</h6>
         <img
           className="card-img-top"
           style={{
-            width: "100%",
-            height: "100%",
-            display: "block",
+            width: '100%',
+            height: '100%',
+            display: 'block',
           }}
           alt="Thumbnail [100%x225]"
           src={product.imgURL}

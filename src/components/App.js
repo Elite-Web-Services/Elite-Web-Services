@@ -1,19 +1,24 @@
-import React from "react";
-import "../style/App.css";
-import "bootstrap/dist/css/bootstrap.min.css";
-import AuthProvider from "./context/AuthContext";
-import Main from "./MAIN/Main";
-import Navbar from "./NAV/Navbar";
+import React, { useState } from 'react';
+// getAPIHealth is defined in our axios-services directory index.js
+// you can think of that directory as a collection of api adapters
+// where each adapter fetches specific info from our express server's /api route
+import '../style/App.css';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import AuthProvider from './context/AuthContext';
+import Main from './MAIN/Main';
+import Navbar from './NAV/Navbar';
 
-import Sidebar from "./SIDEBAR/Sidebar"; //NEW
-import { BrowserRouter as Router } from "react-router-dom";
-import CartProvider from "./context/CartContext";
-import ProductProvider from "./context/ProductContext";
-import ContactProvider from "./context/ContactContext";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer } from "react-toastify";
+import Sidebar from './SIDEBAR/Sidebar'; //NEW
+import { BrowserRouter as Router } from 'react-router-dom';
+import CartProvider from './context/CartContext';
+import ProductProvider from './context/ProductContext';
+import ContactProvider from './context/ContactContext';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer } from 'react-toastify';
 
 const App = () => {
+  const [APIHealth, setAPIHealth] = useState('');
+
   return (
     <Router>
       <AuthProvider>
@@ -30,7 +35,7 @@ const App = () => {
                     newestOnTop={false}
                     closeOnClick
                     rtl={false}
-                    theme={"colored"}
+                    theme={'colored'}
                     pauseOnFocusLoss
                     draggable
                     pauseOnHover

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import { Link } from 'react-router-dom';
@@ -7,8 +7,6 @@ import { decrementQuantity, incrementQuantity } from '../context/helpers';
 const Sidebar = () => {
   const { user, token } = useAuth();
   const { cart, setCart } = useCart();
-  const [toggleAdminRender, setToggleAdminRender] = useState(false);
-  const [toggleCartRender, setToggleCartRender] = useState(false);
 
   const handleIncrementClick = async (product) => {
     const newCart = await incrementQuantity(cart, product.id, 1, user, token);
@@ -17,16 +15,6 @@ const Sidebar = () => {
   const handleDecrementClick = async (product) => {
     const newCart = await decrementQuantity(cart, product.id, 1, user, token);
     setCart(newCart);
-  };
-
-  const handleAdmin = () => {
-    setToggleAdminRender(true);
-    setToggleCartRender(false);
-  };
-
-  const handleCart = () => {
-    setToggleAdminRender(false);
-    setToggleCartRender(true);
   };
 
   return (
@@ -43,7 +31,6 @@ const Sidebar = () => {
                   data-bs-toggle="collapse"
                   data-bs-target="#admin-sidebar-collapse"
                   aria-expanded="false"
-                  onClick={handleAdmin}
                 >
                   ADMIN Controls
                 </button>
@@ -109,7 +96,6 @@ const Sidebar = () => {
                 data-bs-toggle="collapse"
                 data-bs-target="#cart-sidebar-collapse"
                 aria-expanded="false"
-                onClick={handleCart}
               >
                 Cart
               </button>

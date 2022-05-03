@@ -9,7 +9,6 @@ import { toast, Zoom, Bounce } from 'react-toastify';
 const Cart = () => {
   const { cart, addProduct, removeProduct, setCart } = useCart();
   const { user, token } = useAuth();
-  console.log(cart);
 
   const removeToast = () => {
     toast.error('Product removed from cart.', { theme: 'colored' });

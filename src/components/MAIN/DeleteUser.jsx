@@ -1,8 +1,8 @@
 //not a 100% sure this is being used.
 
-import React from "react";
-import useAuth from "../hooks/useAuth";
-import { deleteUser } from "../../axios-services";
+import React from 'react';
+import useAuth from '../hooks/useAuth';
+import { deleteUser } from '../../axios-services';
 
 const DeleteUser = ({ user }) => {
   const { token } = useAuth();
@@ -10,7 +10,6 @@ const DeleteUser = ({ user }) => {
   const handleDeleteUser = async (e) => {
     e.preventDefault();
     const response = await deleteUser(user.id, token);
-    console.log("USER ID FOR DELETION", user.id);
   };
 
   return (

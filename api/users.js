@@ -1,4 +1,4 @@
-const usersRouter = require("express").Router();
+const usersRouter = require('express').Router();
 const {
   getUserByUsername,
   createUser,
@@ -6,32 +6,32 @@ const {
   addContacts,
   getUserByEmail,
   deleteUser,
-} = require("../db/models/user");
-const jwt = require("jsonwebtoken");
+} = require('../db/models/user');
+const jwt = require('jsonwebtoken');
 const { JWT_SECRET } = process.env;
-const { requireUser, requireAdmin } = require("./utils");
-const bcrypt = require("bcrypt");
-const { User } = require("../db/models");
+const { requireUser, requireAdmin } = require('./utils');
+const bcrypt = require('bcrypt');
+const { User } = require('../db/models');
 
-usersRouter.use("/", (req, res, next) => {
-  console.log("Request to /users is being made.");
+usersRouter.use('/', (req, res, next) => {
+  console.log('Request to /users is being made.');
   next();
 });
 
-usersRouter.post("/login", async (req, res, next) => {
+usersRouter.post('/login', async (req, res, next) => {
   const { username, password } = req.body;
 
   try {
     const user = await getUserByUsername(username);
-    console.log("USER: ", user);
+    console.log('USER: ', user);
 
     // CHANGE BCRYPT TO ASYNC SOMEHOW
     if (user && bcrypt.compareSync(password, user.password)) {
-      console.log("LOGIN SUCCESS");
+      console.log('LOGIN SUCCESS');
       const token = jwt.sign(
         { id: user.id, username: username, isAdmin: user.isAdmin },
         process.env.JWT_SECRET,
-        { expiresIn: "1w" }
+        { expiresIn: '1w' }
       );
 
       res.send({
@@ -39,11 +39,11 @@ usersRouter.post("/login", async (req, res, next) => {
         token: token,
       });
     } else {
-      console.log("LOGIN FAIL");
+      console.log('LOGIN FAIL');
       res.status(409);
       next({
-        name: "Bad Login/Password",
-        message: "Login error: you must supply a valid login/password",
+        name: 'Bad Login/Password',
+        message: 'Login error: you must supply a valid login/password',
       });
     }
   } catch ({ name, message }) {
@@ -52,7 +52,7 @@ usersRouter.post("/login", async (req, res, next) => {
   }
 });
 
-usersRouter.post("/register", async (req, res, next) => {
+usersRouter.post('/register', async (req, res, next) => {
   const { username, password, email } = req.body;
 
   try {
@@ -61,16 +61,16 @@ usersRouter.post("/register", async (req, res, next) => {
     if (_user) {
       res.status(409);
       next({
-        name: "UserAlreadyExistsError",
-        message: "Username is already taken",
+        name: 'UserAlreadyExistsError',
+        message: 'Username is already taken',
       });
     }
     const _email = await getUserByEmail(email);
     if (_email) {
       res.status(409);
       next({
-        name: "EmailAlreadyInUseError",
-        message: "Email is already registered",
+        name: 'EmailAlreadyInUseError',
+        message: 'Email is already registered',
       });
     } else {
       const user = await createUser({
@@ -88,7 +88,7 @@ usersRouter.post("/register", async (req, res, next) => {
         },
         process.env.JWT_SECRET,
         {
-          expiresIn: "1w",
+          expiresIn: '1w',
         }
       );
       res.send({
@@ -102,16 +102,28 @@ usersRouter.post("/register", async (req, res, next) => {
   }
 });
 
-usersRouter.get("/me", requireUser, (req, res, next) => {
+usersRouter.get('/me', requireUser, (req, res, next) => {
   res.send(req.user);
 });
 
-usersRouter.get("/all", requireUser, async (req, res, next) => {
+usersRouter.get('/user/:username', requireAdmin, async (req, res, next) => {
+  const { username } = req.params;
+  try {
+    const user = await getUserByUsername(username);
+    delete user.password;
+    res.send(user);
+  } catch ({ name, message }) {
+    next(name, message);
+  }
+});
+
+usersRouter.get('/all', requireUser, async (req, res, next) => {
+  // TRY CATCH ERROR
   const users = await getAllUsers();
   res.send(users);
 });
 
-usersRouter.patch("/contact/:userId", async (req, res, next) => {
+usersRouter.patch('/contact/:userId', async (req, res, next) => {
   const { userId } = req.params;
   const {
     firstName,
@@ -138,7 +150,7 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
       country,
     });
 
-    console.log("*******USERS API********", updateContacts);
+    console.log('*******USERS API********', updateContacts);
     res.send({
       updateContacts,
     });
@@ -148,13 +160,13 @@ usersRouter.patch("/contact/:userId", async (req, res, next) => {
   }
 });
 
-usersRouter.delete("/:userId", requireAdmin, async (req, res, next) => {
-  console.log("REQUEST TO DELETE", req.params);
+usersRouter.delete('/:userId', requireAdmin, async (req, res, next) => {
+  console.log('REQUEST TO DELETE', req.params);
   const { userId } = req.params;
-  console.log("USER ID IN API DELETE", userId);
+  console.log('USER ID IN API DELETE', userId);
   try {
     const deleteTheUser = await deleteUser(userId);
-    console.log("deleteTheUser", deleteTheUser);
+    console.log('deleteTheUser', deleteTheUser);
     res.send(deleteTheUser);
   } catch (error) {
     next(error);

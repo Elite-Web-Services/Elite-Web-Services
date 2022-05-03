@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
-import { registerUser } from "../../axios-services";
+import React, { useEffect } from 'react';
+import { registerUser } from '../../axios-services';
 // import { useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import useContact from "../hooks/useContact";
-import "react-toastify/dist/ReactToastify.css";
-import { ToastContainer, toast, Zoom, Bounce } from "react-toastify";
+import useAuth from '../hooks/useAuth';
+import useContact from '../hooks/useContact';
+import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
 
 const RegisterationForm = ({
   setIsLogin,
@@ -26,10 +26,10 @@ const RegisterationForm = ({
   }, []);
 
   const successToast = (e) => {
-    toast.success("Registration Success!", { theme: "colored" });
+    toast.success('Registration Success!', { theme: 'colored' });
   };
   const failureToast = (error) => {
-    toast.error(error, { theme: "colored" });
+    toast.error(error, { theme: 'colored' });
   };
 
   const handleRegistration = async (e) => {
@@ -37,8 +37,7 @@ const RegisterationForm = ({
     try {
       const response = await registerUser(username, password, newEmail);
       setIsError(false);
-      console.log("REGISTER USER RESPONSE: ", response);
-      localStorage.setItem("token", response.token);
+      localStorage.setItem('token', response.token);
       setToken(response.token);
       setIsLogin(false);
       successToast();
@@ -121,12 +120,12 @@ const RegisterationForm = ({
           Go back to
           <span
             className="loginRegisterRedirect"
-            style={{ color: "blue" }}
+            style={{ color: 'blue' }}
             onClick={() => {
               setIsRegister(false);
             }}
           >
-            {" login."}
+            {' login.'}
           </span>
         </small>
       </div>

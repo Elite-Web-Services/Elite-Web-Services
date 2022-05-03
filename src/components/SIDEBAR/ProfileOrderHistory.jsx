@@ -1,12 +1,11 @@
 import React, { useState, useEffect, Fragment } from 'react';
 import useAuth from '../hooks/useAuth';
 import { getOrderHistory } from '../../axios-services';
-import useCart from '../hooks/useCart';
+import { default as EmptyCart } from '../SIDEBAR/EmptyCart';
 
 const ProfileOrderHistory = ({ userOrderHistory }) => {
   const [orderHistory, setOrderHistory] = useState([]);
   const { token } = useAuth();
-  const { total } = useCart();
 
   const getHistory = async () => {
     let newOrderHistory = await getOrderHistory(token);
@@ -26,7 +25,7 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
         <div>
           {orderHistory.map((cart, idx) => {
             return (
-              <Fragment>
+              <Fragment key={`orderHistory:${idx}`}>
                 {cart.products && cart.products.length > 0 ? (
                   <div>
                     <h2 className="d-block text-gray-dark">
@@ -60,7 +59,9 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
             );
           })}
         </div>
-      ) : null}
+      ) : (
+        <EmptyCart />
+      )}
     </div>
   );
 };

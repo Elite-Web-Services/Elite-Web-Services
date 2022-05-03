@@ -1,13 +1,13 @@
-import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import useAuth from "../hooks/useAuth";
-import useProduct from "../hooks/useProduct";
+import React, { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import useAuth from '../hooks/useAuth';
+import useProduct from '../hooks/useProduct';
 import {
   getAllProducts,
   updateProduct,
   deleteProduct,
-} from "../../axios-services";
-import { toast } from "react-toastify";
+} from '../../axios-services';
+import { toast } from 'react-toastify';
 
 const EditProduct = ({ product }) => {
   const navigate = useNavigate();
@@ -25,12 +25,12 @@ const EditProduct = ({ product }) => {
     imgURL: product.imgURL,
   });
 
-  const [updateError, setUpdateError] = useState("");
+  const [updateError, setUpdateError] = useState('');
   const successToast = (message) => {
-    toast.success(message, { theme: "colored" });
+    toast.success(message, { theme: 'colored' });
   };
   const failureToast = (error) => {
-    toast.error(error, { theme: "colored" });
+    toast.error(error, { theme: 'colored' });
   };
 
   const handleUpdateProduct = async () => {
@@ -45,35 +45,33 @@ const EditProduct = ({ product }) => {
       updateState.isPublic,
       updateState.imgURL
     );
-    console.log(result);
 
-    if (result.name == "error") {
+    if (result.name == 'error') {
       setUpdateError(result.message);
-      failureToast("Unable to update product");
+      failureToast('Unable to update product');
     } else {
-      setUpdateError("");
+      setUpdateError('');
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
-      successToast("Product updated!");
-      navigate("/manageproducts");
+      successToast('Product updated!');
+      navigate('/manageproducts');
     }
   };
 
   const handleDeleteProduct = async () => {
     const result = await deleteProduct(product.id, token);
-    // console.log(result)
 
-    if (result.name == "error") {
+    if (result.name == 'error') {
       setUpdateError(result.message);
-      failureToast("Unable to delete product");
+      failureToast('Unable to delete product');
     } else {
-      setUpdateError("");
+      setUpdateError('');
 
       const newProducts = await getAllProducts(token);
       setProducts(newProducts);
-      successToast("Product deleted");
-      navigate("/manageproducts");
+      successToast('Product deleted');
+      navigate('/manageproducts');
     }
   };
 
@@ -86,16 +84,16 @@ const EditProduct = ({ product }) => {
       </Link>
       <div
         className="card mb-4 box-shadow"
-        style={{ margin: "2rem 3rem 0 3rem" }}
+        style={{ margin: '2rem 3rem 0 3rem' }}
       >
         {product ? (
           <div className="card-body">
-            <div style={{ margin: "2rem 12.5rem 5rem 12.5rem" }}>
+            <div style={{ margin: '2rem 12.5rem 5rem 12.5rem' }}>
               <img
                 style={{
-                  width: "100%",
-                  height: "100%",
-                  display: "block",
+                  width: '100%',
+                  height: '100%',
+                  display: 'block',
                 }}
                 alt="Thumbnail [100%x225]"
                 src={product.imgURL}
@@ -111,11 +109,11 @@ const EditProduct = ({ product }) => {
               {/* Start inputs here */}
               <div
                 className="row"
-                style={{ display: "flex", justifyContent: "center" }}
+                style={{ display: 'flex', justifyContent: 'center' }}
               >
                 <div className="col-md-5 mb-3">
                   <select
-                    style={{ padding: ".5rem", width: "100%" }}
+                    style={{ padding: '.5rem', width: '100%' }}
                     name="isPublic"
                     id="select-public"
                     value={updateState.isPublic}
@@ -133,7 +131,7 @@ const EditProduct = ({ product }) => {
                 </div>
                 <div className="col-md-5 mb-3">
                   <select
-                    style={{ padding: ".5rem", width: "100%" }}
+                    style={{ padding: '.5rem', width: '100%' }}
                     name="category"
                     id="category-select"
                     value={updateState.typeId}
@@ -147,7 +145,7 @@ const EditProduct = ({ product }) => {
                   >
                     {types.map((type) => {
                       return (
-                        <option key={"typeList:" + type.id} value={type.id}>
+                        <option key={'typeList:' + type.id} value={type.id}>
                           {type.name}
                         </option>
                       );
@@ -196,7 +194,7 @@ const EditProduct = ({ product }) => {
                 <div className="input-group">
                   <textarea
                     className="form-control"
-                    style={{ height: "10rem" }}
+                    style={{ height: '10rem' }}
                     type="text"
                     placeholder={product.fullDescription}
                     value={updateState.fullDescription}
@@ -216,7 +214,7 @@ const EditProduct = ({ product }) => {
                     className="form-control"
                     type="text"
                     placeholder={product.imgURL}
-                    value={updateState.imgURL ? updateState.imgURL : ""}
+                    value={updateState.imgURL ? updateState.imgURL : ''}
                     onChange={(event) =>
                       setUpdateState({
                         ...updateState,
@@ -230,7 +228,7 @@ const EditProduct = ({ product }) => {
                 <label htmlFor="price">Price</label>
                 <input
                   className="form-control"
-                  style={{ width: "50%" }}
+                  style={{ width: '50%' }}
                   type="number"
                   placeholder={product.price}
                   value={updateState.price}
@@ -245,7 +243,7 @@ const EditProduct = ({ product }) => {
               {updateError ? <h5>Unable to edit: {updateError}</h5> : null}
               <div
                 className="d-flex justify-content-between align-items-center"
-                style={{ margin: "1rem" }}
+                style={{ margin: '1rem' }}
               >
                 <button className="btn btn-info" type="submit">
                   Update Product

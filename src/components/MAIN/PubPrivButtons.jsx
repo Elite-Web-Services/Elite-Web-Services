@@ -1,16 +1,15 @@
-import React from "react";
-import useProduct from "../hooks/useProduct";
+import React from 'react';
+import useProduct from '../hooks/useProduct';
 
 const PubPrivButtons = () => {
-  const { searchObj, setSearchObj } =
-    useProduct();
+  const { searchObj, setSearchObj } = useProduct();
 
   return (
     <div>
       {searchObj.isPublic.length ? (
         <button
           onClick={() => {
-            setSearchObj({ ...searchObj, isPublic: "" });
+            setSearchObj({ ...searchObj, isPublic: '' });
           }}
         >
           See all
@@ -18,15 +17,14 @@ const PubPrivButtons = () => {
       ) : null}
       <button
         onClick={() => {
-          setSearchObj({ ...searchObj, isPublic: "true" });
-          console.log(searchObj.isPublic, "hello", searchObj.isPublic.length)
+          setSearchObj({ ...searchObj, isPublic: 'true' });
         }}
       >
         Public
       </button>
       <button
         onClick={() => {
-          setSearchObj({ ...searchObj, isPublic: "false" });
+          setSearchObj({ ...searchObj, isPublic: 'false' });
         }}
       >
         Private

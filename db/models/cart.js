@@ -32,10 +32,10 @@ async function getCart(userId) {
       `
     SELECT 
 	    purchased, "purchaseDate", "userId", carts.id as "cartId", "productId", quantity, "imgURL",
-        "typeId", products.name as "productName", products.description as "productDescription", price, "isPublic"
+      "typeId", products.name as "productName", products.description as "productDescription", price, "isPublic"
     FROM carts
-	    LEFT JOIN cart_products ON cart_products."cartId" = carts.id
-        LEFT JOIN products ON products.id = cart_products."productId"
+	  LEFT JOIN cart_products ON cart_products."cartId" = carts.id
+    LEFT JOIN products ON products.id = cart_products."productId"
     WHERE "userId"=$1 and purchased=false;
     `,
       [userId]
