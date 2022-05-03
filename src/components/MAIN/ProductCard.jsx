@@ -1,12 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import useCart from '../hooks/useCart';
-import useProduct from '../hooks/useProduct';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const ProductCard = ({ product }) => {
   const { addProduct, setCart } = useCart();
-  const { searchObj } = useProduct();
 
   const successToast = (e) => {
     toast.success('Product added to Cart ', {

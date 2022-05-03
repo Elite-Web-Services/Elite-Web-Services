@@ -48,7 +48,7 @@ const ProductProvider = ({ children }) => {
       };
       displayPublicProducts();
     }
-  }, [user]);
+  }, [user, token]);
 
   // GET ALL TYPES
   useEffect(() => {

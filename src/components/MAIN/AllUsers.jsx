@@ -51,7 +51,7 @@ const AllUsers = () => {
 
   const handleDeleteUser = async (_user) => {
     try {
-      const response = await deleteUser(_user.id, token);
+      await deleteUser(_user.id, token);
       const updatedAllUsers = await getAllUsers(token);
       setAllUsers(updatedAllUsers);
       successToast();
