@@ -31,8 +31,9 @@ const AllUsers = () => {
 
   const handleSeeHistory = async (userId) => {
     try {
+      setUserOrderHistory([]);
       const orderHistory = await getOrderHistory(token, userId);
-      setUserContactInfo([]);
+      setUserContactInfo({});
       setUserOrderHistory(orderHistory);
     } catch (error) {
       console.error(error);
@@ -41,9 +42,10 @@ const AllUsers = () => {
 
   const handleSeeContact = async (username) => {
     try {
+      setUserContactInfo({});
       const contact = await getUserByUsername(token, username);
       setUserContactInfo(contact);
-      setUserOrderHistory({});
+      setUserOrderHistory([]);
     } catch (error) {
       console.error(error);
     }
