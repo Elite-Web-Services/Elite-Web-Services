@@ -44,7 +44,7 @@ const Cart = () => {
           >
             {cart.products.map((product, index) => {
               return (
-                <div className="col cartCard">
+                <div className="col cartCard" key={`cartMap${index}`}>
                   <div
                     key={'cart' + index}
                     className="card cartCardImg card-cover h-100 overflow-hidden text-white bg-dark rounded-5 shadow-lg"

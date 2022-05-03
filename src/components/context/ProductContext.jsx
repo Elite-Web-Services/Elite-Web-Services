@@ -85,12 +85,7 @@ const ProductProvider = ({ children }) => {
         if (
           product.typeName.includes(searchObj.type) &&
           Number(product.price) >= Number(searchObj.min) &&
-          (searchObj.max === 0
-            ? true
-            : Number(product.price) <= Number(searchObj.max)) &&
-          // (!searchObj.isPublic.length
-          //   ? true
-          //   : searchObj.isPublic == product.isPublic) &&
+          (Number(searchObj.max) ? Number(product.price) <= Number(searchObj.max) : true) &&
           (tLC(product.name).includes(searchQuery) ||
             tLC(product.description).includes(searchQuery) ||
             tLC(product.fullDescription).includes(searchQuery) ||

@@ -54,11 +54,12 @@ const CheckoutSubmitPayment = ({ isSubmitPayment, setIsSubmitPayment }) => {
           {purchased ? 'Payment Submitted' : 'Submit payment?'}
         </h5>
         {purchased ? (
+          <>
           <p>
-            {`Order Confirmation number: 978664-${purchasedCartId}`}
+            {`Order Confirmation number: 978664-${purchasedCartId}`}</p>
             <hr />
-            {'Look for a confirmation email.'}
-          </p>
+            <p>{'Look for a confirmation email.'}</p>
+          </>
         ) : (
           <p className="mb-0">{`You are purchasing an elite package with ${cart.products.length} items with a total cost of $${total}.`}</p>
         )}
