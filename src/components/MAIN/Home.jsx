@@ -7,6 +7,7 @@ const Home = () => {
     <Fragment>
       <div className="px-4 py-5 my-5 text-center">
         <img
+          alt="company logo"
           className="d-block mx-auto mb-4"
           src="https://res.cloudinary.com/elite-web-services/image/upload/v1651153876/Untitled_Artwork_1_qa34ja.png"
           width="150"
@@ -46,6 +47,7 @@ const Home = () => {
           </div>
           <div className="col-md-5">
             <img
+              alt="product category"
               className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
               src="https://res.cloudinary.com/elite-web-services/image/upload/v1650999019/websiteTemplate_tuq40k.png"
               width="500"
@@ -70,6 +72,7 @@ const Home = () => {
           </div>
           <div className="col-md-5 order-md-1">
             <img
+              alt="product category"
               className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
               src="https://res.cloudinary.com/elite-web-services/image/upload/v1650999415/service_po98bn.jpg"
               width="500"
@@ -92,6 +95,7 @@ const Home = () => {
           </div>
           <div className="col-md-5">
             <img
+              alt="product category"
               className="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto"
               src="https://res.cloudinary.com/elite-web-services/image/upload/v1650999341/consulting2_tyaxed.jpg"
               width="500"
@@ -104,8 +108,13 @@ const Home = () => {
         <h1 className="text-center">Meet the Team</h1>
         <div className="row">
           <div className="col-lg-4 text-center">
-            <a href="https://github.com/hays-b" target="_blank">
+            <a
+              href="https://github.com/hays-b"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
+                alt="team headshot"
                 className="rounded-circle"
                 src="https://res.cloudinary.com/elite-web-services/image/upload/v1651156205/IMG_8371_tznlbe.jpg"
                 width="140"
@@ -120,8 +129,13 @@ const Home = () => {
             </p>
           </div>
           <div className="col-lg-4 text-center">
-            <a href="https://github.com/k-hongkham" target="_blank">
+            <a
+              href="https://github.com/k-hongkham"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
+                alt="team headshot"
                 className="rounded-circle"
                 src="https://res.cloudinary.com/elite-web-services/image/upload/v1651157072/20220428_101857_nbnpv8.jpg"
                 width="140"
@@ -136,8 +150,13 @@ const Home = () => {
             </p>
           </div>
           <div className="col-lg-4 text-center">
-            <a href="https://github.com/danielforkner" target="_blank">
+            <a
+              href="https://github.com/danielforkner"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <img
+                alt="team headshot"
                 className="rounded-circle"
                 src="https://res.cloudinary.com/elite-web-services/image/upload/v1651157944/Photo_Jul_04_17_19_24_mdj6wb.jpg"
                 width="140"

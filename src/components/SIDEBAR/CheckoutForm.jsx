@@ -4,7 +4,7 @@ import useAuth from '../hooks/useAuth';
 import useCart from '../hooks/useCart';
 import useContact from '../hooks/useContact';
 import ContactInfo from './ContactInfo';
-import { ToastContainer, toast, Zoom, Bounce } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const CheckoutForm = ({ setIsSubmitPayment }) => {
   const { user, token } = useAuth();

@@ -17,6 +17,7 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
     } else {
       getHistory();
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
