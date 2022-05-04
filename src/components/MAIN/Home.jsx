@@ -175,8 +175,8 @@ const Home = () => {
         <div className="container">
           <div className="d-flex justify-content-center">
             <iframe
-              width="100%"
-              height="720"
+              width="560"
+              height="315"
               src="https://www.youtube.com/embed/hnYvfiz2YpM"
               title="YouTube video player"
               frameBorder="0"
