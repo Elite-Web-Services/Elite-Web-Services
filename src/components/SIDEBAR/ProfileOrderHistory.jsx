@@ -3,7 +3,7 @@ import useAuth from '../hooks/useAuth';
 import { getOrderHistory } from '../../axios-services';
 import { default as EmptyCart } from '../SIDEBAR/EmptyCart';
 
-const ProfileOrderHistory = ({ userOrderHistory }) => {
+const ProfileOrderHistory = () => {
   const [orderHistory, setOrderHistory] = useState([]);
   const { token } = useAuth();
 
@@ -11,12 +11,9 @@ const ProfileOrderHistory = ({ userOrderHistory }) => {
     let newOrderHistory = await getOrderHistory(token);
     setOrderHistory(newOrderHistory);
   };
+
   useEffect(() => {
-    if (userOrderHistory) {
-      setOrderHistory(userOrderHistory);
-    } else {
-      getHistory();
-    }
+    getHistory();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

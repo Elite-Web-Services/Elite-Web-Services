@@ -1,10 +1,10 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import { getAllUsers, getOrderHistory } from '../../axios-services';
 import useAuth from '../hooks/useAuth';
-import ProfileOrderHistory from '../SIDEBAR/ProfileOrderHistory';
 import { deleteUser, getUserByUsername } from '../../axios-services';
 import { toast } from 'react-toastify';
 import UserContactInfo from './UserContactInfo';
+import UserOrderHistory from './UserOrderHistory';
 
 const AllUsers = () => {
   const [isError, setIsError] = useState(false);
@@ -32,7 +32,7 @@ const AllUsers = () => {
   const handleSeeHistory = async (userId) => {
     try {
       const orderHistory = await getOrderHistory(token, userId);
-      setUserContactInfo([]);
+      setUserContactInfo({});
       setUserOrderHistory(orderHistory);
     } catch (error) {
       console.error(error);
@@ -42,8 +42,8 @@ const AllUsers = () => {
   const handleSeeContact = async (username) => {
     try {
       const contact = await getUserByUsername(token, username);
+      setUserOrderHistory([]);
       setUserContactInfo(contact);
-      setUserOrderHistory({});
     } catch (error) {
       console.error(error);
     }
@@ -128,7 +128,7 @@ const AllUsers = () => {
       </div>
       <div>
         {userOrderHistory.length > 0 ? (
-          <ProfileOrderHistory userOrderHistory={userOrderHistory} />
+          <UserOrderHistory userOrderHistory={userOrderHistory} />
         ) : null}
         {userContactInfo.id ? <UserContactInfo user={userContactInfo} /> : null}
       </div>
