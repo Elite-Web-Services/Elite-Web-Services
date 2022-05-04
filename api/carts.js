@@ -7,8 +7,9 @@ cartsRouter.get('/', requireUser, async (req, res, next) => {
   try {
     const [cart] = await Cart.getCart(req.user.id);
     res.send(cart);
-  } catch (error) {
-    throw error;
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
   }
 });
 
@@ -23,8 +24,9 @@ cartsRouter.post('/addProduct', requireUser, async (req, res, next) => {
     });
     const [cart] = await Cart.getCart(req.user.id);
     res.send(cart);
-  } catch (error) {
-    throw error;
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
   }
 });
 
@@ -40,8 +42,9 @@ cartsRouter.patch('/productQuantity', requireUser, async (req, res, next) => {
     const [cart] = await Cart.getCart(req.user.id);
 
     res.send(cart);
-  } catch (error) {
-    throw error;
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
   }
 });
 
@@ -58,8 +61,9 @@ cartsRouter.delete(
 
       res.send(cart);
       // come back to catch errors
-    } catch (error) {
-      throw error;
+    } catch ({ name, message }) {
+      res.status(409);
+      next({ name, message });
     }
   }
 );
@@ -82,8 +86,9 @@ cartsRouter.patch('/purchaseCart', requireUser, async (req, res, next) => {
         message: 'Something went wrong. Please try again.',
       });
     }
-  } catch (error) {
-    throw error;
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
   }
 });
 
