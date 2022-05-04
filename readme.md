@@ -1,4 +1,4 @@
-[Live Link](https://morning-island-77515.herokuapp.com/)
+[elite-web-services.herokuapp.com](https://elite-web-services.herokuapp.com/)
 
 This project is a template e-commerce website for a web-services company.
 
