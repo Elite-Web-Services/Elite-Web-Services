@@ -15,6 +15,7 @@ productsRouter.get('/all', requireAdmin, async (req, res, next) => {
 
     res.send(allProducts);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
@@ -25,12 +26,21 @@ productsRouter.get('/', async (req, res, next) => {
 
     res.send(publicProducts);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
 productsRouter.post('/', requireAdmin, async (req, res, next) => {
-  const { typeId, name, description, fullDescription, price, isPublic, imgURL } = req.body;
+  const {
+    typeId,
+    name,
+    description,
+    fullDescription,
+    price,
+    isPublic,
+    imgURL,
+  } = req.body;
 
   const productsData = {
     typeId,
@@ -47,13 +57,22 @@ productsRouter.post('/', requireAdmin, async (req, res, next) => {
 
     res.send(product);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
 productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
   const { productId } = req.params;
-  const { typeId, name, description, fullDescription, price, isPublic, imgURL } = req.body;
+  const {
+    typeId,
+    name,
+    description,
+    fullDescription,
+    price,
+    isPublic,
+    imgURL,
+  } = req.body;
 
   const updateFields = {
     id: productId,
@@ -71,6 +90,7 @@ productsRouter.patch('/:productId', requireAdmin, async (req, res, next) => {
 
     res.send(updatedProduct);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
@@ -81,12 +101,12 @@ productsRouter.delete('/:productId', requireAdmin, async (req, res, next) => {
 
     res.send(deletedProduct);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
-
-productsRouter.post("/types", requireAdmin, async (req, res, next) => {
+productsRouter.post('/types', requireAdmin, async (req, res, next) => {
   const { name } = req.body;
 
   try {
@@ -94,22 +114,23 @@ productsRouter.post("/types", requireAdmin, async (req, res, next) => {
 
     res.send(type);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
-productsRouter.get("/types", async (req, res, next) => {
+productsRouter.get('/types', async (req, res, next) => {
   try {
     const types = await Product.getAllTypes();
 
     res.send(types);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
-
-productsRouter.patch("/types/:typeId", requireAdmin, async (req, res, next) => {
+productsRouter.patch('/types/:typeId', requireAdmin, async (req, res, next) => {
   const { typeId } = req.params;
   const { name } = req.body;
 
@@ -123,26 +144,33 @@ productsRouter.patch("/types/:typeId", requireAdmin, async (req, res, next) => {
 
     res.send(updatedType);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
 
-productsRouter.delete("/types/:typeId", requireAdmin, async (req, res, next) => {
-  try {
-    const deletedType = await Product.deleteType(req.params);
+productsRouter.delete(
+  '/types/:typeId',
+  requireAdmin,
+  async (req, res, next) => {
+    try {
+      const deletedType = await Product.deleteType(req.params);
 
-    res.send(deletedType);
-  } catch ({ name, message }) {
-    next({ name, message });
+      res.send(deletedType);
+    } catch ({ name, message }) {
+      res.status(409);
+      next({ name, message });
+    }
   }
-});
+);
 
-productsRouter.get("/orderHistory", async (req, res, next) => {
-  console.log("inside Products API orders", req.user.id);
+productsRouter.get('/orderHistory', async (req, res, next) => {
+  console.log('inside Products API orders', req.user.id);
   try {
     const history = await Product.getOrderHistory(req.user.id);
     res.send(history);
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });
@@ -158,6 +186,7 @@ productsRouter.get('/orderHistory/:userId', async (req, res, next) => {
       next({ name: 'unauthorized', message: 'this requires admin access' });
     }
   } catch ({ name, message }) {
+    res.status(409);
     next({ name, message });
   }
 });

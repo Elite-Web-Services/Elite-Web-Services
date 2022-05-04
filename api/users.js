@@ -113,14 +113,19 @@ usersRouter.get('/user/:username', requireAdmin, async (req, res, next) => {
     delete user.password;
     res.send(user);
   } catch ({ name, message }) {
-    next(name, message);
+    res.status(409);
+    next({ name, message });
   }
 });
 
 usersRouter.get('/all', requireUser, async (req, res, next) => {
-  // TRY CATCH ERROR
-  const users = await getAllUsers();
-  res.send(users);
+  try {
+    const users = await getAllUsers();
+    res.send(users);
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
+  }
 });
 
 usersRouter.patch('/contact/:userId', async (req, res, next) => {
@@ -154,9 +159,9 @@ usersRouter.patch('/contact/:userId', async (req, res, next) => {
     res.send({
       updateContacts,
     });
-  } catch (error) {
+  } catch ({ name, message }) {
     res.status(401);
-    throw error;
+    next({ name, message });
   }
 });
 
@@ -168,8 +173,9 @@ usersRouter.delete('/:userId', requireAdmin, async (req, res, next) => {
     const deleteTheUser = await deleteUser(userId);
     console.log('deleteTheUser', deleteTheUser);
     res.send(deleteTheUser);
-  } catch (error) {
-    next(error);
+  } catch ({ name, message }) {
+    res.status(409);
+    next({ name, message });
   }
 });
 

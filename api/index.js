@@ -41,7 +41,7 @@ apiRouter.use(async (req, res, next) => {
 
 apiRouter.get('/', (req, res, next) => {
   res.send({
-    message: 'API is under construction!',
+    message: 'specify an api route to proceed',
   });
 });
 
