@@ -19,7 +19,7 @@ const RegisterationForm = ({
   setErrorMessage,
 }) => {
   const { setToken } = useAuth();
-  const { newEmail, setNewEmail } = useContact("");
+  const { newEmail, setNewEmail } = useContact();
   const [confirmedPW, setConfirmedPW] = useState("");
 
   useEffect(() => {
@@ -121,7 +121,7 @@ const RegisterationForm = ({
             <input
               className="form-control rounded-4"
               type="text"
-              value={newEmail}
+              value={newEmail || ""}
               onChange={handleEmail}
               required
             />

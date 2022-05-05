@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import useAuth from '../hooks/useAuth';
-import { addContact as editContact } from '../../axios-services';
+import React, { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import { addContact as editContact } from "../../axios-services";
 
 export const ContactContext = React.createContext();
 
