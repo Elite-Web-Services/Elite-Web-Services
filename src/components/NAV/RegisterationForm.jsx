@@ -1,10 +1,10 @@
-import React, { useEffect } from 'react';
-import { registerUser } from '../../axios-services';
+import React, { useState, useEffect } from "react";
+import { registerUser } from "../../axios-services";
 // import { useNavigate } from "react-router-dom";
-import useAuth from '../hooks/useAuth';
-import useContact from '../hooks/useContact';
-import 'react-toastify/dist/ReactToastify.css';
-import { toast } from 'react-toastify';
+import useAuth from "../hooks/useAuth";
+import useContact from "../hooks/useContact";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
 
 const RegisterationForm = ({
   setIsLogin,
@@ -20,6 +20,7 @@ const RegisterationForm = ({
 }) => {
   const { setToken } = useAuth();
   const { newEmail, setNewEmail } = useContact();
+  const [confirmedPW, setConfirmedPW] = useState("");
 
   useEffect(() => {
     setIsError(false);
@@ -27,21 +28,27 @@ const RegisterationForm = ({
   }, []);
 
   const successToast = (e) => {
-    toast.success('Registration Success!', { theme: 'colored' });
+    toast.success("Registration Success!", { theme: "colored" });
   };
   const failureToast = (error) => {
-    toast.error(error, { theme: 'colored' });
+    toast.error(error, { theme: "colored" });
   };
 
   const handleRegistration = async (e) => {
     e.preventDefault();
     try {
-      const response = await registerUser(username, password, newEmail);
-      setIsError(false);
-      localStorage.setItem('token', response.token);
-      setToken(response.token);
-      setIsLogin(false);
-      successToast();
+      if (password === confirmedPW && password.length > 0) {
+        const response = await registerUser(username, password, newEmail);
+        setIsError(false);
+        localStorage.setItem("token", response.token);
+        setToken(response.token);
+        setIsLogin(false);
+        successToast();
+      } else {
+        setIsError(true);
+        setErrorMessage("Password does not match.");
+        failureToast("Password does not match.");
+      }
     } catch (error) {
       setIsError(true);
       setErrorMessage(error.message);
@@ -56,6 +63,10 @@ const RegisterationForm = ({
   const handlePassword = (e) => {
     setPassword(e.target.value);
   };
+  const handleConfirmPW = (e) => {
+    setConfirmedPW(e.target.value);
+  };
+
   const handleEmail = (e) => {
     setNewEmail(e.target.value);
   };
@@ -98,8 +109,19 @@ const RegisterationForm = ({
           <div className="form-floating mb-3">
             <input
               className="form-control rounded-4"
+              type="password"
+              value={confirmedPW}
+              onChange={handleConfirmPW}
+              required
+              minLength={8}
+            ></input>
+            <label htmlFor="Confirm password">Confirm Password: </label>
+          </div>
+          <div className="form-floating mb-3">
+            <input
+              className="form-control rounded-4"
               type="text"
-              value={newEmail}
+              value={newEmail || ""}
               onChange={handleEmail}
               required
             />
@@ -121,12 +143,12 @@ const RegisterationForm = ({
           Go back to
           <span
             className="loginRegisterRedirect"
-            style={{ color: 'blue' }}
+            style={{ color: "blue" }}
             onClick={() => {
               setIsRegister(false);
             }}
           >
-            {' login.'}
+            {" login."}
           </span>
         </small>
       </div>
