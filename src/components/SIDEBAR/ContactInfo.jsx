@@ -1,8 +1,8 @@
-import React from 'react';
-import useContact from '../hooks/useContact';
-import useAuth from '../hooks/useAuth';
-import { USAStates } from './USAStates';
-import { Countries } from './Countries';
+import React from "react";
+import useContact from "../hooks/useContact";
+import useAuth from "../hooks/useAuth";
+import { USAStates } from "./USAStates";
+import { Countries } from "./Countries";
 
 const ContactInfo = () => {
   const {
@@ -66,7 +66,7 @@ const ContactInfo = () => {
             type="text"
             className="form-control"
             placeholder=""
-            value={firstName || ''}
+            value={firstName || ""}
             required=""
             onChange={handleFirstName}
           />
@@ -80,7 +80,7 @@ const ContactInfo = () => {
             type="text"
             className="form-control"
             placeholder=""
-            value={lastName || ''}
+            value={lastName || ""}
             onChange={handleLastName}
             required=""
           />
@@ -93,8 +93,8 @@ const ContactInfo = () => {
           <input
             type="email"
             className="form-control"
-            placeholder={`${user.username || 'you'}@example.com`}
-            value={newEmail || ''}
+            placeholder={`${user.username || "you"}@example.com`}
+            value={newEmail || ""}
             onChange={handleEmail}
           />
         </div>
@@ -105,7 +105,7 @@ const ContactInfo = () => {
           <select
             className="form-select"
             required=""
-            value={country || ''}
+            value={country || ""}
             onChange={handleCountry}
           >
             <option value="">Choose...</option>
@@ -128,7 +128,7 @@ const ContactInfo = () => {
             className="form-control"
             placeholder="1234 Main St"
             required=""
-            value={newAddress || ''}
+            value={newAddress || ""}
             onChange={handleAddress}
           />
         </div>
@@ -141,7 +141,7 @@ const ContactInfo = () => {
             type="text"
             className="form-control"
             placeholder="Apartment or suite"
-            value={newAddress2 || ''}
+            value={newAddress2 || ""}
             onChange={handleAddress2}
           />
         </div>
@@ -155,7 +155,7 @@ const ContactInfo = () => {
             className="form-control"
             placeholder="1234 Main St"
             required=""
-            value={newCity || ''}
+            value={newCity || ""}
             onChange={handleCity}
           />
         </div>
@@ -167,7 +167,7 @@ const ContactInfo = () => {
           <select
             className="form-select"
             required=""
-            value={newState || ''}
+            value={newState || ""}
             onChange={handleState}
           >
             <option value="">Choose...</option>
@@ -186,7 +186,7 @@ const ContactInfo = () => {
             className="form-control"
             placeholder=""
             required=""
-            value={newZip || ''}
+            value={newZip || ""}
             onChange={handleZip}
           />
         </div>
